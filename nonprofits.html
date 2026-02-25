@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HitPay for Nonprofits — Accept Donations & Grow Your Mission</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-hero { background: linear-gradient(135deg, #fdf4ff 0%, #ffffff 60%); }
+    .gradient-cta { background: linear-gradient(135deg, #6d28d9 0%, #9333ea 100%); }
+    .feature-card { transition: box-shadow 0.2s; }
+    .feature-card:hover { box-shadow: 0 8px 30px rgba(109,40,217,0.12); }
+    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
+    @keyframes pulse-ring { 0% { transform: scale(0.95); opacity: 0.7; } 70% { transform: scale(1.05); opacity: 0; } 100% { transform: scale(0.95); opacity: 0; } }
+    .pulse { animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite; }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+
+  <!-- Nav -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="#" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">H</span>
+          </div>
+          <span class="font-bold text-lg text-slate-900">HitPay</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+          <a href="#" class="hover:text-slate-900">Products</a>
+          <a href="#" class="hover:text-slate-900">Solutions</a>
+          <a href="#" class="hover:text-slate-900">Pricing</a>
+          <a href="#" class="hover:text-slate-900">Developers</a>
+          <a href="#" class="hover:text-slate-900">Resources</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
+        <a href="#" class="text-sm font-semibold bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-violet-700 transition-colors">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="gradient-hero pt-32 pb-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-violet-50 text-violet-700 text-sm font-medium px-4 py-2 rounded-full mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Nonprofits
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+            Accept donations.<br/>Amplify your mission.
+          </h1>
+          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+            Simple, affordable payment tools purpose-built for nonprofits. Collect one-time and recurring donations online, at events, and everywhere your community is — with no monthly fees.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#" class="inline-flex items-center gap-2 bg-violet-600 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-violet-700 transition-colors text-base">
+              Start for free
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 bg-white text-slate-800 font-semibold px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-base">
+              Talk to our team
+            </a>
+          </div>
+          <p class="text-sm text-slate-500 mt-4">Free to sign up · No setup fees · No monthly subscription</p>
+        </div>
+        <div class="hidden lg:flex justify-end">
+          <!-- Donation page mock -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden w-72">
+            <div class="bg-gradient-to-br from-violet-600 to-purple-700 p-5">
+              <div class="text-violet-200 text-xs font-medium mb-1">Animal Welfare Society Singapore</div>
+              <div class="text-white font-bold text-xl mb-1">Help us rescue strays 🐾</div>
+              <div class="text-violet-200 text-sm">Your donation saves lives. Every dollar counts.</div>
+            </div>
+            <div class="p-5">
+              <div class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Choose an amount</div>
+              <div class="grid grid-cols-3 gap-2 mb-3">
+                <div class="border border-slate-200 rounded-lg py-2 text-center text-sm font-medium text-slate-600 cursor-pointer hover:border-violet-400">S$10</div>
+                <div class="border-2 border-violet-500 rounded-lg py-2 text-center text-sm font-bold text-violet-700 bg-violet-50">S$25</div>
+                <div class="border border-slate-200 rounded-lg py-2 text-center text-sm font-medium text-slate-600 cursor-pointer hover:border-violet-400">S$50</div>
+              </div>
+              <div class="border border-slate-200 rounded-lg py-2 px-3 text-sm text-slate-400 mb-4">Custom amount...</div>
+              <div class="flex gap-2 mb-4">
+                <button class="flex-1 bg-violet-600 text-white rounded-lg py-2.5 text-sm font-semibold">Give once</button>
+                <button class="flex-1 border border-slate-200 text-slate-600 rounded-lg py-2.5 text-sm font-medium">Monthly</button>
+              </div>
+              <div class="bg-violet-600 rounded-lg py-3 text-center text-white text-sm font-semibold">Donate S$25.00</div>
+              <div class="flex justify-center gap-2 mt-3">
+                <span class="payment-badge text-xs">PayNow</span>
+                <span class="payment-badge text-xs">Card</span>
+                <span class="payment-badge text-xs">GrabPay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted by -->
+  <section class="py-14 border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-center text-slate-500 text-sm font-medium uppercase tracking-widest mb-8">Empowering nonprofits and social enterprises across Southeast Asia</p>
+      <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-4">
+        <span class="text-slate-400 font-semibold text-lg">Animal Welfare</span>
+        <span class="text-slate-400 font-semibold text-lg">Education Funds</span>
+        <span class="text-slate-400 font-semibold text-lg">Religious Organisations</span>
+        <span class="text-slate-400 font-semibold text-lg">Community Clubs</span>
+        <span class="text-slate-400 font-semibold text-lg">Arts &amp; Culture</span>
+        <span class="text-slate-400 font-semibold text-lg">Environmental NGOs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-slate-900 mb-5">Fundraise more. Spend less on payment fees.</h2>
+      <p class="text-xl text-slate-600 leading-relaxed">With no setup costs and no monthly subscription, HitPay lets you keep more of every donation. Simple donation pages, recurring giving, QR codes, and invoicing — all in one platform.</p>
+    </div>
+  </section>
+
+  <!-- Feature 1: Online Donation Pages -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="text-violet-600 font-semibold text-sm uppercase tracking-widest mb-4">Donation Pages</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Beautiful donation pages in minutes, not weeks</h2>
+          <p class="text-lg text-slate-600 mb-8">Create a branded donation page in under 5 minutes. Embed it on your website or share the link directly. No developer needed — and donors can pay with PayNow, card, GrabPay, and more.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Customisable preset amounts and custom fields</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Add your logo, branding, and cause description</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Works on mobile — most donors give on their phones</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Automatic tax receipt emails sent to donors</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-violet-600 font-semibold hover:text-violet-800 text-sm">
+            Create your donation page <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <div class="space-y-3 w-80">
+            <!-- Donation flow stages -->
+            <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center text-violet-600 font-bold text-sm flex-shrink-0">1</div>
+                <div>
+                  <div class="font-semibold text-slate-900 text-sm">Create your page</div>
+                  <div class="text-slate-500 text-xs">Add your cause, logo, and preset amounts</div>
+                </div>
+                <div class="ml-auto text-green-500 text-xs font-medium">✓ Done</div>
+              </div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center text-violet-600 font-bold text-sm flex-shrink-0">2</div>
+                <div>
+                  <div class="font-semibold text-slate-900 text-sm">Share the link</div>
+                  <div class="text-slate-500 text-xs">Via email, WhatsApp, social media, or QR</div>
+                </div>
+                <div class="ml-auto text-green-500 text-xs font-medium">✓ Done</div>
+              </div>
+            </div>
+            <div class="bg-violet-50 border-2 border-violet-200 rounded-xl p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-violet-600 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                <div>
+                  <div class="font-semibold text-violet-900 text-sm">Donations come in</div>
+                  <div class="text-violet-600 text-xs">Real-time dashboard + payout next business day</div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+              <div class="text-xs text-slate-500 mb-2">Today's donations</div>
+              <div class="flex items-baseline gap-1 mb-1">
+                <div class="text-2xl font-bold text-slate-900">S$1,840</div>
+                <div class="text-xs text-green-600 font-medium">↑ 34 donors</div>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-violet-500 rounded-full" style="width: 73%"></div>
+              </div>
+              <div class="text-xs text-slate-400 mt-1">73% of S$2,500 monthly goal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 2: Recurring giving -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center order-2 lg:order-1">
+          <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 w-80">
+            <div class="flex items-center justify-between mb-5">
+              <div class="font-semibold text-slate-900">Monthly Donors</div>
+              <div class="text-xs text-violet-600 font-medium bg-violet-50 px-2 py-1 rounded">February 2025</div>
+            </div>
+            <div class="space-y-3 mb-5">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-sm font-bold text-orange-600">RK</div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-slate-900">Rahul K.</div>
+                  <div class="text-xs text-slate-500">Monthly — since Jan 2024</div>
+                </div>
+                <div class="text-sm font-bold text-slate-900">S$50/mo</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-sm font-bold text-blue-600">MT</div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-slate-900">Michelle T.</div>
+                  <div class="text-xs text-slate-500">Monthly — since Mar 2024</div>
+                </div>
+                <div class="text-sm font-bold text-slate-900">S$25/mo</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-sm font-bold text-green-600">AL</div>
+                <div class="flex-1">
+                  <div class="text-sm font-medium text-slate-900">Andrew L.</div>
+                  <div class="text-xs text-slate-500">Annual — since Nov 2023</div>
+                </div>
+                <div class="text-sm font-bold text-slate-900">S$200/yr</div>
+              </div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500 mb-1">Monthly Recurring Donations</div>
+              <div class="text-2xl font-bold text-slate-900">S$4,320</div>
+              <div class="text-xs text-green-600 mt-1">↑ 8 new recurring donors this month</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="text-violet-600 font-semibold text-sm uppercase tracking-widest mb-4">Recurring Giving</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Turn one-time donors into lifetime supporters</h2>
+          <p class="text-lg text-slate-600 mb-8">Predictable recurring donations help you plan programs, hire staff, and grow sustainably. HitPay makes it easy for donors to set up monthly giving in a few taps — and just as easy for you to manage it all.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Monthly, quarterly, and annual giving options</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Automatic receipts and thank-you emails</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Donors can manage their own subscriptions without calling you</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Smart retries for failed payments to reduce lapsed donors</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-violet-600 font-semibold hover:text-violet-800 text-sm">
+            Set up recurring giving <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 3: Events & QR -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="text-violet-600 font-semibold text-sm uppercase tracking-widest mb-4">Events & In-Person</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Collect at galas, fundraisers, and community events</h2>
+          <p class="text-lg text-slate-600 mb-8">Whether it's a charity run, a gala dinner, or a bake sale — HitPay lets you accept donations on the spot with QR codes, Tap to Pay, or card terminals. No Wi-Fi? No problem. Set up static PayNow QR codes in advance.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Static QR codes you can print on posters, banners, and tables</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Tap to Pay on your smartphone — no extra hardware</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">All donations tracked in real time in your dashboard</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Share payment links with guests before the event via email or WhatsApp</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-violet-600 font-semibold hover:text-violet-800 text-sm">
+            Learn about event donations <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <div class="relative">
+            <!-- QR code mock -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-64 text-center">
+              <div class="text-sm font-semibold text-slate-900 mb-1">Scan to donate</div>
+              <div class="text-xs text-slate-500 mb-4">Support our year-end campaign</div>
+              <!-- Fake QR code made with CSS -->
+              <div class="w-36 h-36 mx-auto mb-4 bg-slate-900 rounded-xl p-2 grid grid-cols-7 gap-0.5">
+                <div class="col-span-3 row-span-3 bg-white rounded-sm p-0.5"><div class="w-full h-full bg-slate-900 rounded-xs"></div></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="col-span-3 row-span-3 bg-white rounded-sm p-0.5"><div class="w-full h-full bg-slate-900 rounded-xs"></div></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="col-span-3 row-span-3 bg-white rounded-sm p-0.5"><div class="w-full h-full bg-slate-900 rounded-xs"></div></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+                <div class="bg-white rounded-sm"></div>
+                <div class="bg-slate-900 rounded-sm"></div>
+              </div>
+              <div class="text-xs text-slate-400 mb-3">PayNow · Card · GrabPay</div>
+              <div class="bg-violet-600 rounded-lg py-2 text-center text-white text-xs font-semibold">HitPay · hitpay.me/awss</div>
+            </div>
+            <div class="absolute -bottom-3 -right-3 bg-violet-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+              Print & display anywhere!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 4: Invoicing for Grants -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center order-2 lg:order-1">
+          <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 w-80">
+            <div class="flex justify-between items-start mb-5">
+              <div>
+                <div class="font-bold text-slate-900 text-lg">Invoice #1042</div>
+                <div class="text-slate-500 text-xs mt-0.5">Issued 20 Feb 2025</div>
+              </div>
+              <div class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-full">Due in 14 days</div>
+            </div>
+            <div class="border border-slate-100 rounded-xl overflow-hidden mb-4">
+              <div class="bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-widest">Bill to</div>
+              <div class="px-4 py-3">
+                <div class="font-semibold text-slate-900 text-sm">Temasek Foundation</div>
+                <div class="text-slate-500 text-xs">Sponsorship: Community Meals Programme Q1</div>
+              </div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-600">Programme sponsorship</span>
+                <span class="text-slate-900">S$5,000.00</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-600">Logistics support</span>
+                <span class="text-slate-900">S$800.00</span>
+              </div>
+            </div>
+            <div class="border-t border-slate-200 pt-3 flex justify-between items-center">
+              <span class="font-semibold text-slate-700">Total Due</span>
+              <span class="font-bold text-slate-900 text-xl">S$5,800.00</span>
+            </div>
+            <div class="mt-4 bg-violet-600 rounded-lg py-2.5 text-center text-white text-sm font-semibold">
+              Pay invoice
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="text-violet-600 font-semibold text-sm uppercase tracking-widest mb-4">Invoicing</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Professional invoices for grants and corporate sponsors</h2>
+          <p class="text-lg text-slate-600 mb-8">Send polished, branded invoices to grant providers, corporate sponsors, and government agencies. Automated payment reminders mean you spend less time chasing — and more time on your mission.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Generate branded invoices in under 2 minutes</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Automated payment reminders at 7, 3, and 1 day before due</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Sponsors can pay via bank transfer, card, or PayNow</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Full payment history and audit trail for reporting</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-violet-600 font-semibold hover:text-violet-800 text-sm">
+            Learn about invoicing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 bg-violet-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">S$0</div>
+          <div class="text-violet-300 text-sm">Setup or monthly fees</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">&lt;5 min</div>
+          <div class="text-violet-300 text-sm">To launch a donation page</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">100+</div>
+          <div class="text-violet-300 text-sm">Currencies for cross-border donors</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">T+1</div>
+          <div class="text-violet-300 text-sm">Business day payouts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <svg class="w-10 h-10 text-violet-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+      <p class="text-2xl text-slate-800 font-medium leading-relaxed mb-8">"Before HitPay, we were juggling PayNow screenshots, bank transfer confirmations, and a spreadsheet to track donations. Now everything is in one dashboard. Our year-end campaign raised 40% more because donors could give instantly via PayNow QR at the event."</p>
+      <div class="flex items-center justify-center gap-4">
+        <div class="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center text-violet-700 font-bold">NM</div>
+        <div class="text-left">
+          <div class="font-semibold text-slate-900">Nora Mohammed</div>
+          <div class="text-slate-500 text-sm">Executive Director, Yayasan Kreativiti — Singapore Education NGO</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature grid -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">The full toolkit for mission-driven organisations</h2>
+        <p class="text-slate-600 max-w-xl mx-auto">HitPay gives your nonprofit everything it needs to raise more — without the complexity.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-violet-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Shareable payment links</h3>
+          <p class="text-slate-600 text-sm">Create campaign-specific links and share them via email, WhatsApp, or social media. Each link has its own analytics.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Automatic receipts</h3>
+          <p class="text-slate-600 text-sm">Donors receive instant, professional receipts via email after every gift. Reduce admin and keep donors informed.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Multiple payment methods</h3>
+          <p class="text-slate-600 text-sm">PayNow, GrabPay, Visa, Mastercard, Apple Pay, Google Pay — give every donor a convenient way to give.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Donation reporting</h3>
+          <p class="text-slate-600 text-sm">Export donor data and payment history for your annual reports, board meetings, and funding applications.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">International donors</h3>
+          <p class="text-slate-600 text-sm">Accept donations from your global diaspora community in 100+ currencies with transparent conversion.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Secure &amp; trusted</h3>
+          <p class="text-slate-600 text-sm">HitPay is licensed by the Monetary Authority of Singapore (MAS). Donor payments are safe and PCI DSS compliant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing callout -->
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-violet-50 border border-violet-200 rounded-2xl p-8 text-center">
+        <div class="text-violet-700 font-semibold text-sm uppercase tracking-widest mb-4">Simple, transparent pricing</div>
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">No setup fees. No monthly subscription. Ever.</h2>
+        <p class="text-slate-600 text-lg mb-6">HitPay charges only a small per-transaction fee — meaning you keep more of every donation. No hidden fees, no contracts, no surprises.</p>
+        <div class="flex flex-wrap justify-center gap-8 mb-6">
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-violet-700">S$0</div>
+            <div class="text-slate-500 text-sm mt-1">Setup fee</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-violet-700">S$0</div>
+            <div class="text-slate-500 text-sm mt-1">Monthly fee</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-violet-700">Pay-per-txn</div>
+            <div class="text-slate-500 text-sm mt-1">Transparent rates only</div>
+          </div>
+        </div>
+        <a href="#" class="inline-flex items-center gap-2 bg-violet-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-violet-700 transition-colors">
+          See pricing details
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-10 pb-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="ecommerce.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-violet-300 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🛒</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-violet-700">E-commerce</div>
+          <div class="text-slate-600 text-sm">Accept payments on your online store.</div>
+          <div class="mt-4 text-violet-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-violet-300 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🏪</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-violet-700">Retail</div>
+          <div class="text-slate-600 text-sm">Unified POS and payments for physical stores.</div>
+          <div class="mt-4 text-violet-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+        <a href="#" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-violet-300 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🎓</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-violet-700">Education</div>
+          <div class="text-slate-600 text-sm">Course fees, tuition, and exam registration payments.</div>
+          <div class="mt-4 text-violet-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 gradient-cta">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold text-white mb-5">Ready to raise more for your cause?</h2>
+      <p class="text-violet-200 text-xl mb-10">Join nonprofits across Southeast Asia using HitPay to collect donations effortlessly. Free to start — up in under 5 minutes.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#" class="bg-white text-violet-700 font-semibold px-8 py-4 rounded-xl hover:bg-violet-50 transition-colors text-base">
+          Start for free
+        </a>
+        <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">
+          Talk to our team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-7 h-7 bg-violet-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-xs">H</span>
+            </div>
+            <span class="font-bold text-white">HitPay</span>
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses and nonprofits in Southeast Asia and beyond.</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">Payment Links</a></li><li><a href="#" class="hover:text-slate-300">Subscriptions</a></li><li><a href="#" class="hover:text-slate-300">Invoicing</a></li><li><a href="#" class="hover:text-slate-300">Static QR</a></li></ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Solutions</div>
+          <ul class="space-y-2 text-sm"><li><a href="ecommerce.html" class="hover:text-slate-300">E-commerce</a></li><li><a href="retail.html" class="hover:text-slate-300">Retail</a></li><li><a href="nonprofits.html" class="hover:text-slate-300">Nonprofits</a></li><li><a href="#" class="hover:text-slate-300">F&B</a></li></ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">About</a></li><li><a href="#" class="hover:text-slate-300">Blog</a></li><li><a href="#" class="hover:text-slate-300">Pricing</a></li><li><a href="#" class="hover:text-slate-300">Contact</a></li></ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-slate-600">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
