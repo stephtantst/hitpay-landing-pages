@@ -259,6 +259,16 @@
       border: 2px solid transparent;
     }
 
+    /* Feature card modal */
+    .fcard { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .fcard:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(79,70,229,0.09); border-color: #c7d2fe; }
+    .fcard-dark:hover { border-color: #4f46e5; }
+
+    .hp-modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
+    .hp-modal-overlay.is-open { opacity: 1; pointer-events: all; }
+    .hp-modal-panel { transform: scale(0.97) translateY(14px); transition: transform 0.28s cubic-bezier(0.16,1,0.3,1); }
+    .hp-modal-overlay.is-open .hp-modal-panel { transform: scale(1) translateY(0); }
+
     /* Smooth scroll */
     html { scroll-behavior: smooth; }
   </style>
@@ -322,21 +332,25 @@
 
           <!-- Subline -->
           <p class="text-lg xl:text-xl text-slate-500 leading-relaxed mb-6">
-            Accept PayNow, GrabPay, ShopeePay, cards, and 700+ payment methods — online, in-store, via WhatsApp, or via invoice. Zero monthly fees.
+            Sell from your website, your store, or your Instagram — and let every customer pay their way. Zero monthly fees, fast and reliable payouts.
           </p>
           <!-- USP micro-callouts -->
           <div class="flex flex-col gap-2 mb-8">
             <div class="flex items-center gap-2.5 text-sm text-slate-600">
               <span class="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span>SEA's broadest QR &amp; alternative payment aggregator</span>
+              <span>Accept cards, QR codes, and e-wallets — all from one account</span>
             </div>
             <div class="flex items-center gap-2.5 text-sm text-slate-600">
               <span class="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span>Cross-border payments across 10+ countries, 100+ currencies</span>
+              <span>Sell on every channel — website, store, WhatsApp, and social</span>
             </div>
             <div class="flex items-center gap-2.5 text-sm text-slate-600">
               <span class="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span>True omni-channel — online, in-store, social, and everything in between</span>
+              <span>Accept payments from tourists and overseas customers</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span>Set up in minutes — supported every day of the week</span>
             </div>
           </div>
 
@@ -522,19 +536,23 @@
   ═══════════════════════════════════════════════════ -->
   <section class="py-16 bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 text-center">
         <div>
           <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">15,000<span class="text-indigo-400">+</span></p>
           <p class="text-sm text-slate-400">Businesses across SEA</p>
         </div>
         <div>
+          <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight"><span class="text-indigo-400">$</span>1B<span class="text-indigo-400">+</span></p>
+          <p class="text-sm text-slate-400">Payment volume in 2025</p>
+        </div>
+        <!-- <div>
           <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">700<span class="text-indigo-400">+</span></p>
           <p class="text-sm text-slate-400">Payment methods</p>
-        </div>
-        <div>
+        </div> -->
+        <!-- <div>
           <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">10<span class="text-indigo-400">+</span></p>
           <p class="text-sm text-slate-400">Countries supported</p>
-        </div>
+        </div> -->
         <div>
           <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">100<span class="text-indigo-400">+</span></p>
           <p class="text-sm text-slate-400">Currencies accepted</p>
@@ -554,107 +572,115 @@
         </div>
         <h2 class="text-4xl xl:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">One platform.<br />Every way to get paid.</h2>
         <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          From your first sale to your millionth — HitPay handles every payment channel so you can focus on growing your business.
+          Whether you sell online, run a physical store, or take orders through social media — HitPay handles the payments so you can focus on what you do best.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
         <!-- Online Checkout -->
-        <div class="feature-card bg-white border border-slate-200 rounded-2xl p-7">
-          <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-5">
+        <div class="fcard bg-white border border-slate-200 rounded-2xl p-7 flex flex-col cursor-pointer group"
+             onclick="openFeatureModal('checkout')">
+          <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-5 flex-shrink-0">
             <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Online Checkout</h3>
-          <p class="text-sm text-slate-500 leading-relaxed">A hosted payment page that works on any device. No developer, no code. Launch in minutes and start accepting all major payment methods immediately.</p>
+          <p class="text-sm text-slate-500 leading-relaxed flex-1">Give your customers a checkout that just works — on any device, with whatever payment method they prefer. No developer needed. Fast and reliable payouts.</p>
+          <div class="mt-5 pt-4 border-t border-slate-100 flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-indigo-600">Learn more</span>
+            <svg class="w-3 h-3 text-indigo-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </div>
         </div>
 
         <!-- POS -->
-        <div class="feature-card bg-white border border-slate-200 rounded-2xl p-7">
-          <div class="w-12 h-12 bg-violet-50 rounded-xl flex items-center justify-center mb-5">
+        <div class="fcard bg-white border border-slate-200 rounded-2xl p-7 flex flex-col cursor-pointer group"
+             onclick="openFeatureModal('pos')">
+          <div class="w-12 h-12 bg-violet-50 rounded-xl flex items-center justify-center mb-5 flex-shrink-0">
             <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Point of Sale</h3>
-          <p class="text-sm text-slate-500 leading-relaxed mb-4">Turn your phone into a complete POS system. Display a static QR at your counter, generate a dynamic QR per transaction, or accept contactless via Tap to Pay — all in one app.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 rounded-lg px-2.5 py-1 text-xs font-semibold text-violet-700">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8H2a2 2 0 00-2 2v10a2 2 0 002 2h3M15 8h3a2 2 0 012 2v3"/></svg>
-              Static QR
-            </span>
-            <span class="inline-flex items-center gap-1.5 bg-indigo-50 border border-indigo-100 rounded-lg px-2.5 py-1 text-xs font-semibold text-indigo-700">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-              Dynamic QR
-            </span>
+          <p class="text-sm text-slate-500 leading-relaxed mb-4 flex-1">Take payments anywhere — at your stall, counter, pop-up, or market. Show a QR code, tap a card, or connect a terminal for S$85. No monthly rental, no bulky hardware.</p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 rounded-lg px-2.5 py-1 text-xs font-semibold text-violet-700">Static QR</span>
+            <span class="inline-flex items-center gap-1.5 bg-indigo-50 border border-indigo-100 rounded-lg px-2.5 py-1 text-xs font-semibold text-indigo-700">Dynamic QR</span>
             <span class="inline-flex items-center gap-1.5 bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-semibold text-slate-600">Tap to Pay</span>
             <span class="inline-flex items-center gap-1.5 bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-semibold text-slate-600">Terminal S$85</span>
           </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-violet-600">Learn more</span>
+            <svg class="w-3 h-3 text-violet-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </div>
         </div>
 
-        <!-- Payment Links & Invoicing (merged) -->
-        <div class="feature-card bg-white border border-slate-200 rounded-2xl p-7">
-          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+        <!-- Payment Links & Invoicing -->
+        <div class="fcard bg-white border border-slate-200 rounded-2xl p-7 flex flex-col cursor-pointer group"
+             onclick="openFeatureModal('links')">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5 flex-shrink-0">
             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Payment Links &amp; Invoicing</h3>
-          <p class="text-sm text-slate-500 leading-relaxed mb-4">Generate a shareable payment URL in seconds — send via WhatsApp, Instagram, or email. Or issue branded invoices with embedded pay buttons, auto-reconciled with Xero.</p>
-          <div class="flex flex-wrap gap-2">
+          <p class="text-sm text-slate-500 leading-relaxed mb-4 flex-1">No website? No problem. Share a payment link on WhatsApp or Instagram and get paid in seconds. Send professional invoices for B2B work — automatically synced to Xero.</p>
+          <div class="flex flex-wrap gap-2 mb-5">
             <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-100 rounded-lg px-2.5 py-1 text-xs font-semibold text-blue-700">Payment Links</span>
             <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 rounded-lg px-2.5 py-1 text-xs font-semibold text-emerald-700">Smart Invoicing</span>
             <span class="inline-flex items-center gap-1.5 bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-semibold text-slate-600">Xero sync</span>
           </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-blue-600">Learn more</span>
+            <svg class="w-3 h-3 text-blue-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </div>
         </div>
 
         <!-- Recurring -->
-        <div class="feature-card bg-white border border-slate-200 rounded-2xl p-7">
-          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-5">
+        <div class="fcard bg-white border border-slate-200 rounded-2xl p-7 flex flex-col cursor-pointer group"
+             onclick="openFeatureModal('recurring')">
+          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-5 flex-shrink-0">
             <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Recurring Billing</h3>
-          <p class="text-sm text-slate-500 leading-relaxed">Set up subscription plans with flexible intervals. Automatic retry on failed payments. Customers get receipts automatically. Built for memberships, retainers, and SaaS.</p>
+          <p class="text-sm text-slate-500 leading-relaxed flex-1">Stop chasing monthly payments. Set up once and collect automatically — memberships, retainers, subscriptions. Failed payments are retried for you. No more admin Fridays.</p>
+          <div class="mt-5 pt-4 border-t border-slate-100 flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-amber-600">Learn more</span>
+            <svg class="w-3 h-3 text-amber-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </div>
         </div>
 
         <!-- Plugin Integrations -->
-        <div class="feature-card bg-white border border-slate-200 rounded-2xl p-7">
-          <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-5">
+        <div class="fcard bg-white border border-slate-200 rounded-2xl p-7 flex flex-col cursor-pointer group"
+             onclick="openFeatureModal('integrations')">
+          <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-5 flex-shrink-0">
             <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l5 5m0-5l-5 5"/></svg>
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Plugin Integrations</h3>
-          <p class="text-sm text-slate-500 leading-relaxed mb-4">Install HitPay into your existing store in minutes — no developer needed. Works with all major e-commerce platforms and accounting tools.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700">
-              <span class="w-4 h-4 bg-green-500 rounded flex items-center justify-center text-[8px] font-extrabold text-white">S</span>
-              Shopify
-            </span>
-            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700">
-              <span class="w-4 h-4 bg-blue-600 rounded flex items-center justify-center text-[7px] font-extrabold text-white">W</span>
-              WooCommerce
-            </span>
-            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700">
-              <span class="w-4 h-4 bg-indigo-400 rounded flex items-center justify-center text-[8px] font-extrabold text-white">W</span>
-              Wix
-            </span>
-            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700">
-              <span class="w-4 h-4 bg-orange-500 rounded flex items-center justify-center text-[7px] font-extrabold text-white">M</span>
-              Magento
-            </span>
-            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700">
-              <span class="w-4 h-4 bg-blue-500 rounded flex items-center justify-center text-[7px] font-extrabold text-white">X</span>
-              Xero
-            </span>
+          <p class="text-sm text-slate-500 leading-relaxed mb-4 flex-1">Already on Shopify, WooCommerce, or Wix? Add HitPay in under 10 minutes and instantly unlock PayNow, GrabPay, and every other local payment your customers prefer.</p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700"><span class="w-4 h-4 bg-green-500 rounded flex items-center justify-center text-[8px] font-extrabold text-white">S</span>Shopify</span>
+            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700"><span class="w-4 h-4 bg-blue-600 rounded flex items-center justify-center text-[7px] font-extrabold text-white">W</span>WooCommerce</span>
+            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700"><span class="w-4 h-4 bg-indigo-400 rounded flex items-center justify-center text-[8px] font-extrabold text-white">W</span>Wix</span>
+            <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-700"><span class="w-4 h-4 bg-blue-500 rounded flex items-center justify-center text-[7px] font-extrabold text-white">X</span>Xero</span>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-green-600">Learn more</span>
+            <svg class="w-3 h-3 text-green-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </div>
         </div>
 
         <!-- Developer API -->
-        <div class="feature-card bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-7">
-          <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-5">
+        <div class="fcard fcard-dark bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-7 flex flex-col cursor-pointer group"
+             onclick="openFeatureModal('api')">
+          <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-5 flex-shrink-0">
             <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
           </div>
           <h3 class="text-lg font-bold text-white mb-2">Developer API</h3>
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">One REST API to accept every payment method — cards, QR, e-wallets, and cross-border. Full sandbox for safe testing before going live.</p>
-          <div class="bg-slate-950 rounded-lg px-4 py-3 border border-slate-700 font-mono text-xs space-y-1">
+          <p class="text-sm text-slate-400 leading-relaxed mb-4 flex-1">One REST API to accept every payment method — cards, QR, e-wallets, and cross-border. Full sandbox for safe testing before going live.</p>
+          <div class="bg-slate-950 rounded-lg px-4 py-3 border border-slate-700 font-mono text-xs space-y-1 mb-5">
             <p class="text-slate-500">// Create a payment request</p>
             <p><span class="text-indigo-400">POST</span> <span class="text-green-400">/v1/payment-requests</span></p>
             <p class="text-slate-400">&#123; amount: <span class="text-amber-400">99.00</span>, currency: <span class="text-amber-400">"SGD"</span> &#125;</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center gap-1.5">
+            <span class="text-xs font-semibold text-indigo-400">Learn more</span>
+            <svg class="w-3 h-3 text-indigo-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </div>
         </div>
 
@@ -669,13 +695,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Section intro -->
-      <div class="text-center mb-20">
+      <div class="text-center mb-14">
         <div class="inline-block badge-pill rounded-full px-4 py-1.5 mb-4">
-          <span class="text-indigo-700 text-xs font-semibold tracking-widest uppercase">Why HitPay</span>
+          <span class="text-indigo-700 text-xs font-semibold tracking-widest uppercase">Built for Southeast Asia</span>
         </div>
-        <h2 class="text-4xl xl:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Three things no other<br />platform does better</h2>
+        <h2 class="text-4xl xl:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Payments built around how<br />your customers actually pay</h2>
         <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Built for the realities of Southeast Asian commerce — where QR codes dominate checkout, borders don't stop ambition, and customers shop on every channel.
+          QR codes dominate checkout. Tourists bring their home wallets. Customers shop across every channel. HitPay is built for all of it — so you never have to turn away a sale.
         </p>
       </div>
 
@@ -685,14 +711,11 @@
         <div>
           <div class="inline-flex items-center gap-2.5 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-5">
             <span class="text-blue-600 text-xs font-extrabold">01</span>
-            <span class="text-blue-700 text-xs font-semibold">QR &amp; Alternative Payment Methods</span>
+            <span class="text-blue-700 text-xs font-semibold">Cards, QRs, E-wallets</span>
           </div>
-          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">SEA's broadest QR<br />&amp; e-wallet aggregator</h3>
-          <p class="text-slate-500 leading-relaxed mb-4">
-            Over 60% of consumers in Southeast Asia prefer QR codes and digital wallets over cards. Yet most payment gateways only support a handful. HitPay aggregates every major QR-based alternative payment method across the region — so you never lose a sale because of a missing payment option.
-          </p>
+          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">Increase your checkout<br />conversion rates</h3>
           <p class="text-slate-500 leading-relaxed mb-7">
-            From PayNow for Singaporeans, GrabPay for ride-hailing loyalists, ShopeePay for e-commerce shoppers, to Alipay+ for Chinese visitors and WeChat Pay for mainland tourists — one HitPay account enables them all automatically. No separate merchant registrations, no multiple contracts, no extra fees.
+            Over 60% of consumers in Southeast Asia pay by QR code or digital wallet — not card. If your checkout doesn't support PayNow, GrabPay, or ShopeePay, you're turning customers away without realising it. One HitPay account gives you access to every major wallet with a single sign-up — more payment options means higher checkout conversion. No separate registrations, no extra contracts.
           </p>
           <!-- Method chips -->
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-7">
@@ -721,7 +744,6 @@
               <span class="text-xs font-semibold text-indigo-600">700+ more</span>
             </div>
           </div>
-          <p class="text-xs text-slate-400 italic">More payment options = higher checkout conversion. Businesses that add QR wallets to cards report up to 5% lower cart abandonment.</p>
         </div>
         <!-- Right: Visual card -->
         <div class="bg-white rounded-2xl border border-slate-200 shadow-lg p-7">
@@ -765,7 +787,7 @@
             </div>
           </div>
           <div class="mt-6 bg-indigo-50 border border-indigo-100 rounded-xl px-5 py-3.5">
-            <p class="text-xs text-indigo-700 font-semibold leading-relaxed">Single integration. All methods enabled automatically. No separate merchant registrations required with each e-wallet provider.</p>
+            <p class="text-xs text-indigo-700 font-semibold leading-relaxed">Single sign-up. All methods available from one account. No separate merchant registrations required with each e-wallet provider.</p>
           </div>
           <div class="mt-4 pt-4 border-t border-slate-100 flex items-end justify-between">
             <div>
@@ -777,121 +799,20 @@
         </div>
       </div>
 
-      <!-- ── USP 2: CROSS-BORDER ── -->
+      <!-- ── USP 2: OMNI-CHANNEL ── -->
       <div class="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center mb-24">
-        <!-- Left: Visual card — actual method table -->
-        <div class="order-last lg:order-first bg-white rounded-2xl border border-slate-200 shadow-lg p-7">
-          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Cross-border QR methods for SG merchants</p>
-          <p class="text-[11px] text-slate-400 mb-5">Customer pays in their home currency · funds deposited to your HitPay wallet</p>
-
-          <!-- Method rows -->
-          <div class="space-y-1.5 mb-5">
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 px-3 pb-2">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Method</span>
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center">Online</span>
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center">In-Store</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇮🇩</span><div><p class="text-xs font-bold text-slate-800">QRIS</p><p class="text-[10px] text-slate-400">Indonesia · IDR</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇹🇭</span><div><p class="text-xs font-bold text-slate-800">PromptPay · TrueMoney · LINE Pay</p><p class="text-[10px] text-slate-400">Thailand · THB</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇮🇳</span><div><p class="text-xs font-bold text-slate-800">UPI</p><p class="text-[10px] text-slate-400">India · SGD charged</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇵🇭</span><div><p class="text-xs font-bold text-slate-800">QRPH</p><p class="text-[10px] text-slate-400">Philippines · PHP</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇻🇳</span><div><p class="text-xs font-bold text-slate-800">VietQR</p><p class="text-[10px] text-slate-400">Vietnam · VND</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇨🇳</span><div><p class="text-xs font-bold text-slate-800">WeChat Pay</p><p class="text-[10px] text-slate-400">China · SGD charged</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">–</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
-              <div class="flex items-center gap-2"><span class="text-sm">🇦🇺</span><div><p class="text-xs font-bold text-slate-800">PayID</p><p class="text-[10px] text-slate-400">Australia · AUD</p></div></div>
-              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
-              <span class="text-center text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">–</span>
-            </div>
-            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center border border-dashed border-slate-200 rounded-xl px-3 py-2.5 opacity-55">
-              <div class="flex items-center gap-2"><span class="text-sm">🇲🇾</span><div><p class="text-xs font-semibold text-slate-500">DuitNow <span class="text-[10px] font-normal text-slate-400">· Coming soon</span></p><p class="text-[10px] text-slate-400">Malaysia · MYR</p></div></div>
-              <span class="text-center text-[10px] text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">Soon</span>
-              <span class="text-center text-[10px] text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">Soon</span>
-            </div>
-          </div>
-
-          <div class="bg-violet-50 border border-violet-100 rounded-xl px-4 py-3 mb-3">
-            <p class="text-xs text-violet-700 font-bold mb-1">Virtual accounts in 13 currencies</p>
-            <p class="text-[11px] text-violet-600 leading-relaxed">SGD · USD · EUR · GBP · AUD · HKD · JPY · CAD · CHF · CNH · NZD · NOK · SEK</p>
-          </div>
-          <p class="text-[10px] text-slate-400 italic">FX conversion to SGD main wallet: 1.5% markup on exchange rate.</p>
-        </div>
-
-        <!-- Right: Content -->
-        <div>
-          <div class="inline-flex items-center gap-2.5 bg-violet-50 border border-violet-100 rounded-full px-4 py-1.5 mb-5">
-            <span class="text-violet-600 text-xs font-extrabold">02</span>
-            <span class="text-violet-700 text-xs font-semibold">Cross-Border Payments</span>
-          </div>
-          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">Let every tourist and<br />overseas customer<br />pay their way</h3>
-          <p class="text-slate-500 leading-relaxed mb-4">
-            Singapore welcomes millions of visitors from Indonesia, Thailand, India, China, the Philippines, Vietnam, and Australia every year. When they scan your HitPay QR with their home wallet app, it works instantly — no friction, no turned-away sales.
-          </p>
-          <p class="text-slate-500 leading-relaxed mb-6">
-            For online businesses, HitPay lets you accept orders from customers paying in their local currency across the region. Funds are deposited to currency-specific wallets and converted to SGD whenever you choose — all from one account, no separate merchant agreements needed.
-          </p>
-          <ul class="space-y-3 mb-7">
-            <li class="flex items-start gap-3 text-sm text-slate-600">
-              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span><strong class="text-slate-800">10 active cross-border QR methods</strong> — QRIS, PromptPay, TrueMoney, LINE Pay, QRPH, VietQR, UPI, WeChat Pay, PayID + DuitNow coming</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-600">
-              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span><strong class="text-slate-800">Virtual accounts in 13 currencies</strong> for global B2B invoicing — USD, EUR, GBP, AUD, HKD, JPY and more</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-600">
-              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span>Transparent FX: <strong class="text-slate-800">1.5% markup</strong> to convert currency wallet to SGD — no hidden fees</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-600">
-              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
-              <span>Works online and in-store — same terminal, same QR code display, same dashboard</span>
-            </li>
-          </ul>
-          <a href="https://hitpayapp.com/cross-border-payments" class="inline-flex items-center gap-2 text-violet-600 font-semibold text-sm hover:text-violet-700 transition-colors">
-            Explore cross-border payments
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- ── USP 3: OMNI-CHANNEL ── -->
-      <div class="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center">
         <!-- Left: Content -->
         <div>
           <div class="inline-flex items-center gap-2.5 bg-emerald-50 border border-emerald-100 rounded-full px-4 py-1.5 mb-5">
-            <span class="text-emerald-600 text-xs font-extrabold">03</span>
-            <span class="text-emerald-700 text-xs font-semibold">Omni-Channel</span>
+            <span class="text-emerald-600 text-xs font-extrabold">02</span>
+            <span class="text-emerald-700 text-xs font-semibold">Omnichannel</span>
           </div>
-          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">One account.<br />Every sales channel.</h3>
+          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">Run your whole business<br />from one place.</h3>
           <p class="text-slate-500 leading-relaxed mb-4">
-            Your customers don't shop in one place — they browse your Instagram, visit your store, check out your website, and message you on WhatsApp. HitPay is the only payment platform that seamlessly covers every one of those channels, keeping your payments, reporting, and payouts unified.
+            Your customers browse your Instagram, visit your store, and message you on WhatsApp. Chasing payments across three different tools — a gateway here, a POS there, an invoicing app somewhere else — wastes time you don't have.
           </p>
           <p class="text-slate-500 leading-relaxed mb-7">
-            No more juggling a separate online gateway, a different POS system, and a third invoicing tool. One HitPay account replaces them all — with a single dashboard, a single reconciliation view, and a single bank account for all payouts.
+            HitPay brings it all together. One dashboard shows every sale from every channel. One daily payout lands in your bank account. No reconciliation headaches, no end-of-month surprises.
           </p>
           <!-- Channel grid -->
           <div class="grid grid-cols-3 gap-3">
@@ -977,260 +898,198 @@
         </div>
       </div>
 
-    </div>
-  </section>
+      <!-- ── USP 3: CROSS-BORDER ── -->
+      <div class="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center mb-24">
+        <!-- Left: Visual card — actual method table -->
+        <div class="order-last lg:order-first bg-white rounded-2xl border border-slate-200 shadow-lg p-7">
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Cross-border QR methods for SG merchants</p>
+          <p class="text-[11px] text-slate-400 mb-5">Customer pays in their home currency · funds deposited to your HitPay wallet</p>
 
-  <!-- ═══════════════════════════════════════════════════
-       PAYMENT METHODS
-  ═══════════════════════════════════════════════════ -->
-  <section id="payments" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
-        <div class="inline-block badge-pill rounded-full px-4 py-1.5 mb-4">
-          <span class="text-indigo-700 text-xs font-semibold tracking-widest uppercase">Payment methods</span>
-        </div>
-        <h2 class="text-4xl xl:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">The widest payment method<br />coverage in Southeast Asia</h2>
-        <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          More payment options means higher conversion and lower cart abandonment. One HitPay integration gives you every method your customers expect — from PayNow QR to cross-border wallets across the region.
-        </p>
-      </div>
+          <!-- Method rows -->
+          <div class="space-y-1.5 mb-5">
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 px-3 pb-2">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Method</span>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center">Online</span>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center">In-Store</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇮🇩</span><div><p class="text-xs font-bold text-slate-800">QRIS</p><p class="text-[10px] text-slate-400">Indonesia · IDR</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇹🇭</span><div><p class="text-xs font-bold text-slate-800">PromptPay · TrueMoney · LINE Pay</p><p class="text-[10px] text-slate-400">Thailand · THB</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇮🇳</span><div><p class="text-xs font-bold text-slate-800">UPI</p><p class="text-[10px] text-slate-400">India · SGD charged</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇵🇭</span><div><p class="text-xs font-bold text-slate-800">QRPH</p><p class="text-[10px] text-slate-400">Philippines · PHP</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇻🇳</span><div><p class="text-xs font-bold text-slate-800">VietQR</p><p class="text-[10px] text-slate-400">Vietnam · VND</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇨🇳</span><div><p class="text-xs font-bold text-slate-800">WeChat Pay</p><p class="text-[10px] text-slate-400">China · SGD charged</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">–</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center bg-slate-50 rounded-xl px-3 py-2.5">
+              <div class="flex items-center gap-2"><span class="text-sm">🇦🇺</span><div><p class="text-xs font-bold text-slate-800">PayID</p><p class="text-[10px] text-slate-400">Australia · AUD</p></div></div>
+              <span class="text-center text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full py-0.5">✓</span>
+              <span class="text-center text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">–</span>
+            </div>
+            <div class="grid grid-cols-[1fr_64px_72px] gap-2 items-center border border-dashed border-slate-200 rounded-xl px-3 py-2.5 opacity-55">
+              <div class="flex items-center gap-2"><span class="text-sm">🇲🇾</span><div><p class="text-xs font-semibold text-slate-500">DuitNow <span class="text-[10px] font-normal text-slate-400">· Coming soon</span></p><p class="text-[10px] text-slate-400">Malaysia · MYR</p></div></div>
+              <span class="text-center text-[10px] text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">Soon</span>
+              <span class="text-center text-[10px] text-slate-400 bg-slate-100 border border-slate-200 rounded-full py-0.5">Soon</span>
+            </div>
+          </div>
 
-      <!-- Category 1: Singapore QR & E-Wallets -->
-      <div class="mb-10">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Singapore QR &amp; E-Wallets</span>
-          <div class="flex-1 h-px bg-slate-100"></div>
-          <span class="text-xs text-slate-400 font-medium">🇸🇬 Optimised for local customers</span>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <div class="method-badge bg-white border-2 border-blue-100 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center">
-              <span class="text-blue-600 text-xs font-extrabold">PN</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700 text-center leading-tight">PayNow</span>
-            <span class="text-[10px] text-blue-600 font-semibold">0.65% + S$0.30</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-emerald-50 rounded-xl flex items-center justify-center">
-              <span class="text-emerald-600 text-[10px] font-extrabold">GP</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700 text-center leading-tight">GrabPay</span>
-            <span class="text-[10px] text-slate-400">QR wallet</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-orange-50 rounded-xl flex items-center justify-center">
-              <span class="text-orange-500 text-[10px] font-extrabold">SPY</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700 text-center leading-tight">ShopeePay</span>
-            <span class="text-[10px] text-slate-400">QR wallet</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-sky-50 rounded-xl flex items-center justify-center">
-              <span class="text-sky-600 text-[10px] font-extrabold">AP+</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700 text-center leading-tight">Alipay+</span>
-            <span class="text-[10px] text-slate-400">Global QR</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center">
-              <span class="text-green-600 text-[10px] font-extrabold">WCP</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700 text-center leading-tight">WeChat Pay</span>
-            <span class="text-[10px] text-slate-400">QR wallet</span>
+          <div class="bg-violet-50 border border-violet-100 rounded-xl px-4 py-3">
+            <p class="text-xs text-violet-700 font-bold mb-1">Virtual accounts in 13 currencies</p>
+            <p class="text-[11px] text-violet-600 leading-relaxed">SGD · USD · EUR · GBP · AUD · HKD · JPY · CAD · CHF · CNH · NZD · NOK · SEK</p>
           </div>
         </div>
-      </div>
 
-      <!-- Category 2: Cards & Device Pay -->
-      <div class="mb-10">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">International Cards &amp; Device Pay</span>
-          <div class="flex-1 h-px bg-slate-100"></div>
-          <span class="text-xs text-slate-400 font-medium">🌍 Global coverage</span>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-indigo-50 rounded-xl flex items-center justify-center">
-              <span class="text-indigo-700 text-xs font-extrabold">VISA</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700">Visa</span>
-            <span class="text-[10px] text-slate-400">2.8% + S$0.30</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center">
-              <span class="text-red-600 text-[10px] font-extrabold">MC</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700">Mastercard</span>
-            <span class="text-[10px] text-slate-400">2.8% + S$0.30</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-slate-100 rounded-xl flex items-center justify-center">
-              <span class="text-slate-600 text-[10px] font-extrabold">AMX</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700">Amex</span>
-            <span class="text-[10px] text-slate-400">3.4% + S$0.30</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-slate-800 rounded-xl flex items-center justify-center">
-              <span class="text-white text-[9px] font-extrabold">APay</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700">Apple Pay</span>
-            <span class="text-[10px] text-slate-400">Device pay</span>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center gap-2 cursor-default">
-            <div class="w-11 h-11 bg-red-50 rounded-xl flex items-center justify-center">
-              <span class="text-red-500 text-[9px] font-extrabold">GPay</span>
-            </div>
-            <span class="text-xs font-semibold text-slate-700">Google Pay</span>
-            <span class="text-[10px] text-slate-400">Device pay</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category 3: Cross-Border SEA -->
-      <div class="mb-10">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Cross-Border &amp; International</span>
-          <div class="flex-1 h-px bg-slate-100"></div>
-          <span class="text-xs text-slate-400 font-medium">Accept from tourists &amp; overseas buyers</span>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇮🇩</span>
-              <span class="text-xs font-bold text-slate-700">Indonesia</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">QRIS</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇹🇭</span>
-              <span class="text-xs font-bold text-slate-700">Thailand</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">PromptPay</span>
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">TrueMoney</span>
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">LINE Pay</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇮🇳</span>
-              <span class="text-xs font-bold text-slate-700">India</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">UPI</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇵🇭</span>
-              <span class="text-xs font-bold text-slate-700">Philippines</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">QRPH</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇻🇳</span>
-              <span class="text-xs font-bold text-slate-700">Vietnam</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">VietQR</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇨🇳</span>
-              <span class="text-xs font-bold text-slate-700">China</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">WeChat Pay</span>
-              <span class="text-[10px] bg-indigo-50 border border-indigo-100 rounded-lg px-2 py-1 font-medium text-indigo-500">Online only</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇦🇺</span>
-              <span class="text-xs font-bold text-slate-700">Australia</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">PayID</span>
-              <span class="text-[10px] bg-indigo-50 border border-indigo-100 rounded-lg px-2 py-1 font-medium text-indigo-500">Online only</span>
-            </div>
-          </div>
-          <div class="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-4 opacity-60">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="text-base">🇲🇾</span>
-              <span class="text-xs font-bold text-slate-700">Malaysia</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="text-[10px] bg-white border border-slate-200 rounded-lg px-2 py-1 font-medium text-slate-600">DuitNow</span>
-              <span class="text-[10px] bg-amber-50 border border-amber-200 rounded-lg px-2 py-1 font-medium text-amber-600">Coming soon</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category 4: Other -->
-      <div class="mb-10">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Other</span>
-          <div class="flex-1 h-px bg-slate-100"></div>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-3 cursor-default">
-            <div class="w-10 h-10 bg-sky-50 rounded-lg flex items-center justify-center flex-shrink-0">
-              <span class="text-sky-600 text-[10px] font-bold">BT</span>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-slate-700">Bank Transfer</p>
-              <p class="text-[10px] text-slate-400">Direct debit</p>
-            </div>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-3 cursor-default">
-            <div class="w-10 h-10 bg-violet-50 rounded-lg flex items-center justify-center flex-shrink-0">
-              <span class="text-violet-600 text-[10px] font-bold">QR</span>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-slate-700">Static QR Code</p>
-              <p class="text-[10px] text-slate-400">Print &amp; display</p>
-            </div>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-3 cursor-default">
-            <div class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
-              <span class="text-amber-600 text-[10px] font-bold">TAP</span>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-slate-700">Tap to Pay</p>
-              <p class="text-[10px] text-slate-400">iPhone &amp; Android</p>
-            </div>
-          </div>
-          <div class="method-badge bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-3 cursor-default">
-            <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <span class="text-slate-500 text-[10px] font-bold">+700</span>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-slate-700">700+ Digital Wallets</p>
-              <p class="text-[10px] text-slate-400">Across SEA &amp; beyond</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom CTA -->
-      <div class="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- Right: Content -->
         <div>
-          <p class="font-bold text-slate-900 mb-1">More payment options. Higher conversion.</p>
-          <p class="text-sm text-slate-500">Businesses that add PayNow and e-wallets alongside cards report significantly lower cart abandonment. Enable them all with one account.</p>
+          <div class="inline-flex items-center gap-2.5 bg-violet-50 border border-violet-100 rounded-full px-4 py-1.5 mb-5">
+            <span class="text-violet-600 text-xs font-extrabold">03</span>
+            <span class="text-violet-700 text-xs font-semibold">Cross Border Acceptance</span>
+          </div>
+          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">Grow your customer base<br />beyond Singapore</h3>
+          <p class="text-slate-500 leading-relaxed mb-4">
+            Every tourist who visits your shop, every overseas buyer who finds you online — they're potential customers. When they scan your HitPay QR with their home wallet, it works instantly. No friction, no turned-away sales, no awkward "we don't accept that" moments.
+          </p>
+          <p class="text-slate-500 leading-relaxed mb-6">
+            For online businesses, you can take orders from across the region and let customers pay in their local currency. Funds settle to your account in SGD — no separate merchant agreements, no extra setup per country.
+          </p>
+          <ul class="space-y-3 mb-7">
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span><strong class="text-slate-800">10 active cross-border QR methods</strong> — QRIS, PromptPay, TrueMoney, LINE Pay, QRPH, VietQR, UPI, WeChat Pay, PayID + DuitNow coming</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span><strong class="text-slate-800">Virtual accounts in 13 currencies</strong> for global B2B invoicing — USD, EUR, GBP, AUD, HKD, JPY and more</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-violet-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span>Works online and in-store — same terminal, same QR code display, same dashboard</span>
+            </li>
+          </ul>
+          <a href="https://hitpayapp.com/cross-border-payments" class="inline-flex items-center gap-2 text-violet-600 font-semibold text-sm hover:text-violet-700 transition-colors">
+            Explore cross-border payments
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
         </div>
-        <a href="#" class="btn-primary text-white font-semibold px-6 py-3 rounded-xl text-sm flex-shrink-0 shadow-sm">Start accepting all methods</a>
       </div>
+
+      <!-- ── USP 4: SUPPORT & RELIABILITY ── -->
+      <div class="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center">
+        <!-- Left: Content -->
+        <div>
+          <div class="inline-flex items-center gap-2.5 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-5">
+            <span class="text-amber-600 text-xs font-extrabold">04</span>
+            <span class="text-amber-700 text-xs font-semibold">Fast Onboarding &amp; Reliable Support</span>
+          </div>
+          <h3 class="text-3xl xl:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight leading-tight">Set up in minutes.<br />Supported every day.</h3>
+          <p class="text-slate-500 leading-relaxed mb-4">
+            We know you're running a business, not managing a payment system. HitPay is built to get you up and running fast — most businesses accept their first payment within 10 minutes of signing up. No lengthy onboarding, no developer required.
+          </p>
+          <p class="text-slate-500 leading-relaxed mb-7">
+            And when something doesn't go as expected, our support team is available every day of the week. Real people, fast responses — because every minute your payments are down costs you money.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span><strong class="text-slate-800">Live in under 10 minutes</strong> — create an account, verify, and start accepting payments the same day</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span><strong class="text-slate-800">Support 7 days a week</strong> — live chat and email, with a team that actually knows Singapore payments</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm text-slate-600">
+              <span class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-amber-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span>
+              <span><strong class="text-slate-800">Built for reliability</strong> — your checkout stays available when your customers need it, backed by MAS licensing and PCI DSS Level 1 certification</span>
+            </li>
+          </ul>
+        </div>
+        <!-- Right: Visual -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg p-7">
+          <!-- Setup checklist -->
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-5">Getting started — under 10 minutes</p>
+          <div class="space-y-3 mb-7">
+            <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-3">
+              <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </div>
+              <span class="text-sm font-medium text-slate-700">Create your free account</span>
+              <span class="ml-auto text-xs text-emerald-600 font-semibold">~2 min</span>
+            </div>
+            <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-3">
+              <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </div>
+              <span class="text-sm font-medium text-slate-700">Verify your identity</span>
+              <span class="ml-auto text-xs text-emerald-600 font-semibold">~5 min</span>
+            </div>
+            <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-3">
+              <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              </div>
+              <span class="text-sm font-medium text-slate-700">Link your bank account</span>
+              <span class="ml-auto text-xs text-emerald-600 font-semibold">~2 min</span>
+            </div>
+            <div class="flex items-center gap-3 bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-3">
+              <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <span class="text-sm font-bold text-indigo-700">You're live — start accepting payments</span>
+            </div>
+          </div>
+          <!-- Support availability -->
+          <div class="border-t border-slate-100 pt-5">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Support availability</p>
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span class="text-sm text-slate-600">Live chat</span>
+                </div>
+                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Online now</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span class="text-sm text-slate-600">Email support</span>
+                </div>
+                <span class="text-xs text-slate-400">7 days a week</span>
+              </div>
+            </div>
+            <div class="mt-4 bg-slate-50 rounded-xl px-4 py-3 flex items-center gap-3">
+              <div class="flex gap-2 flex-shrink-0">
+                <span class="text-[10px] font-bold text-slate-500 bg-white border border-slate-200 rounded px-1.5 py-0.5">MAS Licensed</span>
+                <span class="text-[10px] font-bold text-slate-500 bg-white border border-slate-200 rounded px-1.5 py-0.5">PCI DSS L1</span>
+              </div>
+              <span class="text-[11px] text-slate-400">Your transactions are always secure</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
+
 
   <!-- ═══════════════════════════════════════════════════
        PRICING
@@ -1295,6 +1154,8 @@
           <p class="text-xs text-slate-400 mb-5">Physical POS device · In-store</p>
           <div class="mb-5">
             <span class="text-4xl font-extrabold text-slate-900 tracking-tight">S$85</span>
+            <span class="text-slate-400 text-2xl font-light mx-1">–</span>
+            <span class="text-4xl font-extrabold text-slate-900 tracking-tight">S$350</span>
             <span class="text-slate-500 text-sm ml-1">one-time</span>
           </div>
           <ul class="space-y-2 text-sm text-slate-600">
@@ -1396,7 +1257,7 @@
             <span class="text-indigo-400 text-xs font-semibold tracking-widest uppercase">For Developers</span>
           </div>
           <h2 class="text-4xl xl:text-5xl font-extrabold text-white mb-5 tracking-tight leading-tight">
-            The easiest payment<br />integration for your checkout
+            Build Once. <br />Accept Everywhere.
           </h2>
           <p class="text-lg text-slate-400 leading-relaxed mb-10">
             One API call to accept every payment method across multiple countries. From a simple checkout link to a fully custom integration, HitPay scales with your ambition.
@@ -1504,25 +1365,61 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════
+       API CREDIBILITY STATS
+  ═══════════════════════════════════════════════════ -->
+  <section class="py-16 bg-slate-900 border-t border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-semibold text-slate-500 uppercase tracking-widest mb-10">Trusted by developers across Southeast Asia</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-px bg-slate-800 rounded-2xl overflow-hidden">
+
+        <div class="bg-slate-900 px-8 py-9 text-center">
+          <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">
+            <span class="text-indigo-400">XX</span>M<span class="text-indigo-400">+</span>
+          </p>
+          <p class="text-sm font-semibold text-slate-300 mb-1">API requests per day</p>
+          <p class="text-xs text-slate-500">processed reliably across all markets</p>
+        </div>
+
+        <div class="bg-slate-900 px-8 py-9 text-center">
+          <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">
+            <span class="text-indigo-400">XX</span>K<span class="text-indigo-400">+</span>
+          </p>
+          <p class="text-sm font-semibold text-slate-300 mb-1">API requests per second</p>
+          <p class="text-xs text-slate-500">at peak throughput, without degradation</p>
+        </div>
+
+        <div class="bg-slate-900 px-8 py-9 text-center">
+          <p class="text-4xl xl:text-5xl font-extrabold text-white mb-2 tracking-tight">
+            <span class="text-indigo-400">XX</span>K<span class="text-indigo-400">+</span>
+          </p>
+          <p class="text-sm font-semibold text-slate-300 mb-1">businesses using HitPay APIs</p>
+          <p class="text-xs text-slate-500">from solo devs to enterprise platforms</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
        TESTIMONIALS
   ═══════════════════════════════════════════════════ -->
-  <section class="py-24 bg-slate-900">
+  <section class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-4">
-          <span class="text-slate-300 text-xs font-semibold tracking-widest uppercase">Customer stories</span>
+        <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-full px-4 py-1.5 mb-4">
+          <span class="text-indigo-600 text-xs font-semibold tracking-widest uppercase">HitSquad stories</span>
         </div>
-        <h2 class="text-4xl xl:text-5xl font-extrabold text-white tracking-tight">Businesses that trust HitPay</h2>
+        <h2 class="text-4xl xl:text-5xl font-extrabold text-slate-900 tracking-tight">Businesses that trust HitPay</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
 
         <!-- Testimonial 1 -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 hover:bg-white/8 transition-colors">
+        <div class="bg-white border border-slate-200 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-center gap-1 mb-5">
             <span class="text-amber-400 text-sm">★★★★★</span>
           </div>
-          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+          <p class="text-slate-600 text-sm leading-relaxed mb-6">
             "We replaced three separate tools — a payment gateway, an invoicing app, and a POS system — with just HitPay. Setup took one afternoon. I only wish we'd found it sooner."
           </p>
           <div class="flex items-center gap-3">
@@ -1530,18 +1427,18 @@
               <span class="text-white text-sm font-bold">FT</span>
             </div>
             <div>
-              <p class="text-white text-sm font-semibold">Fiona Tan</p>
+              <p class="text-slate-900 text-sm font-semibold">Fiona Tan</p>
               <p class="text-slate-400 text-xs">Owner, The Floral Studio · Singapore</p>
             </div>
           </div>
         </div>
 
         <!-- Testimonial 2 -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 hover:bg-white/8 transition-colors">
+        <div class="bg-white border border-slate-200 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-center gap-1 mb-5">
             <span class="text-amber-400 text-sm">★★★★★</span>
           </div>
-          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+          <p class="text-slate-600 text-sm leading-relaxed mb-6">
             "After switching to HitPay's checkout, our cart abandonment dropped to near-zero. Customers in Singapore expect PayNow at checkout — and now we have it, seamlessly."
           </p>
           <div class="flex items-center gap-3">
@@ -1549,18 +1446,18 @@
               <span class="text-white text-sm font-bold">RK</span>
             </div>
             <div>
-              <p class="text-white text-sm font-semibold">Rajesh Kumar</p>
+              <p class="text-slate-900 text-sm font-semibold">Rajesh Kumar</p>
               <p class="text-slate-400 text-xs">Founder, GoodGoods Co. · Singapore</p>
             </div>
           </div>
         </div>
 
         <!-- Testimonial 3 -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 hover:bg-white/8 transition-colors">
+        <div class="bg-white border border-slate-200 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow">
           <div class="flex items-center gap-1 mb-5">
             <span class="text-amber-400 text-sm">★★★★★</span>
           </div>
-          <p class="text-slate-300 text-sm leading-relaxed mb-6">
+          <p class="text-slate-600 text-sm leading-relaxed mb-6">
             "The dashboard is so simple my whole team can use it. We get paid overnight and the reports sync straight into Xero. Running a bakery is hard enough — payments shouldn't be."
           </p>
           <div class="flex items-center gap-3">
@@ -1568,7 +1465,7 @@
               <span class="text-white text-sm font-bold">LW</span>
             </div>
             <div>
-              <p class="text-white text-sm font-semibold">Ling Wei</p>
+              <p class="text-slate-900 text-sm font-semibold">Ling Wei</p>
               <p class="text-slate-400 text-xs">Co-owner, DailyBakes SG · Singapore</p>
             </div>
           </div>
@@ -1981,6 +1878,324 @@
         body.classList.add('open');
       }
     }
+  </script>
+
+  <!-- ===================== FEATURE MODAL ===================== -->
+  <div id="hp-modal"
+       class="hp-modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm"
+       onclick="handleModalBackdrop(event)">
+    <div class="hp-modal-panel bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto relative">
+
+      <!-- Close button -->
+      <button onclick="closeFeatureModal()"
+              class="sticky top-4 float-right mr-4 w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors z-10">
+        <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Dynamic content injected by JS -->
+      <div id="hp-modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ---- SVG path library (Heroicons outline) ---- */
+    const _IC = {
+      creditCard: 'M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z',
+      globe:      'M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418',
+      puzzle:     'M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.959.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z',
+      banknotes:  'M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z',
+      phone:      'M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 8.25h3',
+      computer:   'M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3',
+      qrCode:     'M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5zM6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z',
+      chartBar:   'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z',
+      link:       'M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244',
+      document:   'M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z',
+      bell:       'M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0',
+      arrowPath:  'M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99',
+      calendar:   'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H18v-.008zm0 2.25h.008v.008H18V15z',
+      envelope:   'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75',
+      user:       'M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z',
+      code:       'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5',
+      beaker:     'M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5',
+      bolt:       'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z',
+      book:       'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25',
+      map:        'M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z',
+      transfer:   'M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5',
+    };
+
+    function _svg(name, cls) {
+      return `<svg class="w-5 h-5 ${cls}" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="${_IC[name]}"/></svg>`;
+    }
+
+    /* ---- Product data ---- */
+    const HP_FEATURES = {
+
+      checkout: {
+        badge: 'Online Checkout',
+        accentClass: 'bg-indigo-50 text-indigo-700',
+        title: 'The checkout your customers expect',
+        desc: 'Accept every payment method Singapore shoppers use — PayNow, GrabPay, cards, e-wallets — at a single mobile-optimised checkout. Embed in minutes, no developer required.',
+        exploreName: 'Online Checkout',
+        exploreUrl: 'https://hitpayapp.com/sg/payment-gateway',
+        imageNote: 'Suggested image: online checkout page showing payment method selector — PayNow QR, GrabPay, Visa/Mastercard, ShopeePay (recommended 640×400px)',
+        usps: [
+          { icon: 'creditCard', bg: 'bg-indigo-50', color: 'text-indigo-500',
+            title: '30+ payment methods, one checkout',
+            desc: 'PayNow, GrabPay, ShopeePay, Alipay+, Visa, Mastercard, AMEX — no separate applications per provider.' },
+          { icon: 'globe', bg: 'bg-violet-50', color: 'text-violet-500',
+            title: 'Accept overseas buyers too',
+            desc: 'Alipay+ and WeChat Pay for Chinese tourists. Cards charged in 100+ currencies for all other overseas customers.' },
+          { icon: 'puzzle', bg: 'bg-blue-50', color: 'text-blue-500',
+            title: 'Works on any e-commerce platform',
+            desc: 'Official plugins for Shopify, WooCommerce, Wix, and Magento. Or embed with 3 lines of code.' },
+          { icon: 'banknotes', bg: 'bg-emerald-50', color: 'text-emerald-500',
+            title: 'No monthly fees, ever',
+            desc: 'Pay only when you get paid. 0.65% for PayNow QR, 2.35% for cards. Zero setup or subscription costs.' },
+        ],
+        highlights: [
+          { label: 'Payment methods', value: '30+' },
+          { label: 'Monthly fee', value: 'S$0' },
+          { label: 'PayNow rate', value: '0.65%' },
+        ]
+      },
+
+      pos: {
+        badge: 'Point of Sale',
+        accentClass: 'bg-violet-50 text-violet-700',
+        title: 'Sell in-person, your way',
+        desc: 'From a hawker stall to a boutique — take in-person payments with whatever setup works for you. QR on your phone, Tap to Pay, or a low-cost card terminal.',
+        exploreName: 'Point of Sale',
+        exploreUrl: 'https://hitpayapp.com/sg/pos-software',
+        imageNote: 'Suggested image: HitPay POS app on iPad showing an open order with payment method buttons (recommended 640×480px)',
+        usps: [
+          { icon: 'phone', bg: 'bg-violet-50', color: 'text-violet-500',
+            title: 'Tap to Pay — zero hardware needed',
+            desc: 'Accept contactless cards and Apple/Google Pay directly on any iPhone or Android. Your phone is the terminal.' },
+          { icon: 'computer', bg: 'bg-indigo-50', color: 'text-indigo-500',
+            title: 'S$85 card terminal, no monthly rental',
+            desc: 'One-time purchase. No return at end of contract. Accepts Visa, Mastercard, AMEX, and all contactless.' },
+          { icon: 'qrCode', bg: 'bg-blue-50', color: 'text-blue-500',
+            title: 'Static & dynamic QR payments',
+            desc: 'Print a counter QR or generate a fresh one per transaction. Customers pay with PayNow, GrabPay, or ShopeePay.' },
+          { icon: 'chartBar', bg: 'bg-emerald-50', color: 'text-emerald-500',
+            title: 'POS software & sales reports built in',
+            desc: 'Manage your menu or product catalog, process orders, view daily sales, and manage staff — one app, any device.' },
+        ],
+        highlights: [
+          { label: 'Card terminal', value: 'S$85 one-time' },
+          { label: 'Tap to Pay', value: 'iOS & Android' },
+          { label: 'QR support', value: 'Static & Dynamic' },
+        ]
+      },
+
+      links: {
+        badge: 'Payment Links & Invoicing',
+        accentClass: 'bg-blue-50 text-blue-700',
+        title: 'Get paid — no website required',
+        desc: 'Create a payment link in under a minute and share it on WhatsApp, Instagram, or email. For larger jobs, send a professional invoice that auto-chases itself.',
+        exploreName: 'Payment Links',
+        exploreUrl: 'https://hitpayapp.com/sg/payment-links',
+        imageNote: 'Suggested image: split screen — payment link creator on left, customer-facing payment page on right. Or invoice PDF preview with a "Pay Now" button (recommended 640×400px)',
+        usps: [
+          { icon: 'link', bg: 'bg-blue-50', color: 'text-blue-500',
+            title: 'Create a shareable link in 30 seconds',
+            desc: 'Set amount, description, and accepted payment methods. Share anywhere. Customers pay without signing up.' },
+          { icon: 'document', bg: 'bg-indigo-50', color: 'text-indigo-500',
+            title: 'Professional branded invoices',
+            desc: 'Add your logo, itemised line items, and a due date. Customers click to pay directly from the invoice email.' },
+          { icon: 'bell', bg: 'bg-amber-50', color: 'text-amber-500',
+            title: 'Auto-reminders for overdue invoices',
+            desc: 'Automatic follow-up emails for unpaid invoices. Stop chasing clients manually — HitPay does it for you.' },
+          { icon: 'transfer', bg: 'bg-emerald-50', color: 'text-emerald-500',
+            title: 'Xero sync — zero manual bookkeeping',
+            desc: 'Every payment auto-reconciles in Xero. No manual entry, no end-of-month scramble.' },
+        ],
+        highlights: [
+          { label: 'Link setup time', value: '< 1 min' },
+          { label: 'Share via', value: 'WhatsApp, Email, Social' },
+          { label: 'Accounting', value: 'Xero sync' },
+        ]
+      },
+
+      recurring: {
+        badge: 'Recurring Billing',
+        accentClass: 'bg-amber-50 text-amber-700',
+        title: 'Collect recurring payments on autopilot',
+        desc: 'Set up once, collect forever. HitPay handles every future charge automatically — including smart retries when a payment fails — so you can stop chasing and focus on your business.',
+        exploreName: 'Recurring Billing',
+        exploreUrl: 'https://hitpayapp.com/sg/recurring-billing',
+        imageNote: 'Suggested image: recurring billing dashboard showing list of active subscriptions with status badges (Active / Past due) and a billing schedule calendar (recommended 640×400px)',
+        usps: [
+          { icon: 'calendar', bg: 'bg-amber-50', color: 'text-amber-500',
+            title: 'Flexible billing schedules',
+            desc: 'Weekly, fortnightly, monthly, or fully custom intervals. Set start dates, free trial periods, and billing caps.' },
+          { icon: 'arrowPath', bg: 'bg-indigo-50', color: 'text-indigo-500',
+            title: 'Automatic retry on failed payments',
+            desc: 'When a card declines, HitPay retries on a smart schedule — recovering revenue without any manual work from you.' },
+          { icon: 'envelope', bg: 'bg-blue-50', color: 'text-blue-500',
+            title: 'Automated billing notifications',
+            desc: 'Your customer is emailed for every event: upcoming charge, successful payment, failed payment, and cancellation.' },
+          { icon: 'user', bg: 'bg-emerald-50', color: 'text-emerald-500',
+            title: 'Customer self-service portal',
+            desc: 'Subscribers can update their card details or cancel their own plan — reducing your support overhead significantly.' },
+        ],
+        highlights: [
+          { label: 'Failed payments', value: 'Auto-retry' },
+          { label: 'Billing intervals', value: 'Fully flexible' },
+          { label: 'Notifications', value: 'Automated' },
+        ]
+      },
+
+      integrations: {
+        badge: 'Plugin Integrations',
+        accentClass: 'bg-green-50 text-green-700',
+        title: 'Add HitPay to your store in minutes',
+        desc: 'Already on Shopify, WooCommerce, or Wix? Install HitPay in under 10 minutes — no developer required. Your customers immediately see every local payment method at checkout.',
+        exploreName: 'Integrations',
+        exploreUrl: 'https://hitpayapp.com/sg/online-store',
+        imageNote: 'Suggested image: WooCommerce or Shopify checkout page showing HitPay payment options (PayNow, GrabPay, ShopeePay, cards). Or a side-by-side of the plugin settings screen + live checkout (recommended 640×400px)',
+        usps: [
+          { icon: 'puzzle', bg: 'bg-green-50', color: 'text-green-500',
+            title: 'Shopify, WooCommerce, Wix & Magento',
+            desc: 'Official plugins with guided setup. All HitPay payment methods unlocked immediately. No code or developer needed.' },
+          { icon: 'map', bg: 'bg-indigo-50', color: 'text-indigo-500',
+            title: 'Local methods Stripe & PayPal can\'t offer',
+            desc: 'PayNow, GrabPay, ShopeePay — the methods Singapore customers prefer but global processors don\'t natively support.' },
+          { icon: 'chartBar', bg: 'bg-blue-50', color: 'text-blue-500',
+            title: 'Xero accounting — automatic reconciliation',
+            desc: 'Sales flow directly into Xero. Spend less time reconciling and more time running your business.' },
+          { icon: 'bolt', bg: 'bg-amber-50', color: 'text-amber-500',
+            title: 'No migration, no disruption',
+            desc: 'HitPay plugs into your existing store setup. Keep everything you have — just add better local payment support.' },
+        ],
+        highlights: [
+          { label: 'Platforms', value: 'Shopify, Woo, Wix, Magento' },
+          { label: 'Setup time', value: '< 10 min' },
+          { label: 'Accounting', value: 'Xero' },
+        ]
+      },
+
+      api: {
+        badge: 'Developer API',
+        accentClass: 'bg-slate-100 text-slate-700',
+        title: 'One API for every payment method',
+        desc: 'A clean REST API to accept cards, QR codes, e-wallets, and cross-border payments in a single integration. Full sandbox environment for safe testing before you go live.',
+        exploreName: 'Developer API',
+        exploreUrl: 'https://docs.hitpayapp.com',
+        imageNote: 'Suggested image: HitPay API docs page, or a code editor showing a payment request JSON payload with a 200 OK response (recommended 640×400px, dark background preferred)',
+        usps: [
+          { icon: 'code', bg: 'bg-indigo-50', color: 'text-indigo-500',
+            title: 'Clean REST API with webhooks',
+            desc: 'Accept payments and receive real-time event notifications. JSON throughout, predictable endpoints, full error docs.' },
+          { icon: 'beaker', bg: 'bg-violet-50', color: 'text-violet-500',
+            title: 'Full sandbox — test without real money',
+            desc: 'Test every payment method, failure scenario, and webhook event safely before flipping the switch to production.' },
+          { icon: 'globe', bg: 'bg-blue-50', color: 'text-blue-500',
+            title: 'All payment methods, one integration',
+            desc: 'Cards, PayNow QR, GrabPay, Alipay+, WeChat Pay, and more — no separate agreements or API credentials per method.' },
+          { icon: 'book', bg: 'bg-emerald-50', color: 'text-emerald-500',
+            title: 'Docs, code samples & dev support',
+            desc: 'Comprehensive documentation with ready-to-use code examples. Dedicated developer support via live chat.' },
+        ],
+        highlights: [
+          { label: 'Protocol', value: 'REST API' },
+          { label: 'Testing env', value: 'Full sandbox' },
+          { label: 'Real-time events', value: 'Webhooks' },
+        ]
+      }
+
+    };
+
+    /* ---- Render & open modal ---- */
+    function openFeatureModal(id) {
+      const d = HP_FEATURES[id];
+      if (!d) return;
+
+      const uspsHtml = d.usps.map(u => `
+        <div class="flex items-start gap-3.5">
+          <div class="w-9 h-9 rounded-xl ${u.bg} flex items-center justify-center flex-shrink-0 mt-0.5">
+            ${_svg(u.icon, u.color)}
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-slate-900 mb-0.5">${u.title}</p>
+            <p class="text-xs text-slate-500 leading-relaxed">${u.desc}</p>
+          </div>
+        </div>
+      `).join('');
+
+      const highlightsHtml = d.highlights.map((h, i) => `
+        <div class="${i > 0 ? 'border-l border-slate-200 pl-6' : ''}">
+          <p class="text-xs text-slate-400 mb-1">${h.label}</p>
+          <p class="text-sm font-bold text-slate-900">${h.value}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('hp-modal-body').innerHTML = `
+        <div class="p-8 sm:p-10">
+
+          <!-- Header -->
+          <div class="mb-7 pr-6">
+            <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${d.accentClass}">${d.badge}</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3 leading-tight">${d.title}</h2>
+            <p class="text-sm text-slate-500 leading-relaxed max-w-xl">${d.desc}</p>
+          </div>
+
+          <!-- ═══ IMAGE PLACEHOLDER (full width) — designer populates this ═══ -->
+          <div class="rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 flex flex-col items-center justify-center gap-3 h-48 mb-8 text-center px-6">
+            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">Designer: Add image here</p>
+              <p class="text-xs text-slate-400 leading-relaxed">${d.imageNote}</p>
+            </div>
+          </div>
+          <!-- ═══════════════════════════════════════════════════════════ -->
+
+          <!-- USPs: 2×2 grid — left / right / left / right -->
+          <div class="grid sm:grid-cols-2 gap-5 mb-8">${uspsHtml}</div>
+
+          <!-- Stats strip -->
+          <div class="flex flex-wrap gap-x-8 gap-y-3 py-5 border-t border-b border-slate-100 mb-7">
+            ${highlightsHtml}
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="${d.exploreUrl}" target="_blank" rel="noopener"
+               class="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-colors">
+              Explore ${d.exploreName}
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://dashboard.hit-pay.com/register" target="_blank" rel="noopener"
+               class="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm px-6 py-3 rounded-xl transition-colors">
+              Get Started with HitPay
+            </a>
+          </div>
+
+        </div>
+      `;
+
+      document.getElementById('hp-modal').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFeatureModal() {
+      document.getElementById('hp-modal').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function handleModalBackdrop(e) {
+      if (e.target === document.getElementById('hp-modal')) closeFeatureModal();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeFeatureModal();
+    });
   </script>
 
 </body>
