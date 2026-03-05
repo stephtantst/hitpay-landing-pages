@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HitPay for Travel Agencies & Tour Operators — Accept Payments Worldwide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-hero { background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 60%); }
+    .gradient-cta { background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); }
+    .feature-card { transition: box-shadow 0.2s; }
+    .feature-card:hover { box-shadow: 0 8px 30px rgba(3,105,161,0.12); }
+    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+
+  <!-- Nav -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-sky-700 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">H</span>
+          </div>
+          <span class="font-bold text-lg text-slate-900">HitPay</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+          <a href="#" class="hover:text-slate-900">Products</a>
+          <a href="#" class="hover:text-slate-900">Solutions</a>
+          <a href="#" class="hover:text-slate-900">Pricing</a>
+          <a href="#" class="hover:text-slate-900">Developers</a>
+          <a href="#" class="hover:text-slate-900">Resources</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
+        <a href="#" class="text-sm font-semibold bg-sky-700 text-white px-4 py-2 rounded-lg hover:bg-sky-800 transition-colors">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="gradient-hero pt-32 pb-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-sky-50 text-sky-700 text-sm font-medium px-4 py-2 rounded-full mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+            Travel & Tours
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+            Accept payments from travellers around the world
+          </h1>
+          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+            From booking deposits to final balances — collect payments in 150+ currencies, accept WeChat Pay, Alipay, GrabPay, and UPI from international guests. No monthly fees, ever.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#" class="inline-flex items-center gap-2 bg-sky-700 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-sky-800 transition-colors text-base">
+              Start for free
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 bg-white text-slate-800 font-semibold px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-base">
+              Contact sales
+            </a>
+          </div>
+          <p class="text-sm text-slate-500 mt-4">Free to sign up · No setup fees · Pay per transaction</p>
+        </div>
+        <div class="relative lg:flex justify-end hidden">
+          <!-- Mock booking invoice UI -->
+          <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 w-80">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <div class="font-bold text-slate-900">Tour Invoice</div>
+                <div class="text-xs text-slate-500 mt-0.5">INV-2025-0481</div>
+              </div>
+              <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded-full font-medium">Deposit Due</span>
+            </div>
+            <div class="bg-sky-50 rounded-xl p-4 mb-4">
+              <div class="text-sm font-semibold text-slate-800 mb-1">Bali 7D6N Private Tour</div>
+              <div class="text-xs text-slate-500">4 pax · Departs 15 Apr 2025</div>
+              <div class="flex justify-between items-center mt-3">
+                <span class="text-xs text-slate-500">Total package</span>
+                <span class="font-bold text-slate-900">S$6,800.00</span>
+              </div>
+              <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-sky-700 font-medium">30% deposit now</span>
+                <span class="font-bold text-sky-700">S$2,040.00</span>
+              </div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center gap-2 p-2 border border-sky-400 rounded-lg bg-sky-50">
+                <div class="w-4 h-4 rounded-full bg-sky-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <span class="text-xs font-medium text-sky-800">PayNow (instant)</span>
+              </div>
+              <div class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg">
+                <div class="w-4 h-4 rounded-full border border-slate-300 flex-shrink-0"></div>
+                <span class="text-xs text-slate-600">WeChat Pay</span>
+              </div>
+              <div class="flex items-center gap-2 p-2 border border-slate-200 rounded-lg">
+                <div class="w-4 h-4 rounded-full border border-slate-300 flex-shrink-0"></div>
+                <span class="text-xs text-slate-600">Credit / Debit Card</span>
+              </div>
+            </div>
+            <div class="bg-sky-700 rounded-xl py-3 text-center text-white text-sm font-semibold">Pay Deposit — S$2,040.00</div>
+            <div class="flex justify-center gap-1 mt-3">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              <span class="text-xs text-slate-400">Secured by HitPay · PCI DSS Level 1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="py-14 border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-center text-slate-500 text-sm font-medium uppercase tracking-widest mb-8">Trusted by travel businesses across Southeast Asia</p>
+      <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-4">
+        <span class="text-slate-400 font-semibold text-lg">WeChat Pay</span>
+        <span class="text-slate-400 font-semibold text-lg">Alipay</span>
+        <span class="text-slate-400 font-semibold text-lg">GrabPay</span>
+        <span class="text-slate-400 font-semibold text-lg">UPI</span>
+        <span class="text-slate-400 font-semibold text-lg">PayNow</span>
+        <span class="text-slate-400 font-semibold text-lg">Xero</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-slate-900 mb-5">Built for the way travel businesses actually work</h2>
+      <p class="text-xl text-slate-600 leading-relaxed">Multi-currency deposits, balance invoices, walk-in client payments, and tourist QR codes — HitPay handles it all on one platform so you can focus on crafting unforgettable experiences.</p>
+    </div>
+  </section>
+
+  <!-- USP 1: Cross-border -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="text-sky-700 font-semibold text-sm uppercase tracking-widest mb-4">Cross-Border Payments</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Accept your guests' preferred payment method — no matter where they're from</h2>
+          <p class="text-lg text-slate-600 mb-8">Chinese tourists pay by WeChat Pay or Alipay. Indian visitors prefer UPI. Malaysian travellers use GrabPay or TnG. HitPay covers 700+ local payment options across 12 APAC markets — all in one integration.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">WeChat Pay, Alipay, UPI, GrabPay, Touch 'n Go — one integration</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Automatic currency conversion at mid-market rates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">1.5% lower fees vs standard international card rates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Accept tourist payments in-store or at overseas events</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-sky-700 font-semibold hover:text-sky-900 text-sm">
+            Explore cross-border payments <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Markets covered</div>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <div class="bg-red-50 rounded-lg p-2 text-center"><div class="text-lg">🇨🇳</div><div class="text-xs font-medium text-slate-700 mt-1">China</div><div class="text-xs text-slate-400">1.5%</div></div>
+              <div class="bg-orange-50 rounded-lg p-2 text-center"><div class="text-lg">🇮🇳</div><div class="text-xs font-medium text-slate-700 mt-1">India</div><div class="text-xs text-slate-400">2%</div></div>
+              <div class="bg-blue-50 rounded-lg p-2 text-center"><div class="text-lg">🇲🇾</div><div class="text-xs font-medium text-slate-700 mt-1">Malaysia</div><div class="text-xs text-slate-400">MYR</div></div>
+              <div class="bg-yellow-50 rounded-lg p-2 text-center"><div class="text-lg">🇮🇩</div><div class="text-xs font-medium text-slate-700 mt-1">Indonesia</div><div class="text-xs text-slate-400">2%</div></div>
+              <div class="bg-pink-50 rounded-lg p-2 text-center"><div class="text-lg">🇹🇭</div><div class="text-xs font-medium text-slate-700 mt-1">Thailand</div><div class="text-xs text-slate-400">2.5%</div></div>
+              <div class="bg-sky-50 rounded-lg p-2 text-center"><div class="text-lg">🇵🇭</div><div class="text-xs font-medium text-slate-700 mt-1">Philippines</div><div class="text-xs text-slate-400">1%</div></div>
+            </div>
+            <div class="bg-sky-50 rounded-lg p-3 text-center">
+              <div class="text-xs text-slate-500 mb-1">Total APAC markets</div>
+              <div class="text-2xl font-bold text-sky-700">12</div>
+              <div class="text-xs text-slate-500">700+ local payment options</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP 2: Invoicing -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1 flex justify-center">
+          <div class="space-y-3 w-72">
+            <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center justify-between mb-2">
+                <div class="font-semibold text-slate-900 text-sm">Tokyo Cherry Blossom Tour</div>
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded font-medium">Paid</span>
+              </div>
+              <div class="text-xs text-slate-500">INV-0092 · 30% deposit · S$1,800</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center justify-between mb-2">
+                <div class="font-semibold text-slate-900 text-sm">Tokyo Cherry Blossom Tour</div>
+                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-medium">Due 1 Mar</span>
+              </div>
+              <div class="text-xs text-slate-500">INV-0093 · Balance payment · S$4,200</div>
+            </div>
+            <div class="bg-white border border-indigo-200 border-2 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center justify-between mb-2">
+                <div class="font-semibold text-slate-900 text-sm">Europe Family Package</div>
+                <span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-medium">Auto-remind</span>
+              </div>
+              <div class="text-xs text-slate-500">INV-0094 · Due in 7 days · S$8,400</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-4">
+              <div class="text-xs text-slate-500 mb-1">Outstanding receivables</div>
+              <div class="text-2xl font-bold text-slate-900">S$14,200</div>
+              <div class="text-xs text-slate-500 mt-1">Reminders sent automatically</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="text-sky-700 font-semibold text-sm uppercase tracking-widest mb-4">Invoicing</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Deposit invoices, balance payments, auto-reminders — all automated</h2>
+          <p class="text-lg text-slate-600 mb-8">Stop chasing clients for payments. HitPay invoicing lets you send professional deposit and balance invoices, automatically remind clients before due dates, and sync everything to Xero — all for free.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Partial payments — collect deposits now, balance later</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Automated payment reminders for overdue and upcoming invoices</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Xero & QuickBooks auto-sync — no manual bookkeeping</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Multi-currency invoices — bill in USD, EUR, AUD, and more</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-sky-700 font-semibold hover:text-sky-900 text-sm">
+            Learn about invoicing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP 3: Payment Links -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="text-sky-700 font-semibold text-sm uppercase tracking-widest mb-4">Payment Links</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Share a booking link via email or WhatsApp — clients pay in seconds</h2>
+          <p class="text-lg text-slate-600 mb-8">No website required. Create a secure payment link for any tour package, paste it into WhatsApp, email, or Instagram, and let clients pay with their preferred method. Shareable QR codes for walk-in enquiries too.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Generate a link in under 60 seconds — no coding needed</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Let customers set their own amount — ideal for flexible deposits</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Instant payment notification the moment a client pays</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-sky-700 font-semibold hover:text-sky-900 text-sm">
+            Try payment links <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden w-72">
+            <div class="bg-sky-700 p-4">
+              <div class="text-sky-200 text-xs font-medium mb-1">hitpay.me/wandersg</div>
+              <div class="text-white font-bold text-xl">Japan Autumn Tour 2025</div>
+              <div class="text-sky-200 text-sm mt-1">8D7N · From S$3,200/pax</div>
+            </div>
+            <div class="p-4">
+              <div class="w-full h-24 bg-sky-50 rounded-xl mb-4 flex items-center justify-center text-4xl">✈️</div>
+              <div class="text-slate-600 text-sm mb-3">Tokyo · Kyoto · Osaka. Includes accommodation, guided tours, and JR Pass.</div>
+              <div class="flex gap-2 mb-4">
+                <div class="bg-slate-50 rounded-lg px-3 py-2 text-xs font-medium text-slate-700">2 pax</div>
+                <div class="bg-slate-50 rounded-lg px-3 py-2 text-xs font-medium text-slate-700">S$6,400 total</div>
+              </div>
+              <div class="bg-sky-700 rounded-lg py-3 text-center text-white text-sm font-semibold">Pay 30% Deposit — S$1,920</div>
+              <div class="flex justify-center gap-2 mt-3">
+                <span class="payment-badge text-xs">PayNow</span>
+                <span class="payment-badge text-xs">Card</span>
+                <span class="payment-badge text-xs">GrabPay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP 4: POS -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">HitPay POS · Walk-In Sales</div>
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                <span class="text-sm text-slate-700">Thailand Family Tour</span>
+                <span class="font-semibold text-sm">S$4,500</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                <span class="text-sm text-slate-700">Travel Insurance</span>
+                <span class="font-semibold text-sm">S$180</span>
+              </div>
+            </div>
+            <div class="border-t border-slate-200 pt-3 mb-4">
+              <div class="flex justify-between font-bold text-slate-900">
+                <span>Total</span>
+                <span>S$4,680</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <div class="border-2 border-sky-500 rounded-lg p-2 text-center"><div class="text-xs font-semibold text-sky-700">Tap Card</div></div>
+              <div class="border border-slate-200 rounded-lg p-2 text-center"><div class="text-xs text-slate-600">PayNow</div></div>
+              <div class="border border-slate-200 rounded-lg p-2 text-center"><div class="text-xs text-slate-600">NETS</div></div>
+            </div>
+            <div class="bg-sky-700 rounded-xl py-3 text-center text-white text-sm font-semibold">Charge S$4,680</div>
+            <div class="mt-3 flex justify-between text-xs text-slate-400">
+              <span>Receipt: Email / Print</span>
+              <span>● Live</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="text-sky-700 font-semibold text-sm uppercase tracking-widest mb-4">POS & Card Terminal</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Streamline walk-in clients and in-store sales with a modern POS</h2>
+          <p class="text-lg text-slate-600 mb-8">Whether customers walk into your office or you're at a travel fair, HitPay POS gives you a fast, professional checkout — accept every card, QR code, and wallet without needing multiple devices.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Visa, Mastercard, Amex, UnionPay — all cards accepted</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Daily automated reconciliation reports — save hours every month</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-sky-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">No hardware rental — purchase once, pay per transaction only</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-sky-700 font-semibold hover:text-sky-900 text-sm">
+            View POS Software <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 bg-sky-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">12</div>
+          <div class="text-sky-300 text-sm">APAC markets covered</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">700+</div>
+          <div class="text-sky-300 text-sm">Local payment options</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">150+</div>
+          <div class="text-sky-300 text-sm">Currencies supported</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">15,000+</div>
+          <div class="text-sky-300 text-sm">Businesses on HitPay</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <svg class="w-10 h-10 text-sky-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+      <p class="text-2xl text-slate-800 font-medium leading-relaxed mb-8">"HitPay POS has saved us lots of time and resources with daily automated reports and reconciliation. Our sales SOP is much more efficient now."</p>
+      <div class="flex items-center justify-center gap-4">
+        <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center text-sky-700 font-bold">TA</div>
+        <div class="text-left">
+          <div class="font-semibold text-slate-900">Travel Agency</div>
+          <div class="text-slate-500 text-sm">HitPay Merchant — Singapore</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature grid -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Everything else your travel business needs</h2>
+        <p class="text-slate-600 max-w-xl mx-auto">One platform. Every payment touchpoint from first enquiry to final balance.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Multi-currency billing</h3>
+          <p class="text-slate-600 text-sm">Invoice clients in USD, EUR, AUD, GBP — settle in SGD. Transparent exchange rates, no hidden markups.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">MAS licensed & PCI DSS</h3>
+          <p class="text-slate-600 text-sm">Fully regulated under MAS (Major Payment Institution). PCI DSS Level 1 compliant. Your clients' data is safe.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Real-time analytics</h3>
+          <p class="text-slate-600 text-sm">Track bookings, deposits, and outstanding balances in real time. Export reports for your accountant in one click.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Next-day payouts</h3>
+          <p class="text-slate-600 text-sm">Get your money the next business day. No holding periods, no surprise delays in your cash flow.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Instant payment alerts</h3>
+          <p class="text-slate-600 text-sm">Get notified the moment a client pays — via app, email, or SMS. No more manually checking bank transfers.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Xero & QuickBooks sync</h3>
+          <p class="text-slate-600 text-sm">Every payment automatically syncs to your accounting software. Reconciliation that used to take hours now takes seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="ecommerce.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-sky-300 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🛒</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-sky-700">E-commerce</div>
+          <div class="text-slate-600 text-sm">Accept payments on your booking website with all major local and global methods.</div>
+          <div class="mt-4 text-sky-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-sky-300 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🏪</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-sky-700">Retail</div>
+          <div class="text-slate-600 text-sm">Unified POS and online payments for walk-in and in-store clients.</div>
+          <div class="mt-4 text-sky-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+        <a href="education.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-sky-300 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🎓</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-sky-700">Education</div>
+          <div class="text-slate-600 text-sm">Collect course fees and bookings with automated reminders.</div>
+          <div class="mt-4 text-sky-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 gradient-cta">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold text-white mb-5">Ready to get paid faster?</h2>
+      <p class="text-sky-100 text-xl mb-10">Join 15,000+ businesses already growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#" class="bg-white text-sky-800 font-semibold px-8 py-4 rounded-xl hover:bg-sky-50 transition-colors text-base">Start for free</a>
+        <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-7 h-7 bg-sky-700 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">H</span></div>
+            <span class="font-bold text-white">HitPay</span>
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">Payment Gateway</a></li><li><a href="#" class="hover:text-slate-300">Cross-Border</a></li><li><a href="#" class="hover:text-slate-300">Invoicing</a></li><li><a href="#" class="hover:text-slate-300">Payment Links</a></li></ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Solutions</div>
+          <ul class="space-y-2 text-sm"><li><a href="ecommerce.html" class="hover:text-slate-300">E-commerce</a></li><li><a href="retail.html" class="hover:text-slate-300">Retail</a></li><li><a href="nonprofits.html" class="hover:text-slate-300">Nonprofits</a></li><li><a href="restaurants.html" class="hover:text-slate-300">F&B</a></li></ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">About</a></li><li><a href="#" class="hover:text-slate-300">Blog</a></li><li><a href="#" class="hover:text-slate-300">Pricing</a></li><li><a href="#" class="hover:text-slate-300">Contact</a></li></ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-slate-600">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

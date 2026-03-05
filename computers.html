@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HitPay for Computers, Peripherals & Software — Retail & B2B Payments</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-hero { background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 60%); }
+    .gradient-cta { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); }
+    .feature-card { transition: box-shadow 0.2s; }
+    .feature-card:hover { box-shadow: 0 8px 30px rgba(15,23,42,0.12); }
+    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
+    .accent { color: #0ea5e9; }
+  </style>
+</head>
+<body class="bg-white text-slate-900">
+
+  <!-- Nav -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">H</span>
+          </div>
+          <span class="font-bold text-lg text-slate-900">HitPay</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+          <a href="#" class="hover:text-slate-900">Products</a>
+          <a href="#" class="hover:text-slate-900">Solutions</a>
+          <a href="#" class="hover:text-slate-900">Pricing</a>
+          <a href="#" class="hover:text-slate-900">Developers</a>
+          <a href="#" class="hover:text-slate-900">Resources</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
+        <a href="#" class="text-sm font-semibold bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="gradient-hero pt-32 pb-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-slate-100 text-slate-700 text-sm font-medium px-4 py-2 rounded-full mb-6">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Computers, Peripherals & Software
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+            The payment platform built for tech retailers
+          </h1>
+          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+            Sell in-store, online, and to corporate clients — with unified inventory, B2B invoicing, and 50+ payment methods including BNPL for big-ticket purchases.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#" class="inline-flex items-center gap-2 bg-slate-900 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-slate-800 transition-colors text-base">
+              Start for free
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 bg-white text-slate-800 font-semibold px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-base">
+              Contact sales
+            </a>
+          </div>
+          <p class="text-sm text-slate-500 mt-4">Free to sign up · No setup fees · Pay per transaction</p>
+        </div>
+        <div class="relative lg:flex justify-end hidden">
+          <!-- Mock POS / tech checkout UI -->
+          <div class="bg-slate-900 rounded-2xl shadow-2xl p-6 w-80">
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-white font-semibold text-sm">HitPay POS</div>
+              <div class="flex gap-1">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+              </div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between items-center bg-slate-800 rounded-lg px-3 py-2.5">
+                <div>
+                  <div class="text-white text-sm font-medium">Custom PC Build (RTX 4080)</div>
+                  <div class="text-slate-400 text-xs">SKU: PC-4080-ITX · ×1</div>
+                </div>
+                <span class="text-sky-400 font-bold text-sm">S$3,200</span>
+              </div>
+              <div class="flex justify-between items-center bg-slate-800 rounded-lg px-3 py-2.5">
+                <div>
+                  <div class="text-white text-sm font-medium">27" 4K Monitor</div>
+                  <div class="text-slate-400 text-xs">SKU: MON-4K27 · ×1</div>
+                </div>
+                <span class="text-sky-400 font-bold text-sm">S$780</span>
+              </div>
+              <div class="flex justify-between items-center bg-slate-800 rounded-lg px-3 py-2.5">
+                <div>
+                  <div class="text-white text-sm font-medium">Mechanical Keyboard</div>
+                  <div class="text-slate-400 text-xs">SKU: KBD-75-RED · ×1</div>
+                </div>
+                <span class="text-sky-400 font-bold text-sm">S$189</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center bg-sky-900/40 rounded-lg px-3 py-2.5 mb-4">
+              <span class="text-slate-300 font-semibold">Total</span>
+              <span class="text-white font-bold text-lg">S$4,169</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-3">
+              <div class="bg-sky-500 rounded-lg p-2 text-center"><div class="text-white text-xs font-semibold">Tap Card</div></div>
+              <div class="bg-slate-700 rounded-lg p-2 text-center"><div class="text-slate-300 text-xs">Atome</div></div>
+              <div class="bg-slate-700 rounded-lg p-2 text-center"><div class="text-slate-300 text-xs">PayNow</div></div>
+            </div>
+            <div class="bg-sky-500 rounded-xl py-3 text-center text-white text-sm font-semibold">Charge S$4,169</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="py-14 border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-center text-slate-500 text-sm font-medium uppercase tracking-widest mb-8">Trusted by leading tech retailers in Singapore</p>
+      <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-4">
+        <span class="text-slate-400 font-semibold text-lg">Shopify</span>
+        <span class="text-slate-400 font-semibold text-lg">WooCommerce</span>
+        <span class="text-slate-400 font-semibold text-lg">Xero</span>
+        <span class="text-slate-400 font-semibold text-lg">QuickBooks</span>
+        <span class="text-slate-400 font-semibold text-lg">Atome BNPL</span>
+        <span class="text-slate-400 font-semibold text-lg">PayNow</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-slate-900 mb-5">One platform for in-store, online, and corporate sales</h2>
+      <p class="text-xl text-slate-600 leading-relaxed">Tech retail moves fast. HitPay gives you unified inventory across all channels, BNPL for high-value orders, B2B invoicing for corporate clients, and the payment methods customers expect — all on one platform.</p>
+    </div>
+  </section>
+
+  <!-- USP 1: POS + Inventory -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="text-slate-700 font-semibold text-sm uppercase tracking-widest mb-4">POS & Inventory</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Manage hundreds of SKUs across multiple outlets — in real time</h2>
+          <p class="text-lg text-slate-600 mb-8">From individual components to complete system builds, HitPay POS handles complex inventory with variants, syncs stock between your physical stores and online shop, and gives you real-time sales visibility across every location.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Variants support — RAM size, GPU model, colour, storage — all tracked</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Online + in-store stock synced automatically — no overselling</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Multi-location management — run Sim Lim, Funan, and online from one dashboard</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Barcode scanner and receipt printer compatible</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-slate-700 font-semibold hover:text-slate-900 text-sm">
+            Learn about POS Software <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Inventory · Live</div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                <div>
+                  <div class="text-sm font-semibold text-slate-900">RTX 4080 GPU</div>
+                  <div class="text-xs text-slate-500">Funan + Sim Lim + Online</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold text-slate-900">7 units</div>
+                  <div class="text-xs text-green-600">In stock</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                <div>
+                  <div class="text-sm font-semibold text-slate-900">Corsair 32GB DDR5</div>
+                  <div class="text-xs text-slate-500">Funan + Online</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold text-slate-900">24 units</div>
+                  <div class="text-xs text-green-600">In stock</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg border border-red-200">
+                <div>
+                  <div class="text-sm font-semibold text-slate-900">Sony WH-1000XM5</div>
+                  <div class="text-xs text-slate-500">All locations</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm font-bold text-red-600">2 units</div>
+                  <div class="text-xs text-red-600">Low stock</div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 bg-slate-900 rounded-lg p-3">
+              <div class="text-xs text-slate-400 mb-1">Today's revenue (all outlets)</div>
+              <div class="text-xl font-bold text-white">S$28,440</div>
+              <div class="text-xs text-sky-400 mt-1">↑ 12% vs last Tuesday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP 2: BNPL + payment methods -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1 flex justify-center">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72">
+            <div class="text-sm font-semibold text-slate-800 mb-4">Custom PC Build · S$4,800</div>
+            <div class="text-xs text-slate-500 mb-3">Choose how you'd like to pay</div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center gap-3 p-3 border-2 border-slate-900 rounded-xl">
+                <div class="w-4 h-4 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0">
+                  <div class="w-2 h-2 rounded-full bg-white"></div>
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-slate-900">Pay in full</div>
+                  <div class="text-xs text-slate-500">Card, PayNow, or wallet</div>
+                </div>
+                <div class="ml-auto text-sm font-bold">S$4,800</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl">
+                <div class="w-4 h-4 rounded-full border border-slate-300 flex-shrink-0"></div>
+                <div>
+                  <div class="text-sm font-semibold text-slate-700">Atome (3 months)</div>
+                  <div class="text-xs text-slate-500">0% interest · Split into 3</div>
+                </div>
+                <div class="ml-auto text-sm font-bold text-sky-600">S$1,600×3</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl">
+                <div class="w-4 h-4 rounded-full border border-slate-300 flex-shrink-0"></div>
+                <div>
+                  <div class="text-sm font-semibold text-slate-700">GrabPay Later</div>
+                  <div class="text-xs text-slate-500">Pay monthly, up to 6×</div>
+                </div>
+                <div class="ml-auto text-sm font-bold text-green-600">Flexible</div>
+              </div>
+            </div>
+            <div class="bg-slate-900 rounded-xl py-3 text-center text-white text-sm font-semibold">Confirm Payment</div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="text-slate-700 font-semibold text-sm uppercase tracking-widest mb-4">Payment Methods</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Offer BNPL for high-ticket items — increase average order value</h2>
+          <p class="text-lg text-slate-600 mb-8">A S$4,000 gaming PC is easier to sell when customers can split it into 3 interest-free payments. HitPay supports Atome, GrabPay Later, and ShopeePay Later — plus every card, wallet, and PayNow.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Atome, GrabPay Later, ShopeePay Later — all supported</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Visa, Mastercard, Amex, UnionPay, Apple Pay, Google Pay</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Accept tourist payments via WeChat Pay, Alipay, UPI in-store</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-slate-700 font-semibold hover:text-slate-900 text-sm">
+            See all payment methods <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP 3: B2B Invoicing -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="text-slate-700 font-semibold text-sm uppercase tracking-widest mb-4">B2B Invoicing</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Invoice corporate clients professionally — get paid faster</h2>
+          <p class="text-lg text-slate-600 mb-8">Corporate procurement teams expect professional invoices with GST, payment terms, and purchase order references. HitPay's invoicing covers all of it — and automatically syncs to Xero so your accounts team stays happy.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">GST-inclusive line items, PO references, custom payment terms</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Auto-send reminders — reduce late B2B payments without awkward follow-ups</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Xero & QuickBooks auto-sync — no double data entry</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Multi-currency — bill in USD or AUD for overseas corporate clients</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-slate-700 font-semibold hover:text-slate-900 text-sm">
+            Learn about Invoicing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 w-72">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <div class="font-bold text-slate-900">TechHub SG</div>
+                <div class="text-xs text-slate-500 mt-0.5">INVOICE · INV-2025-0892</div>
+              </div>
+              <span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-medium">Net 30</span>
+            </div>
+            <div class="text-xs text-slate-500 mb-2">Bill to: Acme Corp Pte Ltd</div>
+            <div class="border-t border-slate-100 pt-3 space-y-2 mb-3">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-600">20× Workstation (i9 + RTX A4000)</span>
+                <span class="font-medium">S$96,000</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-600">20× 27" 4K Monitor</span>
+                <span class="font-medium">S$15,600</span>
+              </div>
+              <div class="flex justify-between text-sm text-slate-400">
+                <span>GST 9%</span>
+                <span>S$10,044</span>
+              </div>
+            </div>
+            <div class="flex justify-between font-bold text-slate-900 border-t border-slate-200 pt-3 mb-4">
+              <span>Total</span>
+              <span>S$121,644</span>
+            </div>
+            <div class="bg-slate-900 rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay now via PayNow / Bank Transfer</div>
+            <div class="mt-2 text-center text-xs text-slate-400">Auto-reminder on Day 25, 30 if unpaid</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP 4: Online Store + Ecommerce -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center">
+          <div class="grid grid-cols-2 gap-4 max-w-xs">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm text-center feature-card">
+              <div class="text-2xl mb-2">🛍️</div>
+              <div class="font-semibold text-slate-900 text-sm">Shopify</div>
+              <div class="text-xs text-green-600 font-medium mt-1">● Connected</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm text-center feature-card">
+              <div class="text-2xl mb-2">🔷</div>
+              <div class="font-semibold text-slate-900 text-sm">WooCommerce</div>
+              <div class="text-xs text-green-600 font-medium mt-1">● Connected</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm text-center feature-card">
+              <div class="text-2xl mb-2">📦</div>
+              <div class="font-semibold text-slate-900 text-sm">Online Store</div>
+              <div class="text-xs text-slate-400 font-medium mt-1">Built-in</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm text-center feature-card">
+              <div class="text-2xl mb-2">⚡</div>
+              <div class="font-semibold text-slate-900 text-sm">Payment API</div>
+              <div class="text-xs text-slate-400 font-medium mt-1">Custom build</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="text-slate-700 font-semibold text-sm uppercase tracking-widest mb-4">Online & Omnichannel</div>
+          <h2 class="text-4xl font-bold text-slate-900 mb-5">Sell on Shopify, WooCommerce, or your own store — same inventory</h2>
+          <p class="text-lg text-slate-600 mb-8">Add HitPay to your existing e-commerce platform in minutes. Stock syncs in real time between your physical store and online shop — so you never oversell a limited-edition GPU again.</p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Shopify, WooCommerce, Wix, Magento — one-click install</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Sell digital software licences with instant secure delivery</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-slate-700">Discount codes and promotions — schedule sales and flash deals</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-flex items-center gap-1 text-slate-700 font-semibold hover:text-slate-900 text-sm">
+            Explore integrations <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">15,000+</div>
+          <div class="text-slate-400 text-sm">Merchants on HitPay</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">50+</div>
+          <div class="text-slate-400 text-sm">Payment methods</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">$0</div>
+          <div class="text-slate-400 text-sm">Monthly or setup fees</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-extrabold text-white mb-2">T+1</div>
+          <div class="text-slate-400 text-sm">Business day payouts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <svg class="w-10 h-10 text-slate-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+      <p class="text-2xl text-slate-800 font-medium leading-relaxed mb-8">"The HitPay platform is simple with everything we need. The ease of use is the best in the industry — we went live in a day and haven't looked back. Payments, inventory, and reports all in one place."</p>
+      <div class="flex items-center justify-center gap-4">
+        <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-700 font-bold">PC</div>
+        <div class="text-left">
+          <div class="font-semibold text-slate-900">Leading Custom PC Brand</div>
+          <div class="text-slate-500 text-sm">HitPay Merchant — Singapore</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature grid -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Everything a tech retailer needs</h2>
+        <p class="text-slate-600 max-w-xl mx-auto">From component resellers to system integrators to software distributors.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Card terminal (all major cards)</h3>
+          <p class="text-slate-600 text-sm">Visa, Mastercard, Amex, UnionPay, Apple Pay, Google Pay. No rental — purchase once, pay per transaction.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Fraud protection</h3>
+          <p class="text-slate-600 text-sm">PCI DSS Level 1 compliant. Built-in risk scoring on every transaction — protect high-value sales.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Cross-border tourist payments</h3>
+          <p class="text-slate-600 text-sm">Accept WeChat Pay, Alipay, UPI from Chinese, Indian, and Malaysian visitors shopping in-store.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Next-day payouts</h3>
+          <p class="text-slate-600 text-sm">High-value transactions settled next business day. Maintain healthy cash flow even on big corporate orders.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Sales analytics</h3>
+          <p class="text-slate-600 text-sm">See which products and categories are driving revenue. Filter by outlet, date, and payment method.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Software licence delivery</h3>
+          <p class="text-slate-600 text-sm">Sell digital software via the HitPay Online Store. Licence keys delivered instantly after payment confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-slate-400 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🏪</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-slate-700">Retail</div>
+          <div class="text-slate-600 text-sm">Unified POS and online payments for multi-location retail stores.</div>
+          <div class="mt-4 text-slate-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+        <a href="ecommerce.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-slate-400 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🛒</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-slate-700">E-commerce</div>
+          <div class="text-slate-600 text-sm">Accept every payment method in your online tech store.</div>
+          <div class="mt-4 text-slate-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+        <a href="restaurants.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-slate-400 hover:shadow-md transition-all">
+          <div class="text-3xl mb-4">🍽️</div>
+          <div class="font-semibold text-slate-900 mb-2 group-hover:text-slate-700">F&B</div>
+          <div class="text-slate-600 text-sm">Payments built for restaurants, cafés, and hawker stalls.</div>
+          <div class="mt-4 text-slate-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 gradient-cta">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold text-white mb-5">Power your tech retail business with HitPay</h2>
+      <p class="text-slate-300 text-xl mb-10">Join 15,000+ merchants already growing with HitPay. Free to start — no monthly fees.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#" class="bg-white text-slate-900 font-semibold px-8 py-4 rounded-xl hover:bg-slate-50 transition-colors text-base">Start for free</a>
+        <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/20 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-7 h-7 bg-slate-700 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">H</span></div>
+            <span class="font-bold text-white">HitPay</span>
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">POS Software</a></li><li><a href="#" class="hover:text-slate-300">Card Terminal</a></li><li><a href="#" class="hover:text-slate-300">Invoicing</a></li><li><a href="#" class="hover:text-slate-300">Online Store</a></li></ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Solutions</div>
+          <ul class="space-y-2 text-sm"><li><a href="ecommerce.html" class="hover:text-slate-300">E-commerce</a></li><li><a href="retail.html" class="hover:text-slate-300">Retail</a></li><li><a href="travel.html" class="hover:text-slate-300">Travel</a></li><li><a href="restaurants.html" class="hover:text-slate-300">F&B</a></li></ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">About</a></li><li><a href="#" class="hover:text-slate-300">Blog</a></li><li><a href="#" class="hover:text-slate-300">Pricing</a></li><li><a href="#" class="hover:text-slate-300">Contact</a></li></ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-slate-600">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

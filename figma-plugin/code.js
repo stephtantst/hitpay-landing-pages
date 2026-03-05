@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════
 // HitPay Landing Pages — Figma Plugin
-// Generates E-commerce, Retail, and Nonprofits pages
-// as editable Figma frames at 1440px width.
+// Generates 5 landing pages as editable Figma frames at 1440px:
+//   E-commerce, Retail, Nonprofits, General (SEO/AEO), General v2 (Plain-inspired)
 // ═══════════════════════════════════════════════════════════
 
 // ── TAILWIND COLOR MAP (RGB fractions) ──────────────────────
@@ -1553,6 +1553,156 @@ function mkHeroNonprofits() {
   return sec;
 }
 
+/** Mock revenue dashboard (general landing hero) */
+function mockDashboard() {
+  const card = mkFrame('MockDashboard', 320, 300, C.white, 16);
+  card.effects = [{
+    type: 'DROP_SHADOW',
+    color: { r: 0, g: 0, b: 0, a: 0.10 },
+    offset: { x: 0, y: 16 },
+    radius: 40,
+    spread: 0,
+    visible: true,
+    blendMode: 'NORMAL',
+  }];
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }];
+  card.strokeWeight = 1;
+  card.strokeAlign = 'INSIDE';
+
+  const headerBg = mkRect(320, 80, C.indigo600);
+  headerBg.x = 0; headerBg.y = 0;
+  card.appendChild(headerBg);
+
+  const headerTitle = mkText("Today's revenue", 13, W.regular, C.white);
+  headerTitle.opacity = 0.75;
+  headerTitle.x = 20; headerTitle.y = 16;
+  card.appendChild(headerTitle);
+
+  const totalAmt = mkText('S$4,892.40', 28, W.bold, C.white);
+  totalAmt.x = 20; totalAmt.y = 38;
+  card.appendChild(totalAmt);
+
+  const upBadge = mkText('↑ 12.4%', 12, W.semibold, C.indigo200);
+  upBadge.x = 230; upBadge.y = 46;
+  card.appendChild(upBadge);
+
+  const methodsLabel = mkText('BY PAYMENT METHOD', 10, W.semibold, C.slate500);
+  methodsLabel.letterSpacing = { value: 1, unit: 'PIXELS' };
+  methodsLabel.x = 20; methodsLabel.y = 98;
+  card.appendChild(methodsLabel);
+
+  const methods = [
+    { label: 'PayNow QR', amount: 'S$2,140', pct: 0.44, barColor: C.indigo600 },
+    { label: 'Credit/Debit Card', amount: 'S$1,890', pct: 0.39, barColor: C.violet500 },
+    { label: 'GrabPay', amount: 'S$862', pct: 0.18, barColor: C.emerald500 },
+  ];
+
+  methods.forEach((m, i) => {
+    const y = 120 + i * 52;
+    const lbl = mkText(m.label, 13, W.medium, C.slate700);
+    lbl.x = 20; lbl.y = y;
+    card.appendChild(lbl);
+
+    const amtT = mkText(m.amount, 13, W.semibold, C.slate900, 'RIGHT', 100);
+    amtT.x = 200; amtT.y = y;
+    card.appendChild(amtT);
+
+    const trackBg = mkRect(280, 8, C.slate100, 4);
+    trackBg.x = 20; trackBg.y = y + 20;
+    card.appendChild(trackBg);
+
+    const fill = mkRect(Math.round(280 * m.pct), 8, m.barColor, 4);
+    fill.x = 20; fill.y = y + 20;
+    card.appendChild(fill);
+  });
+
+  const divider = mkRect(280, 1, C.slate100);
+  divider.x = 20; divider.y = 268;
+  card.appendChild(divider);
+
+  const payoutL = mkText('Next payout', 12, W.regular, C.slate500);
+  payoutL.x = 20; payoutL.y = 280;
+  card.appendChild(payoutL);
+
+  const payoutA = mkText('Tomorrow · T+1', 13, W.semibold, C.green600, 'RIGHT', 130);
+  payoutA.x = 170; payoutA.y = 278;
+  card.appendChild(payoutA);
+
+  return card;
+}
+
+function mkHeroLanding() {
+  const sec = mkFrame('Hero', 1440, 560, { r: 0.973, g: 0.969, b: 1.0 });
+
+  const badge = mkPill('MAS Licensed  ·  PCI DSS Certified  ·  SOC2 Compliant', C.indigo50, C.indigo600, 16, 8, 100);
+  badge.x = 144; badge.y = 76;
+  sec.appendChild(badge);
+
+  const h1 = mkText('Payments made\nfast, easy and reliable', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  h1.lineHeight = { value: 64, unit: 'PIXELS' };
+  h1.x = 144; h1.y = 124;
+  sec.appendChild(h1);
+
+  const sub = mkText('Strip away the payment hassle. Focus on your growth.\nAccept PayNow, cards, QRs and international payments across your website, retail store, and social media. One unified platform, zero monthly fees.', 18, W.regular, C.slate600, 'LEFT', 520);
+  sub.lineHeight = { value: 28, unit: 'PIXELS' };
+  sub.x = 144; sub.y = 278;
+  sec.appendChild(sub);
+
+  const b1 = mkBtn('Create free account', C.indigo600, C.white, 24, 14, 12);
+  b1.x = 144; b1.y = 378;
+  sec.appendChild(b1);
+
+  const b2 = mkBtn('See all features →', null, C.slate800, 24, 14, 12, true);
+  b2.x = 358; b2.y = 378;
+  sec.appendChild(b2);
+
+  const fine = mkText('Free to sign up · No setup fees · Pay per transaction', 13, W.regular, C.slate500);
+  fine.x = 144; fine.y = 432;
+  sec.appendChild(fine);
+
+  const db = mockDashboard();
+  db.x = 860; db.y = 110;
+  sec.appendChild(db);
+
+  return sec;
+}
+
+function mkHeroLandingPlain() {
+  const sec = mkFrame('Hero', 1440, 560, { r: 0.973, g: 0.969, b: 1.0 });
+
+  const badge = mkPill('New: Cross-border QR now live in 10 markets  →', C.indigo50, C.indigo700, 16, 8, 100);
+  badge.x = 144; badge.y = 76;
+  sec.appendChild(badge);
+
+  const h1 = mkText('Accept payments\nyour way', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  h1.lineHeight = { value: 64, unit: 'PIXELS' };
+  h1.x = 144; h1.y = 124;
+  sec.appendChild(h1);
+
+  const sub = mkText('Break free from the patchwork of tools, the hidden fees, and the lock-in.\nHitPay is the all-in-one payment platform that lets growing businesses collect money the way their customers prefer — no-code or full API.', 18, W.regular, C.slate600, 'LEFT', 520);
+  sub.lineHeight = { value: 28, unit: 'PIXELS' };
+  sub.x = 144; sub.y = 264;
+  sec.appendChild(sub);
+
+  const b1 = mkBtn('Create free account', C.indigo600, C.white, 24, 14, 12);
+  b1.x = 144; b1.y = 394;
+  sec.appendChild(b1);
+
+  const b2 = mkBtn('See how it works →', null, C.slate800, 24, 14, 12, true);
+  b2.x = 358; b2.y = 394;
+  sec.appendChild(b2);
+
+  const fine = mkText('Free to sign up · No monthly fees · Pay per transaction', 13, W.regular, C.slate500);
+  fine.x = 144; fine.y = 448;
+  sec.appendChild(fine);
+
+  const db = mockDashboard();
+  db.x = 860; db.y = 110;
+  sec.appendChild(db);
+
+  return sec;
+}
+
 // ── PAGE BUILDERS ────────────────────────────────────────────
 
 function buildEcommerce() {
@@ -2023,6 +2173,392 @@ function buildNonprofits() {
   return page.f;
 }
 
+function buildLanding() {
+  const page = new Page('General Landing Page (SEO/AEO)', 4620);
+  const ac = C.indigo600;
+
+  page.add(mkNavbar(ac), 64);
+  page.add(mkHeroLanding(), 560);
+  page.add(mkTrustBar(
+    'TRUSTED BY 15,000+ BUSINESSES ACROSS SOUTHEAST ASIA',
+    ['E-commerce', 'Retail', 'F&B', 'Nonprofits', 'Freelancers', 'Services']
+  ), 120);
+  page.add(mkStats(
+    [
+      { value: '10+', label: 'Countries supported' },
+      { value: '$1B+', label: 'Payment volume' },
+      { value: '700+', label: 'Payment methods' },
+      { value: 'T+1', label: 'Business day payouts' },
+    ],
+    C.indigo900, C.white, C.indigo200
+  ), 192);
+  page.add(mkIntro(
+    'One platform. Every way to get paid.',
+    'Whether you sell online, run a physical store, or take orders through social media — HitPay handles the payments so you can focus on what you do best.'
+  ), 240);
+
+  page.add(mkFeature({
+    label: 'Checkout & Payments',
+    h2: 'Increase your checkout conversion rates',
+    p: 'Accept the full range of Singapore and regional payment methods in one checkout — PayNow, GrabPay, cards, e-wallets, and BNPL. More options, fewer abandoned sales.',
+    bullets: [
+      'PayNow QR, GrabPay, ShopeePay, and 700+ methods',
+      'Visa, Mastercard, Amex — Apple Pay & Google Pay ready',
+      'Buy Now Pay Later with Atome for higher AOV',
+      'Mobile-optimised, PCI DSS Level 1 secure',
+    ],
+    mockUI: mockCheckout(),
+    bg: C.slate50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  page.add(mkFeature({
+    label: 'Omni-channel',
+    h2: 'Run your whole business from one place.',
+    p: 'In-store POS, online checkout, payment links, QR codes, and subscriptions — all from a single dashboard. No more switching between systems or reconciling separate reports.',
+    bullets: [
+      'Unified dashboard across all sales channels',
+      'POS for retail, payment links for social selling',
+      'Subscriptions and recurring billing built-in',
+      'Real-time consolidated revenue reports',
+    ],
+    mockUI: mockOmnichannel(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  page.add(mkFeature({
+    label: 'Cross-border',
+    h2: 'Grow your customer base beyond Singapore',
+    p: 'Accept payments from tourists, overseas customers, and regional buyers without setting up accounts in each market. HitPay supports cross-border QR and international wallets across 10+ countries.',
+    bullets: [
+      'Cross-border QR live in 10 markets',
+      'Alipay+, WeChat Pay, DuitNow, PromptPay',
+      '100+ currencies accepted',
+      'Tourists pay in their home currency',
+    ],
+    mockUI: mockQR(),
+    bg: C.slate50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  page.add(mkFeature({
+    label: 'Onboarding & Support',
+    h2: 'Set up in minutes. Supported every day.',
+    p: 'Most businesses accept their first payment within 10 minutes of signing up. Our team is available every day of the week — by chat, email, and phone — so you\'re never on your own.',
+    bullets: [
+      'Sign up and verify in under 10 minutes',
+      'Support 7 days a week by chat and email',
+      'Dedicated account managers for larger businesses',
+      'Comprehensive documentation and tutorials',
+    ],
+    mockUI: mockPaymentLink(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  page.add(mkStats(
+    [
+      { value: '15,000+', label: 'Businesses trust HitPay' },
+      { value: '99.99%', label: 'Uptime SLA' },
+      { value: 'S$0', label: 'Monthly platform fees' },
+      { value: '2016', label: 'Founded in Singapore' },
+    ],
+    C.indigo900, C.white, C.indigo200
+  ), 192);
+
+  page.add(mkTestimonial(
+    'HitPay gave us a single dashboard for everything — from our Orchard Road outlet to our online store and Instagram sales. Our reconciliation time dropped by 80% in the first week.',
+    'Felicia Tan',
+    'Founder, The Botanical Boutique — Singapore Lifestyle Brand',
+    ac
+  ), 380);
+
+  page.add(mkGrid(
+    'Everything Singapore businesses need to get paid',
+    'From your first PayNow QR code to a full API integration — HitPay scales with you.',
+    [
+      { title: 'Payment Gateway', desc: 'Hosted checkout that accepts all major payment methods. No code required.' },
+      { title: 'POS System', desc: 'iPad and Android POS for retail, F&B, and service businesses. Includes inventory.' },
+      { title: 'Payment Links', desc: 'Create and share payment links in seconds. Collect from WhatsApp, Instagram, or email.' },
+      { title: 'Invoicing', desc: 'Send branded digital invoices with embedded payment buttons. Auto-reminders included.' },
+      { title: 'Subscriptions', desc: 'Recurring billing for memberships, subscriptions, and retainer clients.' },
+      { title: 'Developer API', desc: 'RESTful API, webhooks, and SDKs. Build a fully custom payment experience end to end.' },
+    ]
+  ), 660);
+
+  page.add(mkRelated(
+    'Explore by industry',
+    [
+      { emoji: '🛒', title: 'E-commerce', desc: 'Shopify, WooCommerce plugins and a powerful checkout that converts.' },
+      { emoji: '🏪', title: 'Retail', desc: 'POS, Tap to Pay, and card terminals for physical stores.' },
+      { emoji: '💜', title: 'Nonprofits', desc: 'Donation pages, recurring giving, and event QR codes.' },
+    ],
+    ac
+  ), 380);
+
+  page.add(mkCTA(
+    'Start accepting payments in Singapore today',
+    'Join 15,000+ businesses already growing with HitPay. Free to start — no credit card needed.',
+    'Create free account',
+    'Talk to sales',
+    ac
+  ), 300);
+
+  page.add(mkFooter(
+    ac,
+    ['Payment Gateway', 'POS System', 'Payment Links', 'Invoicing', 'Subscriptions'],
+    ['E-commerce', 'Retail', 'Nonprofits', 'F&B', 'Freelancers']
+  ), 280);
+
+  return page.f;
+}
+
+function buildLandingPlainInspired() {
+  const page = new Page('General Landing v2 (Plain-inspired)', 6160);
+  const ac = C.indigo600;
+
+  page.add(mkNavbar(ac), 64);
+  page.add(mkHeroLandingPlain(), 560);
+  page.add(mkTrustBar(
+    'FAST-GROWING BUSINESSES TRUST HITPAY',
+    ['E-commerce', 'Retail', 'F&B', 'Nonprofits', 'Freelancers', 'Services']
+  ), 120);
+
+  // Pain section (dark)
+  page.add((() => {
+    const sec = mkFrame('PainSection', 1440, 280, C.slate900);
+    const h2 = mkText('Payment sprawl is\nslowing you down', 40, W.extrabold, C.white, 'CENTER', 760);
+    h2.lineHeight = { value: 52, unit: 'PIXELS' };
+    h2.x = 340; h2.y = 44;
+    sec.appendChild(h2);
+    const p = mkText('Your customers pay with PayNow, GrabPay at checkout, and cards online. You\'re managing multiple systems, chasing separate reports, and losing track of revenue across every channel.', 17, W.regular, C.slate400, 'CENTER', 760);
+    p.lineHeight = { value: 28, unit: 'PIXELS' };
+    p.x = 340; p.y = 172;
+    sec.appendChild(p);
+    return sec;
+  })(), 280);
+
+  page.add(mkStats(
+    [
+      { value: '10+', label: 'Countries supported' },
+      { value: '$1B+', label: 'Payment volume' },
+      { value: '700+', label: 'Payment methods' },
+      { value: 'T+1', label: 'Business day payouts' },
+    ],
+    C.indigo900, C.white, C.indigo200
+  ), 192);
+
+  // Orchestration dark section
+  page.add((() => {
+    const sec = mkFrame('OrchestrationSection', 1440, 380, C.slate800);
+    const eyebrow = mkText('THE HITPAY DIFFERENCE', 11, W.semibold, C.indigo200, 'CENTER', 800);
+    eyebrow.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+    eyebrow.x = 320; eyebrow.y = 40;
+    sec.appendChild(eyebrow);
+    const h2 = mkText('HitPay brings every payment together', 36, W.bold, C.white, 'CENTER', 800);
+    h2.lineHeight = { value: 44, unit: 'PIXELS' };
+    h2.x = 320; h2.y = 68;
+    sec.appendChild(h2);
+    const orchCards = [
+      { title: 'Accept every method', desc: 'PayNow, cards, e-wallets, BNPL — online, in-store, and via link. One account, every way.' },
+      { title: 'Understand your revenue', desc: 'Unified dashboard showing sales across every channel. Real-time, consolidated, accurate.' },
+      { title: 'Scale without switching', desc: 'Start with payment links. Add POS. Enable API. HitPay grows with your business.' },
+    ];
+    const orchColW = (1152 - 64) / 3;
+    orchCards.forEach((oc, i) => {
+      const cx = 144 + i * (orchColW + 32);
+      const cardF = mkFrame('OCard/' + oc.title, orchColW, 160, C.slate900, 16);
+      cardF.x = cx; cardF.y = 164;
+      const tt = mkText(oc.title, 16, W.semibold, C.white, 'LEFT', orchColW - 48);
+      tt.x = 24; tt.y = 20;
+      cardF.appendChild(tt);
+      const dd = mkText(oc.desc, 14, W.regular, C.slate400, 'LEFT', orchColW - 48);
+      dd.lineHeight = { value: 22, unit: 'PIXELS' };
+      dd.x = 24; dd.y = 52;
+      cardF.appendChild(dd);
+      sec.appendChild(cardF);
+    });
+    return sec;
+  })(), 380);
+
+  page.add(mkFeature({
+    label: 'Payments',
+    h2: 'Accept every way customers pay',
+    p: 'Your customers pay their way — PayNow, GrabPay, cards, e-wallets, and BNPL. HitPay gives every option at checkout, in-store, and via link. No friction. No abandoned sales.',
+    bullets: [
+      'PayNow QR, GrabPay, ShopeePay, and 700+ methods',
+      'Visa, Mastercard, Amex — Apple Pay & Google Pay ready',
+      'Buy Now Pay Later with Atome',
+      'Cross-border wallets for tourists and overseas buyers',
+    ],
+    mockUI: mockCheckout(),
+    bg: C.slate50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  page.add(mkFeature({
+    label: 'Platform',
+    h2: 'One command center. Every channel.',
+    p: 'In-store POS, online checkout, payment links, QR codes — all in a single dashboard. No stitching together reports from separate systems. No reconciliation headaches. Just one clear view.',
+    bullets: [
+      'Unified dashboard across all sales channels',
+      'POS for retail, payment links for social',
+      'Real-time consolidated revenue reports',
+      'Multi-location management from one account',
+    ],
+    mockUI: mockOmnichannel(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  page.add(mkFeature({
+    label: 'Cross-border',
+    h2: 'Go regional in minutes',
+    p: 'Accept cross-border QR payments from 10 markets without setting up accounts in each country. Tourists pay with their home wallet. Overseas buyers pay their way. You settle in SGD.',
+    bullets: [
+      'Cross-border QR live in 10 markets',
+      'Alipay+, WeChat Pay, DuitNow, PromptPay',
+      '100+ currencies accepted',
+      'Settle in SGD — no FX complexity for you',
+    ],
+    mockUI: mockQR(),
+    bg: C.slate50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  page.add(mkFeature({
+    label: 'Onboarding',
+    h2: 'Be live today. Backed every day.',
+    p: 'Sign up and accept your first payment in under 10 minutes. No paperwork, no waiting. And when you need help, our team is there 7 days a week — because your business doesn\'t close on weekends.',
+    bullets: [
+      'Verify and go live in under 10 minutes',
+      'Support 7 days a week by chat and email',
+      'Dedicated account managers for larger businesses',
+      'Comprehensive docs and video tutorials',
+    ],
+    mockUI: mockPaymentLink(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  // "Simple to start. Built to scale." — dark comparison section
+  page.add((() => {
+    const sec = mkFrame('SpeedMeetPower', 1440, 480, C.slate900);
+    const h2 = mkText('Simple to start.\nBuilt to scale.', 48, W.extrabold, C.white, 'CENTER', 800);
+    h2.lineHeight = { value: 58, unit: 'PIXELS' };
+    h2.x = 320; h2.y = 44;
+    sec.appendChild(h2);
+    const sub = mkText('When comparing payment platforms, they all look the same. Here\'s what makes HitPay different.', 17, W.regular, C.slate400, 'CENTER', 720);
+    sub.lineHeight = { value: 26, unit: 'PIXELS' };
+    sub.x = 360; sub.y = 180;
+    sec.appendChild(sub);
+    const divLine = mkRect(1152, 1, C.slate800);
+    divLine.x = 144; divLine.y = 234;
+    sec.appendChild(divLine);
+    const rows = [
+      { q: 'When you need the widest payment coverage', a: '→ 700+ methods, local wallets, and cross-border QR in 10 markets.' },
+      { q: 'When you want zero monthly fees', a: '→ Pay only when you get paid. No subscriptions, no setup costs.' },
+      { q: 'When you need to expand regionally', a: '→ Activate cross-border payments in minutes. No new accounts.' },
+      { q: 'When you demand extensibility', a: '→ Full REST API, webhooks, and SDKs for custom integrations.' },
+      { q: 'When you just need it to work', a: '→ Setup in 10 minutes. Supported every day. Seriously.' },
+    ];
+    rows.forEach((row, i) => {
+      const y = 252 + i * 42;
+      const qT = mkText(row.q, 14, W.medium, C.slate300, 'LEFT', 560);
+      qT.x = 144; qT.y = y;
+      sec.appendChild(qT);
+      const aT = mkText(row.a, 14, W.regular, C.indigo200, 'LEFT', 480);
+      aT.x = 736; aT.y = y;
+      sec.appendChild(aT);
+      if (i < rows.length - 1) {
+        const rowDiv = mkRect(1152, 1, C.slate800);
+        rowDiv.x = 144; rowDiv.y = y + 34;
+        sec.appendChild(rowDiv);
+      }
+    });
+    return sec;
+  })(), 480);
+
+  page.add(mkTestimonial(
+    'We evaluated three payment platforms before choosing HitPay. The setup was genuinely 10 minutes. The dashboard is clean. And when we had a question at 9pm on a Sunday, someone actually replied.',
+    'Marcus Lim',
+    'Co-founder, Ritual Coffee SG — F&B & Subscription Business',
+    ac
+  ), 380);
+
+  // Time-to-value section
+  page.add((() => {
+    const sec = mkFrame('TimeToValue', 1440, 380, C.white);
+    const eyebrow = mkText('TIME IS MONEY. MONEY IS YOURS.', 11, W.semibold, ac, 'CENTER', 800);
+    eyebrow.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+    eyebrow.x = 320; eyebrow.y = 44;
+    sec.appendChild(eyebrow);
+    const h2 = mkText("Here's what you can do\nin under 10 minutes", 36, W.bold, C.slate900, 'CENTER', 800);
+    h2.lineHeight = { value: 44, unit: 'PIXELS' };
+    h2.x = 320; h2.y = 68;
+    sec.appendChild(h2);
+    const ttvCols = [
+      { time: '2 minutes', items: ['Create your free account', 'Set business name and logo', 'Link your Singapore bank account'] },
+      { time: '5 minutes', items: ['Complete KYC verification', 'Generate your first PayNow QR', 'Share your first payment link'] },
+      { time: '10 minutes', items: ['Receive your first payment', 'See it in your dashboard', 'Know exactly when it hits your bank'] },
+    ];
+    const ttvColW = (1152 - 64) / 3;
+    ttvCols.forEach((col, i) => {
+      const cx = 144 + i * (ttvColW + 32);
+      const timeLbl = mkText(col.time, 14, W.bold, ac);
+      timeLbl.x = cx; timeLbl.y = 176;
+      sec.appendChild(timeLbl);
+      col.items.forEach((item, j) => {
+        const dot = mkRect(6, 6, ac, 3);
+        dot.x = cx; dot.y = 212 + j * 36 + 5;
+        sec.appendChild(dot);
+        const itemT = mkText(item, 14, W.regular, C.slate700, 'LEFT', ttvColW - 24);
+        itemT.x = cx + 18; itemT.y = 212 + j * 36;
+        sec.appendChild(itemT);
+      });
+    });
+    return sec;
+  })(), 380);
+
+  page.add(mkGrid(
+    'Engineered with enterprise-level security.\nBuilt for every business.',
+    'We don\'t treat security as a set of badges. It\'s a core engineering principle.',
+    [
+      { title: 'MAS Licensed', desc: 'Licensed by the Monetary Authority of Singapore under the Payment Services Act.' },
+      { title: 'PCI DSS Level 1', desc: 'The highest payment card industry certification. Your customers\' data is always protected.' },
+      { title: 'SOC 2 Compliant', desc: 'Independently audited security, availability, and confidentiality controls.' },
+      { title: 'End-to-end encryption', desc: 'All payment data encrypted in transit and at rest. Every single transaction.' },
+      { title: '99.99% uptime SLA', desc: 'Built for reliability. Your checkout is always up when customers are ready to pay.' },
+      { title: 'Fraud detection', desc: 'Real-time risk scoring on every transaction. Reduce chargebacks without blocking good orders.' },
+    ]
+  ), 660);
+
+  page.add(mkCTA(
+    'Join the businesses that trust HitPay\nto accept payments their way',
+    'Free to start. No monthly fees. No lock-in. Just payments that work.',
+    'Create free account',
+    'Talk to sales',
+    ac
+  ), 300);
+
+  page.add(mkFooter(
+    ac,
+    ['Payment Gateway', 'POS System', 'Payment Links', 'Invoicing', 'Subscriptions'],
+    ['E-commerce', 'Retail', 'Nonprofits', 'F&B', 'Freelancers']
+  ), 280);
+
+  return page.f;
+}
+
 // ── MAIN ─────────────────────────────────────────────────────
 
 async function main() {
@@ -2031,13 +2567,17 @@ async function main() {
   const ecomm = buildEcommerce();
   const retail = buildRetail();
   const np = buildNonprofits();
+  const landing = buildLanding();
+  const plain = buildLandingPlainInspired();
 
   figma.currentPage.appendChild(ecomm);
   figma.currentPage.appendChild(retail);
   figma.currentPage.appendChild(np);
+  figma.currentPage.appendChild(landing);
+  figma.currentPage.appendChild(plain);
 
-  figma.viewport.scrollAndZoomIntoView([ecomm, retail, np]);
-  figma.closePlugin('✅ HitPay landing pages created! 3 frames at 1440px.');
+  figma.viewport.scrollAndZoomIntoView([ecomm, retail, np, landing, plain]);
+  figma.closePlugin('✅ HitPay landing pages created! 5 frames at 1440px.');
 }
 
 main().catch(err => {

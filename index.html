@@ -7,13 +7,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Inter', sans-serif; }</style>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .chip { cursor: pointer; transition: all 0.15s; user-select: none; }
+    .chip:hover { transform: translateY(-1px); }
+    .chip.active { ring: 2px; }
+    .swatch { cursor: pointer; transition: all 0.15s; }
+    .swatch:hover { transform: scale(1.15); }
+    .swatch.selected { outline: 3px solid white; box-shadow: 0 0 0 5px currentColor; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { animation: spin 0.8s linear infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .pulse-dot { animation: pulse-dot 1.2s ease-in-out infinite; }
+    .pulse-dot:nth-child(2) { animation-delay: 0.2s; }
+    .pulse-dot:nth-child(3) { animation-delay: 0.4s; }
+    textarea:focus, input:focus { outline: none; }
+    .output-pre { font-family: 'Menlo', 'Monaco', monospace; font-size: 11px; line-height: 1.5; }
+  </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col items-center justify-center px-6 py-16">
+<body class="bg-slate-50 min-h-screen px-6 py-16">
 
-  <div class="max-w-2xl w-full">
+  <div class="max-w-2xl mx-auto">
+
     <!-- Header -->
-    <div class="text-center mb-12">
+    <div class="text-center mb-10">
       <div class="flex items-center justify-center gap-2 mb-4">
         <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
           <span class="text-white font-bold">H</span>
@@ -24,61 +41,752 @@
       <p class="text-slate-500">Internal review — please share feedback with the growth team</p>
     </div>
 
-    <!-- Cards -->
-    <div class="space-y-4">
-      <a href="ecommerce.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-400 hover:shadow-md transition-all group">
-        <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">🛒</div>
+    <!-- Existing Pages -->
+    <div id="pageList" class="space-y-3 mb-3">
+      <a href="ecommerce.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛒</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 text-lg group-hover:text-indigo-700">E-commerce</div>
+          <div class="font-semibold text-slate-900 group-hover:text-indigo-700">E-commerce</div>
           <div class="text-slate-500 text-sm mt-0.5">Online checkout, integrations, payment links, and subscriptions</div>
         </div>
         <svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="retail.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-6 hover:border-emerald-400 hover:shadow-md transition-all group">
-        <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">🏪</div>
+      <a href="retail.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-emerald-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🏪</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 text-lg group-hover:text-emerald-700">Retail</div>
+          <div class="font-semibold text-slate-900 group-hover:text-emerald-700">Retail</div>
           <div class="text-slate-500 text-sm mt-0.5">POS system, Tap to Pay, card terminals, and omnichannel dashboard</div>
         </div>
         <svg class="w-5 h-5 text-slate-400 group-hover:text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="nonprofits.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-6 hover:border-violet-400 hover:shadow-md transition-all group">
-        <div class="w-14 h-14 bg-violet-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">💜</div>
+      <a href="nonprofits.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-violet-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💜</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 text-lg group-hover:text-violet-700">Nonprofits</div>
+          <div class="font-semibold text-slate-900 group-hover:text-violet-700">Nonprofits</div>
           <div class="text-slate-500 text-sm mt-0.5">Donation pages, recurring giving, event QR codes, and grant invoicing</div>
         </div>
         <svg class="w-5 h-5 text-slate-400 group-hover:text-violet-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="landing.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-400 hover:shadow-md transition-all group">
-        <div class="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">🌏</div>
+      <a href="landing.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🌏</div>
         <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 text-lg group-hover:text-indigo-700">General (SEO/AEO)</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Cross-channel overview — QR aggregation, cross-border payments, omni-channel, FAQ-optimised</div>
+          <div class="font-semibold text-slate-900 group-hover:text-indigo-700">General (SEO/AEO)</div>
+          <div class="text-slate-500 text-sm mt-0.5">Cross-channel overview — QR aggregation, cross-border payments, FAQ-optimised</div>
         </div>
         <svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="landing-plaininspired.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-6 hover:border-indigo-400 hover:shadow-md transition-all group">
-        <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">⚡</div>
+      <a href="landing-plaininspired.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">⚡</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 text-lg group-hover:text-indigo-700">General v2 (Plain-inspired)</span>
+            <span class="font-semibold text-slate-900 group-hover:text-indigo-700">General v2 (Plain-inspired)</span>
             <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">New</span>
           </div>
-          <div class="text-slate-500 text-sm mt-0.5">Punchy copy, pain-first flow, "Speed meet power" comparison section, time-to-value</div>
+          <div class="text-slate-500 text-sm mt-0.5">Punchy copy, pain-first flow, "Speed meet power" comparison section</div>
         </div>
         <svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
+
+      <a href="travel.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-sky-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">✈️</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-900 group-hover:text-sky-700">Travel Agencies & Tour Operators</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">New</span>
+          </div>
+          <div class="text-slate-500 text-sm mt-0.5">Cross-border tourist payments, deposit invoicing, payment links, POS</div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-sky-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="education.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-blue-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🎓</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-900 group-hover:text-blue-700">Educational Services</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">New</span>
+          </div>
+          <div class="text-slate-500 text-sm mt-0.5">Recurring tuition billing, parent WhatsApp payment links, invoicing, online store</div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="computers.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-slate-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💻</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-900 group-hover:text-slate-700">Computers, Peripherals & Software</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">New</span>
+          </div>
+          <div class="text-slate-500 text-sm mt-0.5">Multi-location POS + inventory, BNPL for big-ticket items, B2B invoicing</div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-slate-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="restaurants.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-amber-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🍜</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-900 group-hover:text-amber-700">Fast Food Restaurants & F&B</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">New</span>
+          </div>
+          <div class="text-slate-500 text-sm mt-0.5">POS + Soundbox, 2% F&B card rate, cross-border tourist QR payments</div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-amber-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="beauty.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-rose-400 hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💆</div>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-900 group-hover:text-rose-600">Health, Beauty & Spas</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-600 px-2 py-0.5 rounded-full">New</span>
+          </div>
+          <div class="text-slate-500 text-sm mt-0.5">Monthly memberships, deposit collection via WhatsApp, package invoicing</div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-rose-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+
+      <!-- Generated pages injected here by JS -->
+      <div id="generatedCards"></div>
     </div>
 
-    <p class="text-center text-slate-400 text-xs mt-10">HitPay Growth Team · Internal use only</p>
+    <!-- Divider -->
+    <div class="flex items-center gap-3 my-8">
+      <div class="flex-1 h-px bg-slate-200"></div>
+      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Generate New Page</span>
+      <div class="flex-1 h-px bg-slate-200"></div>
+    </div>
+
+    <!-- Generator Panel -->
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+
+      <!-- Panel header -->
+      <div class="px-6 pt-6 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-slate-900 text-sm">AI Page Generator</div>
+            <div class="text-xs text-slate-400">Powered by Claude · Uses RESEARCH.md context</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 space-y-5">
+
+        <!-- Quick-pick chips -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2.5">Quick pick</label>
+          <div class="flex flex-wrap gap-2" id="chipContainer">
+            <!-- chips injected by JS -->
+          </div>
+        </div>
+
+        <!-- Industry input -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2" for="industryInput">Industry or use case</label>
+          <input
+            id="industryInput"
+            type="text"
+            placeholder="e.g. Restaurants, Beauty & Wellness, SaaS, Freelancers…"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors"
+          />
+        </div>
+
+        <!-- Context textarea -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2" for="contextInput">
+            Additional context
+            <span class="normal-case font-normal text-slate-400 ml-1">— optional</span>
+          </label>
+          <textarea
+            id="contextInput"
+            rows="3"
+            placeholder="e.g. Focus on GrabPay and DuitNow for Malaysian merchants. Include UPI for Indian tourists. Highlight the 2% F&B rate."
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Color theme -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2.5">Accent colour</label>
+          <div class="flex items-center gap-2.5 flex-wrap" id="swatchContainer">
+            <!-- swatches injected by JS -->
+          </div>
+          <div class="mt-2 text-xs text-slate-400" id="colorLabel">Amber</div>
+        </div>
+
+        <!-- API key -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider" for="apiKeyInput">Anthropic API key</label>
+            <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-xs text-indigo-500 hover:text-indigo-700">Get key →</a>
+          </div>
+          <div class="relative">
+            <input
+              id="apiKeyInput"
+              type="password"
+              placeholder="sk-ant-…"
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors pr-20"
+            />
+            <button onclick="toggleApiKey()" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600 font-medium px-2 py-1">Show</button>
+          </div>
+          <p class="text-xs text-slate-400 mt-1.5">Stored in your browser only. Never sent anywhere except Anthropic's API.</p>
+        </div>
+
+        <!-- Generate button -->
+        <button
+          id="generateBtn"
+          onclick="generatePage()"
+          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Generate Landing Page
+        </button>
+
+      </div>
+
+      <!-- Output area (hidden until generating) -->
+      <div id="outputArea" class="hidden border-t border-slate-100">
+
+        <!-- Generating state -->
+        <div id="generatingState" class="px-6 py-5">
+          <div class="flex items-center gap-3 mb-4">
+            <svg id="genSpinner" class="spinner w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/></svg>
+            <span class="text-sm font-medium text-slate-700" id="genStatus">Generating…</span>
+            <div class="flex gap-1 ml-auto">
+              <div class="pulse-dot w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+              <div class="pulse-dot w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+              <div class="pulse-dot w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4 h-28 overflow-hidden relative">
+            <pre class="output-pre text-slate-500 whitespace-pre-wrap" id="streamPreview"></pre>
+            <div class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-slate-50 pointer-events-none"></div>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-xs text-slate-400" id="charCount">0 characters</span>
+            <span class="text-xs text-slate-400" id="genFilename"></span>
+          </div>
+        </div>
+
+        <!-- Done state -->
+        <div id="doneState" class="hidden px-6 py-5">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span class="text-sm font-semibold text-slate-900">Page generated</span>
+            <span class="text-xs text-slate-400 ml-auto" id="finalCharCount"></span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="downloadPage()" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download HTML
+            </button>
+            <button onclick="previewPage()" class="flex-1 bg-white border border-slate-200 hover:border-slate-400 text-slate-700 text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Preview
+            </button>
+            <button onclick="copyHTML()" id="copyBtn" class="bg-white border border-slate-200 hover:border-slate-400 text-slate-700 text-sm font-semibold py-2.5 px-4 rounded-xl transition-colors">
+              Copy
+            </button>
+          </div>
+          <p class="text-xs text-slate-400 mt-3 text-center">
+            Save as <code id="saveFilename" class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-600"></code> in the project folder, then
+            <button onclick="window.location.reload()" class="text-indigo-500 hover:underline">refresh</button> to see it in the list.
+          </p>
+        </div>
+
+        <!-- Error state -->
+        <div id="errorState" class="hidden px-6 py-5">
+          <div class="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
+            <svg class="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div>
+              <div class="text-sm font-medium text-red-700">Generation failed</div>
+              <div class="text-xs text-red-600 mt-1" id="errorMsg"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="text-center text-slate-400 text-xs mt-8">HitPay Growth Team · Internal use only</p>
   </div>
 
+<script>
+// ─── Config ──────────────────────────────────────────────────────────────────
+
+const CHIPS = [
+  { label: 'Restaurants', emoji: '🍜', color: 'amber',   context: 'Focus on POS, Soundbox, QR payments and the 2% F&B card rate.' },
+  { label: 'Hospitality', emoji: '🏨', color: 'teal',    context: 'Focus on cross-border tourist payments (WeChat Pay, Alipay, UPI), POS at check-in, and invoicing for deposits.' },
+  { label: 'Beauty',      emoji: '💅', color: 'rose',    context: 'Focus on recurring billing for packages, payment links for deposits via WhatsApp/Instagram, and SimplyBook integration.' },
+  { label: 'Education',   emoji: '📚', color: 'blue',    context: 'Focus on recurring billing for tuition fees, payment links sent to parents, and invoicing.' },
+  { label: 'Healthcare',  emoji: '🏥', color: 'sky',     context: 'Focus on invoicing for sessions/packages, payment links post-consultation, and recurring health plan billing.' },
+  { label: 'Travel',      emoji: '✈️', color: 'cyan',    context: 'Focus on multi-currency cross-border payments, invoicing for deposits and balances, and Xero sync.' },
+  { label: 'SaaS',        emoji: '💻', color: 'violet',  context: 'Focus on Payment APIs, recurring billing with all plan types, and global coverage across 25+ countries.' },
+  { label: 'Freelancers', emoji: '💼', color: 'orange',  context: 'Focus on payment links, invoicing with automated reminders, and partial payments for deposits.' },
+  { label: 'Subscriptions', emoji: '🔄', color: 'purple', context: 'Focus on recurring billing, subscription management dashboard, customer self-serve portal, and shareable plan links.' },
+  { label: 'Cross-border', emoji: '🌏', color: 'indigo', context: 'Focus on 700+ APAC payment options, 12 markets, and Borderless QR for tourist payments.' },
+];
+
+const SWATCHES = [
+  { name: 'Amber',  value: 'amber',  hex: '#D97706' },
+  { name: 'Teal',   value: 'teal',   hex: '#0D9488' },
+  { name: 'Rose',   value: 'rose',   hex: '#E11D48' },
+  { name: 'Blue',   value: 'blue',   hex: '#2563EB' },
+  { name: 'Sky',    value: 'sky',    hex: '#0284C7' },
+  { name: 'Cyan',   value: 'cyan',   hex: '#0891B2' },
+  { name: 'Violet', value: 'violet', hex: '#7C3AED' },
+  { name: 'Orange', value: 'orange', hex: '#EA580C' },
+  { name: 'Purple', value: 'purple', hex: '#9333EA' },
+  { name: 'Indigo', value: 'indigo', hex: '#4F46E5' },
+];
+
+// ─── State ────────────────────────────────────────────────────────────────────
+
+let selectedColor = 'amber';
+let generatedHTML = '';
+let generatedFilename = '';
+
+// ─── Research context (from RESEARCH.md) ─────────────────────────────────────
+
+const RESEARCH = `
+## HITPAY COMPANY
+Founded 2016, Singapore. Founders: Aditya Haripurkar (CEO), Nitin Muthyala. Backed by Y Combinator, Tiger Global, Global Founders Capital, HOF Capital. ~$21.3M raised. 15,000+ merchants. MAS Major Payment Institution licensed. PCI DSS Level 1 compliant. Available 25+ countries. Top fintech SG — Tech In Asia & Statista 2026. No setup fees, no monthly fees, no hidden fees. Only pay per transaction.
+
+## KEY STATS (reuse across pages)
+- 15,000+ brands and merchants
+- 50+ payment methods
+- 150+ currencies
+- 700+ local APAC payment options
+- 12 APAC markets supported cross-border
+- 25+ countries via API
+- 9,000+ SG merchants integrated UPI
+- MAS licensed, PCI DSS Level 1
+- Get set up in minutes
+
+## PRODUCTS
+
+### Payment Gateway
+Hero: "Seamless payments, every time." 50+ methods, 150+ currencies. Cards, e-wallets, bank transfers, QR, BNPL. Mobile-first checkout. Personalised checkout (custom logo, colours, rules — no code). PCI DSS. Expand cross-border with low fees. "Accept payments the way your customers prefer."
+
+### Cross-Border Payments
+Hero: "Expand to the fastest-growing markets in APAC." 12 markets: AU, CN, HK, ID, IN, JP, KR, MY, SG, TH, PH, VN. 700+ local options. ShopeePay, GrabPay, GCash, TnG, WeChat Pay, BillEase, Atome. Mid-market FX, zero exchange-rate markup for customers. Also works in-person for tourists at stores and overseas events.
+
+### Payment Links
+Hero: "Create and share payment links in just a few clicks." No website needed. Fixed or flexible amounts. 100+ currencies. Personalised checkout. Share via email, WhatsApp, Instagram, print QR. "Seamless payments in three easy steps: Create → Share → Receive."
+
+### Invoicing
+Hero: "Helps you get paid faster, every time." Free, no setup fees. Auto-reminders (upcoming + overdue). Partial payments (deposits). Multi-currency. Mobile app. Xero/QuickBooks sync. Discounts, tax lines, mark-as-paid (cash). "Say goodbye to manual invoicing."
+
+### Recurring Billing
+Hero: "Automate billing cycles." Daily/weekly/monthly/annual schedules. Full dashboard. Customer self-serve portal (update card, manage plan). Shareable subscription links (subscribe in one click). Branded email templates. GIRO support (SG). "Scaling your subscription business has never been so easy."
+
+### POS Software
+Multi-location management (free). Inventory sync (online + offline). CRM with purchase history. Real-time reporting. Mobile POS (smartphones, tablets, laptops). Discount management and scheduling. Cards, QR, Tap to Pay, BNPL, payment links.
+
+### Online Store
+No-code builder, pre-built templates. Customise colours/fonts/layout. Digital products (DRM). Coupons & discounts. Inventory & order management. Link-in-Bio (mobile optimised). POS inventory sync.
+
+### Card Terminal
+No rental, no subscription — purchase once, only pay per transaction. Visa/MC/Amex/Apple Pay/Google Pay/Samsung Pay/Fitbit Pay/PayNow QR. Devices: countertop, Tap to Pay on Android, POS Max all-in-one (receipt printer + barcode reader + full POS).
+
+### Payment APIs
+RESTful APIs. Python, Java, PHP, JavaScript. 25+ countries. PCI DSS. Custom checkout UX. Recurring via API. Reporting & analytics. Comprehensive docs + developer support.
+
+### Integrations
+Ecommerce: Shopify, WooCommerce, Wix, PrestaShop, Magento, OpenCart, Ecwid, EasyStore, SiteGiant
+Accounting: Xero (auto-sync), QuickBooks
+Automation: Zapier, Google Forms
+Scheduling/bookings: Cal.com, SimplyBook.me
+Other: WHMCS, Odoo, GiveWP
+
+### SG-Specific
+Soundbox: Instant audio + screen alert for PayNow. SIM card (no WiFi). 2000mAh battery. Prevents fake PayNow screenshot fraud. Best for hawkers, F&B, retail.
+Static QR: 0.4% flat fee — cheaper than SGQR (0.5–0.8%). Multi-outlet. No POS needed. Next-day settlement.
+Tap to Pay on iPhone: Contactless cards + Apple Pay, no hardware needed.
+
+## PRICING (Singapore)
+Domestic cards: 2.5% + S$0.30 | F&B cards: 2% + S$0.20 | International cards: 3.5%
+PayNow (≥S$100): 0.65% + S$0.30 | PayNow (<S$100): 0.65% + S$0.20
+GrabPay/ShopeePay: 3% | BNPL (Atome/GrabPay Later/ShopeePay Later): 5–5.5%
+Static QR: 0.4% | Payment Links surcharge: +0.2%
+Cross-border online: China 1.5% | India 2% | Philippines 1% or ₱20 | Indonesia 2% | Thailand 2.5%
+Custom pricing available for high-volume merchants.
+
+## TESTIMONIALS (pick the most relevant one per page)
+- Travel Agency: "HitPay POS has saved us lots of time and resources with daily automated reports and reconciliation. Our sales SOP is much more efficient now."
+- Custom PC Brand (Retail/Tech): "The HitPay platform is simple with everything we need. The ease of use is the best in the industry."
+- Design Jewellery (Retail): "The HitPay team is extremely helpful and willing to go the extra mile. The terminals and app are so easy to use and fuss free. I would recommend HitPay anytime to any commercial retailer."
+- Escape Room Experience (Entertainment): "With HitPay we no longer need to do manual invoicing as everything is automated. The no-code tools are also a huge time-saver!"
+- Swimwear Brand (Fashion): "HitPay is super convenient and fuss free. They also have one of the lowest transaction fees in the market so it's a win for merchants!"
+- Hotels & Resorts (Philippines, Hospitality): "HitPay is a welcome addition in the payment gateway scene for the Philippines with their lower fees, easy-to-use interface, and efficient customer service!"
+- Bakery (F&B): "Love the multiple payment options available, especially for online stores."
+- The Senses Therapy (Singapore, Wellness): "We have been using HitPay as the payment processor for our website, and we've been thoroughly impressed with their service."
+- Saint àvia (Malaysia, Fashion): "HitPay has redefined my online payment experience with its seamless and user-friendly platform. The quick and hassle-free registration process, coupled with robust security features."
+- MTMojo Traders (Singapore, Retail): "Amazing platform — fast and easy to set up. Accept all major payment methods quickly. Transparent and easy-to-understand fees."
+- General: "It's reliable, easy to use and honestly such a fantastic service to small businesses like mine."
+
+## CASE STUDIES
+- Bob the Baker Boy (F&B/bakery): Uses Payment Gateway APIs. "Customers loved GrabPay, Alipay, PayNow, and credit cards — sales have grown ever since."
+- Hay Dairies (farm/agriculture): Uses WooCommerce plugin. "With the ease of a QR code payment, they can immediately know whether customers have paid."
+- GetGo (car-sharing/mobility): Uses GIRO recurring payments for member billing.
+- Nodspark (beauty brand): Featured merchant. "Building a beauty brand for busy women."
+
+## INDUSTRY-SPECIFIC BRIEFS
+
+### F&B / Restaurants
+Pain points: Fake PayNow screenshots, slow reconciliation, table turnover, cash handling.
+Key products: POS Software, Soundbox, Static QR, Card Terminal, Cross-Border (WeChat/Alipay/UPI for tourists).
+Highlight: 2% + S$0.20 F&B card rate (industry-specific lower rate).
+Best testimonial: Bakery or Travel Agency (POS efficiency).
+
+### Hospitality / Hotels
+Pain points: Multi-currency tourist payments, fragmented channels, slow check-in, deposit tracking.
+Key products: Cross-Border Payments, Card Terminal, POS, Invoicing (deposits), Recurring (memberships/loyalty).
+Highlight: 12 APAC markets, WeChat Pay/Alipay/UPI/GrabPay for tourist QR, mid-market FX.
+Best testimonial: Hotels & Resorts Philippines.
+
+### Beauty & Wellness (salons, spas, clinics)
+Pain points: Chasing deposits, no-shows, managing packages, manual membership billing.
+Key products: Recurring Billing, Payment Links (deposit via WhatsApp), Invoicing, SimplyBook/Cal.com integration.
+Best testimonial: The Senses Therapy, Nodspark case study.
+
+### Education (schools, tuition, courses)
+Pain points: Manual tuition tracking, late payments, managing different plan types.
+Key products: Recurring Billing, Payment Links (parents via WhatsApp/email), Invoicing, Online Store (merch/events).
+Best testimonial: Escape Room Experience (automated invoicing), general reliability quote.
+
+### Healthcare / Clinics
+Pain points: Manual billing, chasing payments, multi-session package management.
+Key products: Invoicing (partial payments for packages), Payment Links (post-consult via SMS), Recurring (health plans).
+Best testimonial: The Senses Therapy.
+
+### Travel Agencies
+Pain points: Multi-currency international clients, deposit management, reconciliation overhead.
+Key products: Cross-Border Payments, Invoicing (deposit + balance invoices), Payment Links, Xero sync.
+Best testimonial: Travel Agency (POS + reporting efficiency).
+
+### SaaS / Software
+Pain points: Multi-market billing complexity, subscription management, engineering overhead.
+Key products: Payment APIs, Recurring Billing (all plan types + self-serve portal + GIRO), global 25+ countries.
+Best testimonial: Custom PC Brand (simplicity + ease of use).
+
+### Freelancers & Service Businesses
+Pain points: Getting paid late, no professional invoicing, managing deposits.
+Key products: Payment Links (primary), Invoicing (auto-reminders, partial payments), Recurring Billing.
+Best testimonial: Livette D, Escape Room (automation).
+`;
+
+// ─── System prompt ────────────────────────────────────────────────────────────
+
+const SYSTEM_PROMPT = `You are a senior growth marketing engineer at HitPay. Generate complete, production-ready HTML landing pages.
+
+## OUTPUT RULES
+- Return ONLY raw HTML starting with <!DOCTYPE html>. No markdown, no code fences, no explanation.
+- Single self-contained file. No external dependencies except Tailwind CDN and Google Inter font.
+- Use this exact head boilerplate:
+  <script src="https://cdn.tailwindcss.com"><\/script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+
+## PAGE STRUCTURE (include all sections in this order)
+1. NAVBAR — fixed, bg-white/95 backdrop-blur, logo (H icon + HitPay), nav links (Products, Solutions, Pricing, Developers, Resources), right side: Sign in + accent-coloured "Get started" CTA
+2. HERO — pt-32 pb-20; grid 2-col lg; LEFT: badge pill (industry label), h1 (5xl-6xl font-extrabold, max 12 words), subhead (xl text-slate-600, 2 sentences), 2 CTAs ("Start for free" accent + "Contact sales" outlined), small trust line ("Free to sign up · No setup fees · Pay per transaction"); RIGHT: a div-based mock UI visual relevant to the industry (e.g. POS screen, invoice, checkout, QR payment — built entirely from Tailwind divs, no images, realistic-looking)
+3. TRUST BAR — "Trusted by 15,000+ businesses" + payment method logos as inline text badges (pill style: border rounded-lg px-3 py-1.5 text-sm font-medium)
+4. INTRO/PROBLEM — 2-col: LEFT heading "Why [industry] businesses choose HitPay" + 3–4 pain-point bullets; RIGHT: clean feature summary box
+5. USP 1 — 2-col grid, visual LEFT / text RIGHT. Large section number, icon, headline, 2-sentence body, 3 bullet points with checkmarks
+6. USP 2 — 2-col grid, text LEFT / visual RIGHT (reversed)
+7. USP 3 — same as USP 1
+8. USP 4 — same as USP 2
+9. STATS — bg-slate-900 text-white section; 4 large stat numbers with labels (e.g. "15,000+" / "Merchants trust HitPay", "50+" / "Payment methods", "150+" / "Currencies supported", "0" / "Setup or monthly fees")
+10. TESTIMONIAL — centered, bg-white, large quote mark, quote text, merchant name + business type badge
+11. FEATURE GRID — "Everything you need" heading + 6 features in 3×2 grid (each: emoji icon + bold title + 1-sentence description)
+12. RELATED PAGES — "Explore more solutions" + 3 cards (e.g. link to ecommerce.html, retail.html, nonprofits.html with relevant label and description)
+13. CTA SECTION — full-width gradient bg (from accent-700 to accent-900), large headline, subhead, "Get started free" white button + "Talk to sales" ghost button
+14. FOOTER — max-w-6xl; logo + tagline; 4 columns: Products / Solutions / Company / Legal; bottom bar: "© 2025 HitPay Payment Solutions Pte Ltd · MAS Licensed Major Payment Institution · PCI DSS Level 1"
+
+## DESIGN SYSTEM
+- Accent color: provided by user as a Tailwind color name (e.g. "amber"). Use [accent]-600 for primary, [accent]-700 for hover, [accent]-100 for light backgrounds, [accent]-50 for hero bg tint.
+- Body bg: bg-white on sections, bg-slate-50 on alternating sections
+- Headings: text-slate-900, font-extrabold or font-bold
+- Body text: text-slate-600, leading-relaxed
+- Section padding: py-20 or py-24
+- Container: max-w-6xl mx-auto px-6
+- Cards: bg-white border border-slate-200 rounded-2xl shadow-sm
+- Buttons: rounded-xl px-6 py-3.5 font-semibold
+- Mock UIs: white card with shadow, dark screen (bg-slate-900 or bg-[accent]-900 text-white), realistic input fields, buttons, amounts — all Tailwind only
+
+## USP VISUAL EXAMPLES (build similar for the target industry)
+- Checkout mockup: white card, "You are paying $X", name/email fields, payment method icons as text badges, "Pay now" accent button
+- POS screen: dark bg, store name, today's orders count, payment method buttons (Scan to Pay / Tap to Pay / Cards), recent transaction list
+- Invoice card: white card, invoice number, bill-to name, line items table, total, "Pay invoice" button
+- QR placeholder: centered dashed border square with "Scan to Pay" text, amount below
+- Recurring plan cards: 3 plan tiers (trial/monthly/annual) with price and subscribe buttons
+
+## HITPAY CONTEXT
+${RESEARCH}
+
+## COPY GUIDELINES
+- Headline formulas: "The payment stack built for [industry]" / "[Verb] payments for [industry]" / "Get paid faster, run smarter"
+- Always include: MAS licensed trust signal, no monthly fees, fast setup
+- Use real stats from the research above
+- Pick the most relevant testimonial for the industry
+- Don't invent features or pricing not in the research`;
+
+// ─── UI Init ──────────────────────────────────────────────────────────────────
+
+function initChips() {
+  const container = document.getElementById('chipContainer');
+  CHIPS.forEach(chip => {
+    const el = document.createElement('button');
+    el.className = 'chip flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-400 text-slate-600';
+    el.dataset.color = chip.color;
+    el.dataset.context = chip.context;
+    el.innerHTML = `<span>${chip.emoji}</span><span>${chip.label}</span>`;
+    el.onclick = () => selectChip(el, chip);
+    container.appendChild(el);
+  });
+}
+
+function selectChip(el, chip) {
+  document.querySelectorAll('.chip').forEach(c => {
+    c.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
+    c.classList.add('bg-slate-50', 'text-slate-600', 'border-slate-200');
+  });
+  el.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
+  el.classList.remove('bg-slate-50', 'text-slate-600', 'border-slate-200');
+  document.getElementById('industryInput').value = chip.label;
+  document.getElementById('contextInput').value = chip.context;
+  selectColor(chip.color);
+}
+
+function initSwatches() {
+  const container = document.getElementById('swatchContainer');
+  SWATCHES.forEach(sw => {
+    const el = document.createElement('button');
+    el.className = 'swatch w-7 h-7 rounded-full border-2 border-white shadow-sm';
+    el.style.backgroundColor = sw.hex;
+    el.style.color = sw.hex;
+    el.title = sw.name;
+    el.dataset.value = sw.value;
+    el.dataset.name = sw.name;
+    el.onclick = () => selectColor(sw.value);
+    container.appendChild(el);
+  });
+  selectColor('amber');
+}
+
+function selectColor(value) {
+  selectedColor = value;
+  document.querySelectorAll('.swatch').forEach(s => {
+    if (s.dataset.value === value) {
+      s.style.outline = '3px solid white';
+      s.style.boxShadow = `0 0 0 5px ${s.style.backgroundColor}`;
+    } else {
+      s.style.outline = '';
+      s.style.boxShadow = '0 1px 3px rgba(0,0,0,0.15)';
+    }
+  });
+  const sw = SWATCHES.find(s => s.value === value);
+  if (sw) document.getElementById('colorLabel').textContent = sw.name;
+}
+
+function toggleApiKey() {
+  const input = document.getElementById('apiKeyInput');
+  const btn = event.target;
+  if (input.type === 'password') { input.type = 'text'; btn.textContent = 'Hide'; }
+  else { input.type = 'password'; btn.textContent = 'Show'; }
+}
+
+// Persist API key
+window.addEventListener('load', () => {
+  initChips();
+  initSwatches();
+  const saved = localStorage.getItem('hp_api_key');
+  if (saved) document.getElementById('apiKeyInput').value = saved;
+});
+
+// ─── Generator ────────────────────────────────────────────────────────────────
+
+function showInlineError(msg) {
+  document.getElementById('outputArea').classList.remove('hidden');
+  document.getElementById('generatingState').classList.add('hidden');
+  document.getElementById('doneState').classList.add('hidden');
+  document.getElementById('errorState').classList.remove('hidden');
+  document.getElementById('errorMsg').textContent = msg;
+}
+
+async function generatePage() {
+  const apiKey = document.getElementById('apiKeyInput').value.trim();
+  const industry = document.getElementById('industryInput').value.trim();
+  const context = document.getElementById('contextInput').value.trim();
+
+  if (!apiKey) { showInlineError('Please enter your Anthropic API key.'); return; }
+  if (!industry) { showInlineError('Please enter an industry or use case.'); return; }
+
+  localStorage.setItem('hp_api_key', apiKey);
+
+  const slug = industry.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  generatedFilename = `${slug}.html`;
+  generatedHTML = '';
+
+  // Update UI
+  document.getElementById('generateBtn').disabled = true;
+  document.getElementById('generateBtn').innerHTML = `
+    <svg class="spinner w-4 h-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/></svg>
+    Generating…`;
+
+  document.getElementById('outputArea').classList.remove('hidden');
+  document.getElementById('generatingState').classList.remove('hidden');
+  document.getElementById('doneState').classList.add('hidden');
+  document.getElementById('errorState').classList.add('hidden');
+  document.getElementById('streamPreview').textContent = '';
+  document.getElementById('genFilename').textContent = generatedFilename;
+  document.getElementById('charCount').textContent = '0 characters';
+  document.getElementById('genStatus').textContent = 'Generating…';
+
+  const userMessage = `Generate a complete landing page for HitPay targeting: ${industry}
+Accent color: ${selectedColor}
+${context ? `Additional context: ${context}` : ''}
+Filename will be: ${generatedFilename}`;
+
+  try {
+    // Use local proxy (avoids CORS). Run: node server.js
+    const apiUrl = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+      ? '/api/messages'
+      : 'https://api.anthropic.com/v1/messages';
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-client-side-usage': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 8000,
+        stream: true,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userMessage }],
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${response.status}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const event = JSON.parse(data);
+          if (event.type === 'content_block_delta' && event.delta?.type === 'text_delta') {
+            generatedHTML += event.delta.text;
+            const count = generatedHTML.length;
+            document.getElementById('charCount').textContent = `${count.toLocaleString()} characters`;
+            // Show last 300 chars of stream
+            const preview = generatedHTML.slice(-400);
+            document.getElementById('streamPreview').textContent = preview;
+          }
+        } catch (e) {}
+      }
+    }
+
+    // Strip any accidental markdown fences
+    generatedHTML = generatedHTML.trim();
+    if (generatedHTML.startsWith('```')) {
+      generatedHTML = generatedHTML.replace(/^```[a-z]*\n?/, '').replace(/\n?```$/, '').trim();
+    }
+
+    // Done
+    document.getElementById('generatingState').classList.add('hidden');
+    document.getElementById('doneState').classList.remove('hidden');
+    document.getElementById('finalCharCount').textContent = `${generatedHTML.length.toLocaleString()} chars`;
+    document.getElementById('saveFilename').textContent = generatedFilename;
+    addGeneratedCard(industry, generatedFilename, generatedHTML);
+
+  } catch (err) {
+    document.getElementById('generatingState').classList.add('hidden');
+    document.getElementById('errorState').classList.remove('hidden');
+    const isCors = err.message === 'Failed to fetch';
+    document.getElementById('errorMsg').textContent = isCors
+      ? 'Failed to fetch — run "node server.js" in the project folder and open http://localhost:3001 instead of the file directly.'
+      : err.message;
+  } finally {
+    document.getElementById('generateBtn').disabled = false;
+    document.getElementById('generateBtn').innerHTML = `
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Generate Landing Page`;
+  }
+}
+
+// ─── Output actions ───────────────────────────────────────────────────────────
+
+function downloadPage() {
+  const blob = new Blob([generatedHTML], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = generatedFilename;
+  a.click();
+}
+
+function previewPage() {
+  const blob = new Blob([generatedHTML], { type: 'text/html' });
+  window.open(URL.createObjectURL(blob), '_blank');
+}
+
+function copyHTML() {
+  navigator.clipboard.writeText(generatedHTML).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+function addGeneratedCard(industry, filename, html) {
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const color = selectedColor;
+  const card = document.createElement('a');
+  card.href = url;
+  card.target = '_blank';
+  card.className = `flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-${color}-400 hover:shadow-md transition-all group`;
+  card.innerHTML = `
+    <div class="w-12 h-12 bg-${color}-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">✨</div>
+    <div class="flex-1">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-900 group-hover:text-${color}-700">${industry}</span>
+        <span class="text-[10px] font-bold uppercase tracking-wider bg-${color}-100 text-${color}-700 px-2 py-0.5 rounded-full">Generated</span>
+      </div>
+      <div class="text-slate-500 text-sm mt-0.5">Preview only — download to save permanently</div>
+    </div>
+    <svg class="w-5 h-5 text-slate-400 group-hover:text-${color}-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+  document.getElementById('generatedCards').appendChild(card);
+}
+</script>
 </body>
 </html>
