@@ -1,0 +1,85 @@
+/* HitPay Brand Tokens — extracted from Orchid UI design system */
+
+:root {
+  --hp-logo-blue: #0E2859;
+  --hp-deep-blue: #002771;
+  --hp-action-blue: #2465DE;
+  --hp-action-blue-hover: #1B4FB8;
+  --hp-text-primary: #03102F;
+  --hp-text-secondary: #61667C;
+  --hp-beige: #F9F9F6;
+  --hp-success: #4DAB80;
+  --hp-blue-50: #EBF1FC;
+  --hp-blue-100: #D6E3F9;
+  --hp-gradient: linear-gradient(135deg, #002771 0%, #2465DE 100%);
+  --hp-shadow: 0px 3px 22px rgba(38, 42, 50, 0.09);
+}
+
+/* Font faces — Hauora (body) */
+@font-face {
+  font-family: 'Hauora';
+  src: url('fonts/Hauora-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hauora';
+  src: url('fonts/Hauora-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hauora';
+  src: url('fonts/Hauora-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hauora';
+  src: url('fonts/Hauora-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global typography */
+body {
+  font-family: 'Hauora', 'Manrope', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'IBM Plex Sans Condensed', 'Hauora', 'Manrope', sans-serif;
+}
+
+/* Shared component styles */
+.gradient-hero {
+  background: linear-gradient(135deg, var(--hp-blue-50) 0%, #ffffff 60%);
+}
+
+.gradient-cta {
+  background: var(--hp-gradient);
+}
+
+.feature-card {
+  transition: box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  box-shadow: var(--hp-shadow);
+}
+
+.payment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #334155;
+}

@@ -19,6 +19,7 @@ const MIME = {
   '.jpg':  'image/jpeg',
   '.svg':  'image/svg+xml',
   '.ico':  'image/x-icon',
+  '.woff2': 'font/woff2',
 };
 
 http.createServer((req, res) => {

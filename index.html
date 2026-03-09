@@ -6,9 +6,10 @@
   <title>HitPay Landing Pages</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
   <style>
-    body { font-family: 'Inter', sans-serif; }
     .chip { cursor: pointer; transition: all 0.15s; user-select: none; }
     .chip:hover { transform: translateY(-1px); }
     .chip.active { ring: 2px; }
@@ -25,89 +26,89 @@
     .output-pre { font-family: 'Menlo', 'Monaco', monospace; font-size: 11px; line-height: 1.5; }
   </style>
 </head>
-<body class="bg-slate-50 min-h-screen px-6 py-16">
+<body class="bg-[#F9F9F6] min-h-screen px-6 py-16">
 
   <div class="max-w-2xl mx-auto">
 
     <!-- Header -->
     <div class="text-center mb-10">
       <div class="flex items-center justify-center gap-2 mb-4">
-        <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
+        <div class="w-9 h-9 bg-[#2465DE] rounded-xl flex items-center justify-center">
           <span class="text-white font-bold">H</span>
         </div>
-        <span class="font-bold text-xl text-slate-900">HitPay</span>
+        <span class="font-bold text-xl text-[#03102F]">HitPay</span>
       </div>
-      <h1 class="text-3xl font-bold text-slate-900 mb-2">Landing Page Previews</h1>
+      <h1 class="text-3xl font-bold text-[#03102F] mb-2">Landing Page Previews</h1>
       <p class="text-slate-500">Internal review — please share feedback with the growth team</p>
     </div>
 
     <!-- Existing Pages -->
     <div id="pageList" class="space-y-3 mb-3">
-      <a href="ecommerce.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛒</div>
+      <a href="ecommerce.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛒</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 group-hover:text-indigo-700">E-commerce</div>
+          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">E-commerce</div>
           <div class="text-slate-500 text-sm mt-0.5">Online checkout, integrations, payment links, and subscriptions</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="retail.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-emerald-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🏪</div>
+      <a href="retail.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🏪</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 group-hover:text-emerald-700">Retail</div>
+          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Retail</div>
           <div class="text-slate-500 text-sm mt-0.5">POS system, Tap to Pay, card terminals, and omnichannel dashboard</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="nonprofits.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-violet-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💜</div>
+      <a href="nonprofits.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">💜</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 group-hover:text-violet-700">Nonprofits</div>
+          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Nonprofits</div>
           <div class="text-slate-500 text-sm mt-0.5">Donation pages, recurring giving, event QR codes, and grant invoicing</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-violet-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="landing.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🌏</div>
+      <a href="landing.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#EBF1FC] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🌏</div>
         <div class="flex-1">
-          <div class="font-semibold text-slate-900 group-hover:text-indigo-700">General (SEO/AEO)</div>
+          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">General (SEO/AEO)</div>
           <div class="text-slate-500 text-sm mt-0.5">Cross-channel overview — QR aggregation, cross-border payments, FAQ-optimised</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="landing-plaininspired.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-400 hover:shadow-md transition-all group">
+      <a href="landing-plaininspired.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
         <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">⚡</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-indigo-700">General v2 (Plain-inspired)</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">New</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">General v2 (Plain-inspired)</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Punchy copy, pain-first flow, "Speed meet power" comparison section</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="travel.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-sky-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">✈️</div>
+      <a href="travel.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">✈️</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-sky-700">Travel Agencies & Tour Operators</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">New</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Travel Agencies & Tour Operators</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Cross-border tourist payments, deposit invoicing, payment links, POS</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-sky-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
       <a href="education.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-blue-400 hover:shadow-md transition-all group">
         <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🎓</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-blue-700">Educational Services</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-blue-700">Educational Services</span>
             <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Recurring tuition billing, parent WhatsApp payment links, invoicing, online store</div>
@@ -119,55 +120,55 @@
         <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💻</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-slate-700">Computers, Peripherals & Software</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-slate-700">Computers, Peripherals & Software</span>
             <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Multi-location POS + inventory, BNPL for big-ticket items, B2B invoicing</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-slate-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#61667C] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="restaurants.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-amber-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🍜</div>
+      <a href="restaurants.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🍜</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-amber-700">Fast Food Restaurants & F&B</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">New</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Fast Food Restaurants & F&B</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">POS + Soundbox, 2% F&B card rate, cross-border tourist QR payments</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-amber-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="beauty.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-rose-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💆</div>
+      <a href="beauty.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">💆</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-rose-600">Health, Beauty & Spas</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-600 px-2 py-0.5 rounded-full">New</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Health, Beauty & Spas</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Monthly memberships, deposit collection via WhatsApp, package invoicing</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-rose-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="furniture.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-orange-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛋️</div>
+      <a href="furniture.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛋️</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-orange-600">Furniture & Home Furnishings</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">New</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Furniture & Home Furnishings</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">POS + inventory, BNPL for big-ticket items, B2B trade invoicing</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-orange-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
       <a href="fitness.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-green-400 hover:shadow-md transition-all group">
         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🏋️</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-green-600">Gyms & Fitness Studios</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-green-600">Gyms & Fitness Studios</span>
             <span class="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-600 px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Automated memberships, class pass payment links, POS at reception</div>
@@ -175,23 +176,23 @@
         <svg class="w-5 h-5 text-slate-400 group-hover:text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
-      <a href="events.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-purple-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🎪</div>
+      <a href="events.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🎪</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-purple-600">Event Management & Wedding Planning</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full">New</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Event Management & Wedding Planning</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">Milestone invoicing, deposit links via WhatsApp, online ticket sales</div>
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
 
       <a href="wholesale.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-blue-400 hover:shadow-md transition-all group">
         <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">📦</div>
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class="font-semibold text-slate-900 group-hover:text-blue-700">Wholesale & B2B Trade</span>
+            <span class="font-semibold text-[#03102F] group-hover:text-blue-700">Wholesale & B2B Trade</span>
             <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">New</span>
           </div>
           <div class="text-slate-500 text-sm mt-0.5">B2B invoicing, cross-border APAC collections, recurring supply contracts</div>
@@ -216,11 +217,11 @@
       <!-- Panel header -->
       <div class="px-6 pt-6 pb-4 border-b border-slate-100">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
+          <div class="w-8 h-8 bg-[#03102F] rounded-lg flex items-center justify-center">
             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <div>
-            <div class="font-semibold text-slate-900 text-sm">AI Page Generator</div>
+            <div class="font-semibold text-[#03102F] text-sm">AI Page Generator</div>
             <div class="text-xs text-slate-400">Powered by Claude · Uses RESEARCH.md context</div>
           </div>
         </div>
@@ -243,7 +244,7 @@
             id="industryInput"
             type="text"
             placeholder="e.g. Restaurants, Beauty & Wellness, SaaS, Freelancers…"
-            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors"
+            class="w-full bg-[#F9F9F6] border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#03102F] placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors"
           />
         </div>
 
@@ -256,8 +257,8 @@
           <textarea
             id="contextInput"
             rows="3"
-            placeholder="e.g. Focus on GrabPay and DuitNow for Malaysian merchants. Include UPI for Indian tourists. Highlight the 2% F&B rate."
-            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors resize-none"
+            placeholder="e.g. Focus on GrabPay and DuitNow for Malaysian partners. Include UPI for Indian tourists. Highlight the 2% F&B rate."
+            class="w-full bg-[#F9F9F6] border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#03102F] placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors resize-none"
           ></textarea>
         </div>
 
@@ -274,16 +275,16 @@
         <div>
           <div class="flex items-center justify-between mb-2">
             <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider" for="apiKeyInput">Anthropic API key</label>
-            <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-xs text-indigo-500 hover:text-indigo-700">Get key →</a>
+            <a href="https://console.anthropic.com/settings/keys" target="_blank" class="text-xs text-[#2465DE] hover:text-[#2465DE]">Get key →</a>
           </div>
           <div class="relative">
             <input
               id="apiKeyInput"
               type="password"
               placeholder="sk-ant-…"
-              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors pr-20"
+              class="w-full bg-[#F9F9F6] border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#03102F] placeholder-slate-400 focus:border-slate-400 focus:bg-white transition-colors pr-20"
             />
-            <button onclick="toggleApiKey()" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600 font-medium px-2 py-1">Show</button>
+            <button onclick="toggleApiKey()" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-[#61667C] font-medium px-2 py-1">Show</button>
           </div>
           <p class="text-xs text-slate-400 mt-1.5">Stored in your browser only. Never sent anywhere except Anthropic's API.</p>
         </div>
@@ -292,7 +293,7 @@
         <button
           id="generateBtn"
           onclick="generatePage()"
-          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
+          class="w-full bg-[#03102F] hover:bg-slate-800 text-white font-semibold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 text-sm"
         >
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           Generate Landing Page
@@ -314,7 +315,7 @@
               <div class="pulse-dot w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
             </div>
           </div>
-          <div class="bg-slate-50 rounded-xl p-4 h-28 overflow-hidden relative">
+          <div class="bg-[#F9F9F6] rounded-xl p-4 h-28 overflow-hidden relative">
             <pre class="output-pre text-slate-500 whitespace-pre-wrap" id="streamPreview"></pre>
             <div class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-slate-50 pointer-events-none"></div>
           </div>
@@ -327,14 +328,14 @@
         <!-- Done state -->
         <div id="doneState" class="hidden px-6 py-5">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <svg class="w-3 h-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm font-semibold text-slate-900">Page generated</span>
+            <span class="text-sm font-semibold text-[#03102F]">Page generated</span>
             <span class="text-xs text-slate-400 ml-auto" id="finalCharCount"></span>
           </div>
           <div class="flex gap-2">
-            <button onclick="downloadPage()" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+            <button onclick="downloadPage()" class="flex-1 bg-[#03102F] hover:bg-slate-800 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               Download HTML
             </button>
@@ -347,8 +348,8 @@
             </button>
           </div>
           <p class="text-xs text-slate-400 mt-3 text-center">
-            Save as <code id="saveFilename" class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-600"></code> in the project folder, then
-            <button onclick="window.location.reload()" class="text-indigo-500 hover:underline">refresh</button> to see it in the list.
+            Save as <code id="saveFilename" class="bg-slate-100 px-1.5 py-0.5 rounded text-[#61667C]"></code> in the project folder, then
+            <button onclick="window.location.reload()" class="text-[#2465DE] hover:underline">refresh</button> to see it in the list.
           </p>
         </div>
 
@@ -411,13 +412,13 @@ const RESEARCH = `
 Founded 2016, Singapore. Founders: Aditya Haripurkar (CEO), Nitin Muthyala. Backed by Y Combinator, Tiger Global, Global Founders Capital, HOF Capital. ~$21.3M raised. 15,000+ merchants. MAS Major Payment Institution licensed. PCI DSS Level 1 compliant. Available 25+ countries. Top fintech SG — Tech In Asia & Statista 2026. No setup fees, no monthly fees, no hidden fees. Only pay per transaction.
 
 ## KEY STATS (reuse across pages)
-- 15,000+ brands and merchants
+- 15,000+ brands and partners
 - 50+ payment methods
 - 150+ currencies
 - 700+ local APAC payment options
 - 12 APAC markets supported cross-border
 - 25+ countries via API
-- 9,000+ SG merchants integrated UPI
+- 9,000+ SG partners integrated UPI
 - MAS licensed, PCI DSS Level 1
 - Get set up in minutes
 
@@ -468,7 +469,7 @@ PayNow (≥S$100): 0.65% + S$0.30 | PayNow (<S$100): 0.65% + S$0.20
 GrabPay/ShopeePay: 3% | BNPL (Atome/GrabPay Later/ShopeePay Later): 5–5.5%
 Static QR: 0.4% | Payment Links surcharge: +0.2%
 Cross-border online: China 1.5% | India 2% | Philippines 1% or ₱20 | Indonesia 2% | Thailand 2.5%
-Custom pricing available for high-volume merchants.
+Custom pricing available for high-volume partners.
 
 ## TESTIMONIALS (pick the most relevant one per page)
 - Travel Agency: "HitPay POS has saved us lots of time and resources with daily automated reports and reconciliation. Our sales SOP is much more efficient now."
@@ -544,19 +545,20 @@ const SYSTEM_PROMPT = `You are a senior growth marketing engineer at HitPay. Gen
 - Use this exact head boilerplate:
   <script src="https://cdn.tailwindcss.com"><\/script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Inter', sans-serif; }</style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
 
 ## PAGE STRUCTURE (include all sections in this order)
 1. NAVBAR — fixed, bg-white/95 backdrop-blur, logo (H icon + HitPay), nav links (Products, Solutions, Pricing, Developers, Resources), right side: Sign in + accent-coloured "Get started" CTA
-2. HERO — pt-32 pb-20; grid 2-col lg; LEFT: badge pill (industry label), h1 (5xl-6xl font-extrabold, max 12 words), subhead (xl text-slate-600, 2 sentences), 2 CTAs ("Start for free" accent + "Contact sales" outlined), small trust line ("Free to sign up · No setup fees · Pay per transaction"); RIGHT: a div-based mock UI visual relevant to the industry (e.g. POS screen, invoice, checkout, QR payment — built entirely from Tailwind divs, no images, realistic-looking)
+2. HERO — pt-32 pb-20; grid 2-col lg; LEFT: badge pill (industry label), h1 (5xl-6xl font-medium, max 12 words), subhead (xl text-[#61667C], 2 sentences), 2 CTAs ("Start for free" accent + "Contact sales" outlined), small trust line ("Free to sign up · No setup fees · Pay per transaction"); RIGHT: a div-based mock UI visual relevant to the industry (e.g. POS screen, invoice, checkout, QR payment — built entirely from Tailwind divs, no images, realistic-looking)
 3. TRUST BAR — "Trusted by 15,000+ businesses" + payment method logos as inline text badges (pill style: border rounded-lg px-3 py-1.5 text-sm font-medium)
 4. INTRO/PROBLEM — 2-col: LEFT heading "Why [industry] businesses choose HitPay" + 3–4 pain-point bullets; RIGHT: clean feature summary box
 5. USP 1 — 2-col grid, visual LEFT / text RIGHT. Large section number, icon, headline, 2-sentence body, 3 bullet points with checkmarks
 6. USP 2 — 2-col grid, text LEFT / visual RIGHT (reversed)
 7. USP 3 — same as USP 1
 8. USP 4 — same as USP 2
-9. STATS — bg-slate-900 text-white section; 4 large stat numbers with labels (e.g. "15,000+" / "Merchants trust HitPay", "50+" / "Payment methods", "150+" / "Currencies supported", "0" / "Setup or monthly fees")
+9. STATS — bg-[#03102F] text-white section; 4 large stat numbers with labels (e.g. "15,000+" / "Merchants trust HitPay", "50+" / "Payment methods", "150+" / "Currencies supported", "0" / "Setup or monthly fees")
 10. TESTIMONIAL — centered, bg-white, large quote mark, quote text, merchant name + business type badge
 11. FEATURE GRID — "Everything you need" heading + 6 features in 3×2 grid (each: emoji icon + bold title + 1-sentence description)
 12. RELATED PAGES — "Explore more solutions" + 3 cards (e.g. link to ecommerce.html, retail.html, nonprofits.html with relevant label and description)
@@ -565,14 +567,14 @@ const SYSTEM_PROMPT = `You are a senior growth marketing engineer at HitPay. Gen
 
 ## DESIGN SYSTEM
 - Accent color: provided by user as a Tailwind color name (e.g. "amber"). Use [accent]-600 for primary, [accent]-700 for hover, [accent]-100 for light backgrounds, [accent]-50 for hero bg tint.
-- Body bg: bg-white on sections, bg-slate-50 on alternating sections
-- Headings: text-slate-900, font-extrabold or font-bold
-- Body text: text-slate-600, leading-relaxed
+- Body bg: bg-white on sections, bg-[#F9F9F6] on alternating sections
+- Headings: text-[#03102F], font-medium or font-bold
+- Body text: text-[#61667C], leading-relaxed
 - Section padding: py-20 or py-24
 - Container: max-w-6xl mx-auto px-6
 - Cards: bg-white border border-slate-200 rounded-2xl shadow-sm
 - Buttons: rounded-xl px-6 py-3.5 font-semibold
-- Mock UIs: white card with shadow, dark screen (bg-slate-900 or bg-[accent]-900 text-white), realistic input fields, buttons, amounts — all Tailwind only
+- Mock UIs: white card with shadow, dark screen (bg-[#03102F] or bg-[accent]-900 text-white), realistic input fields, buttons, amounts — all Tailwind only
 
 ## USP VISUAL EXAMPLES (build similar for the target industry)
 - Checkout mockup: white card, "You are paying $X", name/email fields, payment method icons as text badges, "Pay now" accent button
@@ -597,7 +599,7 @@ function initChips() {
   const container = document.getElementById('chipContainer');
   CHIPS.forEach(chip => {
     const el = document.createElement('button');
-    el.className = 'chip flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-400 text-slate-600';
+    el.className = 'chip flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200 bg-[#F9F9F6] hover:bg-white hover:border-slate-400 text-[#61667C]';
     el.dataset.color = chip.color;
     el.dataset.context = chip.context;
     el.innerHTML = `<span>${chip.emoji}</span><span>${chip.label}</span>`;
@@ -608,11 +610,11 @@ function initChips() {
 
 function selectChip(el, chip) {
   document.querySelectorAll('.chip').forEach(c => {
-    c.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
-    c.classList.add('bg-slate-50', 'text-slate-600', 'border-slate-200');
+    c.classList.remove('bg-[#03102F]', 'text-white', 'border-slate-900');
+    c.classList.add('bg-[#F9F9F6]', 'text-[#61667C]', 'border-slate-200');
   });
-  el.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
-  el.classList.remove('bg-slate-50', 'text-slate-600', 'border-slate-200');
+  el.classList.add('bg-[#03102F]', 'text-white', 'border-slate-900');
+  el.classList.remove('bg-[#F9F9F6]', 'text-[#61667C]', 'border-slate-200');
   document.getElementById('industryInput').value = chip.label;
   document.getElementById('contextInput').value = chip.context;
   selectColor(chip.color);
@@ -827,7 +829,7 @@ function addGeneratedCard(industry, filename, html) {
     <div class="w-12 h-12 bg-${color}-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">✨</div>
     <div class="flex-1">
       <div class="flex items-center gap-2">
-        <span class="font-semibold text-slate-900 group-hover:text-${color}-700">${industry}</span>
+        <span class="font-semibold text-[#03102F] group-hover:text-${color}-700">${industry}</span>
         <span class="text-[10px] font-bold uppercase tracking-wider bg-${color}-100 text-${color}-700 px-2 py-0.5 rounded-full">Generated</span>
       </div>
       <div class="text-slate-500 text-sm mt-0.5">Preview only — download to save permanently</div>

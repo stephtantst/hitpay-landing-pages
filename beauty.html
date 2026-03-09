@@ -6,15 +6,10 @@
   <title>HitPay for Health, Beauty & Spas — Run Your Bookings and Billing on Autopilot</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .gradient-hero { background: linear-gradient(135deg, #fff1f2 0%, #ffffff 60%); }
-    .gradient-cta { background: linear-gradient(135deg, #be123c 0%, #f43f5e 100%); }
-    .feature-card { transition: box-shadow 0.2s; }
-    .feature-card:hover { box-shadow: 0 8px 30px rgba(244,63,94,0.12); }
-    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,29 +29,26 @@
   }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-[#03102F]">
 
   <!-- Nav -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-8">
         <a href="index.html" class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-rose-500 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-sm">H</span>
-          </div>
-          <span class="font-bold text-lg text-slate-900">HitPay</span>
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-          <a href="#" class="hover:text-slate-900">Products</a>
-          <a href="#" class="hover:text-slate-900">Solutions</a>
-          <a href="#" class="hover:text-slate-900">Pricing</a>
-          <a href="#" class="hover:text-slate-900">Developers</a>
-          <a href="#" class="hover:text-slate-900">Resources</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="#" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#" class="hover:text-[#03102F]">Developers</a>
+          <a href="#" class="hover:text-[#03102F]">Resources</a>
         </nav>
       </div>
       <div class="flex items-center gap-3">
-        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
-        <a href="#" class="text-sm font-semibold bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600 transition-colors">Get started</a>
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="#" class="text-sm font-semibold bg-[#2465DE] text-white px-4 py-2 rounded-lg hover:bg-[#2465DE] transition-colors">Get started</a>
       </div>
     </div>
   </header>
@@ -66,18 +58,18 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 bg-rose-50 text-rose-600 text-sm font-medium px-4 py-2 rounded-full mb-6">
+          <div class="inline-flex items-center gap-2 bg-[#EBF1FC] text-[#2465DE] text-sm font-medium px-4 py-2 rounded-full mb-6">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             Health, Beauty & Spas
           </div>
-          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+          <h1 class="text-5xl lg:text-6xl font-medium text-[#03102F] leading-tight mb-6">
             Run your bookings and billing on autopilot
           </h1>
-          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
             Collect deposits via WhatsApp, automate monthly memberships, and get paid before appointments — so you can focus on your clients, not your cash flow.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="#" class="inline-flex items-center gap-2 bg-rose-500 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-rose-600 transition-colors text-base">
+            <a href="#" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#2465DE] transition-colors text-base">
               Start for free
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
@@ -92,35 +84,35 @@
           <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 w-80">
             <div class="text-sm font-semibold text-slate-700 mb-4">Monthly Membership Plans</div>
             <div class="space-y-3 mb-5">
-              <div class="border border-rose-400 bg-rose-50 rounded-xl p-4">
+              <div class="border border-[#2465DE] bg-[#EBF1FC] rounded-xl p-4">
                 <div class="flex justify-between items-center mb-2">
-                  <div class="font-semibold text-slate-900">Platinum Glow</div>
-                  <span class="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded font-medium">Best seller</span>
+                  <div class="font-semibold text-[#03102F]">Platinum Glow</div>
+                  <span class="text-xs bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded font-medium">Best seller</span>
                 </div>
-                <div class="text-slate-600 text-xs mb-2">4 facials + 2 massages + priority booking</div>
+                <div class="text-[#61667C] text-xs mb-2">4 facials + 2 massages + priority booking</div>
                 <div class="flex justify-between items-center">
-                  <span class="text-rose-600 font-bold text-lg">S$280/mo</span>
+                  <span class="text-[#2465DE] font-bold text-lg">S$280/mo</span>
                   <div class="text-xs text-slate-500">23 active</div>
                 </div>
               </div>
               <div class="border border-slate-200 rounded-xl p-4">
-                <div class="font-semibold text-slate-900 mb-1">Essential Care</div>
-                <div class="text-slate-600 text-xs mb-2">2 facials + 1 massage per month</div>
+                <div class="font-semibold text-[#03102F] mb-1">Essential Care</div>
+                <div class="text-[#61667C] text-xs mb-2">2 facials + 1 massage per month</div>
                 <div class="flex justify-between items-center">
                   <span class="font-bold text-slate-700">S$150/mo</span>
                   <div class="text-xs text-slate-500">41 active</div>
                 </div>
               </div>
             </div>
-            <div class="bg-rose-50 rounded-xl p-4">
+            <div class="bg-[#EBF1FC] rounded-xl p-4">
               <div class="flex justify-between items-center">
                 <div>
                   <div class="text-xs text-slate-500">Monthly recurring</div>
-                  <div class="text-2xl font-bold text-slate-900">S$12,590</div>
+                  <div class="text-2xl font-bold text-[#03102F]">S$12,590</div>
                 </div>
                 <div class="text-right">
                   <div class="text-xs text-slate-500">Members</div>
-                  <div class="text-2xl font-bold text-rose-500">64</div>
+                  <div class="text-2xl font-bold text-[#2465DE]">64</div>
                 </div>
               </div>
               <div class="text-xs text-green-600 mt-2">↑ 8 new members this month</div>
@@ -149,46 +141,46 @@
   <!-- Intro -->
   <section class="py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-slate-900 mb-5">Stop chasing payments. Start focusing on your clients.</h2>
-      <p class="text-xl text-slate-600 leading-relaxed">From aesthetic clinics to day spas to nail salons — HitPay automates deposits, membership billing, and invoice reminders so you spend less time on admin and more time delivering exceptional experiences.</p>
+      <h2 class="text-4xl font-bold text-[#03102F] mb-5">Stop chasing payments. Start focusing on your clients.</h2>
+      <p class="text-xl text-[#61667C] leading-relaxed">From aesthetic clinics to day spas to nail salons — HitPay automates deposits, membership billing, and invoice reminders so you spend less time on admin and more time delivering exceptional experiences.</p>
     </div>
   </section>
 
   <!-- USP 1: Recurring Billing -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="text-rose-500 font-semibold text-sm uppercase tracking-widest mb-4">Recurring Billing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Automate monthly memberships and prepaid packages</h2>
-          <p class="text-lg text-slate-600 mb-8">Selling monthly beauty packages or spa memberships? HitPay automatically charges members on their renewal date and sends them a receipt — no manual work, no missed renewals, no awkward conversations about unpaid fees.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Recurring Billing</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Automate monthly memberships and prepaid packages</h2>
+          <p class="text-lg text-[#61667C] mb-8">Selling monthly beauty packages or spa memberships? HitPay automatically charges members on their renewal date and sends them a receipt — no manual work, no missed renewals, no awkward conversations about unpaid fees.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Weekly, monthly, or custom billing cycles — you decide the schedule</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Clients can subscribe with a single click via shareable link</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Supports credit cards, GrabPay, Apple Pay, and GIRO</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Pause or cancel any membership anytime — full control</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-rose-500 font-semibold hover:text-rose-700 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#2465DE] text-sm">
             Learn about recurring billing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -199,35 +191,35 @@
               <div class="space-y-2">
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-slate-700">Platinum Glow Package</span>
-                  <span class="text-sm font-bold text-rose-500">S$280/mo</span>
+                  <span class="text-sm font-bold text-[#2465DE]">S$280/mo</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-slate-700">Essential Care</span>
-                  <span class="text-sm font-bold text-rose-500">S$150/mo</span>
+                  <span class="text-sm font-bold text-[#2465DE]">S$150/mo</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-slate-700">10-session Bundle</span>
-                  <span class="text-sm font-bold text-rose-500">S$480/once</span>
+                  <span class="text-sm font-bold text-[#2465DE]">S$480/once</span>
                 </div>
               </div>
             </div>
-            <div class="bg-white border border-rose-200 border-2 rounded-xl p-4 shadow-sm">
+            <div class="bg-white border border-[#D6E3F9] border-2 rounded-xl p-4 shadow-sm">
               <div class="flex items-center gap-2 mb-2">
                 <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                <span class="text-sm font-semibold text-slate-900">New member</span>
+                <span class="text-sm font-semibold text-[#03102F]">New member</span>
               </div>
               <div class="text-xs text-slate-500">Mei Xiu just subscribed to Platinum Glow</div>
-              <div class="text-xs text-rose-500 font-medium mt-1">S$280 · Renews monthly</div>
+              <div class="text-xs text-[#2465DE] font-medium mt-1">S$280 · Renews monthly</div>
             </div>
-            <div class="bg-slate-50 rounded-xl p-4">
+            <div class="bg-[#F9F9F6] rounded-xl p-4">
               <div class="flex justify-between">
                 <div>
                   <div class="text-xs text-slate-500">Active members</div>
-                  <div class="text-2xl font-bold text-slate-900">64</div>
+                  <div class="text-2xl font-bold text-[#03102F]">64</div>
                 </div>
                 <div class="text-right">
                   <div class="text-xs text-slate-500">Monthly recurring</div>
-                  <div class="text-xl font-bold text-rose-500">S$12,590</div>
+                  <div class="text-xl font-bold text-[#2465DE]">S$12,590</div>
                 </div>
               </div>
             </div>
@@ -243,24 +235,24 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="order-2 lg:order-1 flex justify-center">
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden w-72">
-            <div class="bg-rose-500 p-4">
-              <div class="text-rose-200 text-xs font-medium mb-1">hitpay.me/luminspa</div>
+            <div class="bg-[#2465DE] p-4">
+              <div class="text-blue-200 text-xs font-medium mb-1">hitpay.me/luminspa</div>
               <div class="text-white font-bold text-xl">Reserve your appointment</div>
-              <div class="text-rose-200 text-sm mt-1">Hydra Facial · 90 min</div>
+              <div class="text-blue-200 text-sm mt-1">Hydra Facial · 90 min</div>
             </div>
             <div class="p-4">
-              <div class="bg-rose-50 rounded-xl p-3 mb-4">
+              <div class="bg-[#EBF1FC] rounded-xl p-3 mb-4">
                 <div class="flex justify-between text-sm">
-                  <span class="text-slate-600">Hydra Facial (90 min)</span>
-                  <span class="font-bold text-slate-900">S$180</span>
+                  <span class="text-[#61667C]">Hydra Facial (90 min)</span>
+                  <span class="font-bold text-[#03102F]">S$180</span>
                 </div>
                 <div class="flex justify-between text-sm mt-1">
-                  <span class="text-rose-600 font-medium">Deposit (50%) to confirm</span>
-                  <span class="font-bold text-rose-600">S$90</span>
+                  <span class="text-[#2465DE] font-medium">Deposit (50%) to confirm</span>
+                  <span class="font-bold text-[#2465DE]">S$90</span>
                 </div>
               </div>
               <div class="text-slate-500 text-xs mb-3">Balance of S$90 payable at your appointment. Deposit non-refundable for no-shows.</div>
-              <div class="bg-rose-500 rounded-lg py-3 text-center text-white text-sm font-semibold">Pay S$90 Deposit — Confirm Booking</div>
+              <div class="bg-[#2465DE] rounded-lg py-3 text-center text-white text-sm font-semibold">Pay S$90 Deposit — Confirm Booking</div>
               <div class="flex justify-center gap-2 mt-3">
                 <span class="payment-badge text-xs">PayNow</span>
                 <span class="payment-badge text-xs">Card</span>
@@ -270,36 +262,36 @@
           </div>
         </div>
         <div class="order-1 lg:order-2">
-          <div class="text-rose-500 font-semibold text-sm uppercase tracking-widest mb-4">Payment Links</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Collect deposits upfront via WhatsApp and Instagram — eliminate no-shows</h2>
-          <p class="text-lg text-slate-600 mb-8">Require a deposit to confirm every appointment. Send a secure payment link via WhatsApp or Instagram DM and clients pay in seconds — protecting your schedule and your revenue from last-minute cancellations.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Payment Links</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Collect deposits upfront via WhatsApp and Instagram — eliminate no-shows</h2>
+          <p class="text-lg text-[#61667C] mb-8">Require a deposit to confirm every appointment. Send a secure payment link via WhatsApp or Instagram DM and clients pay in seconds — protecting your schedule and your revenue from last-minute cancellations.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Generate a deposit link in under 60 seconds — no website needed</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Shareable via WhatsApp, Instagram DM, email, or link-in-bio</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Instant payment confirmation — you're notified the moment they pay</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Set fixed deposit amount or allow client to choose — flexible</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-rose-500 font-semibold hover:text-rose-700 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#2465DE] text-sm">
             Try payment links <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -308,40 +300,40 @@
   </section>
 
   <!-- USP 3: Invoicing -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="text-rose-500 font-semibold text-sm uppercase tracking-widest mb-4">Invoicing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Professional invoices for treatment packages — with automated reminders</h2>
-          <p class="text-lg text-slate-600 mb-8">Selling multi-session treatment packages or wellness programmes? Send a professional invoice, let clients pay a deposit now and the balance later, and let HitPay chase them automatically with reminders.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Invoicing</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Professional invoices for treatment packages — with automated reminders</h2>
+          <p class="text-lg text-[#61667C] mb-8">Selling multi-session treatment packages or wellness programmes? Send a professional invoice, let clients pay a deposit now and the balance later, and let HitPay chase them automatically with reminders.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Partial payments — deposit first, balance at next session</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Auto-send reminders before due dates — no awkward follow-up calls</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Add discounts, GST, and custom notes — fully professional</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Free to use — no extra invoicing fee, part of your HitPay account</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-rose-500 font-semibold hover:text-rose-700 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#2465DE] text-sm">
             Learn about invoicing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -349,18 +341,18 @@
           <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 w-72">
             <div class="flex justify-between items-start mb-4">
               <div>
-                <div class="font-bold text-slate-900">Lumin Spa & Aesthetic</div>
+                <div class="font-bold text-[#03102F]">Lumin Spa & Aesthetic</div>
                 <div class="text-xs text-slate-500 mt-0.5">INVOICE · INV-2025-0218</div>
               </div>
-              <span class="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded font-medium">Partial paid</span>
+              <span class="text-xs bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded font-medium">Partial paid</span>
             </div>
             <div class="border-t border-slate-100 pt-3 space-y-2 mb-3">
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">10× Hydra Facial Session (package)</span>
+                <span class="text-[#61667C]">10× Hydra Facial Session (package)</span>
                 <span class="font-medium">S$1,500</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Collagen add-on (×10)</span>
+                <span class="text-[#61667C]">Collagen add-on (×10)</span>
                 <span class="font-medium">S$300</span>
               </div>
               <div class="flex justify-between text-sm text-green-600">
@@ -368,11 +360,11 @@
                 <span>−S$900</span>
               </div>
             </div>
-            <div class="flex justify-between font-bold text-slate-900 border-t border-slate-200 pt-3 mb-4">
+            <div class="flex justify-between font-bold text-[#03102F] border-t border-slate-200 pt-3 mb-4">
               <span>Balance due</span>
               <span>S$900.00</span>
             </div>
-            <div class="bg-rose-500 rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay balance S$900</div>
+            <div class="bg-[#2465DE] rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay balance S$900</div>
             <div class="mt-2 text-center text-xs text-slate-400">Reminder sent automatically on due date</div>
           </div>
         </div>
@@ -388,30 +380,30 @@
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72">
             <div class="text-sm font-semibold text-slate-700 mb-4">Booking + Payment — One Flow</div>
             <div class="space-y-3">
-              <div class="flex items-center gap-3 p-3 bg-rose-50 rounded-xl border border-rose-200">
-                <div class="w-8 h-8 bg-rose-100 rounded-lg flex items-center justify-center text-rose-600 font-bold text-sm flex-shrink-0">1</div>
+              <div class="flex items-center gap-3 p-3 bg-[#EBF1FC] rounded-xl border border-[#D6E3F9]">
+                <div class="w-8 h-8 bg-[#D6E3F9] rounded-lg flex items-center justify-center text-[#2465DE] font-bold text-sm flex-shrink-0">1</div>
                 <div>
-                  <div class="text-sm font-medium text-slate-900">Client books on SimplyBook</div>
+                  <div class="text-sm font-medium text-[#03102F]">Client books on SimplyBook</div>
                   <div class="text-xs text-slate-500">Chooses service + time slot</div>
                 </div>
               </div>
-              <div class="flex items-center gap-2 justify-center text-rose-300">
+              <div class="flex items-center gap-2 justify-center text-blue-300">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
               </div>
-              <div class="flex items-center gap-3 p-3 bg-rose-50 rounded-xl border border-rose-200">
-                <div class="w-8 h-8 bg-rose-100 rounded-lg flex items-center justify-center text-rose-600 font-bold text-sm flex-shrink-0">2</div>
+              <div class="flex items-center gap-3 p-3 bg-[#EBF1FC] rounded-xl border border-[#D6E3F9]">
+                <div class="w-8 h-8 bg-[#D6E3F9] rounded-lg flex items-center justify-center text-[#2465DE] font-bold text-sm flex-shrink-0">2</div>
                 <div>
-                  <div class="text-sm font-medium text-slate-900">HitPay deposit link sent</div>
+                  <div class="text-sm font-medium text-[#03102F]">HitPay deposit link sent</div>
                   <div class="text-xs text-slate-500">Auto-triggered via Zapier</div>
                 </div>
               </div>
-              <div class="flex items-center gap-2 justify-center text-rose-300">
+              <div class="flex items-center gap-2 justify-center text-blue-300">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
               </div>
               <div class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200">
                 <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center text-green-600 font-bold text-sm flex-shrink-0">3</div>
                 <div>
-                  <div class="text-sm font-medium text-slate-900">Booking confirmed ✓</div>
+                  <div class="text-sm font-medium text-[#03102F]">Booking confirmed ✓</div>
                   <div class="text-xs text-slate-500">Only after deposit is paid</div>
                 </div>
               </div>
@@ -419,30 +411,30 @@
           </div>
         </div>
         <div>
-          <div class="text-rose-500 font-semibold text-sm uppercase tracking-widest mb-4">Integrations</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Connect your booking system to HitPay — payments flow automatically</h2>
-          <p class="text-lg text-slate-600 mb-8">Already using SimplyBook.me or Cal.com? Connect them to HitPay via Zapier and payment links are sent automatically after booking — you never need to manually request a deposit again.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Integrations</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Connect your booking system to HitPay — payments flow automatically</h2>
+          <p class="text-lg text-[#61667C] mb-8">Already using SimplyBook.me or Cal.com? Connect them to HitPay via Zapier and payment links are sent automatically after booking — you never need to manually request a deposit again.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">SimplyBook.me + Cal.com integrations via Zapier</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Connect to Xero or QuickBooks — auto-sync every payment</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Google Forms → HitPay — collect client intake forms with payment</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-rose-500 font-semibold hover:text-rose-700 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#2465DE] text-sm">
             Explore all integrations <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -451,24 +443,24 @@
   </section>
 
   <!-- Stats -->
-  <section class="py-16 bg-rose-700">
+  <section class="py-16 bg-[#1B4FB8]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">15,000+</div>
-          <div class="text-rose-200 text-sm">Merchants on HitPay</div>
+          <div class="text-4xl font-medium text-white mb-2">15,000+</div>
+          <div class="text-blue-200 text-sm">Merchants on HitPay</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">50+</div>
-          <div class="text-rose-200 text-sm">Payment methods</div>
+          <div class="text-4xl font-medium text-white mb-2">50+</div>
+          <div class="text-blue-200 text-sm">Payment methods</div>
         </div>
-        <div class="text-4xl font-extrabold text-white mb-2 text-center">
+        <div class="text-4xl font-medium text-white mb-2 text-center">
           <div>$0</div>
-          <div class="text-rose-200 text-sm text-base font-normal">Monthly fees</div>
+          <div class="text-blue-200 text-sm text-base font-normal">Monthly fees</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">T+1</div>
-          <div class="text-rose-200 text-sm">Business day payouts</div>
+          <div class="text-4xl font-medium text-white mb-2">T+1</div>
+          <div class="text-blue-200 text-sm">Business day payouts</div>
         </div>
       </div>
     </div>
@@ -477,12 +469,12 @@
   <!-- Testimonial -->
   <section class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <svg class="w-10 h-10 text-rose-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+      <svg class="w-10 h-10 text-blue-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
       <p class="text-2xl text-slate-800 font-medium leading-relaxed mb-8">"We have been using HitPay as the payment processor for our website, and we've been thoroughly impressed with their service. Not only is the platform reliable, but their customer support is excellent. It just works — every time."</p>
       <div class="flex items-center justify-center gap-4">
-        <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center text-rose-600 font-bold">ST</div>
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-full flex items-center justify-center text-[#2465DE] font-bold">ST</div>
         <div class="text-left">
-          <div class="font-semibold text-slate-900">The Senses Therapy</div>
+          <div class="font-semibold text-[#03102F]">The Senses Therapy</div>
           <div class="text-slate-500 text-sm">Wellness & Spa — Singapore</div>
         </div>
       </div>
@@ -490,54 +482,54 @@
   </section>
 
   <!-- Feature grid -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Built for every health, beauty & wellness business</h2>
-        <p class="text-slate-600 max-w-xl mx-auto">Hair salons, aesthetic clinics, nail studios, day spas, physiotherapy, yoga studios, personal trainers, and more.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Built for every health, beauty & wellness business</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">Hair salons, aesthetic clinics, nail studios, day spas, physiotherapy, yoga studios, personal trainers, and more.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">In-salon card terminal</h3>
-          <p class="text-slate-600 text-sm">Accept tap, chip, and contactless payments at the counter. No rental fees — buy once, pay per transaction.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">In-salon card terminal</h3>
+          <p class="text-[#61667C] text-sm">Accept tap, chip, and contactless payments at the counter. No rental fees — buy once, pay per transaction.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Auto-retry failed payments</h3>
-          <p class="text-slate-600 text-sm">If a membership renewal fails, HitPay retries automatically — no awkward calls needed.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Auto-retry failed payments</h3>
+          <p class="text-[#61667C] text-sm">If a membership renewal fails, HitPay retries automatically — no awkward calls needed.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Client self-serve portal</h3>
-          <p class="text-slate-600 text-sm">Clients can update card details, view payment history, and manage their membership — without calling you.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Client self-serve portal</h3>
+          <p class="text-[#61667C] text-sm">Clients can update card details, view payment history, and manage their membership — without calling you.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">MAS licensed & PCI DSS</h3>
-          <p class="text-slate-600 text-sm">Regulated by MAS as a Major Payment Institution. PCI DSS Level 1 compliant. Your clients' data is always protected.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">MAS licensed & PCI DSS</h3>
+          <p class="text-[#61667C] text-sm">Regulated by MAS as a Major Payment Institution. PCI DSS Level 1 compliant. Your clients' data is always protected.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Next-day payouts</h3>
-          <p class="text-slate-600 text-sm">Get every payment settled the next business day. Predictable cash flow for your salon or clinic.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Next-day payouts</h3>
+          <p class="text-[#61667C] text-sm">Get every payment settled the next business day. Predictable cash flow for your salon or clinic.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Branded checkout experience</h3>
-          <p class="text-slate-600 text-sm">Personalise your checkout and payment links with your logo, brand colours, and business name.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Branded checkout experience</h3>
+          <p class="text-[#61667C] text-sm">Personalise your checkout and payment links with your logo, brand colours, and business name.</p>
         </div>
       </div>
     </div>
@@ -546,126 +538,126 @@
   <!-- Related -->
   <section class="py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <h2 class="text-2xl font-bold text-[#03102F] mb-8">Explore more solutions</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <a href="education.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+        <a href="education.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">🎓</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-rose-500">Education</div>
-          <div class="text-slate-600 text-sm">Collect tuition fees and automate reminders for enrichment centres.</div>
-          <div class="mt-4 text-rose-500 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Education</div>
+          <div class="text-[#61667C] text-sm">Collect tuition fees and automate reminders for enrichment centres.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
-        <a href="nonprofits.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+        <a href="nonprofits.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">💜</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-rose-500">Nonprofits</div>
-          <div class="text-slate-600 text-sm">Accept donations and manage recurring giving for charities.</div>
-          <div class="mt-4 text-rose-500 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Nonprofits</div>
+          <div class="text-[#61667C] text-sm">Accept donations and manage recurring giving for charities.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
-        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-rose-300 hover:shadow-md transition-all">
+        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">🏪</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-rose-500">Retail</div>
-          <div class="text-slate-600 text-sm">Sell beauty products in-store and online with unified POS.</div>
-          <div class="mt-4 text-rose-500 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Retail</div>
+          <div class="text-[#61667C] text-sm">Sell beauty products in-store and online with unified POS.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Frequently asked questions</h2>
-        <p class="text-slate-600">Everything beauty salons, spas, and wellness businesses need to know about HitPay.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Frequently asked questions</h2>
+        <p class="text-[#61667C]">Everything beauty salons, spas, and wellness businesses need to know about HitPay.</p>
       </div>
       <div class="space-y-3">
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How can beauty salons and spas collect deposits to reduce no-shows?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How can beauty salons and spas collect deposits to reduce no-shows?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">With HitPay Payment Links, you create a deposit link — for example, 50% of the treatment price — and share it via WhatsApp or Instagram DM when a client books. They pay the deposit within minutes to confirm their appointment. No deposit, no confirmed slot. This dramatically reduces no-shows because clients have financial skin in the game.</p>
+            <p class="text-[#61667C] leading-relaxed">With HitPay Payment Links, you create a deposit link — for example, 50% of the treatment price — and share it via WhatsApp or Instagram DM when a client books. They pay the deposit within minutes to confirm their appointment. No deposit, no confirmed slot. This dramatically reduces no-shows because clients have financial skin in the game.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay support recurring monthly billing for spa memberships?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay support recurring monthly billing for spa memberships?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's Recurring Billing lets you create membership plans — for example, S$150/month for 2 facials — and clients subscribe with a single click via a shareable link. HitPay charges them automatically each month, retries failed payments with smart dunning, and sends receipts automatically. No manual intervention needed.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's Recurring Billing lets you create membership plans — for example, S$150/month for 2 facials — and clients subscribe with a single click via a shareable link. HitPay charges them automatically each month, retries failed payments with smart dunning, and sends receipts automatically. No manual intervention needed.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can HitPay integrate with SimplyBook.me or Cal.com booking systems?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can HitPay integrate with SimplyBook.me or Cal.com booking systems?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. You can connect HitPay to SimplyBook.me or Cal.com via Zapier. When a client makes a booking, Zapier automatically triggers a HitPay deposit payment link to be sent — creating a seamless book-and-pay flow without any manual step. The booking is only confirmed once the deposit is received.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. You can connect HitPay to SimplyBook.me or Cal.com via Zapier. When a client makes a booking, Zapier automatically triggers a HitPay deposit payment link to be sent — creating a seamless book-and-pay flow without any manual step. The booking is only confirmed once the deposit is received.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">What payment methods can beauty and wellness clients use?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What payment methods can beauty and wellness clients use?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay supports PayNow, Visa/Mastercard, GrabPay, Apple Pay, Google Pay, Atome (interest-free BNPL), and Alipay+. For in-salon payments, HitPay's card terminal accepts contactless, chip, and magnetic stripe payments. Offering multiple payment methods improves client convenience and reduces friction at checkout.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay supports PayNow, Visa/Mastercard, GrabPay, Apple Pay, Google Pay, Atome (interest-free BNPL), and Alipay+. For in-salon payments, HitPay's card terminal accepts contactless, chip, and magnetic stripe payments. Offering multiple payment methods improves client convenience and reduces friction at checkout.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Is HitPay suitable for solo beauty therapists or home-based salons?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Is HitPay suitable for solo beauty therapists or home-based salons?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay has no monthly fees and no minimum transaction volume. Solo therapists working from home or renting a chair can use HitPay's free Payment Links to collect deposits via WhatsApp — no website, no POS terminal, and no upfront cost required. You only pay a small per-transaction fee when you collect a payment.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay has no monthly fees and no minimum transaction volume. Solo therapists working from home or renting a chair can use HitPay's free Payment Links to collect deposits via WhatsApp — no website, no POS terminal, and no upfront cost required. You only pay a small per-transaction fee when you collect a payment.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">I currently collect deposits via manual PayNow — how is HitPay different?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">I currently collect deposits via manual PayNow — how is HitPay different?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Manual PayNow requires you to share your UEN, wait for the transfer, check your banking app to confirm the right amount landed, then manually update your booking records. HitPay automates the entire flow: the client pays via a branded payment link, you receive an instant push notification with their name and amount, and the payment is logged in your dashboard automatically. It saves 10–15 minutes per booking and eliminates reconciliation errors at month-end.</p>
+            <p class="text-[#61667C] leading-relaxed">Manual PayNow requires you to share your UEN, wait for the transfer, check your banking app to confirm the right amount landed, then manually update your booking records. HitPay automates the entire flow: the client pays via a branded payment link, you receive an instant push notification with their name and amount, and the payment is logged in your dashboard automatically. It saves 10–15 minutes per booking and eliminates reconciliation errors at month-end.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I collect a booking deposit before the client has even visited my salon for the first time?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I collect a booking deposit before the client has even visited my salon for the first time?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes — this is one of the most popular use cases. You create a deposit payment link and send it via WhatsApp the moment a new client enquires. They pay online from home before their first appointment, which filters out low-commitment enquiries and ensures every slot on your calendar represents a financially committed client. New client no-shows are virtually eliminated when a deposit is required upfront.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes — this is one of the most popular use cases. You create a deposit payment link and send it via WhatsApp the moment a new client enquires. They pay online from home before their first appointment, which filters out low-commitment enquiries and ensures every slot on your calendar represents a financially committed client. New client no-shows are virtually eliminated when a deposit is required upfront.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay charge extra for the recurring billing or membership feature?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay charge extra for the recurring billing or membership feature?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">No. Recurring billing is included in your HitPay account at no additional monthly fee. You create membership plans, share the sign-up link, and HitPay handles all billing automatically. You only pay the standard per-transaction fee when a membership charge is processed — 2.5% + S$0.30 for card, or 0.4% for PayNow. Compare this to dedicated membership platforms that charge S$50–150/month before any member subscribes.</p>
+            <p class="text-[#61667C] leading-relaxed">No. Recurring billing is included in your HitPay account at no additional monthly fee. You create membership plans, share the sign-up link, and HitPay handles all billing automatically. You only pay the standard per-transaction fee when a membership charge is processed — 2.5% + S$0.30 for card, or 0.4% for PayNow. Compare this to dedicated membership platforms that charge S$50–150/month before any member subscribes.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I brand my payment links with my salon's logo and name?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I brand my payment links with my salon's logo and name?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay lets you customise your payment page with your business name, logo, and brand colour. When clients open your payment link, they see a professional page with your salon's branding — not a generic payment portal. Your payment URL can also be a memorable custom link like hitpay.me/luminspa. This builds trust and reinforces your brand identity throughout the payment experience, which matters especially for premium wellness and aesthetic businesses.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay lets you customise your payment page with your business name, logo, and brand colour. When clients open your payment link, they see a professional page with your salon's branding — not a generic payment portal. Your payment URL can also be a memorable custom link like hitpay.me/luminspa. This builds trust and reinforces your brand identity throughout the payment experience, which matters especially for premium wellness and aesthetic businesses.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How do I issue a refund for a cancelled spa appointment through HitPay?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do I issue a refund for a cancelled spa appointment through HitPay?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">In your HitPay dashboard, locate the transaction and click Refund. You can issue a full refund or a partial refund — for example, returning 50% if the client cancels within your cancellation window while retaining the other 50% as a no-show fee. Card payment refunds typically take 5–10 business days. PayNow refunds are usually instant. Your refund policy is entirely your decision — HitPay simply executes what you initiate.</p>
+            <p class="text-[#61667C] leading-relaxed">In your HitPay dashboard, locate the transaction and click Refund. You can issue a full refund or a partial refund — for example, returning 50% if the client cancels within your cancellation window while retaining the other 50% as a no-show fee. Card payment refunds typically take 5–10 business days. PayNow refunds are usually instant. Your refund policy is entirely your decision — HitPay simply executes what you initiate.</p>
           </div>
         </details>
       </div>
@@ -675,23 +667,22 @@
   <!-- CTA -->
   <section class="py-20 gradient-cta">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-white mb-5">Ready to put your billing on autopilot?</h2>
-      <p class="text-rose-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
+      <h2 class="text-4xl font-medium text-white mb-5">Ready to put your billing on autopilot?</h2>
+      <p class="text-blue-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="#" class="bg-white text-rose-700 font-semibold px-8 py-4 rounded-xl hover:bg-rose-50 transition-colors text-base">Start for free</a>
+        <a href="#" class="bg-white text-[#2465DE] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Start for free</a>
         <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-12">
+  <footer class="bg-[#03102F] text-slate-400 py-12">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 mb-12">
         <div class="md:col-span-2">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-7 h-7 bg-rose-500 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">H</span></div>
-            <span class="font-bold text-white">HitPay</span>
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
           </div>
           <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
         </div>
@@ -709,8 +700,8 @@
         </div>
       </div>
       <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
-        <div class="flex gap-6 text-sm text-slate-600">
+        <div class="text-sm text-[#61667C]">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
           <a href="#" class="hover:text-slate-400">Privacy</a>
           <a href="#" class="hover:text-slate-400">Terms</a>
           <a href="#" class="hover:text-slate-400">Security</a>

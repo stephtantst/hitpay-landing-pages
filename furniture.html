@@ -6,15 +6,10 @@
   <title>HitPay for Furniture, Home Furnishings & Equipment Stores</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .gradient-hero { background: linear-gradient(135deg, #fff7ed 0%, #ffffff 60%); }
-    .gradient-cta { background: linear-gradient(135deg, #9a3412 0%, #ea580c 100%); }
-    .feature-card { transition: box-shadow 0.2s; }
-    .feature-card:hover { box-shadow: 0 8px 30px rgba(234,88,12,0.12); }
-    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,7 +19,7 @@
       {"@type":"Question","name":"Can furniture showrooms use HitPay for both walk-in customers and online orders?","acceptedAnswer":{"@type":"Answer","text":"Yes. HitPay's POS system handles in-showroom sales while the HitPay Online Store lets customers browse and purchase from home. Inventory syncs automatically across both channels so you always have accurate stock levels. Multi-location showrooms can also manage separate inventory per location from the same dashboard."}},
       {"@type":"Question","name":"How can I invoice interior design firms and contractors for trade orders?","acceptedAnswer":{"@type":"Answer","text":"HitPay Invoicing supports B2B trade invoices with GST calculation, trade discounts, and partial payment terms — such as 50% deposit upfront and balance upon delivery. Designers and contractors receive a professional GST-compliant invoice with a one-click payment button. Automatic reminders are sent before the due date so you don't need to follow up manually."}},
       {"@type":"Question","name":"Does HitPay track inventory across multiple showroom locations?","acceptedAnswer":{"@type":"Answer","text":"Yes. HitPay's inventory management supports multiple locations. You can track stock levels per SKU at each showroom and manage transfers between branches from the same dashboard. Sales at any location automatically deduct from the correct location's inventory in real time."}},
-      {"@type":"Question","name":"What are HitPay's fees for furniture retailers?","acceptedAnswer":{"@type":"Answer","text":"HitPay charges 2.5% + S$0.30 for Visa/Mastercard, 0.4% for PayNow, and varying rates for Atome and GrabPay Later BNPL. There are no monthly platform fees and no setup costs — you only pay when a customer completes a purchase. For high-volume merchants, custom rates may be available through the sales team."}},
+      {"@type":"Question","name":"What are HitPay's fees for furniture retailers?","acceptedAnswer":{"@type":"Answer","text":"HitPay charges 2.5% + S$0.30 for Visa/Mastercard, 0.4% for PayNow, and varying rates for Atome and GrabPay Later BNPL. There are no monthly platform fees and no setup costs — you only pay when a customer completes a purchase. For high-volume partners, custom rates may be available through the sales team."}},
       {"@type":"Question","name":"My customers keep asking for instalment payments — how do I set up BNPL at my furniture store?","acceptedAnswer":{"@type":"Answer","text":"Once your HitPay account is active, Atome and GrabPay Later appear automatically as payment options at your POS and online store — no additional integration required. Customers choose to split into 3 interest-free instalments at checkout and you receive the full amount upfront from the BNPL provider. Setup takes minutes, not weeks. Furniture retailers that add BNPL typically see a measurable increase in average basket size."}},
       {"@type":"Question","name":"Can I use HitPay to accept payments at a trade show, pop-up event, or showroom roadshow?","acceptedAnswer":{"@type":"Answer","text":"Yes. HitPay's card terminal and Soundbox are portable — bring the device and your phone. At a trade show, you can accept card tap, PayNow QR, and generate a payment link on your phone for customers who want to pay a deposit on the spot. The Soundbox operates on its own SIM card so no Wi-Fi router is needed at the venue. This makes HitPay ideal for mega sales events, residential showroom launches, and outdoor pop-ups."}},
       {"@type":"Question","name":"I sell to both retail walk-in customers and interior design trade accounts — can one HitPay account handle both?","acceptedAnswer":{"@type":"Answer","text":"Yes. One HitPay account handles both customer types. For retail walk-ins, use POS or the payment link with standard retail pricing. For trade accounts, use HitPay Invoicing with trade-specific pricing — custom line items, percentage trade discounts, and partial payment terms. All revenue from both customer types is tracked in a unified dashboard."}},
@@ -34,29 +29,26 @@
   }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-[#03102F]">
 
   <!-- Nav -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-8">
         <a href="index.html" class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-sm">H</span>
-          </div>
-          <span class="font-bold text-lg text-slate-900">HitPay</span>
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-          <a href="#" class="hover:text-slate-900">Products</a>
-          <a href="#" class="hover:text-slate-900">Solutions</a>
-          <a href="#" class="hover:text-slate-900">Pricing</a>
-          <a href="#" class="hover:text-slate-900">Developers</a>
-          <a href="#" class="hover:text-slate-900">Resources</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="#" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#" class="hover:text-[#03102F]">Developers</a>
+          <a href="#" class="hover:text-[#03102F]">Resources</a>
         </nav>
       </div>
       <div class="flex items-center gap-3">
-        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
-        <a href="#" class="text-sm font-semibold bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">Get started</a>
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="#" class="text-sm font-semibold bg-[#2465DE] text-white px-4 py-2 rounded-lg hover:bg-[#1B4FB8] transition-colors">Get started</a>
       </div>
     </div>
   </header>
@@ -66,18 +58,18 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 bg-orange-50 text-orange-700 text-sm font-medium px-4 py-2 rounded-full mb-6">
+          <div class="inline-flex items-center gap-2 bg-[#EBF1FC] text-[#2465DE] text-sm font-medium px-4 py-2 rounded-full mb-6">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             Furniture & Home Furnishings
           </div>
-          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+          <h1 class="text-5xl lg:text-6xl font-medium text-[#03102F] leading-tight mb-6">
             Payments built for high-value home and furniture retail
           </h1>
-          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
             Sell in-store and online, offer BNPL for big-ticket items, manage B2B trade orders, and sync inventory across all outlets — with zero monthly fees.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="#" class="inline-flex items-center gap-2 bg-orange-600 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-orange-700 transition-colors text-base">
+            <a href="#" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#1B4FB8] transition-colors text-base">
               Start for free
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
@@ -91,47 +83,47 @@
           <!-- Mock POS / checkout UI -->
           <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 w-80">
             <div class="flex items-center justify-between mb-4">
-              <div class="font-bold text-slate-900 text-sm">In-Store Purchase</div>
-              <span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-medium">High-value order</span>
+              <div class="font-bold text-[#03102F] text-sm">In-Store Purchase</div>
+              <span class="text-xs bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full font-medium">High-value order</span>
             </div>
             <div class="space-y-2 mb-4">
-              <div class="flex justify-between items-center bg-orange-50 rounded-lg px-3 py-2.5">
+              <div class="flex justify-between items-center bg-[#EBF1FC] rounded-lg px-3 py-2.5">
                 <div>
-                  <div class="text-sm font-medium text-slate-900">3-Seater L-Shape Sofa</div>
+                  <div class="text-sm font-medium text-[#03102F]">3-Seater L-Shape Sofa</div>
                   <div class="text-xs text-slate-500">Beige · SKU: SF-L-BG-01</div>
                 </div>
-                <span class="font-bold text-orange-700">S$2,490</span>
+                <span class="font-bold text-[#2465DE]">S$2,490</span>
               </div>
-              <div class="flex justify-between items-center bg-slate-50 rounded-lg px-3 py-2.5">
+              <div class="flex justify-between items-center bg-[#F9F9F6] rounded-lg px-3 py-2.5">
                 <div>
-                  <div class="text-sm font-medium text-slate-900">Coffee Table (Oak)</div>
+                  <div class="text-sm font-medium text-[#03102F]">Coffee Table (Oak)</div>
                   <div class="text-xs text-slate-500">SKU: CT-OAK-02</div>
                 </div>
                 <span class="font-bold text-slate-700">S$680</span>
               </div>
-              <div class="flex justify-between items-center bg-slate-50 rounded-lg px-3 py-2.5">
+              <div class="flex justify-between items-center bg-[#F9F9F6] rounded-lg px-3 py-2.5">
                 <div>
-                  <div class="text-sm font-medium text-slate-900">Floor Lamp</div>
+                  <div class="text-sm font-medium text-[#03102F]">Floor Lamp</div>
                   <div class="text-xs text-slate-500">SKU: FL-WD-03</div>
                 </div>
                 <span class="font-bold text-slate-700">S$220</span>
               </div>
             </div>
-            <div class="flex justify-between font-bold text-slate-900 border-t border-slate-100 pt-3 mb-4">
+            <div class="flex justify-between font-bold text-[#03102F] border-t border-slate-100 pt-3 mb-4">
               <span>Total</span>
               <span>S$3,390</span>
             </div>
             <div class="space-y-2 mb-3">
-              <div class="flex items-center gap-2 p-2.5 border-2 border-orange-500 rounded-lg bg-orange-50">
-                <div class="w-3.5 h-3.5 rounded-full bg-orange-600 flex-shrink-0"></div>
-                <span class="text-xs font-semibold text-orange-800">Atome — 3× S$1,130 (0% interest)</span>
+              <div class="flex items-center gap-2 p-2.5 border-2 border-[#2465DE] rounded-lg bg-[#EBF1FC]">
+                <div class="w-3.5 h-3.5 rounded-full bg-[#2465DE] flex-shrink-0"></div>
+                <span class="text-xs font-semibold text-[#0E2859]">Atome — 3× S$1,130 (0% interest)</span>
               </div>
               <div class="flex items-center gap-2 p-2.5 border border-slate-200 rounded-lg">
                 <div class="w-3.5 h-3.5 rounded-full border border-slate-300 flex-shrink-0"></div>
-                <span class="text-xs text-slate-600">Pay in full — Card / PayNow</span>
+                <span class="text-xs text-[#61667C]">Pay in full — Card / PayNow</span>
               </div>
             </div>
-            <div class="bg-orange-600 rounded-xl py-3 text-center text-white text-sm font-semibold">Confirm Purchase</div>
+            <div class="bg-[#2465DE] rounded-xl py-3 text-center text-white text-sm font-semibold">Confirm Purchase</div>
           </div>
         </div>
       </div>
@@ -156,46 +148,46 @@
   <!-- Intro -->
   <section class="py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-slate-900 mb-5">One platform for showroom, online, and trade sales</h2>
-      <p class="text-xl text-slate-600 leading-relaxed">Furniture and home furnishing retail is complex — high-value items, B2B trade accounts, online-offline inventory, and customers who need flexible payment options. HitPay handles it all without monthly fees.</p>
+      <h2 class="text-4xl font-bold text-[#03102F] mb-5">One platform for showroom, online, and trade sales</h2>
+      <p class="text-xl text-[#61667C] leading-relaxed">Furniture and home furnishing retail is complex — high-value items, B2B trade accounts, online-offline inventory, and customers who need flexible payment options. HitPay handles it all without monthly fees.</p>
     </div>
   </section>
 
   <!-- USP 1: POS + Inventory -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="text-orange-600 font-semibold text-sm uppercase tracking-widest mb-4">POS & Inventory</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Manage SKUs, variants, and multiple showrooms — in real time</h2>
-          <p class="text-lg text-slate-600 mb-8">Track every sofa colour, mattress size, and cabinet finish across all your showrooms and your online store from a single dashboard. Stock syncs automatically — no more overselling a display piece you no longer have.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">POS & Inventory</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Manage SKUs, variants, and multiple showrooms — in real time</h2>
+          <p class="text-lg text-[#61667C] mb-8">Track every sofa colour, mattress size, and cabinet finish across all your showrooms and your online store from a single dashboard. Stock syncs automatically — no more overselling a display piece you no longer have.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Product variants — colour, size, material — all tracked per SKU</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Multi-location management — Orchard, Tampines, online, all in one account</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Barcode scanner compatible — process floor sales fast</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Automated daily reconciliation — no manual end-of-day cash counts</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-orange-600 font-semibold hover:text-orange-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             View POS Software <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -203,29 +195,29 @@
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72">
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Inventory · All Showrooms</div>
             <div class="space-y-3">
-              <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+              <div class="flex justify-between items-center p-3 bg-[#F9F9F6] rounded-lg">
                 <div>
-                  <div class="text-sm font-semibold text-slate-900">L-Shape Sofa (Beige)</div>
+                  <div class="text-sm font-semibold text-[#03102F]">L-Shape Sofa (Beige)</div>
                   <div class="text-xs text-slate-500">Orchard · Tampines · Online</div>
                 </div>
                 <div class="text-right">
-                  <div class="text-sm font-bold text-slate-900">12 units</div>
+                  <div class="text-sm font-bold text-[#03102F]">12 units</div>
                   <div class="text-xs text-green-600">In stock</div>
                 </div>
               </div>
-              <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+              <div class="flex justify-between items-center p-3 bg-[#F9F9F6] rounded-lg">
                 <div>
-                  <div class="text-sm font-semibold text-slate-900">King Mattress (Firm)</div>
+                  <div class="text-sm font-semibold text-[#03102F]">King Mattress (Firm)</div>
                   <div class="text-xs text-slate-500">Orchard · Online</div>
                 </div>
                 <div class="text-right">
-                  <div class="text-sm font-bold text-slate-900">8 units</div>
+                  <div class="text-sm font-bold text-[#03102F]">8 units</div>
                   <div class="text-xs text-green-600">In stock</div>
                 </div>
               </div>
               <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-200">
                 <div>
-                  <div class="text-sm font-semibold text-slate-900">Dining Set 6-Seater (Oak)</div>
+                  <div class="text-sm font-semibold text-[#03102F]">Dining Set 6-Seater (Oak)</div>
                   <div class="text-xs text-slate-500">Tampines only</div>
                 </div>
                 <div class="text-right">
@@ -234,9 +226,9 @@
                 </div>
               </div>
             </div>
-            <div class="mt-4 bg-orange-50 rounded-lg p-3">
+            <div class="mt-4 bg-[#EBF1FC] rounded-lg p-3">
               <div class="text-xs text-slate-500 mb-1">Today's revenue (all outlets)</div>
-              <div class="text-xl font-bold text-orange-700">S$41,280</div>
+              <div class="text-xl font-bold text-[#2465DE]">S$41,280</div>
               <div class="text-xs text-green-600 mt-1">↑ 18% vs last Saturday</div>
             </div>
           </div>
@@ -255,15 +247,15 @@
             <div class="text-xs text-slate-500 mb-4">Bed frame + mattress + 2 bedside tables</div>
             <div class="text-xs text-slate-500 mb-3">Choose how you'd like to pay</div>
             <div class="space-y-2 mb-4">
-              <div class="flex items-center gap-3 p-3 border-2 border-orange-500 rounded-xl bg-orange-50">
-                <div class="w-4 h-4 rounded-full bg-orange-600 flex items-center justify-center flex-shrink-0">
+              <div class="flex items-center gap-3 p-3 border-2 border-[#2465DE] rounded-xl bg-[#EBF1FC]">
+                <div class="w-4 h-4 rounded-full bg-[#2465DE] flex items-center justify-center flex-shrink-0">
                   <div class="w-2 h-2 rounded-full bg-white"></div>
                 </div>
                 <div>
-                  <div class="text-sm font-semibold text-slate-900">Atome — 3 months</div>
+                  <div class="text-sm font-semibold text-[#03102F]">Atome — 3 months</div>
                   <div class="text-xs text-slate-500">0% interest · No hidden fees</div>
                 </div>
-                <div class="ml-auto text-sm font-bold text-orange-600">S$1,933×3</div>
+                <div class="ml-auto text-sm font-bold text-[#2465DE]">S$1,933×3</div>
               </div>
               <div class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl">
                 <div class="w-4 h-4 rounded-full border border-slate-300 flex-shrink-0"></div>
@@ -282,34 +274,34 @@
                 <div class="ml-auto text-sm font-bold text-slate-700">S$5,800</div>
               </div>
             </div>
-            <div class="bg-orange-600 rounded-xl py-3 text-center text-white text-sm font-semibold">Confirm Purchase</div>
+            <div class="bg-[#2465DE] rounded-xl py-3 text-center text-white text-sm font-semibold">Confirm Purchase</div>
           </div>
         </div>
         <div class="order-1 lg:order-2">
-          <div class="text-orange-600 font-semibold text-sm uppercase tracking-widest mb-4">Buy Now Pay Later</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Offer BNPL for big-ticket items — boost conversions on high-value sales</h2>
-          <p class="text-lg text-slate-600 mb-8">A S$5,000 bedroom set is a lot easier to say yes to when customers can split it into 3 interest-free payments. HitPay supports Atome, GrabPay Later, and ShopeePay Later — natively, with no extra setup.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Buy Now Pay Later</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Offer BNPL for big-ticket items — boost conversions on high-value sales</h2>
+          <p class="text-lg text-[#61667C] mb-8">A S$5,000 bedroom set is a lot easier to say yes to when customers can split it into 3 interest-free payments. HitPay supports Atome, GrabPay Later, and ShopeePay Later — natively, with no extra setup.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Atome (3×), GrabPay Later (up to 6×), ShopeePay Later — all supported</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Works in-store at the POS terminal and online at checkout</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">You receive the full amount upfront — BNPL risk is with the provider</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-orange-600 font-semibold hover:text-orange-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             See all payment methods <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -318,68 +310,68 @@
   </section>
 
   <!-- USP 3: Online Store -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="text-orange-600 font-semibold text-sm uppercase tracking-widest mb-4">Online Store</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Sell online and in-store with unified inventory — no double data entry</h2>
-          <p class="text-lg text-slate-600 mb-8">Build a professional online catalogue in minutes using HitPay's no-code store builder, or plug into Shopify and WooCommerce. Stock syncs automatically between your website and showroom floor.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Online Store</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Sell online and in-store with unified inventory — no double data entry</h2>
+          <p class="text-lg text-[#61667C] mb-8">Build a professional online catalogue in minutes using HitPay's no-code store builder, or plug into Shopify and WooCommerce. Stock syncs automatically between your website and showroom floor.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Shopify, WooCommerce, Magento, Wix — one-click plugin install</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Mobile-first checkout — customers buy on their phone after seeing in showroom</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Discount codes, flash sales, and seasonal promotions built in</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-orange-600 font-semibold hover:text-orange-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             Explore Online Store <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
         <div class="flex justify-center">
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden w-72">
-            <div class="bg-orange-600 p-4">
-              <div class="text-orange-200 text-xs font-medium mb-1">homeco.sg/shop</div>
+            <div class="bg-[#2465DE] p-4">
+              <div class="text-blue-200 text-xs font-medium mb-1">homeco.sg/shop</div>
               <div class="text-white font-bold text-lg">Nordic Living Collection</div>
-              <div class="text-orange-200 text-sm mt-0.5">Free delivery · Pay later available</div>
+              <div class="text-blue-200 text-sm mt-0.5">Free delivery · Pay later available</div>
             </div>
             <div class="p-4">
               <div class="grid grid-cols-2 gap-2 mb-4">
-                <div class="bg-orange-50 rounded-xl p-3 text-center">
+                <div class="bg-[#EBF1FC] rounded-xl p-3 text-center">
                   <div class="text-2xl mb-1">🛋️</div>
                   <div class="text-xs font-semibold text-slate-800">Sofas</div>
-                  <div class="text-xs text-orange-600 mt-0.5">From S$1,200</div>
+                  <div class="text-xs text-[#2465DE] mt-0.5">From S$1,200</div>
                 </div>
-                <div class="bg-slate-50 rounded-xl p-3 text-center">
+                <div class="bg-[#F9F9F6] rounded-xl p-3 text-center">
                   <div class="text-2xl mb-1">🛏️</div>
                   <div class="text-xs font-semibold text-slate-800">Beds</div>
-                  <div class="text-xs text-orange-600 mt-0.5">From S$890</div>
+                  <div class="text-xs text-[#2465DE] mt-0.5">From S$890</div>
                 </div>
-                <div class="bg-slate-50 rounded-xl p-3 text-center">
+                <div class="bg-[#F9F9F6] rounded-xl p-3 text-center">
                   <div class="text-2xl mb-1">🪑</div>
                   <div class="text-xs font-semibold text-slate-800">Chairs</div>
-                  <div class="text-xs text-orange-600 mt-0.5">From S$240</div>
+                  <div class="text-xs text-[#2465DE] mt-0.5">From S$240</div>
                 </div>
-                <div class="bg-slate-50 rounded-xl p-3 text-center">
+                <div class="bg-[#F9F9F6] rounded-xl p-3 text-center">
                   <div class="text-2xl mb-1">🪴</div>
                   <div class="text-xs font-semibold text-slate-800">Decor</div>
-                  <div class="text-xs text-orange-600 mt-0.5">From S$45</div>
+                  <div class="text-xs text-[#2465DE] mt-0.5">From S$45</div>
                 </div>
               </div>
-              <div class="bg-orange-600 rounded-lg py-2.5 text-center text-white text-sm font-semibold">Shop All Collections</div>
+              <div class="bg-[#2465DE] rounded-lg py-2.5 text-center text-white text-sm font-semibold">Shop All Collections</div>
             </div>
           </div>
         </div>
@@ -395,7 +387,7 @@
           <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 w-72">
             <div class="flex justify-between items-start mb-4">
               <div>
-                <div class="font-bold text-slate-900">HomeCo Furnishings</div>
+                <div class="font-bold text-[#03102F]">HomeCo Furnishings</div>
                 <div class="text-xs text-slate-500 mt-0.5">TRADE INVOICE · INV-2025-T044</div>
               </div>
               <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">Net 30</span>
@@ -403,15 +395,15 @@
             <div class="text-xs text-slate-500 mb-3">Bill to: Prestige Interiors Pte Ltd (Interior Designer)</div>
             <div class="border-t border-slate-100 pt-3 space-y-2 mb-3">
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">6× Dining Chair (Trade price)</span>
+                <span class="text-[#61667C]">6× Dining Chair (Trade price)</span>
                 <span class="font-medium">S$1,560</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">2× Dining Table (180cm)</span>
+                <span class="text-[#61667C]">2× Dining Table (180cm)</span>
                 <span class="font-medium">S$2,800</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Trade discount (15%)</span>
+                <span class="text-[#61667C]">Trade discount (15%)</span>
                 <span class="font-medium text-green-600">−S$654</span>
               </div>
               <div class="flex justify-between text-sm text-slate-400">
@@ -419,38 +411,38 @@
                 <span>S$338.94</span>
               </div>
             </div>
-            <div class="flex justify-between font-bold text-slate-900 border-t border-slate-200 pt-3 mb-4">
+            <div class="flex justify-between font-bold text-[#03102F] border-t border-slate-200 pt-3 mb-4">
               <span>Total</span>
               <span>S$4,044.94</span>
             </div>
-            <div class="bg-orange-600 rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay Invoice</div>
+            <div class="bg-[#2465DE] rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay Invoice</div>
           </div>
         </div>
         <div>
-          <div class="text-orange-600 font-semibold text-sm uppercase tracking-widest mb-4">B2B Trade Invoicing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Invoice interior designers, contractors, and trade clients professionally</h2>
-          <p class="text-lg text-slate-600 mb-8">Trade accounts expect professional invoices with GST, trade discounts, and NET payment terms. HitPay handles it all — auto-send reminders, partial deposits, and Xero sync so your accounts team is always on top of receivables.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">B2B Trade Invoicing</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Invoice interior designers, contractors, and trade clients professionally</h2>
+          <p class="text-lg text-[#61667C] mb-8">Trade accounts expect professional invoices with GST, trade discounts, and NET payment terms. HitPay handles it all — auto-send reminders, partial deposits, and Xero sync so your accounts team is always on top of receivables.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">GST lines, trade discounts, custom payment terms (Net 30/60)</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Automated reminders — never chase a late trade payment manually again</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Xero & QuickBooks auto-sync — reconcile all trade accounts in seconds</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-orange-600 font-semibold hover:text-orange-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             Learn about invoicing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -459,13 +451,13 @@
   </section>
 
   <!-- Stats -->
-  <section class="py-16 bg-slate-900">
+  <section class="py-16 bg-[#03102F]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="text-center"><div class="text-4xl font-extrabold text-white mb-2">15,000+</div><div class="text-slate-400 text-sm">Merchants on HitPay</div></div>
-        <div class="text-center"><div class="text-4xl font-extrabold text-white mb-2">50+</div><div class="text-slate-400 text-sm">Payment methods</div></div>
-        <div class="text-center"><div class="text-4xl font-extrabold text-white mb-2">$0</div><div class="text-slate-400 text-sm">Monthly or setup fees</div></div>
-        <div class="text-center"><div class="text-4xl font-extrabold text-white mb-2">T+1</div><div class="text-slate-400 text-sm">Business day payouts</div></div>
+        <div class="text-center"><div class="text-4xl font-medium text-white mb-2">15,000+</div><div class="text-slate-400 text-sm">Merchants on HitPay</div></div>
+        <div class="text-center"><div class="text-4xl font-medium text-white mb-2">50+</div><div class="text-slate-400 text-sm">Payment methods</div></div>
+        <div class="text-center"><div class="text-4xl font-medium text-white mb-2">$0</div><div class="text-slate-400 text-sm">Monthly or setup fees</div></div>
+        <div class="text-center"><div class="text-4xl font-medium text-white mb-2">T+1</div><div class="text-slate-400 text-sm">Business day payouts</div></div>
       </div>
     </div>
   </section>
@@ -473,12 +465,12 @@
   <!-- Testimonial -->
   <section class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <svg class="w-10 h-10 text-orange-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+      <svg class="w-10 h-10 text-blue-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
       <p class="text-2xl text-slate-800 font-medium leading-relaxed mb-8">"Amazing platform — fast and easy to set up. Accept all major payment methods quickly. Transparent and easy-to-understand fees. The customer support team is genuinely amazing."</p>
       <div class="flex items-center justify-center gap-4">
-        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-700 font-bold">MT</div>
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-full flex items-center justify-center text-[#2465DE] font-bold">MT</div>
         <div class="text-left">
-          <div class="font-semibold text-slate-900">MTMojo Traders</div>
+          <div class="font-semibold text-[#03102F]">MTMojo Traders</div>
           <div class="text-slate-500 text-sm">HitPay Merchant — Singapore</div>
         </div>
       </div>
@@ -486,42 +478,42 @@
   </section>
 
   <!-- Feature grid -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Everything a furniture retailer needs</h2>
-        <p class="text-slate-600 max-w-xl mx-auto">Showroom chains, independent furniture stores, home decor boutiques, and equipment retailers.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Everything a furniture retailer needs</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">Showroom chains, independent furniture stores, home decor boutiques, and equipment retailers.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
-          <h3 class="font-semibold text-slate-900 mb-2">All major cards + wallets</h3>
-          <p class="text-slate-600 text-sm">Visa, Mastercard, Amex, UnionPay, Apple Pay, Google Pay. No rental — buy terminal once, pay per transaction.</p>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
+          <h3 class="font-semibold text-[#03102F] mb-2">All major cards + wallets</h3>
+          <p class="text-[#61667C] text-sm">Visa, Mastercard, Amex, UnionPay, Apple Pay, Google Pay. No rental — buy terminal once, pay per transaction.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064"/></svg></div>
-          <h3 class="font-semibold text-slate-900 mb-2">Tourist cross-border payments</h3>
-          <p class="text-slate-600 text-sm">Accept WeChat Pay, Alipay, and UPI from Chinese, Indian, and Malaysian shoppers in-store.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Tourist cross-border payments</h3>
+          <p class="text-[#61667C] text-sm">Accept WeChat Pay, Alipay, and UPI from Chinese, Indian, and Malaysian shoppers in-store.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-          <h3 class="font-semibold text-slate-900 mb-2">MAS licensed & PCI DSS</h3>
-          <p class="text-slate-600 text-sm">Regulated under MAS as a Major Payment Institution. PCI DSS Level 1 compliant for every transaction.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">MAS licensed & PCI DSS</h3>
+          <p class="text-[#61667C] text-sm">Regulated under MAS as a Major Payment Institution. PCI DSS Level 1 compliant for every transaction.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
-          <h3 class="font-semibold text-slate-900 mb-2">Real-time sales analytics</h3>
-          <p class="text-slate-600 text-sm">See your best-performing products, outlets, and payment methods. Filter and export reports instantly.</p>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Real-time sales analytics</h3>
+          <p class="text-[#61667C] text-sm">See your best-performing products, outlets, and payment methods. Filter and export reports instantly.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
-          <h3 class="font-semibold text-slate-900 mb-2">Payment links for reservations</h3>
-          <p class="text-slate-600 text-sm">Send a deposit link via WhatsApp for custom orders or delivery reservations — clients pay instantly.</p>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Payment links for reservations</h3>
+          <p class="text-[#61667C] text-sm">Send a deposit link via WhatsApp for custom orders or delivery reservations — clients pay instantly.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-          <h3 class="font-semibold text-slate-900 mb-2">Next-day payouts</h3>
-          <p class="text-slate-600 text-sm">High-value sales settled next business day. Maintain healthy cash flow even across a busy weekend.</p>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4"><svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Next-day payouts</h3>
+          <p class="text-[#61667C] text-sm">High-value sales settled next business day. Maintain healthy cash flow even across a busy weekend.</p>
         </div>
       </div>
     </div>
@@ -530,126 +522,126 @@
   <!-- Related -->
   <section class="py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <h2 class="text-2xl font-bold text-[#03102F] mb-8">Explore more solutions</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-orange-300 hover:shadow-md transition-all">
+        <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">🏪</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-orange-700">Retail</div>
-          <div class="text-slate-600 text-sm">Unified POS and online for multi-location retail stores.</div>
-          <div class="mt-4 text-orange-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Retail</div>
+          <div class="text-[#61667C] text-sm">Unified POS and online for multi-location retail stores.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
-        <a href="computers.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-orange-300 hover:shadow-md transition-all">
+        <a href="computers.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">💻</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-orange-700">Tech Retail</div>
-          <div class="text-slate-600 text-sm">BNPL, B2B invoicing and inventory for tech retailers.</div>
-          <div class="mt-4 text-orange-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Tech Retail</div>
+          <div class="text-[#61667C] text-sm">BNPL, B2B invoicing and inventory for tech retailers.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
-        <a href="wholesale.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-orange-300 hover:shadow-md transition-all">
+        <a href="wholesale.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">📦</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-orange-700">Wholesale Trade</div>
-          <div class="text-slate-600 text-sm">B2B invoicing and recurring payments for wholesale businesses.</div>
-          <div class="mt-4 text-orange-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Wholesale Trade</div>
+          <div class="text-[#61667C] text-sm">B2B invoicing and recurring payments for wholesale businesses.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Frequently asked questions</h2>
-        <p class="text-slate-600">Everything furniture stores and home furnishing businesses need to know about HitPay.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Frequently asked questions</h2>
+        <p class="text-[#61667C]">Everything furniture stores and home furnishing businesses need to know about HitPay.</p>
       </div>
       <div class="space-y-3">
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay support BNPL (Buy Now Pay Later) for large furniture purchases?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay support BNPL (Buy Now Pay Later) for large furniture purchases?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay integrates with Atome and GrabPay Later, allowing customers to split furniture purchases into 3 equal interest-free instalments. This is particularly effective for bedroom sets, dining tables, and sofas above S$1,000. Retailers who offer BNPL typically see higher average transaction values and fewer abandoned purchases due to sticker shock.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay integrates with Atome and GrabPay Later, allowing customers to split furniture purchases into 3 equal interest-free instalments. This is particularly effective for bedroom sets, dining tables, and sofas above S$1,000. Retailers who offer BNPL typically see higher average transaction values and fewer abandoned purchases due to sticker shock.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can furniture showrooms use HitPay for both walk-in customers and online orders?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can furniture showrooms use HitPay for both walk-in customers and online orders?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's POS system handles in-showroom sales while the HitPay Online Store lets customers browse and purchase from home. Inventory syncs automatically across both channels so you always have accurate stock levels. Multi-location showrooms can also manage separate inventory per location from the same dashboard.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's POS system handles in-showroom sales while the HitPay Online Store lets customers browse and purchase from home. Inventory syncs automatically across both channels so you always have accurate stock levels. Multi-location showrooms can also manage separate inventory per location from the same dashboard.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How can I invoice interior design firms and contractors for trade orders?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How can I invoice interior design firms and contractors for trade orders?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay Invoicing supports B2B trade invoices with GST calculation, trade discounts, and partial payment terms — such as 50% deposit upfront and balance upon delivery. Designers and contractors receive a professional GST-compliant invoice with a one-click payment button. Automatic reminders are sent before the due date so you don't need to follow up manually.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay Invoicing supports B2B trade invoices with GST calculation, trade discounts, and partial payment terms — such as 50% deposit upfront and balance upon delivery. Designers and contractors receive a professional GST-compliant invoice with a one-click payment button. Automatic reminders are sent before the due date so you don't need to follow up manually.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay track inventory across multiple showroom locations?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay track inventory across multiple showroom locations?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's inventory management supports multiple locations. You can track stock levels per SKU at each showroom and manage transfers between branches from the same dashboard. Sales at any location automatically deduct from the correct location's inventory in real time.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's inventory management supports multiple locations. You can track stock levels per SKU at each showroom and manage transfers between branches from the same dashboard. Sales at any location automatically deduct from the correct location's inventory in real time.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">What are HitPay's fees for furniture retailers?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What are HitPay's fees for furniture retailers?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay charges 2.5% + S$0.30 for Visa/Mastercard, 0.4% for PayNow, and varying rates for Atome and GrabPay Later BNPL. There are no monthly platform fees and no setup costs — you only pay when a customer completes a purchase. For high-volume merchants, custom rates may be available through the sales team.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay charges 2.5% + S$0.30 for Visa/Mastercard, 0.4% for PayNow, and varying rates for Atome and GrabPay Later BNPL. There are no monthly platform fees and no setup costs — you only pay when a customer completes a purchase. For high-volume partners, custom rates may be available through the sales team.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">My customers keep asking for instalment payments — how do I set up BNPL at my furniture store?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">My customers keep asking for instalment payments — how do I set up BNPL at my furniture store?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Once your HitPay account is active, Atome and GrabPay Later appear automatically as payment options at your POS and online store — no additional integration required. Customers choose to split into 3 interest-free instalments at checkout and you receive the full amount upfront from the BNPL provider. Setup takes minutes, not weeks. Furniture retailers that add BNPL typically see a measurable increase in average basket size as customers are more willing to consider higher-end pieces.</p>
+            <p class="text-[#61667C] leading-relaxed">Once your HitPay account is active, Atome and GrabPay Later appear automatically as payment options at your POS and online store — no additional integration required. Customers choose to split into 3 interest-free instalments at checkout and you receive the full amount upfront from the BNPL provider. Setup takes minutes, not weeks. Furniture retailers that add BNPL typically see a measurable increase in average basket size as customers are more willing to consider higher-end pieces.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I use HitPay to accept payments at a trade show, pop-up event, or showroom roadshow?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I use HitPay to accept payments at a trade show, pop-up event, or showroom roadshow?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's card terminal and Soundbox are portable — bring the device and your phone. At a trade show, you can accept card tap, PayNow QR, and generate a payment link on your phone for customers who want to pay a deposit on the spot. The Soundbox operates on its own SIM card so no Wi-Fi router is needed at the venue. This makes HitPay ideal for IKEA-style mega sales events, residential showroom launches, and outdoor pop-ups.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's card terminal and Soundbox are portable — bring the device and your phone. At a trade show, you can accept card tap, PayNow QR, and generate a payment link on your phone for customers who want to pay a deposit on the spot. The Soundbox operates on its own SIM card so no Wi-Fi router is needed at the venue. This makes HitPay ideal for IKEA-style mega sales events, residential showroom launches, and outdoor pop-ups.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">I sell to both retail walk-in customers and interior design trade accounts — can one HitPay account handle both?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">I sell to both retail walk-in customers and interior design trade accounts — can one HitPay account handle both?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. One HitPay account handles both customer types. For retail walk-ins, use POS or the payment link with standard retail pricing. For trade accounts, use HitPay Invoicing with trade-specific pricing — custom line items, percentage trade discounts, and partial payment terms. All revenue from both customer types is tracked in a unified dashboard with no mixing of pricing or terms.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. One HitPay account handles both customer types. For retail walk-ins, use POS or the payment link with standard retail pricing. For trade accounts, use HitPay Invoicing with trade-specific pricing — custom line items, percentage trade discounts, and partial payment terms. All revenue from both customer types is tracked in a unified dashboard with no mixing of pricing or terms.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay's online store support product variants like fabric colour, material, or size?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay's online store support product variants like fabric colour, material, or size?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's Online Store supports product variants — you can list a sofa with options for fabric type (leather, microfibre, velvet), colour, and leg finish, each with its own price and stock count. Customers select their configuration before paying, and your inventory is deducted from the correct variant automatically. This is essential for furniture businesses where the same piece comes in multiple finishes and price points.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's Online Store supports product variants — you can list a sofa with options for fabric type (leather, microfibre, velvet), colour, and leg finish, each with its own price and stock count. Customers select their configuration before paying, and your inventory is deducted from the correct variant automatically. This is essential for furniture businesses where the same piece comes in multiple finishes and price points.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How does HitPay compare to using my bank's payment terminal for my furniture showroom?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How does HitPay compare to using my bank's payment terminal for my furniture showroom?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Bank-issued terminals typically charge 2.5–3.5% per card transaction plus a fixed monthly rental of S$30–80. HitPay charges 2.5% + S$0.30 with no monthly rental — you own the terminal outright. More importantly, HitPay also accepts PayNow (0.4%), GrabPay, Atome BNPL, and Alipay+ — payment methods that traditional bank terminals don't support. Offering BNPL and PayNow alone can convert customers who would otherwise walk out without purchasing due to upfront cost hesitation.</p>
+            <p class="text-[#61667C] leading-relaxed">Bank-issued terminals typically charge 2.5–3.5% per card transaction plus a fixed monthly rental of S$30–80. HitPay charges 2.5% + S$0.30 with no monthly rental — you own the terminal outright. More importantly, HitPay also accepts PayNow (0.4%), GrabPay, Atome BNPL, and Alipay+ — payment methods that traditional bank terminals don't support. Offering BNPL and PayNow alone can convert customers who would otherwise walk out without purchasing due to upfront cost hesitation.</p>
           </div>
         </details>
       </div>
@@ -659,21 +651,21 @@
   <!-- CTA -->
   <section class="py-20 gradient-cta">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-white mb-5">Ready to modernise your store's payments?</h2>
-      <p class="text-orange-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
+      <h2 class="text-4xl font-medium text-white mb-5">Ready to modernise your store's payments?</h2>
+      <p class="text-blue-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="#" class="bg-white text-orange-800 font-semibold px-8 py-4 rounded-xl hover:bg-orange-50 transition-colors text-base">Start for free</a>
+        <a href="#" class="bg-white text-[#0E2859] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Start for free</a>
         <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-12">
+  <footer class="bg-[#03102F] text-slate-400 py-12">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 mb-12">
         <div class="md:col-span-2">
-          <div class="flex items-center gap-2 mb-4"><div class="w-7 h-7 bg-orange-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">H</span></div><span class="font-bold text-white">HitPay</span></div>
+          <div class="flex items-center gap-2 mb-4"><img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7"></div>
           <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
         </div>
         <div><div class="font-semibold text-slate-300 text-sm mb-3">Products</div><ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">POS Software</a></li><li><a href="#" class="hover:text-slate-300">Card Terminal</a></li><li><a href="#" class="hover:text-slate-300">Invoicing</a></li><li><a href="#" class="hover:text-slate-300">Online Store</a></li></ul></div>
@@ -681,8 +673,8 @@
         <div><div class="font-semibold text-slate-300 text-sm mb-3">Company</div><ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-slate-300">About</a></li><li><a href="#" class="hover:text-slate-300">Blog</a></li><li><a href="#" class="hover:text-slate-300">Pricing</a></li><li><a href="#" class="hover:text-slate-300">Contact</a></li></ul></div>
       </div>
       <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
-        <div class="flex gap-6 text-sm text-slate-600"><a href="#" class="hover:text-slate-400">Privacy</a><a href="#" class="hover:text-slate-400">Terms</a><a href="#" class="hover:text-slate-400">Security</a></div>
+        <div class="text-sm text-[#61667C]">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]"><a href="#" class="hover:text-slate-400">Privacy</a><a href="#" class="hover:text-slate-400">Terms</a><a href="#" class="hover:text-slate-400">Security</a></div>
       </div>
     </div>
   </footer>
