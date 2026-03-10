@@ -79,6 +79,17 @@ const C = {
   // blue extras (education, wholesale)
   blue50:   { r: 0.937, g: 0.957, b: 0.996 },
   blue900:  { r: 0.118, g: 0.216, b: 0.604 },
+  // HitPay brand — Orchid UI design system
+  hpLogoBlue:  { r: 0.055, g: 0.157, b: 0.349 },  // #0E2859
+  hpDeepBlue:  { r: 0.000, g: 0.153, b: 0.443 },  // #002771
+  hpAction:    { r: 0.141, g: 0.396, b: 0.871 },  // #2465DE
+  hpActionHov: { r: 0.106, g: 0.310, b: 0.722 },  // #1B4FB8
+  hpTextPri:   { r: 0.012, g: 0.063, b: 0.184 },  // #03102F
+  hpTextSec:   { r: 0.380, g: 0.400, b: 0.486 },  // #61667C
+  hpBeige:     { r: 0.976, g: 0.976, b: 0.965 },  // #F9F9F6
+  hpSuccess:   { r: 0.302, g: 0.671, b: 0.502 },  // #4DAB80
+  hpBlue50:    { r: 0.922, g: 0.945, b: 0.988 },  // #EBF1FC
+  hpBlue100:   { r: 0.839, g: 0.890, b: 0.976 },  // #D6E3F9
 };
 
 // ── FONT WEIGHTS ────────────────────────────────────────────
@@ -94,6 +105,10 @@ const W = {
 async function loadFonts() {
   for (const style of Object.values(W)) {
     await figma.loadFontAsync({ family: 'Inter', style });
+  }
+  // IBM Plex Sans Condensed for brand headlines
+  for (const style of ['Regular', 'Medium', 'SemiBold', 'Bold']) {
+    try { await figma.loadFontAsync({ family: 'IBM Plex Sans Condensed', style }); } catch (_) {}
   }
 }
 
@@ -114,9 +129,9 @@ function mkRect(w, h, fill, radius = 0) {
 }
 
 /** Creates a Text node */
-function mkText(content, size, weight, color, align = 'LEFT', maxW = 0) {
+function mkText(content, size, weight, color, align = 'LEFT', maxW = 0, family = 'Inter') {
   const t = figma.createText();
-  t.fontName = { family: 'Inter', style: weight };
+  t.fontName = { family, style: weight };
   t.fontSize = size;
   t.characters = String(content);
   t.fills = color ? rgb(color) : [];
@@ -128,6 +143,11 @@ function mkText(content, size, weight, color, align = 'LEFT', maxW = 0) {
     t.textAutoResize = 'WIDTH_AND_HEIGHT';
   }
   return t;
+}
+
+/** Brand headline using IBM Plex Sans Condensed */
+function mkH2(content, size, color, align = 'LEFT', maxW = 0) {
+  return mkText(content, size, W.bold, color, align, maxW, 'IBM Plex Sans Condensed');
 }
 
 /** Creates a Frame — no auto-layout, absolute child positioning */
@@ -260,7 +280,7 @@ function mkNavbar(accent) {
   nav.strokeAlign = 'INSIDE';
 
   // Logo mark
-  const mark = mkFrame('LogoMark', 32, 32, accent, 8);
+  const mark = mkFrame('LogoMark', 32, 32, C.hpLogoBlue, 8);
   const markTxt = mkText('H', 14, W.bold, C.white, 'CENTER');
   markTxt.x = 10; markTxt.y = 6;
   mark.appendChild(markTxt);
@@ -268,7 +288,7 @@ function mkNavbar(accent) {
   nav.appendChild(mark);
 
   // Logo text
-  const logoTxt = mkText('HitPay', 18, W.bold, C.slate900);
+  const logoTxt = mkText('HitPay', 18, W.bold, C.hpTextPri);
   logoTxt.x = 184; logoTxt.y = 20;
   nav.appendChild(logoTxt);
 
@@ -355,13 +375,13 @@ function mkFeature(opts) {
   sec.appendChild(lbl);
 
   // H2
-  const heading = mkText(h2, 36, W.bold, C.slate900, 'LEFT', 520);
+  const heading = mkH2(h2, 36, C.hpTextPri, 'LEFT', 520);
   heading.lineHeight = { value: 44, unit: 'PIXELS' };
   heading.x = textX; heading.y = 84;
   sec.appendChild(heading);
 
   // Body
-  const body = mkText(p, 17, W.regular, C.slate600, 'LEFT', 510);
+  const body = mkText(p, 17, W.regular, C.hpTextSec, 'LEFT', 510);
   body.lineHeight = { value: 26, unit: 'PIXELS' };
   body.x = textX; body.y = 200;
   sec.appendChild(body);
@@ -426,7 +446,7 @@ function mkTestimonial(quote, name, company, accent, lightBg) {
   sec.appendChild(quoteText);
 
   // Avatar
-  const avatar = mkFrame('Avatar', 48, 48, lightBg || (accent === C.indigo600 ? C.indigo100 : accent === C.emerald600 ? C.emerald100 : C.violet100), 24);
+  const avatar = mkFrame('Avatar', 48, 48, lightBg || C.hpBlue100, 24);
   const initials = mkText(name.split(' ').map(n => n[0]).join(''), 16, W.bold, accent, 'CENTER');
   initials.x = 14; initials.y = 12;
   avatar.appendChild(initials);
@@ -449,13 +469,13 @@ function mkTestimonial(quote, name, company, accent, lightBg) {
  * cards: [{ icon (color name), title, desc }]
  */
 function mkGrid(title, subtitle, cards) {
-  const sec = mkFrame('FeatureGrid', 1440, 660, C.slate50);
+  const sec = mkFrame('FeatureGrid', 1440, 660, C.hpBeige);
 
-  const h2 = mkText(title, 30, W.bold, C.slate900, 'CENTER', 800);
+  const h2 = mkH2(title, 30, C.hpTextPri, 'CENTER', 800);
   h2.x = 320; h2.y = 60;
   sec.appendChild(h2);
 
-  const st = mkText(subtitle, 16, W.regular, C.slate600, 'CENTER', 600);
+  const st = mkText(subtitle, 16, W.regular, C.hpTextSec, 'CENTER', 600);
   st.x = 420; st.y = 108;
   sec.appendChild(st);
 
@@ -466,7 +486,7 @@ function mkGrid(title, subtitle, cards) {
     { bg: C.purple100, fg: C.purple600 },
     { bg: C.yellow100, fg: C.yellow600 },
     { bg: C.red100, fg: C.red600 },
-    { bg: C.indigo100 || C.indigo50, fg: C.indigo600 },
+    { bg: C.hpBlue100, fg: C.hpAction },
   ];
 
   cards.forEach((card, i) => {
@@ -542,9 +562,9 @@ function mkRelated(sectionTitle, items, accent) {
 
 /** CTA Banner — 300px with gradient simulation */
 function mkCTA(h2text, ptext, btn1label, btn2label, accent, darkAccent) {
-  const sec = mkFrame('CTABanner', 1440, 300, accent);
+  const sec = mkFrame('CTABanner', 1440, 300, C.hpDeepBlue);
 
-  const h2 = mkText(h2text, 40, W.extrabold, C.white, 'CENTER', 800);
+  const h2 = mkH2(h2text, 40, C.white, 'CENTER', 800);
   h2.lineHeight = { value: 48, unit: 'PIXELS' };
   h2.x = 320; h2.y = 48;
   sec.appendChild(h2);
@@ -555,7 +575,7 @@ function mkCTA(h2text, ptext, btn1label, btn2label, accent, darkAccent) {
   p.x = 360; p.y = 112;
   sec.appendChild(p);
 
-  const b1 = mkBtn(btn1label, C.white, accent, 32, 16, 12);
+  const b1 = mkBtn(btn1label, C.white, C.hpDeepBlue, 32, 16, 12);
   b1.x = 512; b1.y = 210;
   sec.appendChild(b1);
 
@@ -573,10 +593,10 @@ function mkCTA(h2text, ptext, btn1label, btn2label, accent, darkAccent) {
 
 /** Footer — 280px */
 function mkFooter(accent, footerProducts, footerSolutions) {
-  const sec = mkFrame('Footer', 1440, 280, C.slate900);
+  const sec = mkFrame('Footer', 1440, 280, C.hpLogoBlue);
 
   // Logo
-  const mark = mkFrame('LogoMark', 28, 28, accent, 8);
+  const mark = mkFrame('LogoMark', 28, 28, C.hpAction, 8);
   const mt = mkText('H', 12, W.bold, C.white, 'CENTER');
   mt.x = 9; mt.y = 6;
   mark.appendChild(mt);
@@ -751,7 +771,7 @@ function mockCheckout() {
   cvvT.x = 210; cvvT.y = 178;
   card.appendChild(cvvT);
 
-  const payBtn = mkRect(260, 44, C.indigo600, 8);
+  const payBtn = mkRect(260, 44, C.hpAction, 8);
   payBtn.x = 20; payBtn.y = 214;
   card.appendChild(payBtn);
   const payT = mkText('Pay S$248.00', 15, W.semibold, C.white, 'CENTER', 260);
@@ -831,7 +851,7 @@ function mockPaymentLink() {
   }];
   card.clipsContent = true;
 
-  const header = mkRect(270, 70, C.indigo600);
+  const header = mkRect(270, 70, C.hpAction);
   header.x = 0; header.y = 0;
   card.appendChild(header);
 
@@ -857,7 +877,7 @@ function mockPaymentLink() {
   descT.x = 16; descT.y = 196;
   card.appendChild(descT);
 
-  const buyBtn = mkRect(238, 40, C.indigo600, 8);
+  const buyBtn = mkRect(238, 40, C.hpAction, 8);
   buyBtn.x = 16; buyBtn.y = 248;
   card.appendChild(buyBtn);
   const buyT = mkText('Buy now — S$65.00', 14, W.semibold, C.white, 'CENTER', 238);
@@ -874,17 +894,17 @@ function mockSubscriptions() {
   const subs = [
     { title: 'Monthly Subscription', sub: 'Coffee Bean Club', amount: 'S$28/mo', status: '● Active', statusColor: C.green600, border: C.slate200 },
     { title: 'Annual Plan', sub: 'Skincare Ritual Box', amount: 'S$199/yr', status: '● Active', statusColor: C.green600, border: C.slate200 },
-    { title: 'New subscriber', sub: 'Just signed up · @weiming', amount: 'S$28/mo', status: '● Just now', statusColor: C.indigo600, border: C.indigo200 },
+    { title: 'New subscriber', sub: 'Just signed up · @weiming', amount: 'S$28/mo', status: '● Just now', statusColor: C.hpAction, border: C.hpBlue100 },
   ];
 
   subs.forEach((s, i) => {
     const row = mkFrame(`Sub/${s.title}`, 290, 68, C.white, 12);
     row.strokes = [{ type: 'SOLID', color: s.border }];
-    row.strokeWeight = s.border === C.indigo200 ? 2 : 1;
+    row.strokeWeight = s.border === C.hpBlue100 ? 2 : 1;
     row.strokeAlign = 'INSIDE';
     row.x = 0; row.y = i * 76;
 
-    const ttl = mkText(s.title, 14, W.semibold, s.border === C.indigo200 ? C.indigo700 : C.slate900, 'LEFT', 160);
+    const ttl = mkText(s.title, 14, W.semibold, s.border === C.hpBlue100 ? C.hpAction : C.slate900, 'LEFT', 160);
     ttl.x = 16; ttl.y = 10;
     row.appendChild(ttl);
 
@@ -940,7 +960,7 @@ function mockPOS() {
   posTitle.x = 20; posTitle.y = 20;
   card.appendChild(posTitle);
 
-  const online = mkText('● Online', 12, W.medium, C.emerald500);
+  const online = mkText('● Online', 12, W.medium, C.hpSuccess);
   online.x = 210; online.y = 22;
   card.appendChild(online);
 
@@ -976,7 +996,7 @@ function mockPOS() {
   totalA.x = 150; totalA.y = 192;
   card.appendChild(totalA);
 
-  const payBtn = mkRect(250, 40, C.emerald500, 12);
+  const payBtn = mkRect(250, 40, C.hpAction, 12);
   payBtn.x = 20; payBtn.y = 226;
   card.appendChild(payBtn);
   const payT = mkText('Charge S$91.00', 14, W.semibold, C.white, 'CENTER', 250);
@@ -1000,7 +1020,7 @@ function mockPOSDashboard() {
   }];
   card.clipsContent = true;
 
-  const headerBg = mkRect(300, 90, C.emerald600);
+  const headerBg = mkRect(300, 90, C.hpDeepBlue);
   headerBg.x = 0; headerBg.y = 0;
   card.appendChild(headerBg);
 
@@ -1008,7 +1028,7 @@ function mockPOSDashboard() {
   headerTitle.x = 20; headerTitle.y = 14;
   card.appendChild(headerTitle);
 
-  const date = mkText('Tue 24 Feb', 12, W.regular, C.emerald200);
+  const date = mkText('Tue 24 Feb', 12, W.regular, C.hpBlue100);
   date.x = 220; date.y = 16;
   card.appendChild(date);
 
@@ -1016,7 +1036,7 @@ function mockPOSDashboard() {
   total.x = 20; total.y = 40;
   card.appendChild(total);
 
-  const pct = mkText('↑ 12% vs last Tuesday', 12, W.regular, C.emerald200);
+  const pct = mkText('↑ 12% vs last Tuesday', 12, W.regular, C.hpBlue100);
   pct.x = 20; pct.y = 72;
   card.appendChild(pct);
 
@@ -1085,25 +1105,25 @@ function mockTapToPay() {
 
   // NFC rings
   const ring1 = mkFrame('NFC', 64, 64, null, 32);
-  ring1.strokes = [{ type: 'SOLID', color: C.emerald500 }];
+  ring1.strokes = [{ type: 'SOLID', color: C.hpSuccess }];
   ring1.strokeWeight = 3;
   ring1.strokeAlign = 'INSIDE';
   ring1.x = 93; ring1.y = 88;
   card.appendChild(ring1);
 
   const ring2 = mkFrame('NFCInner', 40, 40, null, 20);
-  ring2.strokes = [{ type: 'SOLID', color: C.emerald500 }];
+  ring2.strokes = [{ type: 'SOLID', color: C.hpSuccess }];
   ring2.strokeWeight = 2;
   ring2.strokeAlign = 'INSIDE';
   ring2.x = 105; ring2.y = 100;
   card.appendChild(ring2);
 
-  const ready = mkText('● Ready to accept', 13, W.medium, C.emerald500, 'CENTER', 210);
+  const ready = mkText('● Ready to accept', 13, W.medium, C.hpSuccess, 'CENTER', 210);
   ready.x = 20; ready.y = 196;
   card.appendChild(ready);
 
   // Badge
-  const badgeBg = mkRect(140, 28, C.emerald500, 100);
+  const badgeBg = mkRect(140, 28, C.hpSuccess, 100);
   badgeBg.x = 55; badgeBg.y = 228;
   card.appendChild(badgeBg);
   const badgeT = mkText('No terminal needed!', 12, W.bold, C.white, 'CENTER', 140);
@@ -1134,9 +1154,9 @@ function mockOmnichannel() {
   card.appendChild(title);
 
   const channels = [
-    { label: '🏪 In-store', amount: 'S$28,410', pct: 0.65, barColor: C.emerald500 },
+    { label: '🏪 In-store', amount: 'S$28,410', pct: 0.65, barColor: C.hpSuccess },
     { label: '🌐 Online Store', amount: 'S$14,230', pct: 0.33, barColor: C.blue500 },
-    { label: '🔗 Payment Links', amount: 'S$3,840', pct: 0.09, barColor: C.violet500 },
+    { label: '🔗 Payment Links', amount: 'S$3,840', pct: 0.09, barColor: C.hpAction },
   ];
 
   channels.forEach((ch, i) => {
@@ -1187,7 +1207,7 @@ function mockDonation() {
     blendMode: 'NORMAL',
   }];
 
-  const headerBg = mkRect(310, 72, C.violet600);
+  const headerBg = mkRect(310, 72, C.hpAction);
   headerBg.x = 0; headerBg.y = 0;
   card.appendChild(headerBg);
 
@@ -1207,7 +1227,7 @@ function mockDonation() {
   const amts = ['S$10', 'S$25', 'S$50', 'S$100'];
   amts.forEach((a, i) => {
     const selected = i === 1;
-    const btnBg = mkRect(58, 32, selected ? C.violet600 : C.white, 8);
+    const btnBg = mkRect(58, 32, selected ? C.hpAction : C.white, 8);
     if (!selected) {
       btnBg.strokes = [{ type: 'SOLID', color: C.slate200 }];
       btnBg.strokeWeight = 1;
@@ -1235,7 +1255,7 @@ function mockDonation() {
   msgT.x = 32; msgT.y = 188;
   card.appendChild(msgT);
 
-  const donateBtn = mkRect(270, 44, C.violet600, 10);
+  const donateBtn = mkRect(270, 44, C.hpAction, 10);
   donateBtn.x = 20; donateBtn.y = 236;
   card.appendChild(donateBtn);
   const donateT = mkText('Donate S$25.00', 15, W.semibold, C.white, 'CENTER', 270);
@@ -1265,7 +1285,7 @@ function mockDonation() {
   track.x = 32; track.y = 336;
   card.appendChild(track);
 
-  const bar = mkRect(150, 6, C.violet500, 3);
+  const bar = mkRect(150, 6, C.hpAction, 3);
   bar.x = 32; bar.y = 336;
   card.appendChild(bar);
 
@@ -1293,10 +1313,10 @@ function mockRecurringDonors() {
   title.x = 20; title.y = 20;
   card.appendChild(title);
 
-  const badge = mkRect(100, 24, C.violet50, 8);
+  const badge = mkRect(100, 24, C.hpBlue50, 8);
   badge.x = 180; badge.y = 18;
   card.appendChild(badge);
-  const badgeT = mkText('February 2025', 11, W.medium, C.violet600, 'CENTER', 100);
+  const badgeT = mkText('February 2025', 11, W.medium, C.hpAction, 'CENTER', 100);
   badgeT.x = 180; badgeT.y = 24;
   card.appendChild(badgeT);
 
@@ -1414,7 +1434,7 @@ function mockQR() {
   methodT.x = 20; methodT.y = 214;
   card.appendChild(methodT);
 
-  const hitpayBtn = mkRect(210, 28, C.violet600, 8);
+  const hitpayBtn = mkRect(210, 28, C.hpAction, 8);
   hitpayBtn.x = 20; hitpayBtn.y = 234;
   card.appendChild(hitpayBtn);
   const hpT = mkText('HitPay · hitpay.me/awss', 12, W.semibold, C.white, 'CENTER', 210);
@@ -1422,7 +1442,7 @@ function mockQR() {
   card.appendChild(hpT);
 
   // Floating badge
-  const floatBg = mkRect(140, 28, C.violet500, 100);
+  const floatBg = mkRect(140, 28, C.hpAction, 100);
   floatBg.x = 145; floatBg.y = 250;
   card.appendChild(floatBg);
   const floatT = mkText('Print & display anywhere!', 11, W.bold, C.white, 'CENTER', 140);
@@ -1510,7 +1530,7 @@ function mockInvoice() {
   totalL.x = 20; totalL.y = 232;
   card.appendChild(totalL);
 
-  const totalA = mkText('S$3,500.00', 16, W.bold, C.violet600, 'RIGHT', 120);
+  const totalA = mkText('S$3,500.00', 16, W.bold, C.hpAction, 'RIGHT', 120);
   totalA.x = 160; totalA.y = 230;
   card.appendChild(totalA);
 
@@ -1520,23 +1540,23 @@ function mockInvoice() {
 // ── HERO BUILDERS ────────────────────────────────────────────
 
 function mkHeroEcommerce() {
-  const sec = mkFrame('Hero', 1440, 560, { r: 0.973, g: 0.969, b: 1.0 });
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
 
-  const badge = mkPill('E-commerce Payments', C.indigo50, C.indigo600, 16, 8, 100);
+  const badge = mkPill('E-commerce Payments', C.hpBlue100, C.hpAction, 16, 8, 100);
   badge.x = 144; badge.y = 80;
   sec.appendChild(badge);
 
-  const h1 = mkText('The payment platform\nbuilt for e-commerce', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  const h1 = mkH2('The payment platform\nbuilt for e-commerce', 56, C.hpTextPri, 'LEFT', 560);
   h1.lineHeight = { value: 64, unit: 'PIXELS' };
   h1.x = 144; h1.y = 126;
   sec.appendChild(h1);
 
-  const sub = mkText('Accept PayNow, cards, GrabPay, and 700+ digital wallets. Integrate with Shopify, WooCommerce, and more. No monthly fees — ever.', 20, W.regular, C.slate600, 'LEFT', 540);
+  const sub = mkText('Accept PayNow, cards, GrabPay, and 700+ digital wallets. Integrate with Shopify, WooCommerce, and more. No monthly fees — ever.', 20, W.regular, C.hpTextSec, 'LEFT', 540);
   sub.lineHeight = { value: 30, unit: 'PIXELS' };
   sub.x = 144; sub.y = 280;
   sec.appendChild(sub);
 
-  const b1 = mkBtn('Start for free', C.indigo600, C.white, 24, 14, 12);
+  const b1 = mkBtn('Start for free', C.hpAction, C.white, 24, 14, 12);
   b1.x = 144; b1.y = 374;
   sec.appendChild(b1);
 
@@ -1556,23 +1576,23 @@ function mkHeroEcommerce() {
 }
 
 function mkHeroRetail() {
-  const sec = mkFrame('Hero', 1440, 560, { r: 0.941, g: 0.992, b: 0.965 });
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
 
-  const badge = mkPill('Retail', C.emerald50, C.emerald600, 16, 8, 100);
+  const badge = mkPill('Retail', C.hpBlue100, C.hpAction, 16, 8, 100);
   badge.x = 144; badge.y = 80;
   sec.appendChild(badge);
 
-  const h1 = mkText('Modern payments for\nretail, online and in-store', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  const h1 = mkH2('Modern payments for\nretail, online and in-store', 56, C.hpTextPri, 'LEFT', 560);
   h1.lineHeight = { value: 64, unit: 'PIXELS' };
   h1.x = 144; h1.y = 126;
   sec.appendChild(h1);
 
-  const sub = mkText('Connect your physical store and online sales on one platform. HitPay\'s POS, card terminals, and Tap to Pay work together so your customers always get a seamless experience.', 20, W.regular, C.slate600, 'LEFT', 540);
+  const sub = mkText('Connect your physical store and online sales on one platform. HitPay\'s POS, card terminals, and Tap to Pay work together so your customers always get a seamless experience.', 20, W.regular, C.hpTextSec, 'LEFT', 540);
   sub.lineHeight = { value: 30, unit: 'PIXELS' };
   sub.x = 144; sub.y = 290;
   sec.appendChild(sub);
 
-  const b1 = mkBtn('Start for free', C.emerald600, C.white, 24, 14, 12);
+  const b1 = mkBtn('Start for free', C.hpAction, C.white, 24, 14, 12);
   b1.x = 144; b1.y = 392;
   sec.appendChild(b1);
 
@@ -1592,23 +1612,23 @@ function mkHeroRetail() {
 }
 
 function mkHeroNonprofits() {
-  const sec = mkFrame('Hero', 1440, 560, { r: 0.992, g: 0.957, b: 1.0 });
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
 
-  const badge = mkPill('Nonprofits & Charities', C.violet50, C.violet600, 16, 8, 100);
+  const badge = mkPill('Nonprofits & Charities', C.hpBlue100, C.hpAction, 16, 8, 100);
   badge.x = 144; badge.y = 80;
   sec.appendChild(badge);
 
-  const h1 = mkText('Accept donations.\nGrow your mission.', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  const h1 = mkH2('Accept donations.\nGrow your mission.', 56, C.hpTextPri, 'LEFT', 560);
   h1.lineHeight = { value: 64, unit: 'PIXELS' };
   h1.x = 144; h1.y = 126;
   sec.appendChild(h1);
 
-  const sub = mkText('HitPay helps nonprofits, charities, and social enterprises accept online donations, run fundraising events, and grow recurring giving — with zero monthly fees.', 20, W.regular, C.slate600, 'LEFT', 540);
+  const sub = mkText('HitPay helps nonprofits, charities, and social enterprises accept online donations, run fundraising events, and grow recurring giving — with zero monthly fees.', 20, W.regular, C.hpTextSec, 'LEFT', 540);
   sub.lineHeight = { value: 30, unit: 'PIXELS' };
   sub.x = 144; sub.y = 278;
   sec.appendChild(sub);
 
-  const b1 = mkBtn('Start for free', C.violet600, C.white, 24, 14, 12);
+  const b1 = mkBtn('Start for free', C.hpAction, C.white, 24, 14, 12);
   b1.x = 144; b1.y = 390;
   sec.appendChild(b1);
 
@@ -1643,7 +1663,7 @@ function mockDashboard() {
   card.strokeWeight = 1;
   card.strokeAlign = 'INSIDE';
 
-  const headerBg = mkRect(320, 80, C.indigo600);
+  const headerBg = mkRect(320, 80, C.hpDeepBlue);
   headerBg.x = 0; headerBg.y = 0;
   card.appendChild(headerBg);
 
@@ -1656,7 +1676,7 @@ function mockDashboard() {
   totalAmt.x = 20; totalAmt.y = 38;
   card.appendChild(totalAmt);
 
-  const upBadge = mkText('↑ 12.4%', 12, W.semibold, C.indigo200);
+  const upBadge = mkText('↑ 12.4%', 12, W.semibold, C.hpBlue100);
   upBadge.x = 230; upBadge.y = 46;
   card.appendChild(upBadge);
 
@@ -1666,9 +1686,9 @@ function mockDashboard() {
   card.appendChild(methodsLabel);
 
   const methods = [
-    { label: 'PayNow QR', amount: 'S$2,140', pct: 0.44, barColor: C.indigo600 },
-    { label: 'Credit/Debit Card', amount: 'S$1,890', pct: 0.39, barColor: C.violet500 },
-    { label: 'GrabPay', amount: 'S$862', pct: 0.18, barColor: C.emerald500 },
+    { label: 'PayNow QR', amount: 'S$2,140', pct: 0.44, barColor: C.hpAction },
+    { label: 'Credit/Debit Card', amount: 'S$1,890', pct: 0.39, barColor: C.hpAction },
+    { label: 'GrabPay', amount: 'S$862', pct: 0.18, barColor: C.hpSuccess },
   ];
 
   methods.forEach((m, i) => {
@@ -1706,23 +1726,23 @@ function mockDashboard() {
 }
 
 function mkHeroLanding() {
-  const sec = mkFrame('Hero', 1440, 560, { r: 0.973, g: 0.969, b: 1.0 });
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
 
-  const badge = mkPill('MAS Licensed  ·  PCI DSS Certified  ·  SOC2 Compliant', C.indigo50, C.indigo600, 16, 8, 100);
+  const badge = mkPill('MAS Licensed  ·  PCI DSS Certified  ·  SOC2 Compliant', C.hpBlue100, C.hpAction, 16, 8, 100);
   badge.x = 144; badge.y = 76;
   sec.appendChild(badge);
 
-  const h1 = mkText('Payments made\nfast, easy and reliable', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  const h1 = mkH2('Payments made\nfast, easy and reliable', 56, C.hpTextPri, 'LEFT', 560);
   h1.lineHeight = { value: 64, unit: 'PIXELS' };
   h1.x = 144; h1.y = 124;
   sec.appendChild(h1);
 
-  const sub = mkText('Strip away the payment hassle. Focus on your growth.\nAccept PayNow, cards, QRs and international payments across your website, retail store, and social media. One unified platform, zero monthly fees.', 18, W.regular, C.slate600, 'LEFT', 520);
+  const sub = mkText('Strip away the payment hassle. Focus on your growth.\nAccept PayNow, cards, QRs and international payments across your website, retail store, and social media. One unified platform, zero monthly fees.', 18, W.regular, C.hpTextSec, 'LEFT', 520);
   sub.lineHeight = { value: 28, unit: 'PIXELS' };
   sub.x = 144; sub.y = 278;
   sec.appendChild(sub);
 
-  const b1 = mkBtn('Create free account', C.indigo600, C.white, 24, 14, 12);
+  const b1 = mkBtn('Create free account', C.hpAction, C.white, 24, 14, 12);
   b1.x = 144; b1.y = 378;
   sec.appendChild(b1);
 
@@ -1742,23 +1762,23 @@ function mkHeroLanding() {
 }
 
 function mkHeroLandingPlain() {
-  const sec = mkFrame('Hero', 1440, 560, { r: 0.973, g: 0.969, b: 1.0 });
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
 
-  const badge = mkPill('New: Cross-border QR now live in 10 markets  →', C.indigo50, C.indigo700, 16, 8, 100);
+  const badge = mkPill('New: Cross-border QR now live in 10 markets  →', C.hpBlue100, C.hpAction, 16, 8, 100);
   badge.x = 144; badge.y = 76;
   sec.appendChild(badge);
 
-  const h1 = mkText('Accept payments\nyour way', 56, W.extrabold, C.slate900, 'LEFT', 560);
+  const h1 = mkH2('Accept payments\nyour way', 56, C.hpTextPri, 'LEFT', 560);
   h1.lineHeight = { value: 64, unit: 'PIXELS' };
   h1.x = 144; h1.y = 124;
   sec.appendChild(h1);
 
-  const sub = mkText('Break free from the patchwork of tools, the hidden fees, and the lock-in.\nHitPay is the all-in-one payment platform that lets growing businesses collect money the way their customers prefer — no-code or full API.', 18, W.regular, C.slate600, 'LEFT', 520);
+  const sub = mkText('Break free from the patchwork of tools, the hidden fees, and the lock-in.\nHitPay is the all-in-one payment platform that lets growing businesses collect money the way their customers prefer — no-code or full API.', 18, W.regular, C.hpTextSec, 'LEFT', 520);
   sub.lineHeight = { value: 28, unit: 'PIXELS' };
   sub.x = 144; sub.y = 264;
   sec.appendChild(sub);
 
-  const b1 = mkBtn('Create free account', C.indigo600, C.white, 24, 14, 12);
+  const b1 = mkBtn('Create free account', C.hpAction, C.white, 24, 14, 12);
   b1.x = 144; b1.y = 394;
   sec.appendChild(b1);
 
@@ -1781,7 +1801,7 @@ function mkHeroLandingPlain() {
 
 function buildEcommerce(xOffset = 0) {
   const page = new Page('E-commerce Landing Page', xOffset);
-  const ac = C.indigo600;
+  const ac = C.hpAction;
 
   page.add(mkNavbar(ac), 64);
   page.add(mkHeroEcommerce(), 560);
@@ -1806,7 +1826,7 @@ function buildEcommerce(xOffset = 0) {
       'Mobile-optimised checkout that works on any device',
     ],
     mockUI: mockCheckout(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -1838,7 +1858,7 @@ function buildEcommerce(xOffset = 0) {
       'All major payment methods supported on every link',
     ],
     mockUI: mockPaymentLink(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -1867,7 +1887,7 @@ function buildEcommerce(xOffset = 0) {
       { value: '100+', label: 'Currencies supported' },
       { value: 'T+1', label: 'Business day payouts' },
     ],
-    C.indigo900, C.white, C.indigo200
+    C.hpDeepBlue, C.white, C.hpBlue100
   ), 192);
 
   page.add(mkTestimonial(
@@ -1919,7 +1939,7 @@ function buildEcommerce(xOffset = 0) {
 
 function buildRetail(xOffset = 1540) {
   const page = new Page('Retail Landing Page', xOffset);
-  const ac = C.emerald600;
+  const ac = C.hpAction;
 
   page.add(mkNavbar(ac), 64);
   page.add(mkHeroRetail(), 560);
@@ -1944,7 +1964,7 @@ function buildRetail(xOffset = 1540) {
       'Works on iPad, Android tablet, or PC — no proprietary hardware required',
     ],
     mockUI: mockPOSDashboard(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -1991,7 +2011,7 @@ function buildRetail(xOffset = 1540) {
       const tapT = mkText('Tap card', 11, W.regular, C.slate300, 'CENTER', 90);
       tapT.x = 19; tapT.y = 50;
       terminal.appendChild(tapT);
-      const payBtn2 = mkRect(90, 28, C.emerald600, 8);
+      const payBtn2 = mkRect(90, 28, C.hpAction, 8);
       payBtn2.x = 19; payBtn2.y = 156;
       terminal.appendChild(payBtn2);
       const payT2 = mkText('PAY', 12, W.bold, C.white, 'CENTER', 90);
@@ -2003,21 +2023,21 @@ function buildRetail(xOffset = 1540) {
       termLbl.x = 0; termLbl.y = 240;
       hw.appendChild(termLbl);
 
-      const soundbox = mkFrame('Soundbox', 96, 164, C.emerald800, 16);
+      const soundbox = mkFrame('Soundbox', 96, 164, C.hpDeepBlue, 16);
       soundbox.x = 160; soundbox.y = 66;
-      const sbLabel = mkText('Payment\nConfirmed', 12, W.medium, C.emerald300, 'CENTER', 76);
+      const sbLabel = mkText('Payment\nConfirmed', 12, W.medium, C.hpBlue100, 'CENTER', 76);
       sbLabel.lineHeight = { value: 18, unit: 'PIXELS' };
       sbLabel.x = 10; sbLabel.y = 16;
       soundbox.appendChild(sbLabel);
 
       // Speaker grille
       [0, 10, 20, 30, 40].forEach((dy) => {
-        const bar = mkRect(76, 4, C.emerald600, 2);
+        const bar = mkRect(76, 4, C.hpAction, 2);
         bar.x = 10; bar.y = 68 + dy;
         soundbox.appendChild(bar);
       });
 
-      const sbAmt = mkText('S$91.00', 12, W.medium, C.emerald300, 'CENTER', 76);
+      const sbAmt = mkText('S$91.00', 12, W.medium, C.hpBlue100, 'CENTER', 76);
       sbAmt.x = 10; sbAmt.y = 136;
       soundbox.appendChild(sbAmt);
       hw.appendChild(soundbox);
@@ -2029,7 +2049,7 @@ function buildRetail(xOffset = 1540) {
       hw.resize(280, 262);
       return hw;
     })(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2057,7 +2077,7 @@ function buildRetail(xOffset = 1540) {
       { value: 'T+1', label: 'Business day payouts' },
       { value: 'S$0', label: 'Monthly subscription fees' },
     ],
-    C.emerald900, C.white, C.emerald200
+    C.hpDeepBlue, C.white, C.hpBlue100
   ), 192);
 
   page.add(mkTestimonial(
@@ -2109,7 +2129,7 @@ function buildRetail(xOffset = 1540) {
 
 function buildNonprofits(xOffset = 3080) {
   const page = new Page('Nonprofits Landing Page', xOffset);
-  const ac = C.violet600;
+  const ac = C.hpAction;
 
   page.add(mkNavbar(ac), 64);
   page.add(mkHeroNonprofits(), 560);
@@ -2134,7 +2154,7 @@ function buildNonprofits(xOffset = 3080) {
       'Instant email receipts for every donor',
     ],
     mockUI: mockDonation(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2168,7 +2188,7 @@ function buildNonprofits(xOffset = 3080) {
       'Share payment links with guests before the event via email or WhatsApp',
     ],
     mockUI: mockQR(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2197,7 +2217,7 @@ function buildNonprofits(xOffset = 3080) {
       { value: 'T+1', label: 'Business day payouts' },
       { value: '100%', label: 'Secure and PCI DSS compliant' },
     ],
-    { r: 0.427, g: 0.157, b: 0.851 }, C.white, C.violet200
+    C.hpDeepBlue, C.white, C.hpBlue100
   ), 192);
 
   page.add(mkTestimonial(
@@ -2249,7 +2269,7 @@ function buildNonprofits(xOffset = 3080) {
 
 function buildLanding(xOffset = 4620) {
   const page = new Page('General Landing Page (SEO/AEO)', xOffset);
-  const ac = C.indigo600;
+  const ac = C.hpAction;
 
   page.add(mkNavbar(ac), 64);
   page.add(mkHeroLanding(), 560);
@@ -2264,7 +2284,7 @@ function buildLanding(xOffset = 4620) {
       { value: '700+', label: 'Payment methods' },
       { value: 'T+1', label: 'Business day payouts' },
     ],
-    C.indigo900, C.white, C.indigo200
+    C.hpDeepBlue, C.white, C.hpBlue100
   ), 192);
   page.add(mkIntro(
     'One platform. Every way to get paid.',
@@ -2282,7 +2302,7 @@ function buildLanding(xOffset = 4620) {
       'Mobile-optimised, PCI DSS Level 1 secure',
     ],
     mockUI: mockCheckout(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2314,7 +2334,7 @@ function buildLanding(xOffset = 4620) {
       'Tourists pay in their home currency',
     ],
     mockUI: mockQR(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2342,7 +2362,7 @@ function buildLanding(xOffset = 4620) {
       { value: 'S$0', label: 'Monthly platform fees' },
       { value: '2016', label: 'Founded in Singapore' },
     ],
-    C.indigo900, C.white, C.indigo200
+    C.hpDeepBlue, C.white, C.hpBlue100
   ), 192);
 
   page.add(mkTestimonial(
@@ -2394,7 +2414,7 @@ function buildLanding(xOffset = 4620) {
 
 function buildLandingPlainInspired(xOffset = 6160) {
   const page = new Page('General Landing v2 (Plain-inspired)', xOffset);
-  const ac = C.indigo600;
+  const ac = C.hpAction;
 
   page.add(mkNavbar(ac), 64);
   page.add(mkHeroLandingPlain(), 560);
@@ -2424,13 +2444,13 @@ function buildLandingPlainInspired(xOffset = 6160) {
       { value: '700+', label: 'Payment methods' },
       { value: 'T+1', label: 'Business day payouts' },
     ],
-    C.indigo900, C.white, C.indigo200
+    C.hpDeepBlue, C.white, C.hpBlue100
   ), 192);
 
   // Orchestration dark section
   page.add((() => {
     const sec = mkFrame('OrchestrationSection', 1440, 380, C.slate800);
-    const eyebrow = mkText('THE HITPAY DIFFERENCE', 11, W.semibold, C.indigo200, 'CENTER', 800);
+    const eyebrow = mkText('THE HITPAY DIFFERENCE', 11, W.semibold, C.hpBlue100, 'CENTER', 800);
     eyebrow.letterSpacing = { value: 1.5, unit: 'PIXELS' };
     eyebrow.x = 320; eyebrow.y = 40;
     sec.appendChild(eyebrow);
@@ -2471,7 +2491,7 @@ function buildLandingPlainInspired(xOffset = 6160) {
       'Cross-border wallets for tourists and overseas buyers',
     ],
     mockUI: mockCheckout(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2503,7 +2523,7 @@ function buildLandingPlainInspired(xOffset = 6160) {
       'Settle in SGD — no FX complexity for you',
     ],
     mockUI: mockQR(),
-    bg: C.slate50,
+    bg: C.hpBlue50,
     textSide: 'left',
     accent: ac,
   }), 480);
@@ -2550,7 +2570,7 @@ function buildLandingPlainInspired(xOffset = 6160) {
       const qT = mkText(row.q, 14, W.medium, C.slate300, 'LEFT', 560);
       qT.x = 144; qT.y = y;
       sec.appendChild(qT);
-      const aT = mkText(row.a, 14, W.regular, C.indigo200, 'LEFT', 480);
+      const aT = mkText(row.a, 14, W.regular, C.hpBlue100, 'LEFT', 480);
       aT.x = 736; aT.y = y;
       sec.appendChild(aT);
       if (i < rows.length - 1) {
@@ -2642,12 +2662,12 @@ function mkHeroIndustry(cfg, ac) {
   badge.x = 144; badge.y = 80;
   sec.appendChild(badge);
 
-  const h1 = mkText(cfg.heroH1, 56, W.extrabold, C.slate900, 'LEFT', 560);
+  const h1 = mkH2(cfg.heroH1, 56, C.hpTextPri, 'LEFT', 560);
   h1.lineHeight = { value: 64, unit: 'PIXELS' };
   h1.x = 144; h1.y = 126;
   sec.appendChild(h1);
 
-  const sub = mkText(cfg.heroSub, 20, W.regular, C.slate600, 'LEFT', 540);
+  const sub = mkText(cfg.heroSub, 20, W.regular, C.hpTextSec, 'LEFT', 540);
   sub.lineHeight = { value: 30, unit: 'PIXELS' };
   sub.x = 144; sub.y = 290;
   sec.appendChild(sub);
@@ -2676,10 +2696,13 @@ function mkHeroIndustry(cfg, ac) {
 
 function buildIndustry(cfg, xOffset) {
   const page = new Page(cfg.name, xOffset);
-  const ac = cfg.accent;
+  const ac = C.hpAction;  // Always brand action blue
+
+  // Override per-industry colors with brand palette
+  const brandedCfg = { ...cfg, heroBg: C.hpBlue50, pillBg: C.hpBlue50 };
 
   page.add(mkNavbar(ac), 64);
-  page.add(mkHeroIndustry(cfg, ac), 560);
+  page.add(mkHeroIndustry(brandedCfg, ac), 560);
   page.add(mkTrustBar(cfg.trustTitle, cfg.trustItems), 120);
   page.add(mkIntro(cfg.introTitle, cfg.introSub), 240);
 
@@ -2690,7 +2713,7 @@ function buildIndustry(cfg, xOffset) {
       p: f.p,
       bullets: f.bullets,
       mockUI: f.mockFn(),
-      bg: i % 2 === 0 ? C.slate50 : C.white,
+      bg: i % 2 === 0 ? C.hpBlue50 : C.white,
       textSide: i % 2 === 0 ? 'left' : 'right',
       accent: ac,
     }), 480);
@@ -2698,9 +2721,9 @@ function buildIndustry(cfg, xOffset) {
 
   page.add(mkStats(
     cfg.stats,
-    cfg.statsBg || C.slate900,
+    C.hpDeepBlue,
     C.white,
-    cfg.statsAccent || ac
+    C.hpBlue100
   ), 192);
 
   page.add(mkTestimonial(
@@ -2708,7 +2731,7 @@ function buildIndustry(cfg, xOffset) {
     cfg.testimonial.name,
     cfg.testimonial.role,
     ac,
-    cfg.testimonial.lightBg
+    C.hpBlue100
   ), 380);
 
   page.add(mkGrid(cfg.gridTitle, cfg.gridSub, cfg.gridItems), 660);
@@ -3498,7 +3521,7 @@ INDUSTRY.fitness = {
 
 INDUSTRY.events = {
   name: 'Events & Weddings — HitPay',
-  accent: C.violet600,
+  accent: C.hpAction,
   heroBg: { r: 0.972, g: 0.957, b: 1.0 },
   pillBg: C.violet50,
   badge: 'Events & Wedding Planning',
@@ -3566,7 +3589,7 @@ INDUSTRY.events = {
     { value: 'T+1',  label: 'Business day payouts' },
     { value: '100%', label: 'Digital, no cash handling' },
   ],
-  statsBg: C.slate900, statsAccent: C.violet600,
+  statsBg: C.slate900, statsAccent: C.hpAction,
   testimonial: {
     quote: 'Wedding deposits used to take 2-3 weeks via bank transfer. With HitPay payment links, couples pay the deposit within hours of our first meeting. My cash flow is completely transformed.',
     name: 'Cheryl Han',
