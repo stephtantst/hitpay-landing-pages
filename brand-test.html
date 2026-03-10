@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HitPay Brand Rebrand — Visual Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+  <style>
+    .swatch { width: 80px; height: 80px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); }
+    .test-section { border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; margin-bottom: 32px; }
+    .pass { color: #4DAB80; } .fail { color: #e53e3e; }
+    .check-label { font-size: 14px; color: #61667C; margin-bottom: 4px; }
+    .check-value { font-size: 13px; font-family: monospace; color: #03102F; }
+  </style>
+</head>
+<body class="bg-white text-[#03102F] p-8 max-w-5xl mx-auto">
+
+  <h1 class="text-4xl font-medium mb-2">HitPay Brand Rebrand — Visual Test Page</h1>
+  <p class="text-[#61667C] mb-8">This page tests all brand elements applied during the rebrand. Open in browser and verify each section visually.</p>
+
+  <!-- 1. Color Swatches -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">1. Brand Colors</h2>
+    <div class="flex flex-wrap gap-6">
+      <div class="text-center">
+        <div class="swatch bg-[#0E2859] mx-auto mb-2"></div>
+        <div class="check-label">Logo Blue</div>
+        <div class="check-value">#0E2859</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#002771] mx-auto mb-2"></div>
+        <div class="check-label">Deep Blue</div>
+        <div class="check-value">#002771</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#2465DE] mx-auto mb-2"></div>
+        <div class="check-label">Action Blue</div>
+        <div class="check-value">#2465DE</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#1B4FB8] mx-auto mb-2"></div>
+        <div class="check-label">Hover Blue</div>
+        <div class="check-value">#1B4FB8</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#03102F] mx-auto mb-2"></div>
+        <div class="check-label">Text Primary</div>
+        <div class="check-value">#03102F</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#61667C] mx-auto mb-2"></div>
+        <div class="check-label">Text Secondary</div>
+        <div class="check-value">#61667C</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#F9F9F6] mx-auto mb-2"></div>
+        <div class="check-label">Beige</div>
+        <div class="check-value">#F9F9F6</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#EBF1FC] mx-auto mb-2"></div>
+        <div class="check-label">Blue 50</div>
+        <div class="check-value">#EBF1FC</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#D6E3F9] mx-auto mb-2"></div>
+        <div class="check-label">Blue 100</div>
+        <div class="check-value">#D6E3F9</div>
+      </div>
+      <div class="text-center">
+        <div class="swatch bg-[#4DAB80] mx-auto mb-2"></div>
+        <div class="check-label">Success</div>
+        <div class="check-value">#4DAB80</div>
+      </div>
+    </div>
+    <div class="mt-6">
+      <div class="check-label mb-2">Brand Gradient</div>
+      <div class="h-16 rounded-xl" style="background: linear-gradient(135deg, #002771 0%, #2465DE 100%);"></div>
+    </div>
+  </div>
+
+  <!-- 2. Typography -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">2. Typography</h2>
+    <div class="space-y-6">
+      <div>
+        <div class="check-label">h1 — IBM Plex Sans Condensed, font-medium (500)</div>
+        <h1 class="text-5xl font-medium">Modern payments for growing businesses</h1>
+      </div>
+      <div>
+        <div class="check-label">h2 — IBM Plex Sans Condensed, font-medium (500)</div>
+        <h2 class="text-3xl font-medium">One platform. Every sales channel.</h2>
+      </div>
+      <div>
+        <div class="check-label">h3 — IBM Plex Sans Condensed</div>
+        <h3 class="text-xl font-semibold">Feature heading</h3>
+      </div>
+      <div>
+        <div class="check-label">Body — Hauora (fallback: Manrope)</div>
+        <p class="text-base">Connect your physical store and online sales on one platform. HitPay's POS, card terminals, and Tap to Pay work together so your partners always get a seamless experience.</p>
+      </div>
+      <div>
+        <div class="check-label">Secondary text — Hauora, #61667C</div>
+        <p class="text-[#61667C]">Free to sign up · No monthly subscription · Pay per transaction</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Logos -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">3. Logos</h2>
+    <div class="grid grid-cols-3 gap-8">
+      <div>
+        <div class="check-label mb-3">hitpay.svg (navbar, light bg)</div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex items-center justify-center">
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
+        </div>
+      </div>
+      <div>
+        <div class="check-label mb-3">hitpay-white.svg (footer, dark bg)</div>
+        <div class="bg-[#03102F] rounded-xl p-6 flex items-center justify-center">
+          <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
+        </div>
+      </div>
+      <div>
+        <div class="check-label mb-3">logogram.svg (icon only)</div>
+        <div class="bg-white border border-slate-200 rounded-xl p-6 flex items-center justify-center">
+          <img src="assets/logos/logogram.svg" alt="HitPay" class="h-10">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Buttons & CTAs -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">4. Buttons & CTAs</h2>
+    <div class="flex flex-wrap gap-4 mb-6">
+      <a href="#" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#1B4FB8] transition-colors text-base">
+        Primary CTA
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="inline-flex items-center gap-2 bg-white text-[#03102F] font-semibold px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-base">
+        Secondary CTA
+      </a>
+      <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
+        Text link <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="check-label">CTA on gradient background:</div>
+    <div class="gradient-cta rounded-xl p-8 mt-2 flex flex-wrap gap-4 items-center">
+      <a href="#" class="bg-white text-[#0E2859] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Start for free</a>
+      <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Request a demo</a>
+    </div>
+  </div>
+
+  <!-- 5. Components -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">5. Components</h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Badge -->
+      <div>
+        <div class="check-label mb-3">Industry Badge</div>
+        <div class="inline-flex items-center gap-2 bg-[#EBF1FC] text-[#2465DE] text-sm font-medium px-4 py-2 rounded-full">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"/></svg>
+          Retail
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div>
+        <div class="check-label mb-3">Feature Checklist</div>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span class="text-slate-700">Inventory tracking with low-stock alerts</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span class="text-slate-700">Multiple staff logins with role-based permissions</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Feature Card -->
+      <div>
+        <div class="check-label mb-3">Feature Card (hover me)</div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Inventory management</h3>
+          <p class="text-[#61667C] text-sm">Track stock levels, get low-stock alerts, and sync inventory between your store and website automatically.</p>
+        </div>
+      </div>
+
+      <!-- Payment Badge -->
+      <div>
+        <div class="check-label mb-3">Payment Badges</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="payment-badge">Visa / Mastercard</span>
+          <span class="payment-badge">PayNow</span>
+          <span class="payment-badge">GrabPay</span>
+          <span class="payment-badge">ShopeePay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Section Backgrounds -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">6. Section Backgrounds</h2>
+    <div class="space-y-4">
+      <div class="bg-white border border-slate-200 rounded-xl p-6">
+        <div class="check-label">White — primary sections</div>
+        <div class="check-value">bg-white (#FFFFFF)</div>
+      </div>
+      <div class="bg-[#F9F9F6] rounded-xl p-6">
+        <div class="check-label">Beige — alternating sections</div>
+        <div class="check-value">bg-[#F9F9F6]</div>
+      </div>
+      <div class="bg-[#03102F] rounded-xl p-6">
+        <div class="check-label text-slate-400">Dark — footer, stats</div>
+        <div class="check-value text-white">bg-[#03102F]</div>
+      </div>
+      <div class="gradient-cta rounded-xl p-6">
+        <div class="check-label text-blue-200">Gradient — CTA banners</div>
+        <div class="check-value text-white">gradient-cta (135deg, #002771 to #2465DE)</div>
+      </div>
+      <div class="gradient-hero rounded-xl p-6 border border-slate-100">
+        <div class="check-label">Hero gradient — light blue tint to white</div>
+        <div class="check-value">gradient-hero (#EBF1FC to #FFFFFF)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Navbar Mock -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">7. Navbar</h2>
+    <header class="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <a href="#" class="flex items-center gap-2">
+            <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+            <a href="#" class="hover:text-[#03102F]">Products</a>
+            <a href="#" class="hover:text-[#03102F]">Solutions</a>
+            <a href="#" class="hover:text-[#03102F]">Pricing</a>
+            <a href="#" class="hover:text-[#03102F]">Developers</a>
+          </nav>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+          <a href="#" class="text-sm font-semibold bg-[#2465DE] text-white px-4 py-2 rounded-lg hover:bg-[#1B4FB8] transition-colors">Get started</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- 8. Footer Mock -->
+  <div class="test-section p-0 overflow-hidden">
+    <div class="p-8 pb-4"><h2 class="text-2xl font-medium">8. Footer</h2></div>
+    <footer class="bg-[#03102F] text-slate-400 py-10 px-8 rounded-b-2xl">
+      <div class="flex items-center gap-2 mb-4">
+        <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
+      </div>
+      <p class="text-sm text-slate-500 leading-relaxed mb-6">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
+      <div class="border-t border-slate-800 pt-6 flex justify-between items-center">
+        <div class="text-sm text-[#61667C]">© 2025 HitPay Payment Solutions Pte. Ltd.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 9. Stats Section -->
+  <div class="test-section p-0 overflow-hidden">
+    <div class="p-8 pb-4"><h2 class="text-2xl font-medium">9. Stats Bar (Dark)</h2></div>
+    <div class="bg-[#002771] py-12 px-8 rounded-b-2xl">
+      <div class="grid grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-3xl font-medium text-white mb-2">&lt;5 min</div>
+          <div class="text-blue-300 text-sm">Setup time</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-medium text-white mb-2">15,000+</div>
+          <div class="text-blue-300 text-sm">Partners</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-medium text-white mb-2">T+1</div>
+          <div class="text-blue-300 text-sm">Payouts</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-medium text-white mb-2">S$0</div>
+          <div class="text-blue-300 text-sm">Monthly fees</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. Automated Checks -->
+  <div class="test-section">
+    <h2 class="text-2xl font-medium mb-6">10. Automated Checks</h2>
+    <div id="checks" class="space-y-2 font-mono text-sm"></div>
+  </div>
+
+  <script>
+    const checks = document.getElementById('checks');
+
+    function addCheck(label, pass, detail) {
+      const row = document.createElement('div');
+      row.className = 'flex items-center gap-3';
+
+      const badge = document.createElement('span');
+      badge.className = pass ? 'pass font-bold' : 'fail font-bold';
+      badge.textContent = pass ? 'PASS' : 'FAIL';
+
+      const labelEl = document.createElement('span');
+      labelEl.className = 'text-[#03102F]';
+      labelEl.textContent = label;
+
+      row.appendChild(badge);
+      row.appendChild(labelEl);
+
+      if (detail) {
+        const detailEl = document.createElement('span');
+        detailEl.className = 'text-[#61667C] text-xs';
+        detailEl.textContent = detail;
+        row.appendChild(detailEl);
+      }
+
+      checks.appendChild(row);
+    }
+
+    // Check body font
+    const bodyFont = getComputedStyle(document.body).fontFamily;
+    addCheck('Body font includes Hauora or Manrope', bodyFont.includes('Hauora') || bodyFont.includes('Manrope'), bodyFont);
+
+    // Check h1 font
+    const h1 = document.querySelector('h1');
+    const h1Font = getComputedStyle(h1).fontFamily;
+    addCheck('H1 font includes IBM Plex Sans Condensed', h1Font.includes('IBM Plex Sans Condensed') || h1Font.includes('Hauora'), h1Font);
+
+    // Check h1 weight
+    const h1Weight = getComputedStyle(h1).fontWeight;
+    addCheck('H1 font-weight is 500 (medium)', h1Weight === '500', 'weight: ' + h1Weight);
+
+    // Check logos loaded
+    const logos = document.querySelectorAll('img[src*="assets/logos"]');
+    logos.forEach(function(img) {
+      addCheck('Logo loaded: ' + img.src.split('/').pop(), img.naturalWidth > 0 || img.complete, img.naturalWidth + 'x' + img.naturalHeight);
+    });
+
+    // Check brand.css loaded
+    const brandCSS = Array.from(document.styleSheets).some(function(s) { return s.href && s.href.includes('brand.css'); });
+    addCheck('brand.css stylesheet loaded', brandCSS);
+
+    // Check CSS custom properties
+    const root = getComputedStyle(document.documentElement);
+    const actionBlue = root.getPropertyValue('--hp-action-blue').trim();
+    addCheck('CSS var --hp-action-blue defined', actionBlue === '#2465DE', actionBlue || 'undefined');
+
+    const deepBlue = root.getPropertyValue('--hp-deep-blue').trim();
+    addCheck('CSS var --hp-deep-blue defined', deepBlue === '#002771', deepBlue || 'undefined');
+
+    const beige = root.getPropertyValue('--hp-beige').trim();
+    addCheck('CSS var --hp-beige defined', beige === '#F9F9F6', beige || 'undefined');
+
+    // Check gradient-cta uses brand gradient
+    const ctaEl = document.querySelector('.gradient-cta');
+    if (ctaEl) {
+      const ctaBg = getComputedStyle(ctaEl).backgroundImage;
+      addCheck('gradient-cta uses brand gradient', ctaBg.includes('002771') || ctaBg.includes('2465') || ctaBg.includes('linear-gradient'), ctaBg.substring(0, 80));
+    }
+
+    // Summary
+    setTimeout(function() {
+      const passed = checks.querySelectorAll('.pass').length;
+      const total = checks.querySelectorAll('.pass, .fail').length;
+      const summary = document.createElement('div');
+      summary.className = 'mt-4 pt-4 border-t border-slate-200 font-bold text-lg ' + (passed === total ? 'pass' : 'fail');
+      summary.textContent = passed + '/' + total + ' checks passed';
+      checks.appendChild(summary);
+    }, 500);
+  </script>
+
+</body>
+</html>

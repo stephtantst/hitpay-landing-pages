@@ -6,15 +6,10 @@
   <title>HitPay for Wholesale Trade — B2B Invoicing, Bulk Payments, and APAC Collections</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .gradient-hero { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%); }
-    .gradient-cta { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
-    .feature-card { transition: box-shadow 0.2s; }
-    .feature-card:hover { box-shadow: 0 8px 30px rgba(37,99,235,0.12); }
-    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,28 +29,25 @@
   }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-[#03102F]">
 
   <!-- Nav -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-8">
         <a href="index.html" class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-sm">H</span>
-          </div>
-          <span class="font-bold text-lg text-slate-900">HitPay</span>
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-          <a href="#" class="hover:text-slate-900">Products</a>
-          <a href="#" class="hover:text-slate-900">Solutions</a>
-          <a href="#" class="hover:text-slate-900">Pricing</a>
-          <a href="#" class="hover:text-slate-900">Developers</a>
-          <a href="#" class="hover:text-slate-900">Resources</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="#" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#" class="hover:text-[#03102F]">Developers</a>
+          <a href="#" class="hover:text-[#03102F]">Resources</a>
         </nav>
       </div>
       <div class="flex items-center gap-3">
-        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
         <a href="#" class="text-sm font-semibold bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">Get started</a>
       </div>
     </div>
@@ -70,10 +62,10 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
             Wholesale & B2B Trade
           </div>
-          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+          <h1 class="text-5xl lg:text-6xl font-medium text-[#03102F] leading-tight mb-6">
             Professional B2B invoicing and bulk payment collection — built for wholesalers
           </h1>
-          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
             From distributor invoices to recurring supply contracts — HitPay handles high-value B2B payments, cross-border APAC collections, and automated reminders so you get paid faster and scale without the admin.
           </p>
           <div class="flex flex-wrap gap-4">
@@ -92,19 +84,19 @@
           <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 w-80">
             <div class="text-sm font-semibold text-slate-700 mb-4">Outstanding Invoices</div>
             <div class="space-y-3 mb-4">
-              <div class="flex items-center gap-3 p-3 bg-amber-50 rounded-xl border border-amber-200">
+              <div class="flex items-center gap-3 p-3 bg-[#EBF1FC] rounded-xl border border-[#D6E3F9]">
                 <div class="flex-1">
-                  <div class="text-sm font-semibold text-slate-900">Apex Retailers Pte Ltd</div>
+                  <div class="text-sm font-semibold text-[#03102F]">Apex Retailers Pte Ltd</div>
                   <div class="text-xs text-slate-500">INV-2025-0412 · Due 30 Mar</div>
                 </div>
                 <div class="text-right">
-                  <div class="text-sm font-bold text-amber-600">S$28,400</div>
-                  <div class="text-xs text-amber-500">Overdue 2d</div>
+                  <div class="text-sm font-bold text-[#2465DE]">S$28,400</div>
+                  <div class="text-xs text-[#2465DE]">Overdue 2d</div>
                 </div>
               </div>
               <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-200">
                 <div class="flex-1">
-                  <div class="text-sm font-semibold text-slate-900">Global Mart (MY)</div>
+                  <div class="text-sm font-semibold text-[#03102F]">Global Mart (MY)</div>
                   <div class="text-xs text-slate-500">INV-2025-0418 · Due 15 Apr</div>
                 </div>
                 <div class="text-right">
@@ -114,7 +106,7 @@
               </div>
               <div class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200">
                 <div class="flex-1">
-                  <div class="text-sm font-semibold text-slate-900">PhilMart Distribution</div>
+                  <div class="text-sm font-semibold text-[#03102F]">PhilMart Distribution</div>
                   <div class="text-xs text-slate-500">INV-2025-0420 · Due 22 Apr</div>
                 </div>
                 <div class="text-right">
@@ -127,7 +119,7 @@
               <div class="flex justify-between items-center">
                 <div>
                   <div class="text-xs text-slate-500">Total outstanding</div>
-                  <div class="text-2xl font-bold text-slate-900">S$89,200</div>
+                  <div class="text-2xl font-bold text-[#03102F]">S$89,200</div>
                 </div>
                 <div class="text-right">
                   <div class="text-xs text-slate-500">Invoices</div>
@@ -159,19 +151,19 @@
   <!-- Intro -->
   <section class="py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-slate-900 mb-5">Stop chasing payments across email threads and bank transfers.</h2>
-      <p class="text-xl text-slate-600 leading-relaxed">Wholesale distributors, importers, and B2B suppliers deal with large invoices, long payment cycles, and buyers across multiple countries. HitPay centralises your B2B payment collection — professional invoicing, automated reminders, cross-border APAC acceptance, and real-time reconciliation.</p>
+      <h2 class="text-4xl font-bold text-[#03102F] mb-5">Stop chasing payments across email threads and bank transfers.</h2>
+      <p class="text-xl text-[#61667C] leading-relaxed">Wholesale distributors, importers, and B2B suppliers deal with large invoices, long payment cycles, and buyers across multiple countries. HitPay centralises your B2B payment collection — professional invoicing, automated reminders, cross-border APAC acceptance, and real-time reconciliation.</p>
     </div>
   </section>
 
   <!-- USP 1: B2B Invoicing -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <div class="text-blue-700 font-semibold text-sm uppercase tracking-widest mb-4">B2B Invoicing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Professional invoices for large trade orders — with auto-reminders</h2>
-          <p class="text-lg text-slate-600 mb-8">Send GST-compliant invoices for bulk orders in seconds. Include partial payment terms, trade discounts, and multi-currency pricing. HitPay automatically chases overdue invoices with reminders so you focus on fulfillment, not collections.</p>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Professional invoices for large trade orders — with auto-reminders</h2>
+          <p class="text-lg text-[#61667C] mb-8">Send GST-compliant invoices for bulk orders in seconds. Include partial payment terms, trade discounts, and multi-currency pricing. HitPay automatically chases overdue invoices with reminders so you focus on fulfillment, not collections.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
               <div class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -207,30 +199,30 @@
           <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 w-72">
             <div class="flex justify-between items-start mb-4">
               <div>
-                <div class="font-bold text-slate-900">Meridian Supplies Pte Ltd</div>
+                <div class="font-bold text-[#03102F]">Meridian Supplies Pte Ltd</div>
                 <div class="text-xs text-slate-500 mt-0.5">INVOICE · INV-2025-0412</div>
               </div>
-              <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-medium">Due 30 Mar</span>
+              <span class="text-xs bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded font-medium">Due 30 Mar</span>
             </div>
             <div class="border-t border-slate-100 pt-3 space-y-2 mb-3">
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Industrial Pump Set × 40</span>
+                <span class="text-[#61667C]">Industrial Pump Set × 40</span>
                 <span class="font-medium">S$18,000</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Piping (50m rolls) × 120</span>
+                <span class="text-[#61667C]">Piping (50m rolls) × 120</span>
                 <span class="font-medium">S$9,600</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Trade discount (5%)</span>
+                <span class="text-[#61667C]">Trade discount (5%)</span>
                 <span class="font-medium text-green-600">−S$1,380</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">GST (9%)</span>
+                <span class="text-[#61667C]">GST (9%)</span>
                 <span class="font-medium">S$2,180</span>
               </div>
             </div>
-            <div class="flex justify-between font-bold text-slate-900 border-t border-slate-200 pt-3 mb-4">
+            <div class="flex justify-between font-bold text-[#03102F] border-t border-slate-200 pt-3 mb-4">
               <span>Total due</span>
               <span>S$28,400.00</span>
             </div>
@@ -251,32 +243,32 @@
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-76">
             <div class="text-sm font-semibold text-slate-700 mb-4">Accept payments from buyers across APAC</div>
             <div class="grid grid-cols-2 gap-3 mb-4">
-              <div class="bg-slate-50 rounded-xl p-3">
+              <div class="bg-[#F9F9F6] rounded-xl p-3">
                 <div class="font-semibold text-slate-800 text-sm">🇸🇬 Singapore</div>
                 <div class="text-xs text-slate-500 mt-1">PayNow · Cards · GrabPay</div>
                 <div class="text-xs text-blue-600 font-medium mt-1">0.4% PayNow</div>
               </div>
-              <div class="bg-slate-50 rounded-xl p-3">
+              <div class="bg-[#F9F9F6] rounded-xl p-3">
                 <div class="font-semibold text-slate-800 text-sm">🇲🇾 Malaysia</div>
                 <div class="text-xs text-slate-500 mt-1">DuitNow · FPX · Touch 'n Go</div>
                 <div class="text-xs text-blue-600 font-medium mt-1">MYR settlement</div>
               </div>
-              <div class="bg-slate-50 rounded-xl p-3">
+              <div class="bg-[#F9F9F6] rounded-xl p-3">
                 <div class="font-semibold text-slate-800 text-sm">🇵🇭 Philippines</div>
                 <div class="text-xs text-slate-500 mt-1">GCash · PayMaya · Banks</div>
                 <div class="text-xs text-blue-600 font-medium mt-1">PHP settlement</div>
               </div>
-              <div class="bg-slate-50 rounded-xl p-3">
+              <div class="bg-[#F9F9F6] rounded-xl p-3">
                 <div class="font-semibold text-slate-800 text-sm">🇨🇳 China buyers</div>
                 <div class="text-xs text-slate-500 mt-1">Alipay+ · WeChat Pay</div>
                 <div class="text-xs text-blue-600 font-medium mt-1">CNY supported</div>
               </div>
-              <div class="bg-slate-50 rounded-xl p-3">
+              <div class="bg-[#F9F9F6] rounded-xl p-3">
                 <div class="font-semibold text-slate-800 text-sm">🇮🇳 India</div>
                 <div class="text-xs text-slate-500 mt-1">UPI · Cards</div>
                 <div class="text-xs text-blue-600 font-medium mt-1">INR settlement</div>
               </div>
-              <div class="bg-slate-50 rounded-xl p-3">
+              <div class="bg-[#F9F9F6] rounded-xl p-3">
                 <div class="font-semibold text-slate-800 text-sm">🌏 +7 more</div>
                 <div class="text-xs text-slate-500 mt-1">TH · ID · AU · HK · JP · TW · VN</div>
                 <div class="text-xs text-blue-600 font-medium mt-1">12 markets total</div>
@@ -289,8 +281,8 @@
         </div>
         <div class="order-1 lg:order-2">
           <div class="text-blue-700 font-semibold text-sm uppercase tracking-widest mb-4">Cross-border Payments</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Collect from buyers in Malaysia, Philippines, China, and beyond — one platform</h2>
-          <p class="text-lg text-slate-600 mb-8">Wholesale trade spans borders. HitPay lets your APAC buyers pay in their preferred local method — DuitNow, GCash, Alipay, UPI — while you receive clean settlements in SGD. No foreign bank accounts, no FX hassle.</p>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Collect from buyers in Malaysia, Philippines, China, and beyond — one platform</h2>
+          <p class="text-lg text-[#61667C] mb-8">Wholesale trade spans borders. HitPay lets your APAC buyers pay in their preferred local method — DuitNow, GCash, Alipay, UPI — while you receive clean settlements in SGD. No foreign bank accounts, no FX hassle.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
               <div class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -326,13 +318,13 @@
   </section>
 
   <!-- USP 3: Payment Links for reorders -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <div class="text-blue-700 font-semibold text-sm uppercase tracking-widest mb-4">Payment Links</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Send reorder payment requests via WhatsApp — buyers pay in one tap</h2>
-          <p class="text-lg text-slate-600 mb-8">When a regular buyer places a repeat order, skip the invoice formality. Create a quick payment link with the order amount and send it via WhatsApp. They pay instantly — you confirm dispatch. Faster than email, simpler than bank transfer.</p>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Send reorder payment requests via WhatsApp — buyers pay in one tap</h2>
+          <p class="text-lg text-[#61667C] mb-8">When a regular buyer places a repeat order, skip the invoice formality. Create a quick payment link with the order amount and send it via WhatsApp. They pay instantly — you confirm dispatch. Faster than email, simpler than bank transfer.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
               <div class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -373,12 +365,12 @@
             <div class="p-4">
               <div class="bg-blue-50 rounded-xl p-3 mb-4">
                 <div class="flex justify-between text-sm">
-                  <span class="text-slate-600">Industrial Pump Set × 40</span>
-                  <span class="font-bold text-slate-900">S$18,000</span>
+                  <span class="text-[#61667C]">Industrial Pump Set × 40</span>
+                  <span class="font-bold text-[#03102F]">S$18,000</span>
                 </div>
                 <div class="flex justify-between text-sm mt-1">
-                  <span class="text-slate-600">Piping (50m) × 120</span>
-                  <span class="font-bold text-slate-900">S$9,600</span>
+                  <span class="text-[#61667C]">Piping (50m) × 120</span>
+                  <span class="font-bold text-[#03102F]">S$9,600</span>
                 </div>
                 <div class="border-t border-blue-200 mt-2 pt-2 flex justify-between text-sm font-bold">
                   <span class="text-slate-700">Total (incl. GST)</span>
@@ -409,21 +401,21 @@
               <div class="space-y-3">
                 <div class="flex justify-between items-center">
                   <div>
-                    <div class="text-sm font-medium text-slate-900">FreshMart Chain (MY)</div>
+                    <div class="text-sm font-medium text-[#03102F]">FreshMart Chain (MY)</div>
                     <div class="text-xs text-slate-500">Weekly produce supply · Fridays</div>
                   </div>
                   <span class="text-sm font-bold text-blue-700">MYR 14,000/wk</span>
                 </div>
                 <div class="border-t border-slate-100 pt-3 flex justify-between items-center">
                   <div>
-                    <div class="text-sm font-medium text-slate-900">Metro Electronics</div>
+                    <div class="text-sm font-medium text-[#03102F]">Metro Electronics</div>
                     <div class="text-xs text-slate-500">Monthly component top-up</div>
                   </div>
                   <span class="text-sm font-bold text-blue-700">S$32,000/mo</span>
                 </div>
                 <div class="border-t border-slate-100 pt-3 flex justify-between items-center">
                   <div>
-                    <div class="text-sm font-medium text-slate-900">Sunshine Hospitality</div>
+                    <div class="text-sm font-medium text-[#03102F]">Sunshine Hospitality</div>
                     <div class="text-xs text-slate-500">Quarterly linen restocking</div>
                   </div>
                   <span class="text-sm font-bold text-blue-700">S$8,500/qtr</span>
@@ -440,8 +432,8 @@
         </div>
         <div>
           <div class="text-blue-700 font-semibold text-sm uppercase tracking-widest mb-4">Recurring Billing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Automate recurring supply contracts — invoice and charge on schedule</h2>
-          <p class="text-lg text-slate-600 mb-8">Running weekly or monthly supply agreements with retail chains or hotels? Set up recurring billing and HitPay automatically invoices and charges your buyers on schedule — no manual invoicing each cycle, no missed payments.</p>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Automate recurring supply contracts — invoice and charge on schedule</h2>
+          <p class="text-lg text-[#61667C] mb-8">Running weekly or monthly supply agreements with retail chains or hotels? Set up recurring billing and HitPay automatically invoices and charges your buyers on schedule — no manual invoicing each cycle, no missed payments.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
               <div class="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -481,19 +473,19 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">12</div>
+          <div class="text-4xl font-medium text-white mb-2">12</div>
           <div class="text-blue-200 text-sm">APAC markets covered</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">700+</div>
+          <div class="text-4xl font-medium text-white mb-2">700+</div>
           <div class="text-blue-200 text-sm">Payment options supported</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">$0</div>
+          <div class="text-4xl font-medium text-white mb-2">$0</div>
           <div class="text-blue-200 text-sm">Monthly platform fee</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">T+1</div>
+          <div class="text-4xl font-medium text-white mb-2">T+1</div>
           <div class="text-blue-200 text-sm">Business day payouts</div>
         </div>
       </div>
@@ -508,7 +500,7 @@
       <div class="flex items-center justify-center gap-4">
         <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">MT</div>
         <div class="text-left">
-          <div class="font-semibold text-slate-900">MTMojo Traders</div>
+          <div class="font-semibold text-[#03102F]">MTMojo Traders</div>
           <div class="text-slate-500 text-sm">Wholesale Distribution — Singapore & Malaysia</div>
         </div>
       </div>
@@ -516,54 +508,54 @@
   </section>
 
   <!-- Feature grid -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Built for every wholesale and B2B trade business</h2>
-        <p class="text-slate-600 max-w-xl mx-auto">Importers, distributors, manufacturers, food wholesalers, chemical suppliers, electronics components, industrial equipment, and more.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Built for every wholesale and B2B trade business</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">Importers, distributors, manufacturers, food wholesalers, chemical suppliers, electronics components, industrial equipment, and more.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">IRAS-compliant GST invoices</h3>
-          <p class="text-slate-600 text-sm">Auto-calculate 9% GST, add trade discounts, and generate compliant tax invoices ready for corporate buyers.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">IRAS-compliant GST invoices</h3>
+          <p class="text-[#61667C] text-sm">Auto-calculate 9% GST, add trade discounts, and generate compliant tax invoices ready for corporate buyers.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Xero / QuickBooks integration</h3>
-          <p class="text-slate-600 text-sm">Every invoice and payment auto-synced to your accounting system — zero manual data entry at month-end.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Xero / QuickBooks integration</h3>
+          <p class="text-[#61667C] text-sm">Every invoice and payment auto-synced to your accounting system — zero manual data entry at month-end.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">MAS licensed & enterprise-grade</h3>
-          <p class="text-slate-600 text-sm">Regulated by MAS as a Major Payment Institution. PCI DSS Level 1. Trusted for high-value B2B transactions.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">MAS licensed & enterprise-grade</h3>
+          <p class="text-[#61667C] text-sm">Regulated by MAS as a Major Payment Institution. PCI DSS Level 1. Trusted for high-value B2B transactions.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">REST API for ERP integration</h3>
-          <p class="text-slate-600 text-sm">Connect HitPay to your ERP or order management system. Auto-generate invoices when orders are confirmed.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">REST API for ERP integration</h3>
+          <p class="text-[#61667C] text-sm">Connect HitPay to your ERP or order management system. Auto-generate invoices when orders are confirmed.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Next-day payouts</h3>
-          <p class="text-slate-600 text-sm">Revenue settled to your account T+1. Predictable cash flow to manage your own supplier payments on time.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Next-day payouts</h3>
+          <p class="text-[#61667C] text-sm">Revenue settled to your account T+1. Predictable cash flow to manage your own supplier payments on time.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Bulk invoice management</h3>
-          <p class="text-slate-600 text-sm">View all outstanding, overdue, and paid invoices in one dashboard. Export transaction reports for your finance team.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Bulk invoice management</h3>
+          <p class="text-[#61667C] text-sm">View all outstanding, overdue, and paid invoices in one dashboard. Export transaction reports for your finance team.</p>
         </div>
       </div>
     </div>
@@ -572,24 +564,24 @@
   <!-- Related -->
   <section class="py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <h2 class="text-2xl font-bold text-[#03102F] mb-8">Explore more solutions</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <a href="furniture.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
           <div class="text-3xl mb-4">🛋️</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-blue-700">Furniture & Home Furnishings</div>
-          <div class="text-slate-600 text-sm">B2B trade invoicing and BNPL for big-ticket furniture orders.</div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-blue-700">Furniture & Home Furnishings</div>
+          <div class="text-[#61667C] text-sm">B2B trade invoicing and BNPL for big-ticket furniture orders.</div>
           <div class="mt-4 text-blue-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
         <a href="computers.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
           <div class="text-3xl mb-4">💻</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-blue-700">Computers & Electronics</div>
-          <div class="text-slate-600 text-sm">B2B invoicing and BNPL for technology hardware and components.</div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-blue-700">Computers & Electronics</div>
+          <div class="text-[#61667C] text-sm">B2B invoicing and BNPL for technology hardware and components.</div>
           <div class="mt-4 text-blue-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
         <a href="retail.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
           <div class="text-3xl mb-4">🏪</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-blue-700">Retail</div>
-          <div class="text-slate-600 text-sm">Unified POS and online store for retail businesses supplied by wholesalers.</div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-blue-700">Retail</div>
+          <div class="text-[#61667C] text-sm">Unified POS and online store for retail businesses supplied by wholesalers.</div>
           <div class="mt-4 text-blue-700 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
       </div>
@@ -597,101 +589,101 @@
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Frequently asked questions</h2>
-        <p class="text-slate-600">Everything wholesale distributors and B2B trade businesses need to know about HitPay.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Frequently asked questions</h2>
+        <p class="text-[#61667C]">Everything wholesale distributors and B2B trade businesses need to know about HitPay.</p>
       </div>
       <div class="space-y-3">
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay support high-value B2B invoices for wholesale trade?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay support high-value B2B invoices for wholesale trade?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay Invoicing supports large B2B trade invoices with GST calculation, trade discounts, and partial payment terms — for example, 30% deposit upfront and balance on delivery. There is no cap on invoice amounts, making HitPay suitable for wholesale orders of any size. Automated reminders are sent before each due date to reduce overdue payments.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay Invoicing supports large B2B trade invoices with GST calculation, trade discounts, and partial payment terms — for example, 30% deposit upfront and balance on delivery. There is no cap on invoice amounts, making HitPay suitable for wholesale orders of any size. Automated reminders are sent before each due date to reduce overdue payments.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I collect payments from buyers in Malaysia, Philippines, and other APAC countries?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I collect payments from buyers in Malaysia, Philippines, and other APAC countries?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay operates across 12 APAC markets including Singapore, Malaysia, Philippines, Indonesia, Thailand, Hong Kong, India, and more. Buyers pay in their preferred local method — DuitNow, GCash, GoPay, UPI — while you receive settlement in SGD. No foreign bank accounts or FX management required on your end.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay operates across 12 APAC markets including Singapore, Malaysia, Philippines, Indonesia, Thailand, Hong Kong, India, and more. Buyers pay in their preferred local method — DuitNow, GCash, GoPay, UPI — while you receive settlement in SGD. No foreign bank accounts or FX management required on your end.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay integrate with Xero or QuickBooks for accounting?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay integrate with Xero or QuickBooks for accounting?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay integrates natively with both Xero and QuickBooks. Every invoice created and every payment received is automatically synced to your accounting system — eliminating manual data entry and making month-end reconciliation straightforward. This is particularly valuable for wholesale businesses managing hundreds of invoices per month.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay integrates natively with both Xero and QuickBooks. Every invoice created and every payment received is automatically synced to your accounting system — eliminating manual data entry and making month-end reconciliation straightforward. This is particularly valuable for wholesale businesses managing hundreds of invoices per month.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How do automated invoice reminders work in HitPay?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do automated invoice reminders work in HitPay?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">When you create an invoice with a due date, HitPay automatically sends email reminders to your buyer at configured intervals — for example, 7 days before, 3 days before, and 1 day after the due date. This significantly reduces overdue invoices without any manual follow-up on your part, preserving your buyer relationships while improving your cash collection rate.</p>
+            <p class="text-[#61667C] leading-relaxed">When you create an invoice with a due date, HitPay automatically sends email reminders to your buyer at configured intervals — for example, 7 days before, 3 days before, and 1 day after the due date. This significantly reduces overdue invoices without any manual follow-up on your part, preserving your buyer relationships while improving your cash collection rate.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I set up recurring billing for weekly or monthly supply contracts?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I set up recurring billing for weekly or monthly supply contracts?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's Recurring Billing supports weekly, fortnightly, monthly, and quarterly billing cycles with no cap on the recurring amount. Your buyer authorises the payment once and HitPay invoices and charges them automatically on your agreed schedule — ideal for regular supply agreements with retail chains, hotel groups, or restaurant chains.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's Recurring Billing supports weekly, fortnightly, monthly, and quarterly billing cycles with no cap on the recurring amount. Your buyer authorises the payment once and HitPay invoices and charges them automatically on your agreed schedule — ideal for regular supply agreements with retail chains, hotel groups, or restaurant chains.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">My wholesale buyers consistently pay late — what can HitPay do to improve my collection rate?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">My wholesale buyers consistently pay late — what can HitPay do to improve my collection rate?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay's automated reminder system sends payment reminders at your configured intervals before and after the due date — without any manual effort. Research consistently shows that timely, professional reminders can improve on-time payment rates by 30–40%. You can also require a partial deposit before dispatching goods, reducing your financial exposure to late-payers. Together, these features significantly tighten your cash collection cycle without damaging buyer relationships.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay's automated reminder system sends payment reminders at your configured intervals before and after the due date — without any manual effort. Research consistently shows that timely, professional reminders can improve on-time payment rates by 30–40%. You can also require a partial deposit before dispatching goods, reducing your financial exposure to late-payers. Together, these features significantly tighten your cash collection cycle without damaging buyer relationships.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I offer different payment terms to different wholesale buyers — NET 30 for some, NET 60 for others?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I offer different payment terms to different wholesale buyers — NET 30 for some, NET 60 for others?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay invoices are created individually per buyer, so you can set any due date you choose — NET 15, NET 30, NET 60, or a specific calendar date. For your most trusted long-term buyers, you can extend NET 60 terms. For newer accounts or higher-risk orders, you require a deposit or NET 15. Each buyer's full invoice history is tracked separately so you can review payment behaviour over time.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay invoices are created individually per buyer, so you can set any due date you choose — NET 15, NET 30, NET 60, or a specific calendar date. For your most trusted long-term buyers, you can extend NET 60 terms. For newer accounts or higher-risk orders, you require a deposit or NET 15. Each buyer's full invoice history is tracked separately so you can review payment behaviour over time.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Does HitPay support purchase order (PO) reference numbers on invoices for corporate buyers?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay support purchase order (PO) reference numbers on invoices for corporate buyers?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay Invoicing lets you add custom reference fields to each invoice — including your buyer's purchase order number, their internal cost centre code, or any other reference they need for their accounts payable workflow. This makes HitPay invoices compatible with large corporate and government procurement processes that require PO-to-invoice matching before releasing payment.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay Invoicing lets you add custom reference fields to each invoice — including your buyer's purchase order number, their internal cost centre code, or any other reference they need for their accounts payable workflow. This makes HitPay invoices compatible with large corporate and government procurement processes that require PO-to-invoice matching before releasing payment.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">What is the most cost-effective way to collect SGD payments from Malaysian buyers?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is the most cost-effective way to collect SGD payments from Malaysian buyers?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">For Malaysian buyers paying in SGD, PayNow is the most cost-effective at 0.4%. HitPay also supports DuitNow cross-border QR, which lets Malaysian buyers pay directly from their Malaysian banking app — settling in SGD on your end with no foreign bank account required. For very large invoices, bank transfer via HitPay Invoice is also supported. All options give you clean SGD settlement with no FX management on your side.</p>
+            <p class="text-[#61667C] leading-relaxed">For Malaysian buyers paying in SGD, PayNow is the most cost-effective at 0.4%. HitPay also supports DuitNow cross-border QR, which lets Malaysian buyers pay directly from their Malaysian banking app — settling in SGD on your end with no foreign bank account required. For very large invoices, bank transfer via HitPay Invoice is also supported. All options give you clean SGD settlement with no FX management on your side.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How long does it take to get set up on HitPay as a wholesale business?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How long does it take to get set up on HitPay as a wholesale business?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Most wholesale businesses are verified and collecting payments within 1–2 business days. You sign up online, submit your ACRA registration and director NRIC, and HitPay's compliance team reviews your account. There are no lock-in contracts, no setup fees, and no minimum transaction volumes — so you can start sending invoices to buyers the moment your account is approved, with no ongoing commitment if your business model or volumes change.</p>
+            <p class="text-[#61667C] leading-relaxed">Most wholesale businesses are verified and collecting payments within 1–2 business days. You sign up online, submit your ACRA registration and director NRIC, and HitPay's compliance team reviews your account. There are no lock-in contracts, no setup fees, and no minimum transaction volumes — so you can start sending invoices to buyers the moment your account is approved, with no ongoing commitment if your business model or volumes change.</p>
           </div>
         </details>
       </div>
@@ -701,7 +693,7 @@
   <!-- CTA -->
   <section class="py-20 gradient-cta">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-white mb-5">Ready to streamline your B2B payment collections?</h2>
+      <h2 class="text-4xl font-medium text-white mb-5">Ready to streamline your B2B payment collections?</h2>
       <p class="text-blue-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="#" class="bg-white text-blue-800 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors text-base">Start for free</a>
@@ -711,13 +703,12 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-12">
+  <footer class="bg-[#03102F] text-slate-400 py-12">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 mb-12">
         <div class="md:col-span-2">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-7 h-7 bg-blue-700 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">H</span></div>
-            <span class="font-bold text-white">HitPay</span>
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
           </div>
           <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
         </div>
@@ -735,8 +726,8 @@
         </div>
       </div>
       <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
-        <div class="flex gap-6 text-sm text-slate-600">
+        <div class="text-sm text-[#61667C]">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
           <a href="#" class="hover:text-slate-400">Privacy</a>
           <a href="#" class="hover:text-slate-400">Terms</a>
           <a href="#" class="hover:text-slate-400">Security</a>

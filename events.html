@@ -6,15 +6,10 @@
   <title>HitPay for Event Management & Wedding Planners — Get Paid Every Milestone</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .gradient-hero { background: linear-gradient(135deg, #faf5ff 0%, #ffffff 60%); }
-    .gradient-cta { background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%); }
-    .feature-card { transition: box-shadow 0.2s; }
-    .feature-card:hover { box-shadow: 0 8px 30px rgba(168,85,247,0.12); }
-    .payment-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: #334155; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,29 +29,26 @@
   }
   </script>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-[#03102F]">
 
   <!-- Nav -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-8">
         <a href="index.html" class="flex items-center gap-2">
-          <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-sm">H</span>
-          </div>
-          <span class="font-bold text-lg text-slate-900">HitPay</span>
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-          <a href="#" class="hover:text-slate-900">Products</a>
-          <a href="#" class="hover:text-slate-900">Solutions</a>
-          <a href="#" class="hover:text-slate-900">Pricing</a>
-          <a href="#" class="hover:text-slate-900">Developers</a>
-          <a href="#" class="hover:text-slate-900">Resources</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="#" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#" class="hover:text-[#03102F]">Developers</a>
+          <a href="#" class="hover:text-[#03102F]">Resources</a>
         </nav>
       </div>
       <div class="flex items-center gap-3">
-        <a href="#" class="text-sm font-medium text-slate-600 hover:text-slate-900">Sign in</a>
-        <a href="#" class="text-sm font-semibold bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">Get started</a>
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="#" class="text-sm font-semibold bg-[#2465DE] text-white px-4 py-2 rounded-lg hover:bg-[#1B4FB8] transition-colors">Get started</a>
       </div>
     </div>
   </header>
@@ -66,18 +58,18 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 bg-purple-50 text-purple-700 text-sm font-medium px-4 py-2 rounded-full mb-6">
+          <div class="inline-flex items-center gap-2 bg-[#EBF1FC] text-[#2465DE] text-sm font-medium px-4 py-2 rounded-full mb-6">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             Event Management & Wedding Planning
           </div>
-          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+          <h1 class="text-5xl lg:text-6xl font-medium text-[#03102F] leading-tight mb-6">
             Collect deposits, milestone payments, and final balances — without the awkward follow-ups
           </h1>
-          <p class="text-xl text-slate-600 leading-relaxed mb-8">
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
             From wedding planners to corporate event organizers — HitPay lets you lock in clients with deposits, invoice in milestone stages, and sell event registrations online, all from one platform.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="#" class="inline-flex items-center gap-2 bg-purple-600 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-purple-700 transition-colors text-base">
+            <a href="#" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#1B4FB8] transition-colors text-base">
               Start for free
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>
@@ -92,10 +84,10 @@
           <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 w-80">
             <div class="flex justify-between items-start mb-4">
               <div>
-                <div class="font-bold text-slate-900">Blooms & Vows Weddings</div>
+                <div class="font-bold text-[#03102F]">Blooms & Vows Weddings</div>
                 <div class="text-xs text-slate-500 mt-0.5">Lim Wei Qi & Chan Jun Hao · 14 Dec 2025</div>
               </div>
-              <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-medium">In progress</span>
+              <span class="text-xs bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded font-medium">In progress</span>
             </div>
             <div class="space-y-2 mb-4">
               <div class="flex items-center gap-3 p-2.5 bg-green-50 rounded-lg border border-green-200">
@@ -103,22 +95,22 @@
                   <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
                 </div>
                 <div class="flex-1">
-                  <div class="text-xs font-medium text-slate-900">Booking deposit (30%)</div>
+                  <div class="text-xs font-medium text-[#03102F]">Booking deposit (30%)</div>
                   <div class="text-xs text-slate-500">Paid 15 Jan 2025</div>
                 </div>
                 <span class="text-xs font-bold text-green-600">S$4,500</span>
               </div>
-              <div class="flex items-center gap-3 p-2.5 bg-purple-50 rounded-lg border border-purple-300">
-                <div class="w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <div class="flex items-center gap-3 p-2.5 bg-[#EBF1FC] rounded-lg border border-[#D6E3F9]">
+                <div class="w-5 h-5 bg-[#2465DE] rounded-full flex items-center justify-center flex-shrink-0">
                   <div class="w-2 h-2 rounded-full bg-white"></div>
                 </div>
                 <div class="flex-1">
-                  <div class="text-xs font-medium text-slate-900">Mid-event milestone (40%)</div>
+                  <div class="text-xs font-medium text-[#03102F]">Mid-event milestone (40%)</div>
                   <div class="text-xs text-slate-500">Due 1 Oct 2025</div>
                 </div>
-                <span class="text-xs font-bold text-purple-600">S$6,000</span>
+                <span class="text-xs font-bold text-[#2465DE]">S$6,000</span>
               </div>
-              <div class="flex items-center gap-3 p-2.5 bg-slate-50 rounded-lg border border-slate-200">
+              <div class="flex items-center gap-3 p-2.5 bg-[#F9F9F6] rounded-lg border border-slate-200">
                 <div class="w-5 h-5 bg-slate-300 rounded-full flex-shrink-0"></div>
                 <div class="flex-1">
                   <div class="text-xs font-medium text-slate-500">Final balance (30%)</div>
@@ -127,15 +119,15 @@
                 <span class="text-xs font-bold text-slate-400">S$4,500</span>
               </div>
             </div>
-            <div class="bg-purple-50 rounded-xl p-3">
+            <div class="bg-[#EBF1FC] rounded-xl p-3">
               <div class="flex justify-between items-center">
                 <div>
                   <div class="text-xs text-slate-500">Total contract</div>
-                  <div class="text-xl font-bold text-slate-900">S$15,000</div>
+                  <div class="text-xl font-bold text-[#03102F]">S$15,000</div>
                 </div>
                 <div class="text-right">
                   <div class="text-xs text-slate-500">Collected</div>
-                  <div class="text-xl font-bold text-purple-600">S$4,500</div>
+                  <div class="text-xl font-bold text-[#2465DE]">S$4,500</div>
                 </div>
               </div>
             </div>
@@ -163,46 +155,46 @@
   <!-- Intro -->
   <section class="py-20">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-slate-900 mb-5">Get paid at every stage — from first deposit to final invoice.</h2>
-      <p class="text-xl text-slate-600 leading-relaxed">Event planners, wedding coordinators, and corporate event companies need structured payment schedules. HitPay makes milestone invoicing effortless — collect deposits to lock in clients, send milestone payment requests automatically, and settle final balances without a single awkward call.</p>
+      <h2 class="text-4xl font-bold text-[#03102F] mb-5">Get paid at every stage — from first deposit to final invoice.</h2>
+      <p class="text-xl text-[#61667C] leading-relaxed">Event planners, wedding coordinators, and corporate event companies need structured payment schedules. HitPay makes milestone invoicing effortless — collect deposits to lock in clients, send milestone payment requests automatically, and settle final balances without a single awkward call.</p>
     </div>
   </section>
 
   <!-- USP 1: Milestone Invoicing -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="text-purple-600 font-semibold text-sm uppercase tracking-widest mb-4">Invoicing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Professional milestone invoices — paid automatically at each stage</h2>
-          <p class="text-lg text-slate-600 mb-8">Structure your event contracts as milestone invoices: a booking deposit, a mid-project payment, and a final balance. HitPay sends reminders automatically before each due date — you stay professional without chasing clients.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Invoicing</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Professional milestone invoices — paid automatically at each stage</h2>
+          <p class="text-lg text-[#61667C] mb-8">Structure your event contracts as milestone invoices: a booking deposit, a mid-project payment, and a final balance. HitPay sends reminders automatically before each due date — you stay professional without chasing clients.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Multi-stage invoicing — define deposit %, milestone %, and balance</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Auto-send reminders before each due date — no awkward follow-ups</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Add GST, service charges, vendor pass-throughs — fully itemised</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Clients pay via PayNow, card, bank transfer, or GrabPay in one click</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-purple-600 font-semibold hover:text-purple-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             Learn about invoicing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -210,18 +202,18 @@
           <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 w-72">
             <div class="flex justify-between items-start mb-4">
               <div>
-                <div class="font-bold text-slate-900 text-sm">Blooms & Vows Weddings</div>
+                <div class="font-bold text-[#03102F] text-sm">Blooms & Vows Weddings</div>
                 <div class="text-xs text-slate-500 mt-0.5">INV-2025-0401 · Wedding Package</div>
               </div>
-              <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-medium">Milestone 2</span>
+              <span class="text-xs bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded font-medium">Milestone 2</span>
             </div>
             <div class="border-t border-slate-100 pt-3 space-y-2 mb-3">
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Venue coordination</span>
+                <span class="text-[#61667C]">Venue coordination</span>
                 <span class="font-medium">S$3,500</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-600">Catering liaison (250 pax)</span>
+                <span class="text-[#61667C]">Catering liaison (250 pax)</span>
                 <span class="font-medium">S$2,500</span>
               </div>
               <div class="flex justify-between text-sm text-green-600">
@@ -233,11 +225,11 @@
                 <span>−S$4,500</span>
               </div>
             </div>
-            <div class="flex justify-between font-bold text-slate-900 border-t border-slate-200 pt-3 mb-4">
+            <div class="flex justify-between font-bold text-[#03102F] border-t border-slate-200 pt-3 mb-4">
               <span>Milestone 2 due</span>
               <span>S$6,000.00</span>
             </div>
-            <div class="bg-purple-600 rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay S$6,000 now</div>
+            <div class="bg-[#2465DE] rounded-lg py-2.5 text-center text-white text-sm font-semibold">Pay S$6,000 now</div>
             <div class="mt-2 text-center text-xs text-slate-400">Reminder sent 7 days before due date</div>
           </div>
         </div>
@@ -251,24 +243,24 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="order-2 lg:order-1 flex justify-center">
           <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden w-72">
-            <div class="bg-purple-600 p-4">
-              <div class="text-purple-200 text-xs font-medium mb-1">hitpay.me/bloomsandvows</div>
+            <div class="bg-[#2465DE] p-4">
+              <div class="text-blue-200 text-xs font-medium mb-1">hitpay.me/bloomsandvows</div>
               <div class="text-white font-bold text-xl">Lock in your date</div>
-              <div class="text-purple-200 text-sm mt-1">Full Wedding Package · 14 Dec 2025</div>
+              <div class="text-blue-200 text-sm mt-1">Full Wedding Package · 14 Dec 2025</div>
             </div>
             <div class="p-4">
-              <div class="bg-purple-50 rounded-xl p-3 mb-4">
+              <div class="bg-[#EBF1FC] rounded-xl p-3 mb-4">
                 <div class="flex justify-between text-sm">
-                  <span class="text-slate-600">Full Wedding Package</span>
-                  <span class="font-bold text-slate-900">S$15,000</span>
+                  <span class="text-[#61667C]">Full Wedding Package</span>
+                  <span class="font-bold text-[#03102F]">S$15,000</span>
                 </div>
                 <div class="flex justify-between text-sm mt-1">
-                  <span class="text-purple-700 font-medium">Booking deposit (30%)</span>
-                  <span class="font-bold text-purple-700">S$4,500</span>
+                  <span class="text-[#2465DE] font-medium">Booking deposit (30%)</span>
+                  <span class="font-bold text-[#2465DE]">S$4,500</span>
                 </div>
               </div>
               <div class="text-slate-500 text-xs mb-3">Deposit secures your date exclusively. Balance invoiced in 2 stages. Non-refundable.</div>
-              <div class="bg-purple-600 rounded-lg py-3 text-center text-white text-sm font-semibold">Pay S$4,500 Deposit</div>
+              <div class="bg-[#2465DE] rounded-lg py-3 text-center text-white text-sm font-semibold">Pay S$4,500 Deposit</div>
               <div class="flex justify-center gap-2 mt-3">
                 <span class="payment-badge text-xs">PayNow</span>
                 <span class="payment-badge text-xs">Card</span>
@@ -278,36 +270,36 @@
           </div>
         </div>
         <div class="order-1 lg:order-2">
-          <div class="text-purple-600 font-semibold text-sm uppercase tracking-widest mb-4">Payment Links</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Lock in clients with a deposit link — via WhatsApp in seconds</h2>
-          <p class="text-lg text-slate-600 mb-8">When a client says "yes" to your proposal, send them a secure deposit payment link via WhatsApp. They pay in minutes — securing the date and your commitment fee before you lift a finger of planning.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Payment Links</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Lock in clients with a deposit link — via WhatsApp in seconds</h2>
+          <p class="text-lg text-[#61667C] mb-8">When a client says "yes" to your proposal, send them a secure deposit payment link via WhatsApp. They pay in minutes — securing the date and your commitment fee before you lift a finger of planning.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Create a custom deposit link in under 60 seconds — no tech skills needed</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Add event description, date, and custom notes — fully branded</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Instant notification when paid — follow up with your next steps immediately</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Share via WhatsApp, email, or embed link in your proposal PDF</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-purple-600 font-semibold hover:text-purple-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             Try payment links <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -316,40 +308,40 @@
   </section>
 
   <!-- USP 3: Online Event Registration / Ticketing -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div class="text-purple-600 font-semibold text-sm uppercase tracking-widest mb-4">Online Store & Tickets</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Sell event registrations and workshop tickets online — instantly</h2>
-          <p class="text-lg text-slate-600 mb-8">Running a wedding expo, bridal fair, or corporate workshop? Create your event listing on HitPay Online Store and start selling tickets in minutes — no third-party ticketing platform required.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Online Store & Tickets</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Sell event registrations and workshop tickets online — instantly</h2>
+          <p class="text-lg text-[#61667C] mb-8">Running a wedding expo, bridal fair, or corporate workshop? Create your event listing on HitPay Online Store and start selling tickets in minutes — no third-party ticketing platform required.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Sell tickets with quantity limits — auto-close when sold out</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Multiple ticket tiers — Early Bird, Standard, VIP — one page</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Collect attendee info during checkout — name, contact, dietary needs</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">No platform fees — just HitPay's standard transaction rate</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-purple-600 font-semibold hover:text-purple-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             Launch your event page <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -358,34 +350,34 @@
             <div class="text-sm font-semibold text-slate-700 mb-1">Singapore Bridal Showcase 2025</div>
             <div class="text-xs text-slate-500 mb-4">15–16 Nov 2025 · Sands Expo Convention Centre</div>
             <div class="space-y-3 mb-4">
-              <div class="border border-amber-300 bg-amber-50 rounded-xl p-4">
+              <div class="border border-[#D6E3F9] bg-[#EBF1FC] rounded-xl p-4">
                 <div class="flex justify-between items-start mb-1">
-                  <div class="text-sm font-semibold text-slate-900">Early Bird (ends 30 Sep)</div>
-                  <span class="text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded font-medium">42 left</span>
+                  <div class="text-sm font-semibold text-[#03102F]">Early Bird (ends 30 Sep)</div>
+                  <span class="text-xs bg-[#D6E3F9] text-[#0E2859] px-2 py-0.5 rounded font-medium">42 left</span>
                 </div>
                 <div class="flex justify-between items-center mt-2">
-                  <span class="text-amber-600 font-bold">S$28</span>
-                  <div class="bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-lg">Buy</div>
+                  <span class="text-[#2465DE] font-bold">S$28</span>
+                  <div class="bg-[#2465DE] text-white text-xs font-semibold px-3 py-1 rounded-lg">Buy</div>
                 </div>
               </div>
               <div class="border border-slate-200 rounded-xl p-4">
                 <div class="flex justify-between items-start mb-1">
-                  <div class="text-sm font-semibold text-slate-900">Standard Ticket</div>
-                  <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">200 left</span>
+                  <div class="text-sm font-semibold text-[#03102F]">Standard Ticket</div>
+                  <span class="text-xs bg-slate-100 text-[#61667C] px-2 py-0.5 rounded font-medium">200 left</span>
                 </div>
                 <div class="flex justify-between items-center mt-2">
                   <span class="font-bold text-slate-700">S$38</span>
-                  <div class="bg-slate-100 text-slate-600 text-xs font-semibold px-3 py-1 rounded-lg">Buy</div>
+                  <div class="bg-slate-100 text-[#61667C] text-xs font-semibold px-3 py-1 rounded-lg">Buy</div>
                 </div>
               </div>
-              <div class="border border-purple-200 bg-purple-50 rounded-xl p-4">
+              <div class="border border-[#D6E3F9] bg-[#EBF1FC] rounded-xl p-4">
                 <div class="flex justify-between items-start mb-1">
-                  <div class="text-sm font-semibold text-slate-900">VIP — Front Row + Gift Bag</div>
-                  <span class="text-xs bg-purple-200 text-purple-800 px-2 py-0.5 rounded font-medium">10 left</span>
+                  <div class="text-sm font-semibold text-[#03102F]">VIP — Front Row + Gift Bag</div>
+                  <span class="text-xs bg-[#D6E3F9] text-[#0E2859] px-2 py-0.5 rounded font-medium">10 left</span>
                 </div>
                 <div class="flex justify-between items-center mt-2">
-                  <span class="text-purple-600 font-bold">S$98</span>
-                  <div class="bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-lg">Buy</div>
+                  <span class="text-[#2465DE] font-bold">S$98</span>
+                  <div class="bg-[#2465DE] text-white text-xs font-semibold px-3 py-1 rounded-lg">Buy</div>
                 </div>
               </div>
             </div>
@@ -411,67 +403,67 @@
               <div class="space-y-3">
                 <div class="flex justify-between items-center">
                   <div>
-                    <div class="text-sm font-medium text-slate-900">TechCorp Pte Ltd</div>
+                    <div class="text-sm font-medium text-[#03102F]">TechCorp Pte Ltd</div>
                     <div class="text-xs text-slate-500">Event management retainer</div>
                   </div>
-                  <span class="text-sm font-bold text-purple-600">S$3,500/mo</span>
+                  <span class="text-sm font-bold text-[#2465DE]">S$3,500/mo</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <div>
-                    <div class="text-sm font-medium text-slate-900">Axiom Holdings</div>
+                    <div class="text-sm font-medium text-[#03102F]">Axiom Holdings</div>
                     <div class="text-xs text-slate-500">Quarterly events package</div>
                   </div>
-                  <span class="text-sm font-bold text-purple-600">S$2,200/mo</span>
+                  <span class="text-sm font-bold text-[#2465DE]">S$2,200/mo</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <div>
-                    <div class="text-sm font-medium text-slate-900">Meridian Bank</div>
+                    <div class="text-sm font-medium text-[#03102F]">Meridian Bank</div>
                     <div class="text-xs text-slate-500">Annual conference retainer</div>
                   </div>
-                  <span class="text-sm font-bold text-purple-600">S$5,000/mo</span>
+                  <span class="text-sm font-bold text-[#2465DE]">S$5,000/mo</span>
                 </div>
               </div>
             </div>
-            <div class="bg-purple-50 border border-purple-200 rounded-xl p-4">
+            <div class="bg-[#EBF1FC] border border-[#D6E3F9] rounded-xl p-4">
               <div class="flex justify-between items-center mb-2">
                 <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Monthly retainer income</div>
               </div>
-              <div class="text-2xl font-bold text-slate-900">S$10,700</div>
+              <div class="text-2xl font-bold text-[#03102F]">S$10,700</div>
               <div class="text-xs text-green-600 mt-1">All 3 clients on auto-charge · Next billing: 1 Apr</div>
             </div>
           </div>
         </div>
         <div>
-          <div class="text-purple-600 font-semibold text-sm uppercase tracking-widest mb-4">Recurring Billing</div>
-          <h2 class="text-4xl font-bold text-slate-900 mb-5">Automate corporate retainer billing — predictable revenue every month</h2>
-          <p class="text-lg text-slate-600 mb-8">Corporate event planners managing ongoing client relationships can set up monthly retainer billing in HitPay. Clients are charged automatically — you get predictable income without lifting a finger every month.</p>
+          <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">Recurring Billing</div>
+          <h2 class="text-4xl font-bold text-[#03102F] mb-5">Automate corporate retainer billing — predictable revenue every month</h2>
+          <p class="text-lg text-[#61667C] mb-8">Corporate event planners managing ongoing client relationships can set up monthly retainer billing in HitPay. Clients are charged automatically — you get predictable income without lifting a finger every month.</p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Monthly or quarterly billing cycles — flexible to your retainer terms</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Client signs up once — charges happen automatically each cycle</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Auto-receipt for every charge — easy for corporate accounts to expense</span>
             </li>
             <li class="flex items-start gap-3">
-              <div class="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+              <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
               </div>
               <span class="text-slate-700">Xero integration — sync all retainer payments into your accounting system</span>
             </li>
           </ul>
-          <a href="#" class="inline-flex items-center gap-1 text-purple-600 font-semibold hover:text-purple-800 text-sm">
+          <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
             Set up recurring billing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -480,24 +472,24 @@
   </section>
 
   <!-- Stats -->
-  <section class="py-16 bg-purple-700">
+  <section class="py-16 bg-[#1B4FB8]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">15,000+</div>
-          <div class="text-purple-200 text-sm">Businesses on HitPay</div>
+          <div class="text-4xl font-medium text-white mb-2">15,000+</div>
+          <div class="text-blue-200 text-sm">Businesses on HitPay</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">$0</div>
-          <div class="text-purple-200 text-sm">Monthly platform fee</div>
+          <div class="text-4xl font-medium text-white mb-2">$0</div>
+          <div class="text-blue-200 text-sm">Monthly platform fee</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">50+</div>
-          <div class="text-purple-200 text-sm">Payment methods</div>
+          <div class="text-4xl font-medium text-white mb-2">50+</div>
+          <div class="text-blue-200 text-sm">Payment methods</div>
         </div>
         <div class="text-center">
-          <div class="text-4xl font-extrabold text-white mb-2">T+1</div>
-          <div class="text-purple-200 text-sm">Business day payouts</div>
+          <div class="text-4xl font-medium text-white mb-2">T+1</div>
+          <div class="text-blue-200 text-sm">Business day payouts</div>
         </div>
       </div>
     </div>
@@ -506,12 +498,12 @@
   <!-- Testimonial -->
   <section class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <svg class="w-10 h-10 text-purple-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+      <svg class="w-10 h-10 text-blue-200 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
       <p class="text-2xl text-slate-800 font-medium leading-relaxed mb-8">"HitPay transformed how we collect deposits and milestone payments from wedding clients. Before, we'd send bank transfer details and wait days — sometimes weeks. Now we send a link on WhatsApp and the deposit lands in minutes. It's completely changed our cash flow and client experience."</p>
       <div class="flex items-center justify-center gap-4">
-        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-700 font-bold">EV</div>
+        <div class="w-12 h-12 bg-[#D6E3F9] rounded-full flex items-center justify-center text-[#2465DE] font-bold">EV</div>
         <div class="text-left">
-          <div class="font-semibold text-slate-900">Enchanted Vows Events</div>
+          <div class="font-semibold text-[#03102F]">Enchanted Vows Events</div>
           <div class="text-slate-500 text-sm">Wedding & Event Planning — Singapore</div>
         </div>
       </div>
@@ -519,54 +511,54 @@
   </section>
 
   <!-- Feature grid -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-14">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Built for every type of event business</h2>
-        <p class="text-slate-600 max-w-xl mx-auto">Wedding planners, corporate event companies, concert promoters, conference organisers, experiential agencies, and more.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Built for every type of event business</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">Wedding planners, corporate event companies, concert promoters, conference organisers, experiential agencies, and more.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">GST-compliant invoices</h3>
-          <p class="text-slate-600 text-sm">Auto-calculate GST at 9%, add service charges, and generate IRAS-compliant invoices ready for corporate clients.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">GST-compliant invoices</h3>
+          <p class="text-[#61667C] text-sm">Auto-calculate GST at 9%, add service charges, and generate IRAS-compliant invoices ready for corporate clients.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">MAS licensed & PCI DSS</h3>
-          <p class="text-slate-600 text-sm">Regulated by MAS as a Major Payment Institution. PCI DSS Level 1 compliant. Enterprise-grade security for large contracts.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">MAS licensed & PCI DSS</h3>
+          <p class="text-[#61667C] text-sm">Regulated by MAS as a Major Payment Institution. PCI DSS Level 1 compliant. Enterprise-grade security for large contracts.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mb-4">
             <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">On-site card terminal</h3>
-          <p class="text-slate-600 text-sm">Accept card and PayNow payments at the event venue registration desk. No rental — buy once, pay per transaction.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">On-site card terminal</h3>
+          <p class="text-[#61667C] text-sm">Accept card and PayNow payments at the event venue registration desk. No rental — buy once, pay per transaction.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Next-day payouts</h3>
-          <p class="text-slate-600 text-sm">Get every payment settled T+1. Critical for managing vendor payments after events without waiting weeks for funds.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Next-day payouts</h3>
+          <p class="text-[#61667C] text-sm">Get every payment settled T+1. Critical for managing vendor payments after events without waiting weeks for funds.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Payment reminders</h3>
-          <p class="text-slate-600 text-sm">HitPay auto-sends payment reminders on your behalf before every milestone due date — keeping relationships professional.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Payment reminders</h3>
+          <p class="text-[#61667C] text-sm">HitPay auto-sends payment reminders on your behalf before every milestone due date — keeping relationships professional.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
-          <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mb-4">
-            <svg class="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <div class="w-10 h-10 bg-[#D6E3F9] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           </div>
-          <h3 class="font-semibold text-slate-900 mb-2">Revenue dashboard</h3>
-          <p class="text-slate-600 text-sm">See all open milestones, collected amounts, and upcoming payments in one dashboard. Always know your cash position.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">Revenue dashboard</h3>
+          <p class="text-[#61667C] text-sm">See all open milestones, collected amounts, and upcoming payments in one dashboard. Always know your cash position.</p>
         </div>
       </div>
     </div>
@@ -575,126 +567,126 @@
   <!-- Related -->
   <section class="py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-slate-900 mb-8">Explore more solutions</h2>
+      <h2 class="text-2xl font-bold text-[#03102F] mb-8">Explore more solutions</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <a href="beauty.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-purple-300 hover:shadow-md transition-all">
+        <a href="beauty.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">💆</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-purple-600">Health, Beauty & Spas</div>
-          <div class="text-slate-600 text-sm">Collect deposits and automate membership billing for wellness businesses.</div>
-          <div class="mt-4 text-purple-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Health, Beauty & Spas</div>
+          <div class="text-[#61667C] text-sm">Collect deposits and automate membership billing for wellness businesses.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
-        <a href="travel.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-purple-300 hover:shadow-md transition-all">
+        <a href="travel.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">✈️</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-purple-600">Travel Agencies</div>
-          <div class="text-slate-600 text-sm">Accept deposits and APAC tourist payments for tour packages and travel bookings.</div>
-          <div class="mt-4 text-purple-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Travel Agencies</div>
+          <div class="text-[#61667C] text-sm">Accept deposits and APAC tourist payments for tour packages and travel bookings.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
-        <a href="nonprofits.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-purple-300 hover:shadow-md transition-all">
+        <a href="nonprofits.html" class="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#D6E3F9] hover:shadow-md transition-all">
           <div class="text-3xl mb-4">💜</div>
-          <div class="font-semibold text-slate-900 mb-2 group-hover:text-purple-600">Nonprofits</div>
-          <div class="text-slate-600 text-sm">Sell event tickets and accept donations for charity galas and fundraising events.</div>
-          <div class="mt-4 text-purple-600 font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-2 group-hover:text-[#2465DE]">Nonprofits</div>
+          <div class="text-[#61667C] text-sm">Sell event tickets and accept donations for charity galas and fundraising events.</div>
+          <div class="mt-4 text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
         </a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-20 bg-slate-50">
+  <section class="py-20 bg-[#F9F9F6]">
     <div class="max-w-3xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Frequently asked questions</h2>
-        <p class="text-slate-600">Everything wedding planners and event management companies need to know about HitPay.</p>
+        <h2 class="text-3xl font-bold text-[#03102F] mb-4">Frequently asked questions</h2>
+        <p class="text-[#61667C]">Everything wedding planners and event management companies need to know about HitPay.</p>
       </div>
       <div class="space-y-3">
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How can wedding planners collect milestone payments professionally?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How can wedding planners collect milestone payments professionally?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay Invoicing supports multi-stage milestone invoicing. You define each payment stage — for example, 30% booking deposit, 40% mid-project milestone, and 30% final balance — with individual due dates. HitPay sends a professional invoice and automatic reminder for each milestone. Clients pay with a single click via PayNow, card, or GrabPay.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay Invoicing supports multi-stage milestone invoicing. You define each payment stage — for example, 30% booking deposit, 40% mid-project milestone, and 30% final balance — with individual due dates. HitPay sends a professional invoice and automatic reminder for each milestone. Clients pay with a single click via PayNow, card, or GrabPay.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can event planners collect deposits via WhatsApp to lock in a client?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can event planners collect deposits via WhatsApp to lock in a client?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. With HitPay Payment Links, you create a deposit link in under 60 seconds — with the deposit amount, event description, and your logo — and send it via WhatsApp. Once the client pays, you receive instant confirmation. This locks in their commitment before any planning work begins, and eliminates the back-and-forth of chasing bank transfer confirmation screenshots.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. With HitPay Payment Links, you create a deposit link in under 60 seconds — with the deposit amount, event description, and your logo — and send it via WhatsApp. Once the client pays, you receive instant confirmation. This locks in their commitment before any planning work begins, and eliminates the back-and-forth of chasing bank transfer confirmation screenshots.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I sell event tickets with different pricing tiers — Early Bird, Standard, VIP?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I sell event tickets with different pricing tiers — Early Bird, Standard, VIP?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's Online Store lets you list multiple ticket types with different prices, quantities, and descriptions on a single event page. You can set Early Bird limits that auto-close when sold out, collect attendee information at checkout (name, dietary requirements, T-shirt size), and track sales in real time — without paying a third-party ticketing platform fee.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's Online Store lets you list multiple ticket types with different prices, quantities, and descriptions on a single event page. You can set Early Bird limits that auto-close when sold out, collect attendee information at checkout (name, dietary requirements, T-shirt size), and track sales in real time — without paying a third-party ticketing platform fee.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">How do I set up monthly retainer billing for a corporate event client?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do I set up monthly retainer billing for a corporate event client?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay's Recurring Billing lets you create a monthly retainer plan for each corporate client. The client authorises the first payment and HitPay charges them automatically every month — sending a receipt ideal for their finance team to process as an expense. You can manage multiple corporate retainer clients from the same dashboard.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay's Recurring Billing lets you create a monthly retainer plan for each corporate client. The client authorises the first payment and HitPay charges them automatically every month — sending a receipt ideal for their finance team to process as an expense. You can manage multiple corporate retainer clients from the same dashboard.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">What payment methods can wedding and event clients use?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What payment methods can wedding and event clients use?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay supports PayNow, Visa/Mastercard, GrabPay, Apple Pay, Google Pay, and Atome BNPL for splitting large deposits interest-free. Corporate clients can also pay via direct bank transfer through the invoice. All payment methods are tracked in a unified dashboard so you always know exactly what has been paid and what remains outstanding.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay supports PayNow, Visa/Mastercard, GrabPay, Apple Pay, Google Pay, and Atome BNPL for splitting large deposits interest-free. Corporate clients can also pay via direct bank transfer through the invoice. All payment methods are tracked in a unified dashboard so you always know exactly what has been paid and what remains outstanding.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">My wedding clients keep delaying deposit payments — how does HitPay help me collect faster?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">My wedding clients keep delaying deposit payments — how does HitPay help me collect faster?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">HitPay Payment Links turn a multi-step collection process (share bank details → client transfers → you check your bank → you confirm) into one step. Send a WhatsApp message with your deposit link and the client pays in 30 seconds from their phone. You receive an instant notification the moment payment lands. Faster collection means you lock in bookings before clients shop around with other planners — especially important in the competitive wedding planning market.</p>
+            <p class="text-[#61667C] leading-relaxed">HitPay Payment Links turn a multi-step collection process (share bank details → client transfers → you check your bank → you confirm) into one step. Send a WhatsApp message with your deposit link and the client pays in 30 seconds from their phone. You receive an instant notification the moment payment lands. Faster collection means you lock in bookings before clients shop around with other planners — especially important in the competitive wedding planning market.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I issue partial or full refunds for event deposits through HitPay?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I issue partial or full refunds for event deposits through HitPay?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's dashboard lets you initiate full or partial refunds against any past transaction. For example, if your policy allows a 50% refund for cancellations more than 60 days before the event, you can refund exactly that amount with a few clicks. Card refunds typically appear within 5–10 business days; PayNow refunds are usually instant. Your refund policy is entirely your own — HitPay simply processes what you decide.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's dashboard lets you initiate full or partial refunds against any past transaction. For example, if your policy allows a 50% refund for cancellations more than 60 days before the event, you can refund exactly that amount with a few clicks. Card refunds typically appear within 5–10 business days; PayNow refunds are usually instant. Your refund policy is entirely your own — HitPay simply processes what you decide.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Can I accept walk-in registrations and on-the-day payments at my event?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can I accept walk-in registrations and on-the-day payments at my event?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay's card terminal or Soundbox handles on-site registration desk payments — accepting card tap, PayNow, and GrabPay. You can also generate a one-time payment link on your phone for last-minute walk-ins who want to pay on the spot without a card. All on-the-day payments sync to your event dashboard in real time alongside pre-paid ticket sales, giving you a complete revenue picture.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay's card terminal or Soundbox handles on-site registration desk payments — accepting card tap, PayNow, and GrabPay. You can also generate a one-time payment link on your phone for last-minute walk-ins who want to pay on the spot without a card. All on-the-day payments sync to your event dashboard in real time alongside pre-paid ticket sales, giving you a complete revenue picture.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">I offer wedding packages at different price tiers — can I create separate deposit links for each?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">I offer wedding packages at different price tiers — can I create separate deposit links for each?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. You can create and save multiple payment links — one per package tier — each with its own amount, label, and description. For example: an "Essential Package Deposit — S$3,000" link and a "Prestige Package Deposit — S$6,000" link. Each link is reusable for future clients of that tier and all deposits are tracked together in your dashboard, giving you a clear view of confirmed bookings by package type.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. You can create and save multiple payment links — one per package tier — each with its own amount, label, and description. For example: an "Essential Package Deposit — S$3,000" link and a "Prestige Package Deposit — S$6,000" link. Each link is reusable for future clients of that tier and all deposits are tracked together in your dashboard, giving you a clear view of confirmed bookings by package type.</p>
           </div>
         </details>
         <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors list-none">
-            <span class="font-semibold text-slate-900">Is HitPay suitable for a freelance wedding coordinator who is not a registered company?</span>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Is HitPay suitable for a freelance wedding coordinator who is not a registered company?</span>
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-slate-600 leading-relaxed">Yes. HitPay accepts sole proprietors and individual freelancers — you don't need a Pte Ltd company. You can sign up with your personal NRIC and a personal bank account, and start accepting professional invoices and payment links within 1–2 business days. This makes HitPay ideal for freelance wedding coordinators, independent MCs, and photographers who need a professional payment collection solution without the overhead of incorporating a company.</p>
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay accepts sole proprietors and individual freelancers — you don't need a Pte Ltd company. You can sign up with your personal NRIC and a personal bank account, and start accepting professional invoices and payment links within 1–2 business days. This makes HitPay ideal for freelance wedding coordinators, independent MCs, and photographers who need a professional payment collection solution without the overhead of incorporating a company.</p>
           </div>
         </details>
       </div>
@@ -704,23 +696,22 @@
   <!-- CTA -->
   <section class="py-20 gradient-cta">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-white mb-5">Ready to get paid at every event milestone?</h2>
-      <p class="text-purple-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
+      <h2 class="text-4xl font-medium text-white mb-5">Ready to get paid at every event milestone?</h2>
+      <p class="text-blue-100 text-xl mb-10">Join 15,000+ businesses growing with HitPay. Free to start — no monthly fees, no setup fees.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="#" class="bg-white text-purple-700 font-semibold px-8 py-4 rounded-xl hover:bg-purple-50 transition-colors text-base">Start for free</a>
+        <a href="#" class="bg-white text-[#2465DE] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Start for free</a>
         <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-12">
+  <footer class="bg-[#03102F] text-slate-400 py-12">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 mb-12">
         <div class="md:col-span-2">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-7 h-7 bg-purple-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">H</span></div>
-            <span class="font-bold text-white">HitPay</span>
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
           </div>
           <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond.</p>
         </div>
@@ -738,8 +729,8 @@
         </div>
       </div>
       <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-sm text-slate-600">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
-        <div class="flex gap-6 text-sm text-slate-600">
+        <div class="text-sm text-[#61667C]">© 2025 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
           <a href="#" class="hover:text-slate-400">Privacy</a>
           <a href="#" class="hover:text-slate-400">Terms</a>
           <a href="#" class="hover:text-slate-400">Security</a>
