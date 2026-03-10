@@ -2698,8 +2698,8 @@ function buildIndustry(cfg, xOffset) {
   const page = new Page(cfg.name, xOffset);
   const ac = C.hpAction;  // Always brand action blue
 
-  // Override per-industry colors with brand palette
-  const brandedCfg = { ...cfg, heroBg: C.hpBlue50, pillBg: C.hpBlue50 };
+  // Override per-industry hero colors with brand palette
+  const brandedCfg = Object.assign({}, cfg, { heroBg: C.hpBlue50, pillBg: C.hpBlue50 });
 
   page.add(mkNavbar(ac), 64);
   page.add(mkHeroIndustry(brandedCfg, ac), 560);
