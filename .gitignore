@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+web/node_modules/
+
+# Build output
+web/.next/
+web/out/
+
+# Env files
+.env
+.env.local
+web/.env.local
+
+# OS
+.DS_Store
+**/.DS_Store
+
+# Logs
+*.log
+
+# Dev scripts
+generate-test.mjs
+generate_fitness_images.py
+screenshot.mjs
+mpp-preview.png

@@ -3751,6 +3751,361 @@ function buildFitness(xOffset)     { return buildIndustry(INDUSTRY.fitness, xOff
 function buildEvents(xOffset)      { return buildIndustry(INDUSTRY.events, xOffset); }
 function buildWholesale(xOffset)   { return buildIndustry(INDUSTRY.wholesale, xOffset); }
 
+// ── ART & CRAFT FAIR ─────────────────────────────────────────
+
+/** Hero — Art & Craft Fair partnership page */
+function mkHeroArtCraftFair() {
+  const sec = mkFrame('Hero/ArtCraftFair', 1440, 560, C.hpBlue50);
+
+  const badgeBg = mkH('PartnerBadge', 6, 14, 8, C.hpBlue100, 100);
+  badgeBg.counterAxisAlignItems = 'CENTER';
+  badgeBg.appendChild(mkText('✓  Official Payment Partner · Art & Craft Fair Singapore 2026', 12, W.semibold, C.hpAction));
+  badgeBg.x = 144; badgeBg.y = 72;
+  sec.appendChild(badgeBg);
+
+  const h1 = mkH2('Collect payments easily at\nArt & Craft Fair Singapore 2026', 52, C.hpTextPri, 'LEFT', 640);
+  h1.lineHeight = { value: 64, unit: 'PIXELS' };
+  h1.x = 144; h1.y = 128;
+  sec.appendChild(h1);
+
+  const sub = mkText('HitPay is a Singapore-headquartered, MAS-licensed Major Payment Institution — built for event vendors like you. No setup fee, no monthly fee, no contract.', 18, W.regular, C.hpTextSec, 'LEFT', 600);
+  sub.lineHeight = { value: 28, unit: 'PIXELS' };
+  sub.x = 144; sub.y = 360;
+  sec.appendChild(sub);
+
+  const cta = mkBtn('Sign up for free today  →', C.hpAction, C.white, 28, 16, 12);
+  cta.x = 144; cta.y = 458;
+  sec.appendChild(cta);
+
+  const note = mkText('Approval takes 1–3 business days · Sign up early', 13, W.regular, C.hpTextSec);
+  note.x = 144; note.y = 512;
+  sec.appendChild(note);
+
+  const pos = mockArtCraftPOS();
+  pos.x = 910; pos.y = 72;
+  sec.appendChild(pos);
+
+  return sec;
+}
+
+/** Mock POS terminal for hero */
+function mockArtCraftPOS() {
+  const card = mkFrame('MockPOS', 360, 400, C.white, 20);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.12 }, offset: { x: 0, y: 20 }, radius: 60, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const header = mkRect(360, 100, C.hpDeepBlue);
+  header.x = 0; header.y = 0;
+  card.appendChild(header);
+  const hdrLbl = mkText('HitPay Point of Sale', 11, W.medium, C.hpBlue100);
+  hdrLbl.x = 20; hdrLbl.y = 16;
+  card.appendChild(hdrLbl);
+  const amt = mkText('S$48.00', 32, W.bold, C.white);
+  amt.x = 20; amt.y = 38;
+  card.appendChild(amt);
+  const itemLbl = mkText('Ceramic bowl — Stall 42', 14, W.regular, C.hpBlue100);
+  itemLbl.x = 20; itemLbl.y = 78;
+  card.appendChild(itemLbl);
+
+  const methods = [
+    { label: 'Tap to Pay (NFC)', status: 'Ready',         sBg: C.green100,  sFg: C.green600 },
+    { label: 'PayNow QR',        status: 'Ready',         sBg: C.green100,  sFg: C.green600 },
+    { label: 'Borderless QR',    status: 'Intl. vendors', sBg: C.hpBlue100, sFg: C.hpAction },
+  ];
+  methods.forEach((m, i) => {
+    const row = mkRect(320, 52, C.hpBeige, 10);
+    row.x = 20; row.y = 116 + i * 68;
+    card.appendChild(row);
+    const lbl = mkText(m.label, 14, W.medium, C.hpTextPri);
+    lbl.x = 36; lbl.y = 133 + i * 68;
+    card.appendChild(lbl);
+    const sb = mkRect(96, 22, m.sBg, 6);
+    sb.x = 228; sb.y = 131 + i * 68;
+    card.appendChild(sb);
+    const st = mkText(m.status, 11, W.semibold, m.sFg, 'CENTER', 96);
+    st.x = 228; st.y = 136 + i * 68;
+    card.appendChild(st);
+  });
+
+  const confBg = mkRect(320, 44, C.white, 10);
+  confBg.strokes = [{ type: 'SOLID', color: C.green100 }];
+  confBg.strokeWeight = 1.5; confBg.strokeAlign = 'INSIDE';
+  confBg.x = 20; confBg.y = 340;
+  card.appendChild(confBg);
+  const dotConf = mkRect(8, 8, C.green600, 4);
+  dotConf.x = 36; dotConf.y = 358;
+  card.appendChild(dotConf);
+  const confTxt = mkText('Payment received · S$48.00 · PayNow · just now', 11, W.medium, C.hpTextPri);
+  confTxt.x = 52; confTxt.y = 353;
+  card.appendChild(confTxt);
+
+  return card;
+}
+
+/** Two-column vendor split (SG vs International) with rates */
+function mkVendorSplit() {
+  const sec = mkFrame('VendorSplit', 1440, 660, C.white);
+
+  const h2 = mkH2('Choose your setup — it takes minutes', 32, C.hpTextPri, 'CENTER', 760);
+  h2.x = 340; h2.y = 48;
+  sec.appendChild(h2);
+  const sub = mkText('Whether you\'re based in Singapore or flying in, HitPay has you covered.', 16, W.regular, C.hpTextSec, 'CENTER', 680);
+  sub.x = 380; sub.y = 108;
+  sec.appendChild(sub);
+
+  // ── SG card ──
+  const sg = mkFrame('SGVendors', 556, 390, C.white, 16);
+  sg.strokes = [{ type: 'SOLID', color: C.slate200 }]; sg.strokeWeight = 1; sg.strokeAlign = 'INSIDE';
+  sg.x = 144; sg.y = 156;
+
+  const sgHdr = mkText('SINGAPORE VENDORS', 10, W.bold, C.hpTextSec);
+  sgHdr.letterSpacing = { value: 1.2, unit: 'PIXELS' };
+  sgHdr.x = 28; sgHdr.y = 28;
+  sg.appendChild(sgHdr);
+
+  ['Accept cards & PayNow via the HitPay app', 'Tap to Pay on NFC iPhone or Android — no terminal needed', 'Payouts sent automatically to your bank account'].forEach((b, i) => {
+    const dot = mkRect(6, 6, C.hpSuccess, 3); dot.x = 28; dot.y = 72 + i * 36 + 5; sg.appendChild(dot);
+    const t = mkText(b, 14, W.regular, C.hpTextPri, 'LEFT', 490); t.x = 44; t.y = 68 + i * 36; sg.appendChild(t);
+  });
+
+  const p1 = mkRect(234, 56, C.hpBeige, 10); p1.x = 28; p1.y = 196; sg.appendChild(p1);
+  const p1s = mkText('Cards payout', 11, W.regular, C.hpTextSec); p1s.x = 44; p1s.y = 206; sg.appendChild(p1s);
+  const p1v = mkText('T+3 working days', 14, W.bold, C.hpTextPri); p1v.x = 44; p1v.y = 226; sg.appendChild(p1v);
+  const p2 = mkRect(234, 56, C.hpBeige, 10); p2.x = 282; p2.y = 196; sg.appendChild(p2);
+  const p2s = mkText('PayNow QR payout', 11, W.regular, C.hpTextSec); p2s.x = 298; p2s.y = 206; sg.appendChild(p2s);
+  const p2v = mkText('T+1 calendar day', 14, W.bold, C.hpTextPri); p2v.x = 298; p2v.y = 226; sg.appendChild(p2v);
+
+  const sgDiv = mkRect(500, 1, C.slate100); sgDiv.x = 28; sgDiv.y = 270; sg.appendChild(sgDiv);
+  const sgRL = mkText('RATES', 10, W.bold, C.hpTextSec); sgRL.letterSpacing = { value: 1.2, unit: 'PIXELS' }; sgRL.x = 28; sgRL.y = 288; sg.appendChild(sgRL);
+  const r1L = mkText('Domestic cards', 13, W.regular, C.hpTextSec); r1L.x = 28; r1L.y = 314; sg.appendChild(r1L);
+  const r1V = mkText('2.5% (min S$0.20)', 13, W.semibold, C.hpAction, 'RIGHT', 200); r1V.x = 328; r1V.y = 314; sg.appendChild(r1V);
+  const r2L = mkText('PayNow', 13, W.regular, C.hpTextSec); r2L.x = 28; r2L.y = 340; sg.appendChild(r2L);
+  const r2V = mkText('0.4% (min S$0.10)', 13, W.semibold, C.hpAction, 'RIGHT', 200); r2V.x = 328; r2V.y = 340; sg.appendChild(r2V);
+  sec.appendChild(sg);
+
+  // ── International card ──
+  const intl = mkFrame('InternationalVendors', 556, 390, C.white, 16);
+  intl.strokes = [{ type: 'SOLID', color: C.hpAction }]; intl.strokeWeight = 1.5; intl.strokeAlign = 'INSIDE';
+  intl.x = 740; intl.y = 156;
+
+  const intlBadgeBg = mkRect(176, 26, C.hpAction, 13); intlBadgeBg.x = 28; intlBadgeBg.y = -13; intl.appendChild(intlBadgeBg);
+  const intlBadgeTxt = mkText('For international vendors', 11, W.semibold, C.white, 'CENTER', 176); intlBadgeTxt.x = 28; intlBadgeTxt.y = -9; intl.appendChild(intlBadgeTxt);
+  const intlHdr = mkText('INTERNATIONAL VENDORS', 10, W.bold, C.hpTextSec);
+  intlHdr.letterSpacing = { value: 1.2, unit: 'PIXELS' }; intlHdr.x = 28; intlHdr.y = 28; intl.appendChild(intlHdr);
+
+  ['Accept PayNow via HitPay\'s Borderless QR', 'Shoppers pay SGD — you receive in your home currency', 'No Singapore business or bank account required', 'Download the HitPay app to get started'].forEach((b, i) => {
+    const dot = mkRect(6, 6, C.hpSuccess, 3); dot.x = 28; dot.y = 68 + i * 32 + 5; intl.appendChild(dot);
+    const t = mkText(b, 14, W.regular, C.hpTextPri, 'LEFT', 490); t.x = 44; t.y = 64 + i * 32; intl.appendChild(t);
+  });
+
+  const poBg = mkRect(500, 56, C.hpBeige, 10); poBg.x = 28; poBg.y = 204; intl.appendChild(poBg);
+  const poS = mkText('Payout', 11, W.regular, C.hpTextSec); poS.x = 44; poS.y = 214; intl.appendChild(poS);
+  const poV = mkText('T+3 working days · in your home currency', 14, W.bold, C.hpTextPri); poV.x = 44; poV.y = 234; intl.appendChild(poV);
+  const intlDiv = mkRect(500, 1, C.slate100); intlDiv.x = 28; intlDiv.y = 278; intl.appendChild(intlDiv);
+  const intlRL = mkText('RATES', 10, W.bold, C.hpTextSec); intlRL.letterSpacing = { value: 1.2, unit: 'PIXELS' }; intlRL.x = 28; intlRL.y = 296; intl.appendChild(intlRL);
+  const irL = mkText('PayNow Borderless QR', 13, W.regular, C.hpTextSec); irL.x = 28; irL.y = 322; intl.appendChild(irL);
+  const irV = mkText('1.5%', 13, W.semibold, C.hpAction, 'RIGHT', 200); irV.x = 328; irV.y = 322; intl.appendChild(irV);
+  sec.appendChild(intl);
+
+  const noteBg = mkRect(1152, 68, C.hpBlue50, 16); noteBg.x = 144; noteBg.y = 564; sec.appendChild(noteBg);
+  const noteTxt = mkText('Onboarding: Your business must be registered in your home country. Approval takes 1–3 business days — sign up early at dashboard.hit-pay.com/register?partner_referral=ARUDTXQHYJ', 13, W.regular, C.hpTextPri, 'LEFT', 1080);
+  noteTxt.lineHeight = { value: 20, unit: 'PIXELS' }; noteTxt.x = 168; noteTxt.y = 576; sec.appendChild(noteTxt);
+
+  return sec;
+}
+
+/** How it works — 3-step overview */
+function mkHowItWorksACF() {
+  const sec = mkFrame('HowItWorks', 1440, 340, C.hpBeige);
+  const h2 = mkH2('How it works', 32, C.hpTextPri, 'CENTER', 600);
+  h2.x = 420; h2.y = 48; sec.appendChild(h2);
+  const sub = mkText('No hardware to order. No complicated setup. Just your phone.', 16, W.regular, C.hpTextSec, 'CENTER', 700);
+  sub.x = 370; sub.y = 106; sec.appendChild(sub);
+
+  [
+    { n: '1', title: 'Sign up online',   desc: 'Create your free account via the partner link. Submit business documents. Approved in 1–3 business days.' },
+    { n: '2', title: 'Download the app', desc: 'Get HitPay Point of Sale on iOS or Android. Enable Tap to Pay or set up your PayNow / Borderless QR.' },
+    { n: '3', title: 'Sell at the fair', desc: 'Accept cards, PayNow, Apple Pay, and more. Payouts hit your bank automatically after the event.' },
+  ].forEach((step, i) => {
+    const x = 200 + i * 370;
+    const circle = mkFrame(`Step${i+1}`, 48, 48, C.hpAction, 24);
+    const numT = mkText(step.n, 20, W.bold, C.white, 'CENTER'); numT.x = 14; numT.y = 10; circle.appendChild(numT);
+    circle.x = x + 126; circle.y = 168; sec.appendChild(circle);
+    const tt = mkText(step.title, 16, W.bold, C.hpTextPri, 'CENTER', 300); tt.x = x + 10; tt.y = 230; sec.appendChild(tt);
+    const dd = mkText(step.desc, 13, W.regular, C.hpTextSec, 'CENTER', 300); dd.lineHeight = { value: 20, unit: 'PIXELS' }; dd.x = x + 10; dd.y = 258; sec.appendChild(dd);
+  });
+  return sec;
+}
+
+/** Video player placeholder for Tap to Pay YouTube embed */
+function mockVideoPlayer(title, url) {
+  const frame = mkFrame('VideoPlaceholder', 420, 236, C.slate900, 16);
+  const overlay = mkRect(420, 236, C.hpDeepBlue, 0); overlay.opacity = 0.6; overlay.x = 0; overlay.y = 0; frame.appendChild(overlay);
+  const playCircle = mkFrame('PlayBtn', 64, 64, C.white, 32); playCircle.opacity = 0.92; playCircle.x = 178; playCircle.y = 68; frame.appendChild(playCircle);
+  const playIcon = mkText('▶', 22, W.bold, C.hpDeepBlue, 'CENTER', 64); playIcon.x = 0; playIcon.y = 18; playCircle.appendChild(playIcon);
+  const titleT = mkText(title, 14, W.semibold, C.white, 'CENTER', 380); titleT.x = 20; titleT.y = 154; frame.appendChild(titleT);
+  const urlT = mkText('▸ ' + url, 11, W.regular, { r: 0.7, g: 0.8, b: 1 }, 'CENTER', 380); urlT.x = 20; urlT.y = 178; frame.appendChild(urlT);
+  const annoBg = mkRect(420, 32, C.amber100, 0); annoBg.x = 0; annoBg.y = 204; frame.appendChild(annoBg);
+  const annoTxt = mkText('✏️  Designer: embed this YouTube video in the final design', 11, W.semibold, C.amber700, 'CENTER', 380); annoTxt.x = 20; annoTxt.y = 212; frame.appendChild(annoTxt);
+  return frame;
+}
+
+/** Mock Borderless QR display panel */
+function mockBorderlessQR() {
+  const frame = mkFrame('MockBorderlessQR', 360, 400, C.white, 20);
+  frame.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.10 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const hdrBg = mkRect(360, 56, C.hpBlue50); hdrBg.x = 0; hdrBg.y = 0; frame.appendChild(hdrBg);
+  const hdrTxt = mkText('HitPay Borderless QR — PayNow', 13, W.semibold, C.hpAction); hdrTxt.x = 16; hdrTxt.y = 18; frame.appendChild(hdrTxt);
+
+  const qrBorder = mkRect(200, 200, C.white, 4);
+  qrBorder.strokes = [{ type: 'SOLID', color: C.slate200 }]; qrBorder.strokeWeight = 1; qrBorder.strokeAlign = 'INSIDE';
+  qrBorder.x = 80; qrBorder.y = 72; frame.appendChild(qrBorder);
+
+  [[1,1,0,1,0,1,1],[1,0,1,0,1,0,1],[0,1,1,0,1,1,0],[1,0,0,1,0,0,1],[0,1,1,0,1,1,0],[1,0,1,0,1,0,1],[1,1,0,1,0,1,1]].forEach((row, ri) => {
+    row.forEach((on, ci) => { if (on) { const d = mkRect(18, 18, C.hpTextPri, 2); d.x = 96 + ci * 24; d.y = 88 + ri * 24; frame.appendChild(d); } });
+  });
+  [[88,80],[200,80],[88,192]].forEach(([cx, cy]) => {
+    const outer = mkRect(32, 32, C.white, 3); outer.strokes = [{ type: 'SOLID', color: C.hpTextPri }]; outer.strokeWeight = 2.5; outer.strokeAlign = 'INSIDE'; outer.x = cx; outer.y = cy; frame.appendChild(outer);
+    const inner = mkRect(14, 14, C.hpTextPri, 2); inner.x = cx + 9; inner.y = cy + 9; frame.appendChild(inner);
+  });
+
+  const qrLbl = mkText('PayNow Borderless QR', 12, W.semibold, C.hpAction, 'CENTER', 200); qrLbl.x = 80; qrLbl.y = 284; frame.appendChild(qrLbl);
+  const note = mkText('Shoppers pay in SGD\nYou receive in your home currency', 12, W.regular, C.hpTextSec, 'CENTER', 300); note.lineHeight = { value: 18, unit: 'PIXELS' }; note.x = 30; note.y = 314; frame.appendChild(note);
+  const annoBg = mkRect(360, 28, C.amber100, 0); annoBg.x = 0; annoBg.y = 372; frame.appendChild(annoBg);
+  const annoTxt = mkText('✏️  Designer: replace with borderless-qr-hero.avif or a fair-setting QR photo', 10, W.semibold, C.amber700, 'CENTER', 340); annoTxt.x = 10; annoTxt.y = 379; frame.appendChild(annoTxt);
+  return frame;
+}
+
+/** International vendors spotlight — dark blue section */
+function mkIntlSpotlight() {
+  const sec = mkFrame('IntlSpotlight', 1440, 460, C.hpDeepBlue);
+
+  const badgeBg = mkH('IntlBadge', 0, 12, 6, { r: 1, g: 1, b: 1 }, 100);
+  badgeBg.fills = [{ type: 'SOLID', color: C.white, opacity: 0.12 }];
+  badgeBg.counterAxisAlignItems = 'CENTER';
+  badgeBg.appendChild(mkText('International Vendors', 12, W.medium, C.hpBlue100));
+  badgeBg.x = 144; badgeBg.y = 64; sec.appendChild(badgeBg);
+
+  const h2 = mkH2('Selling at Art & Craft Fair\nfrom abroad? We\'ve got you.', 36, C.white, 'LEFT', 540);
+  h2.lineHeight = { value: 48, unit: 'PIXELS' }; h2.x = 144; h2.y = 116; sec.appendChild(h2);
+
+  const p = mkText('HitPay\'s Borderless QR lets you accept SGD from Singapore shoppers and receive payout in your home currency — no Singapore bank account needed. Vendors from Thailand, Malaysia, Indonesia, China, Taiwan, Hong Kong, Japan, and the Philippines are all eligible.', 16, W.regular, C.hpBlue100, 'LEFT', 520);
+  p.lineHeight = { value: 26, unit: 'PIXELS' }; p.x = 144; p.y = 240; sec.appendChild(p);
+
+  const cta = mkBtn('Sign up as an international vendor  →', C.white, C.hpDeepBlue, 24, 14, 12);
+  cta.x = 144; cta.y = 386; sec.appendChild(cta);
+
+  [
+    { flag: '🇸🇬', name: 'Singapore',    note: 'PayNow + Cards' },
+    { flag: '🇹🇭', name: 'Thailand',     note: 'PayNow via Borderless QR' },
+    { flag: '🇲🇾', name: 'Malaysia',     note: 'PayNow via Borderless QR' },
+    { flag: '🇮🇩', name: 'Indonesia',    note: 'PayNow via Borderless QR' },
+    { flag: '🇨🇳', name: 'China',        note: 'PayNow via Borderless QR' },
+    { flag: '🇹🇼', name: 'Taiwan',       note: 'PayNow via Borderless QR' },
+    { flag: '🇭🇰', name: 'Hong Kong',    note: 'PayNow via Borderless QR' },
+    { flag: '🇯🇵', name: 'Japan + more', note: 'PayNow via Borderless QR' },
+  ].forEach((c, i) => {
+    const col = i % 2; const row = Math.floor(i / 2);
+    const cx = 780 + col * 262; const cy = 48 + row * 76;
+    const bg = mkRect(246, 64, C.white, 10); bg.opacity = 0.08; bg.x = cx; bg.y = cy; sec.appendChild(bg);
+    const flagT = mkText(c.flag, 20, W.regular, C.white); flagT.x = cx + 12; flagT.y = cy + 14; sec.appendChild(flagT);
+    const nameT = mkText(c.name, 13, W.semibold, C.white); nameT.x = cx + 46; nameT.y = cy + 10; sec.appendChild(nameT);
+    const noteT = mkText(c.note, 11, W.regular, C.hpBlue100); noteT.x = cx + 46; noteT.y = cy + 32; sec.appendChild(noteT);
+  });
+
+  return sec;
+}
+
+function buildArtCraftFair(xOffset = 0) {
+  const page = new Page('Art & Craft Fair Singapore 2026', xOffset);
+  const ac = C.hpAction;
+
+  page.add(mkNavbar(ac), 64);
+  page.add(mkHeroArtCraftFair(), 560);
+  page.add(mkVendorSplit(), 660);
+  page.add(mkHowItWorksACF(), 340);
+
+  page.add(mkFeature({
+    label: 'For Singapore Vendors',
+    h2: 'Tap to Pay on iPhone — no terminal needed',
+    p: 'Turn your iPhone or NFC Android into a card terminal instantly. Customers tap their card, Apple Pay, or Google Pay directly on your phone. Works with any NFC-enabled iPhone running iOS 16+.',
+    bullets: [
+      'Accepts Visa, Mastercard, Apple Pay, Google Pay',
+      'Receipts sent instantly to customer by SMS or email',
+      'Works offline — syncs when connection is restored',
+    ],
+    mockUI: mockVideoPlayer('HitPay — Tap to Pay on iPhone demo', 'youtube.com/watch?v=b2_h1fDtGVE'),
+    bg: C.hpBlue50,
+    textSide: 'left',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: 'For International Vendors',
+    h2: 'PayNow via Borderless QR — collect SGD without a local account',
+    p: 'Display your HitPay Borderless QR at your stall. Singapore shoppers scan with their banking app and pay in SGD — exactly as they would any PayNow QR. HitPay handles the conversion and pays out to your home bank automatically.',
+    bullets: [
+      'No Singapore bank account or ACRA registration needed',
+      'Print or display QR on phone — shopper scans, done',
+      'Payout in THB, MYR, IDR, CNY, HKD, JPY, PHP and more',
+    ],
+    mockUI: mockBorderlessQR(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 520);
+
+  page.add(mkGrid(
+    'Built for in-person selling',
+    'HitPay\'s event tools let you focus on your craft — not your checkout.',
+    [
+      { title: 'Tap to Pay — no terminal',   desc: 'Turn your NFC iPhone or Android into a card reader. Accept contactless cards and Apple Pay instantly.' },
+      { title: 'PayNow via Borderless QR',   desc: 'International vendors display a QR code; Singapore shoppers pay SGD; you receive in your home currency.' },
+      { title: 'Card Terminal (optional)',    desc: 'Prefer a dedicated reader? HitPay card terminals work with the same app and dashboard.' },
+      { title: 'Live sales dashboard',       desc: 'Track every transaction in real time — by item, hour, and payment method — on phone or laptop.' },
+      { title: 'MAS-licensed & secure',      desc: 'Regulated by MAS as a Major Payment Institution. PCI DSS Level 1 certified. Your funds are protected.' },
+      { title: 'No monthly fees, ever',      desc: 'Pay only when you sell — a small percentage per transaction. Nothing to pay when the fair ends.' },
+    ]
+  ), 660);
+
+  page.add(mkIntlSpotlight(), 460);
+
+  page.add(mkStats(
+    [
+      { value: 'SGD 0',    label: 'Monthly fees' },
+      { value: '50+',      label: 'Payment methods' },
+      { value: '15,000+',  label: 'Businesses on HitPay' },
+      { value: '1–3 days', label: 'Account approval time' },
+    ],
+    C.hpBeige, C.hpTextPri, C.hpTextSec
+  ), 192);
+
+  page.add(mkFAQ([
+    { q: 'Can international vendors from Thailand, Malaysia, or Indonesia use HitPay at the fair?', a: 'Yes. International vendors accept PayNow via HitPay\'s Borderless QR — no Singapore bank account or local business registration required. Vendors from Thailand, Malaysia, Indonesia, China, Taiwan, Hong Kong, Japan, Philippines, and more are all eligible.' },
+    { q: 'Do I need to buy or rent a card terminal to accept card payments?', a: 'No terminal needed for Singapore vendors. Tap to Pay on any NFC iPhone or Android phone — customers tap their card, Apple Pay, or Google Pay directly on your device. HitPay card terminals are optional.' },
+    { q: 'How long does HitPay account approval take?', a: 'Approval typically takes 1–3 business days after document submission. Sign up as early as possible to ensure your account is live and tested before the fair.' },
+    { q: 'When do I receive my payout after the fair?', a: 'Singapore vendors: PayNow payouts arrive in T+1 calendar day, card payouts in T+3 working days. International vendors: T+3 working days in their home currency.' },
+    { q: 'Is there any monthly fee or minimum commitment?', a: 'No setup fee, no monthly fee, no contract. HitPay charges only a small percentage per transaction: 2.5% for domestic cards, 0.4% for PayNow (SG), or 1.5% for Borderless QR (international).' },
+    { q: 'What payment methods can shoppers use at the fair?', a: 'Shoppers can pay by Visa, Mastercard, PayNow, Apple Pay, and Google Pay. No cash counting, no wrong change, no missed sales from "I don\'t have cash".' },
+  ], ac), 640);
+
+  page.add(mkCTA(
+    'Sign up for your free HitPay account today',
+    'No monthly fees. No setup cost. Accept cards and PayNow at the fair — from your phone.',
+    'Create my free account now',
+    'Questions? Contact us',
+    ac
+  ), 300);
+
+  page.add(mkFooter(
+    ac,
+    ['Point of Sale', 'Tap to Pay', 'Borderless QR', 'Card Terminal'],
+    ['Art & Craft Fair 2026', 'Events', 'Retail', 'F&B']
+  ), 280);
+
+  return page.f;
+}
+
 // ── MAIN ─────────────────────────────────────────────────────
 
 const BUILDERS = {
@@ -3768,6 +4123,7 @@ const BUILDERS = {
   fitness:       buildFitness,
   events:        buildEvents,
   wholesale:     buildWholesale,
+  art_craft_fair: buildArtCraftFair,
 };
 
 async function main() {

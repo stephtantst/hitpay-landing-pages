@@ -58,6 +58,11 @@
   <p class="section-label">Industry Pages</p>
   <div class="page-list" id="industryPages"></div>
 
+  <div class="divider"></div>
+
+  <p class="section-label">Partnership Pages</p>
+  <div class="page-list" id="partnershipPages"></div>
+
   <p class="count" id="count"></p>
 
   <div class="actions">
@@ -84,6 +89,9 @@
         { id: 'computers',   label: '💻 Computers & Tech' },
         { id: 'events',      label: '🎪 Events' },
         { id: 'wholesale',   label: '📦 Wholesale' },
+      ],
+      partnership: [
+        { id: 'art_craft_fair', label: '🎨 Art & Craft Fair SG 2026' },
       ]
     };
 
@@ -96,6 +104,7 @@
 
     PAGES.original.forEach(p => createCheckbox(p, document.getElementById('originalPages')));
     PAGES.industry.forEach(p => createCheckbox(p, document.getElementById('industryPages')));
+    PAGES.partnership.forEach(p => createCheckbox(p, document.getElementById('partnershipPages')));
 
     function getAllCheckboxes() {
       return document.querySelectorAll('input[type="checkbox"]');
