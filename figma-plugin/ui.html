@@ -50,6 +50,11 @@
     <a id="deselectAll">Deselect all</a>
   </div>
 
+  <p class="section-label">Feature Pages</p>
+  <div class="page-list" id="featurePages"></div>
+
+  <div class="divider"></div>
+
   <p class="section-label">Original Pages</p>
   <div class="page-list" id="originalPages"></div>
 
@@ -72,6 +77,10 @@
 
   <script>
     const PAGES = {
+      feature: [
+        { id: 'ai_shoppers',      label: '🤖 AI Shoppers' },
+        { id: 'virtual_accounts', label: '🏦 Virtual Accounts' },
+      ],
       original: [
         { id: 'ecommerce',     label: '🛒 E-commerce' },
         { id: 'retail',        label: '🏪 Retail' },
@@ -102,6 +111,7 @@
       container.appendChild(div);
     }
 
+    PAGES.feature.forEach(p => createCheckbox(p, document.getElementById('featurePages')));
     PAGES.original.forEach(p => createCheckbox(p, document.getElementById('originalPages')));
     PAGES.industry.forEach(p => createCheckbox(p, document.getElementById('industryPages')));
     PAGES.partnership.forEach(p => createCheckbox(p, document.getElementById('partnershipPages')));

@@ -90,6 +90,7 @@ const C = {
   hpSuccess:   { r: 0.302, g: 0.671, b: 0.502 },  // #4DAB80
   hpBlue50:    { r: 0.922, g: 0.945, b: 0.988 },  // #EBF1FC
   hpBlue100:   { r: 0.839, g: 0.890, b: 0.976 },  // #D6E3F9
+  hpBeige200:  { r: 0.953, g: 0.953, b: 0.929 },  // #F3F3ED — alternating feature bg
 };
 
 // ── FONT WEIGHTS ────────────────────────────────────────────
@@ -3739,8 +3740,484 @@ INDUSTRY.wholesale = {
   footerIndustries: ['Wholesale', 'E-commerce', 'Retail', 'Electronics'],
 };
 
-// ── INDUSTRY BUILDER WRAPPERS ─────────────────────────────────
+// ── AI SHOPPERS — CUSTOM MOCKS ────────────────────────────────
 
+/** Hero mock: AI chat conversation → order placed */
+function mockAIChat() {
+  const card = mkFrame('MockAIChat', 300, 295, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0,g:0,b:0,a:0.10 }, offset:{x:0,y:20}, radius:50, spread:0, visible:true, blendMode:'NORMAL' }];
+
+  // Header bar
+  const hdr = mkRect(300, 46, C.hpTextPri, 0);
+  hdr.x = 0; hdr.y = 0;
+  card.appendChild(hdr);
+  const hdrTxt = mkText('AI Assistant', 13, W.semibold, C.white, 'LEFT');
+  hdrTxt.x = 44; hdrTxt.y = 14;
+  card.appendChild(hdrTxt);
+
+  // User bubble (right-aligned)
+  const uBg = mkRect(188, 42, C.hpBlue50, 10);
+  uBg.x = 96; uBg.y = 60;
+  card.appendChild(uBg);
+  const uTxt = mkText('Buy me a birthday cake\nfrom that bakery in SG', 11, W.regular, C.hpTextPri, 'LEFT', 168);
+  uTxt.x = 106; uTxt.y = 66;
+  card.appendChild(uTxt);
+
+  // AI bubble (left)
+  const aBg = mkRect(200, 42, C.hpBeige, 10);
+  aBg.x = 16; aBg.y = 114;
+  card.appendChild(aBg);
+  const aTxt = mkText('Found it — S$48 cake.\nPlacing order now…', 11, W.regular, C.hpTextSec, 'LEFT', 180);
+  aTxt.x = 26; aTxt.y = 120;
+  card.appendChild(aTxt);
+
+  // Order card
+  const oc = mkRect(268, 80, C.hpBeige, 10);
+  oc.x = 16; oc.y = 170;
+  card.appendChild(oc);
+  const pName = mkText('Chocolate Fudge Cake', 12, W.semibold, C.hpTextPri, 'LEFT', 150);
+  pName.x = 28; pName.y = 180;
+  card.appendChild(pName);
+  const pPrice = mkText('S$48.00', 12, W.semibold, C.hpAction, 'LEFT');
+  pPrice.x = 220; pPrice.y = 180;
+  card.appendChild(pPrice);
+  const pStore = mkText('Little Cakes Singapore', 11, W.regular, C.hpTextSec, 'LEFT', 200);
+  pStore.x = 28; pStore.y = 198;
+  card.appendChild(pStore);
+  const ordBtn = mkRect(248, 26, C.hpAction, 6);
+  ordBtn.x = 26; ordBtn.y = 218;
+  card.appendChild(ordBtn);
+  const ordTxt = mkText('Order placed ✓', 11, W.semibold, C.white, 'CENTER', 248);
+  ordTxt.x = 26; ordTxt.y = 224;
+  card.appendChild(ordTxt);
+
+  // Status line
+  const dot = mkRect(8, 8, C.hpSuccess, 4);
+  dot.x = 96; dot.y = 264;
+  card.appendChild(dot);
+  const st = mkText('Order now in your HitPay dashboard', 11, W.regular, C.hpTextSec, 'LEFT', 180);
+  st.x = 110; st.y = 260;
+  card.appendChild(st);
+
+  return card;
+}
+
+/** Feature 1 mock: product catalog → ChatGPT result */
+function mockProductCatalogAI() {
+  const card = mkFrame('MockProductCatalog', 280, 270, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0,g:0,b:0,a:0.08 }, offset:{x:0,y:16}, radius:40, spread:0, visible:true, blendMode:'NORMAL' }];
+
+  const hdr = mkText('Your store catalog — visible to AI', 11, W.semibold, C.hpTextSec, 'LEFT', 240);
+  hdr.x = 16; hdr.y = 16;
+  card.appendChild(hdr);
+
+  const items = [
+    { name: 'Chocolate Fudge Cake', price: 'S$48 · In stock' },
+    { name: 'Earl Grey Chiffon', price: 'S$38 · In stock' },
+    { name: 'Salted Caramel Tart', price: 'S$22 · In stock' },
+  ];
+  items.forEach((it, i) => {
+    const row = mkRect(248, 36, C.hpBeige, 8);
+    row.x = 16; row.y = 42 + i * 44;
+    card.appendChild(row);
+    const n = mkText(it.name, 12, W.medium, C.hpTextPri, 'LEFT', 150);
+    n.x = 26; n.y = 48 + i * 44;
+    card.appendChild(n);
+    const p = mkText(it.price, 11, W.regular, C.hpTextSec, 'LEFT', 110);
+    p.x = 26; p.y = 62 + i * 44;
+    card.appendChild(p);
+    const dot = mkRect(8, 8, C.hpSuccess, 4);
+    dot.x = 248; dot.y = 52 + i * 44;
+    card.appendChild(dot);
+  });
+
+  // ChatGPT result box
+  const res = mkRect(248, 64, C.hpBlue50, 10);
+  res.x = 16; res.y = 186;
+  card.appendChild(res);
+  const resLbl = mkText('ChatGPT result', 11, W.semibold, C.hpAction, 'LEFT');
+  resLbl.x = 26; resLbl.y = 194;
+  card.appendChild(resLbl);
+  const resTxt = mkText('"For a birthday cake in SG, try\nLittle Cakes — S$48, in stock."', 11, W.regular, C.hpTextPri, 'LEFT', 228);
+  resTxt.x = 26; resTxt.y = 212;
+  card.appendChild(resTxt);
+
+  return card;
+}
+
+/** Feature 2 mock: 3-step AI checkout flow */
+function mockAICheckoutSteps() {
+  const wrap = mkFrame('MockAICheckout', 272, 250, { r:0,g:0,b:0,a:0 }, 0);
+
+  const steps = [
+    { num: '1', title: 'Customer tells AI what to buy', body: '"Order me the skincare set from that brand in KL"', border: C.slate200 },
+    { num: '2', title: 'AI finds product, fills checkout', body: 'Product: Glow Serum Set  RM128\nDelivery: Filled by AI', border: C.slate200 },
+    { num: '3', title: 'Order in your HitPay dashboard', body: 'New order — RM 128.00\nGlow Serum Set · Just now', border: C.hpAction },
+  ];
+
+  steps.forEach((s, i) => {
+    const bg = mkRect(272, 70, C.white, 12);
+    bg.strokes = [{ type: 'SOLID', color: s.border }];
+    bg.strokeWeight = s.border === C.hpAction ? 2 : 1;
+    bg.strokeAlign = 'INSIDE';
+    bg.effects = [{ type: 'DROP_SHADOW', color: { r:0,g:0,b:0,a:0.06 }, offset:{x:0,y:4}, radius:12, spread:0, visible:true, blendMode:'NORMAL' }];
+    bg.x = 0; bg.y = i * 86;
+    wrap.appendChild(bg);
+
+    const numBg = mkRect(20, 20, C.hpBlue50, 10);
+    numBg.x = 12; numBg.y = i * 86 + 14;
+    wrap.appendChild(numBg);
+    const numTxt = mkText(s.num, 11, W.bold, C.hpAction, 'CENTER', 20);
+    numTxt.x = 12; numTxt.y = i * 86 + 17;
+    wrap.appendChild(numTxt);
+
+    const ttl = mkText(s.title, 12, W.semibold, C.hpTextPri, 'LEFT', 220);
+    ttl.x = 40; ttl.y = i * 86 + 12;
+    wrap.appendChild(ttl);
+
+    const bodyBg = mkRect(248, 28, i === 2 ? C.hpBlue50 : C.hpBeige, 6);
+    bodyBg.x = 12; bodyBg.y = i * 86 + 36;
+    wrap.appendChild(bodyBg);
+    const bodyTxt = mkText(s.body, 10, W.regular, i === 2 ? C.hpAction : C.hpTextSec, 'LEFT', 228);
+    bodyTxt.x = 20; bodyTxt.y = i * 86 + 41;
+    wrap.appendChild(bodyTxt);
+  });
+
+  return wrap;
+}
+
+/** Feature 3 mock: AI readiness checklist badge */
+function mockAIReadinessBadge() {
+  const card = mkFrame('MockAIReadiness', 250, 240, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0,g:0,b:0,a:0.08 }, offset:{x:0,y:16}, radius:40, spread:0, visible:true, blendMode:'NORMAL' }];
+
+  // Shield icon area
+  const iconBg = mkRect(56, 56, C.hpBlue50, 14);
+  iconBg.x = 97; iconBg.y = 16;
+  card.appendChild(iconBg);
+  const iconTxt = mkText('✓', 28, W.bold, C.hpAction, 'CENTER', 56);
+  iconTxt.x = 97; iconTxt.y = 22;
+  card.appendChild(iconTxt);
+
+  const title = mkText('HitPay Online Store', 13, W.semibold, C.hpTextPri, 'CENTER', 218);
+  title.x = 16; title.y = 84;
+  card.appendChild(title);
+
+  const checks = ['AI can find you', 'AI can recommend you', 'AI can buy from you'];
+  checks.forEach((c, i) => {
+    const rowBg = mkRect(218, 32, C.hpBeige, 8);
+    rowBg.x = 16; rowBg.y = 110 + i * 38;
+    card.appendChild(rowBg);
+    const chkBg = mkRect(16, 16, C.hpBlue100, 8);
+    chkBg.x = 24; chkBg.y = 118 + i * 38;
+    card.appendChild(chkBg);
+    const chkMark = mkText('✓', 9, W.bold, C.hpAction, 'CENTER', 16);
+    chkMark.x = 24; chkMark.y = 120 + i * 38;
+    card.appendChild(chkMark);
+    const chkTxt = mkText(c, 12, W.regular, C.hpTextPri, 'LEFT', 170);
+    chkTxt.x = 48; chkTxt.y = 118 + i * 38;
+    card.appendChild(chkTxt);
+  });
+
+  const badge = mkRect(218, 28, C.hpAction, 8);
+  badge.x = 16; badge.y = 200;
+  card.appendChild(badge);
+  const badgeTxt = mkText('AI-ready · Automatic · Free', 11, W.semibold, C.white, 'CENTER', 218);
+  badgeTxt.x = 16; badgeTxt.y = 207;
+  card.appendChild(badgeTxt);
+
+  return card;
+}
+
+/** Feature 4 mock: Others vs HitPay comparison table */
+function mockAIComparison() {
+  const card = mkFrame('MockAIComparison', 272, 220, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0,g:0,b:0,a:0.08 }, offset:{x:0,y:16}, radius:40, spread:0, visible:true, blendMode:'NORMAL' }];
+
+  const hdr = mkText('AI shopping features', 11, W.semibold, C.hpTextSec, 'LEFT', 232);
+  hdr.x = 16; hdr.y = 14;
+  card.appendChild(hdr);
+
+  // Column headers
+  const colOther = mkText('Others', 11, W.semibold, C.hpTextSec, 'CENTER', 88);
+  colOther.x = 104; colOther.y = 36;
+  card.appendChild(colOther);
+  const colHP = mkText('HitPay', 11, W.semibold, C.hpAction, 'CENTER', 80);
+  colHP.x = 192; colHP.y = 36;
+  card.appendChild(colHP);
+
+  const rows = [
+    { label: 'AI visibility',  other: 'Manual',    hp: 'Automatic' },
+    { label: 'AI checkout',    other: 'Developer', hp: 'Automatic' },
+    { label: 'AI signal',      other: 'Extra plan',hp: 'Automatic' },
+    { label: 'Extra cost',     other: 'Yes',       hp: 'SGD/MYR/PHP 0' },
+  ];
+
+  rows.forEach((r, i) => {
+    const rowBg = mkRect(240, 30, C.hpBeige, 6);
+    rowBg.x = 16; rowBg.y = 56 + i * 36;
+    card.appendChild(rowBg);
+
+    const lbl = mkText(r.label, 11, W.regular, C.hpTextSec, 'LEFT', 80);
+    lbl.x = 24; lbl.y = 64 + i * 36;
+    card.appendChild(lbl);
+
+    const otherTxt = mkText(r.other, 11, W.regular, C.slate400, 'CENTER', 88);
+    otherTxt.x = 104; otherTxt.y = 64 + i * 36;
+    card.appendChild(otherTxt);
+
+    const hpTxt = mkText(r.hp, 11, W.semibold, C.hpAction, 'CENTER', 80);
+    hpTxt.x = 192; hpTxt.y = 64 + i * 36;
+    card.appendChild(hpTxt);
+  });
+
+  return card;
+}
+
+/** Mid-page CTA strip — matches bg-[#EBF1FC] band in HTML */
+function mkMidCTAAI() {
+  const sec = mkFrame('MidCTA', 1440, 100, C.hpBlue50);
+
+  const txt = mkText('Ready to get your store in front of AI shoppers?', 20, W.semibold, C.hpTextPri, 'LEFT', 560);
+  txt.x = 144; txt.y = 30;
+  sec.appendChild(txt);
+
+  const btn = mkBtn('Start for free →', C.hpAction, C.white, 24, 12, 10);
+  btn.x = 900; btn.y = 28;
+  sec.appendChild(btn);
+
+  const fine = mkText('No setup fees · Approval in 1–3 business days', 13, W.regular, C.hpTextSec);
+  fine.x = 1060; fine.y = 38;
+  sec.appendChild(fine);
+
+  return sec;
+}
+
+/** Payment methods table section */
+function mkPaymentMethodsTableAI() {
+  const sec = mkFrame('PaymentMethodsTable', 1440, 400, C.hpBeige);
+
+  const h2 = mkH2('Payment methods accepted on HitPay Online Store', 26, C.hpTextPri, 'CENTER', 800);
+  h2.x = 320; h2.y = 40;
+  sec.appendChild(h2);
+
+  const sub = mkText('All methods work for both AI-initiated and human-initiated orders across SG, MY and PH.', 16, W.regular, C.hpTextSec, 'CENTER', 700);
+  sub.x = 370; sub.y = 84;
+  sec.appendChild(sub);
+
+  // Table
+  const tableX = 240, tableY = 120, rowH = 36, colWidths = [260, 280, 260];
+  const headers = ['Payment Method', 'Available in', 'Type'];
+  const rows = [
+    ['PayNow', 'Singapore', 'Instant transfer / QR'],
+    ['DuitNow QR', 'Malaysia', 'Instant transfer / QR'],
+    ['GCash, Maya, QR Ph', 'Philippines', 'Mobile wallet / QR'],
+    ['FPX', 'Malaysia', 'Bank transfer'],
+    ['InstaPay, PESONet', 'Philippines', 'Bank transfer'],
+    ['GrabPay, ShopeePay', 'Singapore', 'E-wallet'],
+    ['Touch \'n Go, Boost', 'Malaysia', 'E-wallet'],
+    ['Visa, Mastercard, Amex', 'SG, MY, PH', 'Credit / debit card'],
+    ['Atome, ShopBack PayLater', 'Singapore, Malaysia', 'Buy Now Pay Later'],
+  ];
+
+  // Header row
+  let x = tableX;
+  headers.forEach((h, ci) => {
+    const bg = mkRect(colWidths[ci], rowH, C.hpBlue50, 0);
+    bg.strokes = [{ type: 'SOLID', color: C.slate200 }];
+    bg.strokeWeight = 1; bg.strokeAlign = 'INSIDE';
+    bg.x = x; bg.y = tableY;
+    sec.appendChild(bg);
+    const t = mkText(h, 13, W.semibold, C.hpTextPri, 'LEFT', colWidths[ci] - 24);
+    t.x = x + 12; t.y = tableY + 10;
+    sec.appendChild(t);
+    x += colWidths[ci];
+  });
+
+  // Data rows
+  rows.forEach((row, ri) => {
+    const rowBg = ri % 2 === 0 ? C.white : C.hpBeige;
+    let cx = tableX;
+    row.forEach((cell, ci) => {
+      const bg = mkRect(colWidths[ci], rowH, rowBg, 0);
+      bg.strokes = [{ type: 'SOLID', color: C.slate200 }];
+      bg.strokeWeight = 1; bg.strokeAlign = 'INSIDE';
+      bg.x = cx; bg.y = tableY + rowH * (ri + 1);
+      sec.appendChild(bg);
+      const weight = ci === 0 ? W.medium : W.regular;
+      const color = ci === 0 ? C.hpTextPri : C.hpTextSec;
+      const t = mkText(cell, 13, weight, color, 'LEFT', colWidths[ci] - 24);
+      t.x = cx + 12; t.y = tableY + rowH * (ri + 1) + 10;
+      sec.appendChild(t);
+      cx += colWidths[ci];
+    });
+  });
+
+  return sec;
+}
+
+// ── AI SHOPPERS — CUSTOM PAGE BUILDER ─────────────────────────
+
+function buildAiShoppers(xOffset) {
+  const page = new Page('AI Shoppers — HitPay', xOffset);
+  const ac = C.hpAction;
+
+  // ① Nav
+  page.add(mkNavbar(ac), 64);
+
+  // ② Hero
+  const hero = mkFrame('Hero', 1440, 560, C.hpBlue50);
+  const heroBadge = mkPill('Online Store · AI Shopping · SG · MY · PH', C.hpBlue50, ac, 16, 8, 100);
+  heroBadge.x = 144; heroBadge.y = 80;
+  hero.appendChild(heroBadge);
+  const heroH1 = mkH2('HitPay Online Stores in Singapore,\nMalaysia and the Philippines are\nalready ready for AI shoppers', 48, C.hpTextPri, 'LEFT', 600);
+  heroH1.lineHeight = { value: 58, unit: 'PIXELS' };
+  heroH1.x = 144; heroH1.y = 120;
+  hero.appendChild(heroH1);
+  const heroSub = mkText('Products can come up when someone asks ChatGPT what to buy — PayNow in SG, DuitNow in MY, GCash in PH. AI can place the full order. Nothing to turn on. Already done.', 18, W.regular, C.hpTextSec, 'LEFT', 540);
+  heroSub.lineHeight = { value: 28, unit: 'PIXELS' };
+  heroSub.x = 144; heroSub.y = 350;
+  hero.appendChild(heroSub);
+  const hb1 = mkBtn('Set up your free store', ac, C.white, 24, 14, 12);
+  hb1.x = 144; hb1.y = 440;
+  hero.appendChild(hb1);
+  const hb2 = mkBtn('See how it works', null, C.slate800, 24, 14, 12, true);
+  hb2.x = 320; hb2.y = 440;
+  hero.appendChild(hb2);
+  const hFine = mkText('Free to sign up · No setup fees · AI features included automatically', 13, W.regular, C.hpTextSec);
+  hFine.x = 144; hFine.y = 496;
+  hero.appendChild(hFine);
+  const heroMock = mockAIChat();
+  heroMock.x = 900; heroMock.y = 130;
+  hero.appendChild(heroMock);
+  page.add(hero, 560);
+
+  // ③ Trust bar
+  page.add(mkTrustBar('WORKS WITH THE AI TOOLS YOUR CUSTOMERS ARE ALREADY USING', ['ChatGPT', 'Perplexity', 'Claude', 'Microsoft Copilot', '+ every new AI tool']), 120);
+
+  // ④ Intro
+  page.add(mkIntro('Built for where shopping is going', 'HitPay Online Store lets merchants in Singapore, Malaysia and the Philippines sell online with 50+ payment methods, zero monthly fees, and next business day payouts. Since 2026, every HitPay Online Store is automatically set up for AI shopping — at no extra cost, with nothing to configure. From home bakers in Toa Payoh, Singapore to skincare brands in Bangsar, KL and boutiques in Makati, Manila — AI tools can find, recommend, and buy from every HitPay Online Store.'), 240);
+
+  // ⑤ Feature 1 — AI can see you
+  page.add(mkFeature({
+    label: 'Step 1 — AI Can See You',
+    h2: 'When people ask AI what to buy, products from HitPay stores come up',
+    p: 'Most small business stores in Singapore, Malaysia and the Philippines are invisible to AI shopping tools. HitPay creates a machine-readable version of every merchant\'s product catalog automatically. Product names, prices, and stock levels are included. The catalog updates every hour. When a shopper asks ChatGPT for something a merchant sells, that store has a real chance to come up in the answer.',
+    bullets: ['Full product catalog — names, prices, stock — visible to AI tools automatically', 'Updates every hour — AI sees the latest products and prices', 'Nothing to configure — active the moment a store goes live', 'Works across ChatGPT, Perplexity, and every AI shopping tool'],
+    mockUI: mockProductCatalogAI(),
+    bg: C.hpBlue50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  // ⑥ Feature 2 — AI can buy
+  page.add(mkFeature({
+    label: 'Step 2 — AI Can Buy From You',
+    h2: 'Customer asks AI to buy. AI places the order. Merchants just pack and ship.',
+    p: 'Many customers give up before completing a purchase online. A customer tells ChatGPT what they want to buy. The AI finds the product in the HitPay store, fills in delivery details, and creates the order. The customer pays. The merchant sees the order in their HitPay dashboard exactly like any other sale. AI does not get distracted. It does not abandon checkout halfway. It finishes the purchase.',
+    bullets: ['AI completes the full checkout — product, delivery, order creation', 'Orders appear in the HitPay dashboard exactly like any other sale', 'Works with the existing HitPay Online Store setup — no new tools', 'Fewer customers giving up halfway — AI finishes what it starts'],
+    mockUI: mockAICheckoutSteps(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  // ⑥-B Mid-page CTA strip
+  page.add(mkMidCTAAI(), 100);
+
+  // ⑦ Feature 3 — AI-ready
+  page.add(mkFeature({
+    label: 'Step 3 — Your Store Is AI-Ready',
+    h2: 'AI shopping tools know every HitPay Online Store is open for business',
+    p: 'AI shopping tools do not buy from every store they find. Before placing an order, an AI checks whether a store is set up to work with it — like checking if a shop accepts card payment before walking in. HitPay has placed a signal on every Online Store that tells AI tools: this store is ready. Without this signal, a store risks being skipped entirely — even with great products.',
+    bullets: ['AI tools recognise the store as ready for AI purchases', 'Foundation that connects AI product discovery and AI checkout', 'Automatic for all HitPay Online Store merchants in SG, MY, PH', 'Future AI shopping tools will recognise the store automatically'],
+    mockUI: mockAIReadinessBadge(),
+    bg: C.hpBlue50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  // ⑧ Feature 4 — zero setup
+  page.add(mkFeature({
+    label: 'No Setup Needed',
+    h2: 'Merchants didn\'t have to do anything. That was the point.',
+    p: 'Most platforms charge extra for AI features — or require a developer to set them up. HitPay built all three AI features directly into the Online Store platform. No separate account, no integration work, no extra monthly fee. Every merchant with a HitPay Online Store in Singapore, Malaysia or the Philippines already has all three active. Merchants pay the same standard HitPay transaction rate — nothing more.',
+    bullets: ['SGD / MYR / PHP 0 in extra fees — included with every Online Store', 'No developer, no integration, no configuration — already done', 'Live store merchants are already set up — no action required', 'See hitpayapp.com/pricing for current transaction rates'],
+    mockUI: mockAIComparison(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  // ⑨ Payment methods table
+  page.add(mkPaymentMethodsTableAI(), 400);
+
+  // ⑩ Stats
+  page.add(mkStats([
+    { value: 'SGD/MYR/PHP 0', label: 'Extra cost for AI features' },
+    { value: '900M',  label: 'Weekly ChatGPT users' },
+    { value: '50M+',  label: 'AI shopping queries daily' },
+    { value: '42%',   label: 'Higher conversion from AI shoppers' },
+  ], C.hpDeepBlue, C.white, C.hpBlue100), 192);
+
+  // ⑪ Testimonial
+  page.add(mkTestimonial(
+    '[REAL QUOTE REQUIRED] — Replace with a testimonial from a HitPay Online Store merchant about getting more sales or online discovery.',
+    '[Merchant Name]',
+    'HitPay Online Store merchant, Singapore / Malaysia / Philippines',
+    ac, C.hpBlue100
+  ), 380);
+
+  // ⑫ Feature grid
+  page.add(mkGrid('Six types of businesses already benefiting', 'Every HitPay Online Store merchant in SG, MY & PH is included — regardless of category or size.', [
+    { title: '🧁 Home bakers & food',   desc: 'AI recommends cakes and bakes in SG, KL, and Manila when shoppers ask for birthday treats.' },
+    { title: '👗 Fashion & apparel',    desc: 'AI matches styles to products and completes the order in one conversation.' },
+    { title: '✨ Skincare & beauty',    desc: 'Products surface in budget-based beauty searches with real-time stock status.' },
+    { title: '📚 Education & tutoring', desc: 'Parents find and purchase class packages from education merchants directly.' },
+    { title: '🎁 Gifts & lifestyle',    desc: 'HitPay merchants appear in ChatGPT gift recommendation searches.' },
+    { title: '🧴 Specialty & niche',    desc: 'AI is better than Google for niche searches — small merchants benefit most.' },
+  ]), 660);
+
+  // ⑬ Related
+  page.add(mkRelated('Explore more HitPay solutions', [
+    { emoji: '🛒', title: 'Online Store',       desc: 'Full online checkout with PayNow, DuitNow, GCash and 50+ methods.' },
+    { emoji: '🍜', title: 'Restaurants & F&B', desc: 'POS, Soundbox, and payment links for F&B businesses.' },
+    { emoji: '💆', title: 'Health & Beauty',   desc: 'Memberships, deposits, and recurring billing for spas.' },
+  ], ac), 380);
+
+  // ⑭ FAQ
+  const faqs = [
+    { q: 'What is HitPay Online Store and how does it support AI shopping?', a: 'HitPay Online Store lets merchants in SG, MY and PH sell online with 50+ payment methods and zero monthly fees. Since 2026, every store is automatically set up for AI shopping — ChatGPT can discover products, recommend them, and complete purchases at no extra cost.' },
+    { q: 'Does a merchant need to do anything to enable AI shopping?', a: 'No. Every HitPay Online Store already has all three AI features active — product catalog visibility, agentic checkout, and AI-readiness signal. Nothing to click, configure, or pay for.' },
+    { q: 'Which AI tools can find and shop from a HitPay Online Store?', a: 'Any AI assistant that can shop online — including tools built on ChatGPT and Perplexity. As new AI shopping tools launch, HitPay Online Store merchants will be ready for them automatically.' },
+    { q: 'Can an AI assistant complete a full checkout at a HitPay Online Store?', a: 'Yes. HitPay supports agentic checkout — AI completes the entire purchase. The customer tells AI what to buy, AI creates the order, customer pays. The merchant sees it in the dashboard like any other order.' },
+    { q: 'Will a merchant know if an order came from an AI assistant?', a: 'Orders placed by AI appear in the HitPay dashboard exactly like any other order. No special handling required.' },
+    { q: 'Is customer data shared with AI tools?', a: 'No. Only publicly listed product information — names, prices, stock status — is visible to AI tools. HitPay is MAS licensed (PS20200643) and PCI DSS Level 1 compliant.' },
+    { q: 'How much does HitPay Online Store cost?', a: 'Zero monthly fees and zero setup fees. Merchants pay a per-transaction rate only — including on AI-initiated orders. All AI features included at no extra cost. See hitpayapp.com/pricing.' },
+    { q: 'What support does HitPay provide to Online Store merchants?', a: 'HitPay provides live chat, email support, and a Help Centre at support.hitpayapp.com. Enterprise merchants can speak with a dedicated account manager.' },
+    { q: 'Does this apply to payment link users or in-person merchants?', a: 'Not yet — AI shopping features are specific to HitPay Online Store merchants. Payment link users and in-person POS merchants are not yet covered.' },
+    { q: 'How do Singapore businesses sign up for a HitPay Online Store?', a: 'Register with ACRA business number or personal NRIC. No setup fees, no monthly fees. Approval takes 1–3 business days. Store is automatically AI-ready upon going live.' },
+    { q: 'How do Malaysian businesses sign up for a HitPay Online Store?', a: 'Register with SSM business number and MyKad. Approval takes 1–3 business days. Store is automatically visible to AI shopping tools upon going live.' },
+    { q: 'How do Philippine businesses sign up for a HitPay Online Store?', a: 'Register with SEC or DTI certificate plus government-issued ID. Approval takes 1–3 business days. Store is automatically set up for AI shopping upon going live.' },
+  ];
+  page.add(mkFAQ(faqs, ac), 96 + faqs.length * 136 + 40);
+
+  // ⑮ CTA
+  page.add(mkCTA(
+    'Your store could be getting AI shoppers right now.',
+    'If a HitPay Online Store is already live, it is already set up — free, automatic, nothing to turn on.',
+    'Set up your free store',
+    'Talk to sales',
+    ac
+  ), 300);
+
+  // ⑯ Footer
+  page.add(mkFooter(ac, ['Online Store', 'Payment Links', 'POS Software', 'Invoicing'], ['E-commerce', 'Restaurants', 'Health & Beauty', 'Retail']), 280);
+
+  return page.f;
+}
+
+// ── INDUSTRY BUILDER WRAPPERS ─────────────────────────────────
 function buildRestaurants(xOffset) { return buildIndustry(INDUSTRY.restaurants, xOffset); }
 function buildTravel(xOffset)      { return buildIndustry(INDUSTRY.travel, xOffset); }
 function buildEducation(xOffset)   { return buildIndustry(INDUSTRY.education, xOffset); }
@@ -4106,9 +4583,603 @@ function buildArtCraftFair(xOffset = 0) {
   return page.f;
 }
 
+// ── VIRTUAL ACCOUNTS ─────────────────────────────────────────
+
+function mockVADashboard() {
+  const card = mkFrame('MockVADashboard', 300, 370, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.08 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const hdrT = mkText('Activity — Today', 12, W.semibold, C.hpTextPri);
+  hdrT.x = 20; hdrT.y = 18;
+  card.appendChild(hdrT);
+
+  const liveBg = mkRect(52, 22, C.green100, 11);
+  liveBg.x = 228; liveBg.y = 16;
+  card.appendChild(liveBg);
+  const liveT = mkText('● Live', 10, W.medium, C.green600);
+  liveT.x = 234; liveT.y = 19;
+  card.appendChild(liveT);
+
+  const balBg = mkRect(260, 58, C.hpBlue50, 12);
+  balBg.x = 20; balBg.y = 48;
+  card.appendChild(balBg);
+  const balLbl = mkText('TOTAL BALANCE', 9, W.medium, C.hpTextSec, 'CENTER', 260);
+  balLbl.x = 20; balLbl.y = 58;
+  card.appendChild(balLbl);
+  const balAmt = mkText('S$ 36,448.90', 20, W.semibold, C.hpTextPri, 'CENTER', 260);
+  balAmt.x = 20; balAmt.y = 74;
+  card.appendChild(balAmt);
+
+  const cpHdr = mkText('CUSTOMER PAYMENTS', 9, W.semibold, C.hpTextSec);
+  cpHdr.x = 20; cpHdr.y = 118;
+  card.appendChild(cpHdr);
+
+  [['PayNow · Agnes Bakery', '+S$340'], ['Visa · Online order', '+S$219']].forEach(([label, amt], i) => {
+    const t = mkText(label, 12, W.regular, C.hpTextSec);
+    t.x = 40; t.y = 138 + i * 22;
+    card.appendChild(t);
+    const a = mkText(amt, 12, W.medium, C.green600);
+    a.x = 240; a.y = 138 + i * 22;
+    card.appendChild(a);
+  });
+
+  const div1 = mkRect(260, 1, C.slate100);
+  div1.x = 20; div1.y = 186;
+  card.appendChild(div1);
+
+  const brHdr = mkText('BUSINESS RECEIVABLES', 9, W.semibold, C.hpTextSec);
+  brHdr.x = 20; brHdr.y = 196;
+  card.appendChild(brHdr);
+
+  const brRows = [
+    { badge: 'SGD', badgeBg: C.green100, badgeFg: C.green600, label: 'FAST · Pinnacle Systems SG', amt: '+S$5,200' },
+    { badge: 'USD', badgeBg: C.amber100, badgeFg: C.amber700, label: 'SWIFT · Zenith Retail Ltd', amt: '+S$2,841' },
+    { badge: 'EUR', badgeBg: C.blue100, badgeFg: C.blue600, label: 'SWIFT · Luxe Supplies GmbH', amt: '+S$1,084' },
+  ];
+  brRows.forEach((row, i) => {
+    const y = 216 + i * 26;
+    const badgeBg = mkRect(26, 18, row.badgeBg, 4);
+    badgeBg.x = 20; badgeBg.y = y;
+    card.appendChild(badgeBg);
+    const badgeT = mkText(row.badge, 9, W.bold, row.badgeFg, 'CENTER', 26);
+    badgeT.x = 20; badgeT.y = y + 2;
+    card.appendChild(badgeT);
+    const lt = mkText(row.label, 11, W.regular, C.hpTextSec);
+    lt.x = 50; lt.y = y + 1;
+    card.appendChild(lt);
+    const at = mkText(row.amt, 11, W.medium, C.green600);
+    at.x = 236; at.y = y + 1;
+    card.appendChild(at);
+  });
+
+  const footBg = mkRect(260, 26, C.hpBlue50, 8);
+  footBg.x = 20; footBg.y = 330;
+  card.appendChild(footBg);
+  const footT = mkText('DBS-backed · Own-name account', 10, W.regular, C.hpTextSec, 'CENTER', 260);
+  footT.x = 20; footT.y = 337;
+  card.appendChild(footT);
+
+  card.resize(300, 370);
+  return card;
+}
+
+function mockVALedger() {
+  const card = mkFrame('MockVALedger', 280, 350, C.white, 16);
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }];
+  card.strokeWeight = 1;
+  card.strokeAlign = 'INSIDE';
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.10 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const title = mkText('All transactions — Jun 2026', 11, W.semibold, C.hpTextSec);
+  title.x = 20; title.y = 18;
+  card.appendChild(title);
+
+  const cpH = mkText('CUSTOMER PAYMENTS', 9, W.semibold, C.hpTextSec);
+  cpH.x = 20; cpH.y = 44;
+  card.appendChild(cpH);
+
+  [['PayNow', 'Agnes Tan Bakery', '+S$340'], ['Visa card', 'Online order #2891', '+S$219'], ['GrabPay', 'Walk-in customer', '+S$48']].forEach(([method, sub, amt], i) => {
+    const y = 58 + i * 38;
+    const mt = mkText(method, 12, W.medium, C.hpTextPri);
+    mt.x = 20; mt.y = y;
+    card.appendChild(mt);
+    const st = mkText(sub, 10, W.regular, C.hpTextSec);
+    st.x = 20; st.y = y + 16;
+    card.appendChild(st);
+    const at = mkText(amt, 12, W.semibold, C.green600);
+    at.x = 218; at.y = y;
+    card.appendChild(at);
+    const d = mkRect(240, 1, C.slate50);
+    d.x = 20; d.y = y + 34;
+    card.appendChild(d);
+  });
+
+  const brH = mkText('BUSINESS RECEIVABLES', 9, W.semibold, C.hpTextSec);
+  brH.x = 20; brH.y = 176;
+  card.appendChild(brH);
+
+  [['SGD FAST', 'Pinnacle Systems SG', '+S$5,200'], ['USD SWIFT', 'Zenith Retail Ltd', '+S$2,841'], ['EUR SWIFT', 'Luxe Supplies GmbH', '+S$1,084']].forEach(([method, sub, amt], i) => {
+    const y = 190 + i * 38;
+    const mt = mkText(method, 12, W.medium, C.hpTextPri);
+    mt.x = 20; mt.y = y;
+    card.appendChild(mt);
+    const st = mkText(sub, 10, W.regular, C.hpTextSec);
+    st.x = 20; st.y = y + 16;
+    card.appendChild(st);
+    const at = mkText(amt, 12, W.semibold, C.green600);
+    at.x = 210; at.y = y;
+    card.appendChild(at);
+  });
+
+  const exportBg = mkRect(240, 32, C.hpAction, 8);
+  exportBg.x = 20; exportBg.y = 306;
+  card.appendChild(exportBg);
+  const exportT = mkText('Export unified report →', 12, W.semibold, C.white, 'CENTER', 240);
+  exportT.x = 20; exportT.y = 314;
+  card.appendChild(exportT);
+
+  card.resize(280, 350);
+  return card;
+}
+
+function mockDBSCompare() {
+  const container = mkFrame('MockDBSCompare', 300, 360);
+  container.fills = [];
+
+  const emiCard = mkFrame('EMICard', 280, 148, C.white, 16);
+  emiCard.strokes = [{ type: 'SOLID', color: C.slate200 }];
+  emiCard.strokeWeight = 1;
+  emiCard.strokeAlign = 'INSIDE';
+  emiCard.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.06 }, offset: { x: 0, y: 8 }, radius: 20, spread: 0, visible: true, blendMode: 'NORMAL' }];
+  const emiTitle = mkText('Typical EMI fintech account', 11, W.semibold, C.hpTextSec);
+  emiTitle.x = 20; emiTitle.y = 16;
+  emiCard.appendChild(emiTitle);
+  ['Pooled float — not your own account', 'Fund freezes with no bank recourse', 'E-money licence only — not a bank'].forEach((item, i) => {
+    const cross = mkText('✕', 13, W.bold, C.red600);
+    cross.x = 20; cross.y = 42 + i * 28;
+    emiCard.appendChild(cross);
+    const t = mkText(item, 12, W.regular, C.hpTextSec, 'LEFT', 220);
+    t.x = 40; t.y = 43 + i * 28;
+    emiCard.appendChild(t);
+  });
+  emiCard.x = 10; emiCard.y = 0;
+  container.appendChild(emiCard);
+
+  const hpCard = mkFrame('HitPayDBSCard', 280, 180, C.hpDeepBlue, 16);
+  hpCard.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.20 }, offset: { x: 0, y: 12 }, radius: 32, spread: 0, visible: true, blendMode: 'NORMAL' }];
+  const hpLbl = mkText('HitPay × DBS Bank', 11, W.semibold, C.hpBlue100);
+  hpLbl.x = 20; hpLbl.y = 16;
+  hpCard.appendChild(hpLbl);
+  const bankBadge = mkRect(80, 20, C.green600, 10);
+  bankBadge.x = 180; bankBadge.y = 14;
+  hpCard.appendChild(bankBadge);
+  const bankT = mkText('Bank-grade', 10, W.semibold, C.white, 'CENTER', 80);
+  bankT.x = 180; bankT.y = 17;
+  hpCard.appendChild(bankT);
+  ['Own-name account — not pooled', 'Funds held at DBS — Singapore\'s largest bank', 'Full banking supervision — no freeze risk'].forEach((item, i) => {
+    const check = mkText('✓', 13, W.bold, C.green600);
+    check.x = 20; check.y = 48 + i * 36;
+    hpCard.appendChild(check);
+    const t = mkText(item, 12, W.regular, C.hpBlue100, 'LEFT', 220);
+    t.lineHeight = { value: 18, unit: 'PIXELS' };
+    t.x = 40; t.y = 49 + i * 36;
+    hpCard.appendChild(t);
+  });
+  hpCard.x = 10; hpCard.y = 168;
+  container.appendChild(hpCard);
+
+  container.resize(300, 360);
+  return container;
+}
+
+function mockVACurrencies() {
+  const card = mkFrame('MockVACurrencies', 280, 316, C.white, 16);
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }];
+  card.strokeWeight = 1;
+  card.strokeAlign = 'INSIDE';
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.10 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const title = mkText('Receive payment details', 13, W.semibold, C.hpTextPri);
+  title.x = 20; title.y = 18;
+  card.appendChild(title);
+
+  const detailBg = mkRect(240, 100, C.hpBeige, 12);
+  detailBg.x = 20; detailBg.y = 42;
+  card.appendChild(detailBg);
+  [['Account name', 'Meridian Pte. Ltd.'], ['Account number', '048-XXXXXX-X'], ['Bank', 'DBS Bank Ltd'], ['SWIFT/BIC', 'DBSSSGSG']].forEach(([lbl, val], i) => {
+    const lt = mkText(lbl, 11, W.regular, C.hpTextSec);
+    lt.x = 32; lt.y = 52 + i * 22;
+    card.appendChild(lt);
+    const vt = mkText(val, 11, W.medium, C.hpTextPri);
+    vt.x = 152; vt.y = 52 + i * 22;
+    card.appendChild(vt);
+  });
+
+  const currLabel = mkText('CURRENCIES RECEIVABLE', 9, W.semibold, C.hpTextSec);
+  currLabel.x = 20; currLabel.y = 154;
+  card.appendChild(currLabel);
+
+  const currencies = [
+    { code: 'SGD', sub: 'Instant', bg: C.green100, fg: C.green600 },
+    { code: 'USD', sub: 'SWIFT',   bg: C.hpBeige,  fg: C.hpTextPri },
+    { code: 'EUR', sub: 'SWIFT',   bg: C.hpBeige,  fg: C.hpTextPri },
+    { code: 'GBP', sub: 'SWIFT',   bg: C.hpBeige,  fg: C.hpTextPri },
+    { code: 'AUD', sub: 'SWIFT',   bg: C.hpBeige,  fg: C.hpTextPri },
+    { code: '+8',  sub: 'more',    bg: C.hpBeige,  fg: C.hpTextSec },
+  ];
+  currencies.forEach((c, i) => {
+    const col = i % 3;
+    const row = Math.floor(i / 3);
+    const cx = 20 + col * 80;
+    const cy = 170 + row * 56;
+    const bg = mkRect(70, 46, c.bg, 8);
+    bg.x = cx; bg.y = cy;
+    card.appendChild(bg);
+    const ct = mkText(c.code, 13, W.semibold, c.fg, 'CENTER', 70);
+    ct.x = cx; ct.y = cy + 7;
+    card.appendChild(ct);
+    const st = mkText(c.sub, 10, W.regular, c.fg, 'CENTER', 70);
+    st.x = cx; st.y = cy + 27;
+    card.appendChild(st);
+  });
+
+  const shareBg = mkRect(240, 28, C.hpBlue50, 8);
+  shareBg.x = 20; shareBg.y = 278;
+  card.appendChild(shareBg);
+  const shareT = mkText('Share account details via email or PDF', 11, W.regular, C.hpTextSec, 'CENTER', 240);
+  shareT.x = 20; shareT.y = 286;
+  card.appendChild(shareT);
+
+  card.resize(280, 316);
+  return card;
+}
+
+function mockVAActivation() {
+  const card = mkFrame('MockVAActivation', 280, 280, C.white, 16);
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }];
+  card.strokeWeight = 1;
+  card.strokeAlign = 'INSIDE';
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.10 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const acctTitle = mkText('Your HitPay account', 13, W.semibold, C.hpTextPri);
+  acctTitle.x = 20; acctTitle.y = 14;
+  card.appendChild(acctTitle);
+  const acctSub = mkText('Meridian Pte. Ltd. · PS20200643', 11, W.regular, C.hpTextSec);
+  acctSub.x = 20; acctSub.y = 32;
+  card.appendChild(acctSub);
+
+  [
+    { label: 'Customer payments', status: 'Active', active: true },
+    { label: 'Payment links', status: 'Active', active: true },
+    { label: 'Multi-currency VA', status: 'Activate', active: false },
+  ].forEach((row, i) => {
+    const ry = 54 + i * 54;
+    const rowBg = mkRect(240, 44, row.active ? C.hpBeige : C.hpBlue50, 12);
+    rowBg.strokes = [{ type: 'SOLID', color: row.active ? C.slate100 : C.hpBlue100 }];
+    rowBg.strokeWeight = 1;
+    rowBg.strokeAlign = 'INSIDE';
+    rowBg.x = 20; rowBg.y = ry;
+    card.appendChild(rowBg);
+    const dot = mkRect(8, 8, row.active ? C.green600 : C.hpAction, 4);
+    dot.x = 32; dot.y = ry + 18;
+    card.appendChild(dot);
+    const lt = mkText(row.label, 13, W.medium, row.active ? C.hpTextPri : C.hpAction);
+    lt.x = 48; lt.y = ry + 14;
+    card.appendChild(lt);
+    const bW = row.active ? 48 : 58;
+    const badge = mkRect(bW, 22, row.active ? C.green100 : C.hpAction, 11);
+    badge.x = 216 - bW; badge.y = ry + 11;
+    card.appendChild(badge);
+    const badgeT = mkText(row.status, 11, W.semibold, row.active ? C.green600 : C.white, 'CENTER', bW);
+    badgeT.x = 216 - bW; badgeT.y = ry + 14;
+    card.appendChild(badgeT);
+  });
+
+  const footBg = mkRect(240, 44, C.hpBeige, 12);
+  footBg.x = 20; footBg.y = 224;
+  card.appendChild(footBg);
+  const footL1 = mkText('No new sign-up required', 11, W.regular, C.hpTextSec, 'CENTER', 240);
+  footL1.x = 20; footL1.y = 230;
+  card.appendChild(footL1);
+  const footL2 = mkText('Ready in minutes — same KYB', 12, W.semibold, C.hpTextPri, 'CENTER', 240);
+  footL2.x = 20; footL2.y = 248;
+  card.appendChild(footL2);
+
+  card.resize(280, 280);
+  return card;
+}
+
+function mkHeroVirtualAccounts() {
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
+
+  const badge = mkPill('Virtual Account & Global Collections', C.hpBlue100, C.hpAction, 16, 8, 100);
+  badge.x = 144; badge.y = 72;
+  sec.appendChild(badge);
+
+  const h1 = mkH2('One HitPay account for your customers and your local and overseas business partners — backed by DBS', 44, C.hpTextPri, 'LEFT', 560);
+  h1.lineHeight = { value: 52, unit: 'PIXELS' };
+  h1.x = 144; h1.y = 118;
+  sec.appendChild(h1);
+
+  const sub = mkText('Receive in 13 currencies — SGD instantly via FAST and PayNow from local or overseas partners, USD and EUR via SWIFT — all in the same dashboard as your local and cross-border customer payments.', 18, W.regular, C.hpTextSec, 'LEFT', 540);
+  sub.lineHeight = { value: 28, unit: 'PIXELS' };
+  sub.x = 144; sub.y = 316;
+  sec.appendChild(sub);
+
+  const b1 = mkBtn('Open your account', C.hpAction, C.white, 24, 14, 12);
+  b1.x = 144; b1.y = 410;
+  sec.appendChild(b1);
+
+  const b2 = mkBtn('Talk to sales', null, C.hpTextPri, 24, 14, 12, true);
+  b2.x = 336; b2.y = 410;
+  sec.appendChild(b2);
+
+  const fine = mkText('No monthly fees · No setup fees · Approval in 1–3 business days', 13, W.regular, C.hpTextSec);
+  fine.x = 144; fine.y = 462;
+  sec.appendChild(fine);
+
+  const dashboard = mockVADashboard();
+  dashboard.x = 908; dashboard.y = 88;
+  sec.appendChild(dashboard);
+
+  return sec;
+}
+
+function mkVATrustBar() {
+  const sec = mkFrame('TrustBar', 1440, 200, C.hpBeige);
+  sec.strokes = [{ type: 'SOLID', color: C.slate100 }];
+  sec.strokeWeight = 1;
+  sec.strokeAlign = 'INSIDE';
+
+  const lbl = mkText('USED BY SINGAPORE BUSINESSES COLLECTING FROM LOCAL AND OVERSEAS COUNTERPARTIES', 10, W.semibold, C.hpTextSec, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.2, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 22;
+  sec.appendChild(lbl);
+
+  const tags = ['Exporters', 'Digital Agencies', 'Wholesale Distributors', 'SaaS & Tech', 'Professional Service Firms', 'Consultants', 'Trading Companies', 'Importers'];
+  let tx = 144;
+  let ty = 48;
+  tags.forEach(tag => {
+    const pill = mkPill(tag, C.white, C.hpTextSec, 12, 6, 100);
+    pill.strokes = [{ type: 'SOLID', color: C.slate200 }];
+    pill.strokeWeight = 1;
+    pill.strokeAlign = 'INSIDE';
+    const estW = tag.length * 7 + 28;
+    if (tx + estW > 1280) { tx = 144; ty += 34; }
+    pill.x = tx; pill.y = ty;
+    tx += estW + 8;
+    sec.appendChild(pill);
+  });
+
+  const desc = mkText('From Jurong exporters receiving USD from US distributors, to businesses collecting SGD via FAST from local Singapore partners — HitPay\'s DBS-backed account handles every business receivable, local or overseas.', 14, W.regular, C.hpTextSec, 'CENTER', 840);
+  desc.lineHeight = { value: 22, unit: 'PIXELS' };
+  desc.x = 300; desc.y = 148;
+  sec.appendChild(desc);
+
+  return sec;
+}
+
+function mkVAComparisonSection() {
+  const sec = mkFrame('Comparison', 1440, 560, C.white);
+
+  const lbl = mkText('THE HITPAY DIFFERENCE', 11, W.semibold, C.hpAction, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 40;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('The only platform where customer payments and business collections meet', 32, C.hpTextPri, 'CENTER', 800);
+  h2.lineHeight = { value: 40, unit: 'PIXELS' };
+  h2.x = 320; h2.y = 66;
+  sec.appendChild(h2);
+
+  const sub = mkText('Most multi-currency platforms handle international transfers. Only HitPay also collects from your customers locally and cross-border, and from local partners via FAST — all in one DBS-backed account.', 16, W.regular, C.hpTextSec, 'CENTER', 780);
+  sub.lineHeight = { value: 24, unit: 'PIXELS' };
+  sub.x = 330; sub.y = 150;
+  sec.appendChild(sub);
+
+  const tTop = 208;
+  const col1X = 144; const col1W = 380;
+  const col2X = 540; const col2W = 340;
+  const col3X = 896; const col3W = 340;
+  const rH = 36;
+
+  const hdrBg = mkRect(1152, 40, C.hpBeige, 0);
+  hdrBg.x = 144; hdrBg.y = tTop;
+  sec.appendChild(hdrBg);
+  const h1 = mkText('What matters', 11, W.semibold, C.hpTextSec, 'LEFT', col1W);
+  h1.x = col1X + 12; h1.y = tTop + 13;
+  sec.appendChild(h1);
+  const h2t = mkText('Other multi-currency platforms', 11, W.semibold, C.hpTextSec, 'CENTER', col2W);
+  h2t.x = col2X; h2t.y = tTop + 13;
+  sec.appendChild(h2t);
+  const h3t = mkText('HitPay', 11, W.semibold, C.hpAction, 'CENTER', col3W);
+  h3t.x = col3X; h3t.y = tTop + 13;
+  sec.appendChild(h3t);
+
+  const rows = [
+    ['Collect from customers (C2B)', 'Cards only / limited', '✓✓ Cards, PayNow, wallets, links, POS'],
+    ['Local SGD via FAST/PayNow', '✕ No',                  '✓ Real-time — local & overseas SGD senders'],
+    ['Overseas SWIFT receiving',    '✓ Yes',                '✓ DBS-backed own-name account'],
+    ['Currencies receivable',       '30–60+ (FX specialists)', '13 & growing'],
+    ['Backed by',                   'EMI licence',           'DBS Bank — Singapore\'s largest'],
+    ['Own-name account',            '◐ Varies — some pooled', '✓ Always own-name'],
+    ['FX markup',                   '0.5–3.5%',              '1.0% fixed over interbank mid-rate'],
+    ['Monthly fees',                'Varies by provider',    'SGD 0 — no monthly fees'],
+  ];
+  rows.forEach((row, i) => {
+    const ry = tTop + 40 + i * rH;
+    const rowBg = mkRect(1152, rH, i % 2 === 1 ? C.hpBeige : C.white, 0);
+    rowBg.x = 144; rowBg.y = ry;
+    sec.appendChild(rowBg);
+    const c1 = mkText(row[0], 13, W.medium, C.hpTextPri, 'LEFT', col1W - 24);
+    c1.x = col1X + 12; c1.y = ry + 10;
+    sec.appendChild(c1);
+    const c2 = mkText(row[1], 13, W.regular, C.hpTextSec, 'CENTER', col2W);
+    c2.x = col2X; c2.y = ry + 10;
+    sec.appendChild(c2);
+    const c3 = mkText(row[2], 13, W.semibold, C.hpTextPri, 'CENTER', col3W);
+    c3.x = col3X; c3.y = ry + 10;
+    sec.appendChild(c3);
+  });
+
+  const calloutBg = mkRect(1152, 52, C.hpBlue50, 0);
+  calloutBg.x = 144; calloutBg.y = tTop + 40 + rows.length * rH + 8;
+  sec.appendChild(calloutBg);
+  const calloutT = mkText('HitPay is the only platform where your customers, local business partners, and overseas clients all pay into one DBS-backed account — with one ledger and one reconciliation export.', 13, W.regular, C.hpTextPri, 'LEFT', 1060);
+  calloutT.lineHeight = { value: 20, unit: 'PIXELS' };
+  calloutT.x = 168; calloutT.y = tTop + 40 + rows.length * rH + 18;
+  sec.appendChild(calloutT);
+
+  return sec;
+}
+
+function buildVirtualAccounts(xOffset = 0) {
+  const page = new Page('Virtual Accounts & Global Collections', xOffset);
+  const ac = C.hpAction;
+
+  page.add(mkNavbar(ac), 64);
+  page.add(mkHeroVirtualAccounts(), 560);
+  page.add(mkVATrustBar(), 200);
+
+  page.add(mkFeature({
+    label: 'UNIFIED COLLECTIONS',
+    h2: 'Collect from your customers, local partners, and overseas clients — in one account',
+    p: 'Singapore SMEs with B2B relationships often run two separate platforms — a payment processor for customer collections, and a standalone account for receiving transfers from partners. HitPay eliminates this split. The same account that accepts local and cross-border card payments and PayNow from customers also receives SGD FAST from local Singapore business partners and SWIFT wire transfers from overseas clients in 13 currencies.',
+    bullets: [
+      'C2B — local and cross-border cards, PayNow, GrabPay, ShopeePay, payment links',
+      'B2B — SGD via FAST/PayNow from local partners + SWIFT in 13 currencies from overseas',
+      'One dashboard, one ledger, one reconciliation export — no manual matching',
+      'Xero and QuickBooks sync covers both C2B and B2B transactions',
+    ],
+    mockUI: mockVALedger(),
+    bg: C.white,
+    textSide: 'left',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: 'DBS-BACKED TRUST',
+    h2: 'Your funds sit at DBS Bank — not a freeze-prone EMI fintech wallet',
+    p: 'The most common concern about fintech multi-currency accounts is fund availability — stories of frozen balances, delayed access, and no human to call are the most-cited negative reviews for every major EMI-backed competitor. HitPay\'s virtual account is backed by DBS Bank, Singapore\'s largest bank by assets. Funds sit at DBS, not in a pooled e-money float. The account is issued in the business\'s own name with full DBS bank-grade infrastructure behind every receipt.',
+    bullets: [
+      'Backed by DBS — Singapore\'s largest bank, not an EMI licence',
+      'Own-name account — funds are yours, not pooled with other businesses',
+      'Full banking recourse — the #1 gap in competitor accounts',
+      'MAS-licensed HitPay (PS20200643) operating on DBS infrastructure',
+    ],
+    mockUI: mockDBSCompare(),
+    bg: C.hpBeige200,
+    textSide: 'right',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: '13 CURRENCIES',
+    h2: 'Receive in 13 currencies — SGD arrives instantly via FAST and PayNow',
+    p: 'HitPay\'s multi-currency virtual account supports receiving in 13 currencies, with SGD as the only fully local instant rail — payments from local Singapore senders arrive in real time via FAST or PayNow. USD, EUR, GBP, AUD, HKD, and other supported currencies arrive via SWIFT within 1–3 business days. Singapore businesses share their unique account number and SWIFT/BIC details with counterparties, who initiate a standard bank transfer.',
+    bullets: [
+      'SGD — instant via FAST/PayNow from local and overseas SGD senders · S$0.50/collection',
+      'USD · EUR · GBP · AUD · HKD — via SWIFT · free inbound (AUD: A$3.00/collection)',
+      'Convert to SGD at 1% over interbank mid-rate — or hold in foreign currency',
+      'Local EUR, GBP, AUD rails coming — plus local PHP via InstaPay/PESONet',
+    ],
+    mockUI: mockVACurrencies(),
+    bg: C.white,
+    textSide: 'left',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: 'ZERO NEW VENDOR',
+    h2: 'Already a HitPay merchant? Activate multi-currency receiving in your existing account',
+    p: 'Existing HitPay merchants — already using the platform for card, PayNow, e-wallet, or payment link collections — can activate multi-currency business receiving from their current dashboard without a new vendor relationship, a second KYB process, or additional hardware. New businesses sign up once, complete standard ACRA-based KYB (typically 1–3 business days), and gain access to both C2B collection tools and the multi-currency virtual account simultaneously.',
+    bullets: [
+      'Existing HitPay merchants — activate from dashboard, no new KYB',
+      'New businesses — one sign-up, one ACRA UEN, both products unlocked',
+      'Zero hardware — account details shared digitally with payers',
+      'SGD 0 monthly fees — pay only when you collect (SGD: S$0.50 per receipt)',
+    ],
+    mockUI: mockVAActivation(),
+    bg: C.hpBeige200,
+    textSide: 'right',
+    accent: ac,
+  }), 520);
+
+  page.add(mkVAComparisonSection(), 560);
+
+  page.add(mkStats([
+    { value: 'SGD 0', label: 'Monthly account fees' },
+    { value: '13',    label: 'Currencies receivable' },
+    { value: 'DBS',   label: 'Bank-backed — not an EMI' },
+    { value: '1–3',   label: 'Business days to approval' },
+  ], C.hpDeepBlue, C.white, C.hpBlue100), 192);
+
+  page.add(mkTestimonial(
+    'We were running HitPay for retail customers and a separate Wise account to collect from our US and European distributors. Switching everything to HitPay\'s virtual account meant our USD wires and our PayNow receipts finally sat in one dashboard. Knowing it\'s all backed by DBS made the switch straightforward.',
+    'Ng Wei Ling',
+    'Finance Director, Arcanum Trading Pte. Ltd. · Singapore',
+    ac
+  ), 380);
+
+  page.add(mkGrid(
+    'Everything your global collections need',
+    'From SGD instant receipts via FAST from local partners to SWIFT wires from overseas — one platform, one account.',
+    [
+      { title: 'SGD instant via FAST & PayNow',  desc: 'Local Singapore business partners and customers send SGD via FAST or PayNow — funds arrive in real time. S$0.50 per collection.' },
+      { title: 'DBS bank-grade security',         desc: 'Funds held at DBS Bank — not a pooled e-money float. Own-name account with full banking supervision. No freeze risk.' },
+      { title: 'Unified C2B + B2B ledger',        desc: 'Customer card and PayNow receipts appear alongside local SGD FAST and overseas SWIFT wires in one transaction list — one export.' },
+      { title: 'Free inbound for most currencies',desc: 'USD, EUR, GBP, HKD, and most other inbound transfers carry no collection fee. Convert at 1% over interbank mid-rate.' },
+      { title: 'Xero & QuickBooks sync',          desc: 'Every SWIFT receipt and customer PayNow transaction syncs automatically to Xero or QuickBooks with GST categorisation.' },
+      { title: 'PHP & USD local rails coming',    desc: 'Local PHP via InstaPay/PESONet is in development. Local USD via ACH/Fedwire also in active development.' },
+    ]
+  ), 660);
+
+  page.add(mkRelated(
+    'Explore more HitPay products',
+    [
+      { emoji: '🔗', title: 'Payment Links',  desc: 'Send a link via WhatsApp, email, or SMS and collect from anyone in seconds.' },
+      { emoji: '🖥️', title: 'Point-of-Sale',  desc: 'Accept PayNow, DuitNow, GCash, and cards at the counter with Soundbox alerts.' },
+      { emoji: '🛍️', title: 'Online Store',   desc: 'Launch a full-featured online store with built-in checkout and 50+ payment methods.' },
+    ],
+    ac
+  ), 380);
+
+  page.add(mkFAQ([
+    { q: 'What is HitPay\'s multi-currency virtual account and how does it work?', a: 'A DBS-backed receiving account that allows Singapore businesses to collect in 13 currencies from local and overseas business partners. SGD transfers from local Singapore senders arrive in real time via FAST and PayNow. Other currencies arrive via SWIFT. All funds appear in the same dashboard as your customer payments.' },
+    { q: 'Which currencies can a Singapore business receive through HitPay\'s virtual account?', a: '13 currencies. SGD is instant via FAST or PayNow. USD, EUR, GBP, AUD, HKD, and other supported currencies arrive via SWIFT within 1–3 business days. Local EUR, GBP, and AUD rails via SEPA, Faster Payments, and NPP are in development.' },
+    { q: 'How long does it take for SGD payments to arrive in a HitPay virtual account?', a: 'SGD transfers from Singapore senders arrive in real time when sent via FAST or PayNow. GIRO settles within one business day. USD, EUR, GBP, AUD, and other foreign currencies arrive via SWIFT within 1–3 business days.' },
+    { q: 'How does HitPay\'s virtual account differ from other multi-currency platforms?', a: 'HitPay is the only platform that unifies C2B collections — cards, PayNow, GrabPay, QR — with B2B virtual account receiving in one DBS-backed dashboard. It also accepts SGD FAST from local business partners. No competitor combines all three.' },
+    { q: 'Is money held in HitPay\'s virtual account safe?', a: 'Funds are held at DBS Bank — Singapore\'s largest bank by assets. DBS is a fully licensed bank, not an e-money institution. Each account is issued in the business\'s own name, not held in a pooled float.' },
+    { q: 'Can a Singapore business receive USD payments from overseas clients?', a: 'Yes — via SWIFT wire transfer into their HitPay DBS-backed virtual account. USD funds arrive within 1–3 business days. HitPay is developing local USD receiving via ACH and Fedwire — not yet available.' },
+    { q: 'What FX conversion rate does HitPay charge on the virtual account?', a: 'HitPay charges a 1% markup over the interbank mid-rate. Most inbound receipts carry no collection fee. SGD via FAST/PayNow costs S$0.50 per collection; AUD costs A$3.00. No monthly or setup fees.' },
+    { q: 'Does a business need to open a new account to use HitPay\'s virtual account?', a: 'No. Multi-currency receiving is available inside an existing HitPay account. Businesses already using HitPay for card, PayNow, or e-wallet collections activate from their existing dashboard — no new KYB process.' },
+    { q: 'What types of Singapore businesses can open a HitPay virtual account?', a: 'Singapore-registered businesses and sole proprietors: private limited companies, LLPs, sole proprietors, and ACRA-registered partnerships. Common users include exporters, professional service firms, digital agencies, SaaS companies, and wholesale distributors.' },
+    { q: 'How does HitPay reconcile customer payments and business receivables together?', a: 'All payment types — local and cross-border customer card, PayNow, e-wallet, local SGD FAST from partners, and overseas SWIFT receipts — appear in a unified ledger. Export a single CSV or sync to Xero/QuickBooks.' },
+    { q: 'What documents are needed to open a HitPay virtual account in Singapore?', a: 'ACRA UEN, the company director\'s NRIC or passport, and a valid Singapore business bank account. Sign-up is fully online; approval typically takes 1–3 business days. No setup fees.' },
+    { q: 'What currencies will HitPay\'s virtual account add local rail support for?', a: 'EUR via SEPA, GBP via Faster Payments, AUD via NPP, and PHP via InstaPay/PESONet are in development. Local USD via ACH and Fedwire is also in active development. No specific dates have been announced.' },
+  ], ac), 1768);
+
+  page.add(mkCTA(
+    'Ready to unify your collections?',
+    'Open a DBS-backed multi-currency virtual account alongside your existing customer payments. No monthly fees — approval in 1–3 business days.',
+    'Open your account',
+    'Talk to sales',
+    ac
+  ), 300);
+
+  page.add(mkFooter(
+    ac,
+    ['Virtual Accounts', 'Payment Links', 'POS Software', 'Invoices'],
+    ['E-commerce', 'Retail', 'Restaurants & F&B', 'Health & Beauty']
+  ), 280);
+
+  return page.f;
+}
+
 // ── MAIN ─────────────────────────────────────────────────────
 
 const BUILDERS = {
+  ai_shoppers:   buildAiShoppers,
   ecommerce:     (x) => buildEcommerce(x),
   retail:        (x) => buildRetail(x),
   nonprofits:    (x) => buildNonprofits(x),
@@ -4123,7 +5194,8 @@ const BUILDERS = {
   fitness:       buildFitness,
   events:        buildEvents,
   wholesale:     buildWholesale,
-  art_craft_fair: buildArtCraftFair,
+  art_craft_fair:    buildArtCraftFair,
+  virtual_accounts:  buildVirtualAccounts,
 };
 
 async function main() {
