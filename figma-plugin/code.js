@@ -5884,6 +5884,483 @@ function buildAffiliate(xOffset = 0) {
   return page.f;
 }
 
+// ── REFER AND EARN MOCK UIs ──────────────────────────────────
+
+function mockReferDashboard() {
+  const card = mkFrame('ReferDashboard', 380, 380, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.12 }, offset: { x:0, y:8 }, radius: 24, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  // Chrome bar
+  const chrome = mkRect(380, 40, C.hpDeepBlue, 0);
+  chrome.x = 0; chrome.y = 0;
+  card.appendChild(chrome);
+
+  const dot1 = mkRect(10, 10, { r:1, g:1, b:1, a:0.2 }, 5); dot1.x = 12; dot1.y = 15; card.appendChild(dot1);
+  const dot2 = mkRect(10, 10, { r:1, g:1, b:1, a:0.2 }, 5); dot2.x = 26; dot2.y = 15; card.appendChild(dot2);
+  const dot3 = mkRect(10, 10, { r:1, g:1, b:1, a:0.2 }, 5); dot3.x = 40; dot3.y = 15; card.appendChild(dot3);
+
+  const urlBar = mkRect(280, 22, { r:1, g:1, b:1, a:0.12 }, 4); urlBar.x = 58; urlBar.y = 9; card.appendChild(urlBar);
+  const urlText = mkText('dashboard.hit-pay.com', 10, W.regular, { r:1, g:1, b:1, a:0.6 });
+  urlText.x = 66; urlText.y = 13; card.appendChild(urlText);
+
+  // Title
+  const title = mkText('Refer and Earn', 15, W.semibold, C.hpTextPri);
+  title.x = 16; title.y = 54; card.appendChild(title);
+
+  const subT = mkText('Earn 0.1% from every business you refer', 11, W.regular, C.hpTextSec);
+  subT.x = 16; subT.y = 74; card.appendChild(subT);
+
+  // Stats row
+  const s1Bg = mkRect(163, 60, C.hpBeige, 12); s1Bg.x = 16; s1Bg.y = 94; card.appendChild(s1Bg);
+  const s1Label = mkText('Businesses referred', 10, W.regular, C.hpTextSec); s1Label.x = 24; s1Label.y = 100; card.appendChild(s1Label);
+  const s1Val = mkText('3', 22, W.bold, C.hpTextPri); s1Val.x = 24; s1Val.y = 116; card.appendChild(s1Val);
+
+  const s2Bg = mkRect(163, 60, C.hpBlue50, 12); s2Bg.x = 201; s2Bg.y = 94; card.appendChild(s2Bg);
+  const s2Label = mkText('Earned this month', 10, W.regular, C.hpTextSec); s2Label.x = 209; s2Label.y = 100; card.appendChild(s2Label);
+  const s2Val = mkText('S$600', 22, W.bold, C.hpAction); s2Val.x = 209; s2Val.y = 116; card.appendChild(s2Val);
+
+  // Link label
+  const linkLabel = mkText('YOUR REFERRAL LINK', 9, W.semibold, C.hpTextSec);
+  linkLabel.letterSpacing = { value: 1, unit: 'PIXELS' };
+  linkLabel.x = 16; linkLabel.y = 168; card.appendChild(linkLabel);
+
+  // Link box
+  const linkBg = mkRect(348, 32, C.hpBeige, 8); linkBg.x = 16; linkBg.y = 184; card.appendChild(linkBg);
+  const linkText = mkText('dashboard.hit-pay.com/register?referral_code=HITPAKST2R', 10, W.regular, C.hpTextSec, 'LEFT', 300);
+  linkText.x = 24; linkText.y = 192; card.appendChild(linkText);
+
+  // Buttons
+  const copyBtn = mkBtn('Copy link', C.hpAction, C.white, 14, 8, 8);
+  copyBtn.x = 16; copyBtn.y = 228; card.appendChild(copyBtn);
+
+  const shareBtn = mkBtn('Share', null, C.hpTextPri, 14, 8, 8, true);
+  shareBtn.x = 164; shareBtn.y = 228; card.appendChild(shareBtn);
+
+  // Referrals
+  const refLabel = mkText('YOUR REFERRALS', 9, W.semibold, C.hpTextSec);
+  refLabel.letterSpacing = { value: 1, unit: 'PIXELS' };
+  refLabel.x = 16; refLabel.y = 268; card.appendChild(refLabel);
+
+  const rows = [
+    { name: 'The Noodle House', amt: 'S$300' },
+    { name: 'Bloom Florals',    amt: 'S$120' },
+    { name: 'Peak Fitness',     amt: 'S$180' },
+  ];
+  rows.forEach((row, i) => {
+    const ry = 286 + i * 24;
+    const nameT = mkText(row.name, 12, W.medium, C.hpTextPri); nameT.x = 16; nameT.y = ry; card.appendChild(nameT);
+    const live = mkPill('Live', C.green100, C.green600, 8, 3, 100); live.x = 174; live.y = ry; card.appendChild(live);
+    const amtT = mkText(row.amt, 12, W.semibold, C.hpAction, 'RIGHT', 60); amtT.x = 304; amtT.y = ry; card.appendChild(amtT);
+  });
+
+  const nextCredit = mkText('Next credit: 1 Jul 2026', 10, W.regular, C.hpTextSec);
+  nextCredit.x = 16; nextCredit.y = 358; card.appendChild(nextCredit);
+
+  return card;
+}
+
+function mockReferWalletCredit() {
+  const card = mkFrame('WalletCredit', 300, 200, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.08 }, offset: { x:0, y:4 }, radius: 16, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const hdr = mkText('Wallet · June 2026', 12, W.semibold, C.hpTextPri);
+  hdr.x = 16; hdr.y = 16; card.appendChild(hdr);
+
+  const dt = mkText('1 Jun 2026, 00:00 SGT', 10, W.regular, C.hpTextSec, 'RIGHT', 140);
+  dt.x = 144; dt.y = 17; card.appendChild(dt);
+
+  const amtBg = mkRect(268, 48, C.hpBlue50, 12); amtBg.x = 16; amtBg.y = 42; card.appendChild(amtBg);
+  const amtLabel = mkText('Commission credited', 10, W.semibold, C.hpTextSec, 'CENTER', 268);
+  amtLabel.x = 16; amtLabel.y = 50; card.appendChild(amtLabel);
+  const amtVal = mkText('+S$300.00', 22, W.bold, C.hpTextPri, 'CENTER', 268);
+  amtVal.x = 16; amtVal.y = 64; card.appendChild(amtVal);
+
+  const tagBg = mkRect(168, 22, C.hpBlue50, 100); tagBg.x = 16; tagBg.y = 102; card.appendChild(tagBg);
+  const tagText = mkText('refer_and_earn_commission', 10, W.medium, C.hpAction);
+  tagText.x = 24; tagText.y = 106; card.appendChild(tagText);
+
+  const divider = mkRect(268, 1, C.slate100); divider.x = 16; divider.y = 134; card.appendChild(divider);
+
+  const biz = mkText('The Noodle House', 12, W.medium, C.hpTextPri);
+  biz.x = 16; biz.y = 142; card.appendChild(biz);
+
+  const detail = mkText('0.1% of S$300,000 online TPV · May 2026', 10, W.regular, C.hpTextSec);
+  detail.x = 16; detail.y = 158; card.appendChild(detail);
+
+  const autoNote = mkText('✓ Auto-credited · No action required', 10, W.semibold, C.hpSuccess);
+  autoNote.x = 16; autoNote.y = 176; card.appendChild(autoNote);
+
+  return card;
+}
+
+function mockReferEarningsSummary() {
+  const card = mkFrame('EarningsSummary', 300, 240, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.08 }, offset: { x:0, y:4 }, radius: 16, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const hdr = mkText('Your Referral Earnings', 13, W.semibold, C.hpTextPri);
+  hdr.x = 16; hdr.y = 16; card.appendChild(hdr);
+
+  const monthBg = mkRect(72, 22, C.hpBeige, 8); monthBg.x = 212; monthBg.y = 15; card.appendChild(monthBg);
+  const monthT = mkText('June 2026', 10, W.regular, C.hpTextSec, 'CENTER', 72);
+  monthT.x = 212; monthT.y = 19; card.appendChild(monthT);
+
+  const breakdown = mkText('BREAKDOWN BY REFERRAL', 9, W.semibold, C.hpTextSec);
+  breakdown.letterSpacing = { value: 1, unit: 'PIXELS' };
+  breakdown.x = 16; breakdown.y = 50; card.appendChild(breakdown);
+
+  const rows = [
+    { name: 'The Noodle House', sub: 'S$300K online TPV', amt: 'S$300' },
+    { name: 'Bloom Florals',    sub: 'S$120K online TPV', amt: 'S$120' },
+    { name: 'Peak Fitness',     sub: 'S$180K online TPV', amt: 'S$180' },
+  ];
+  rows.forEach((row, i) => {
+    const ry = 68 + i * 42;
+    const nameT = mkText(row.name, 12, W.medium, C.hpTextPri); nameT.x = 16; nameT.y = ry; card.appendChild(nameT);
+    const subT = mkText(row.sub, 10, W.regular, C.hpTextSec); subT.x = 16; subT.y = ry + 16; card.appendChild(subT);
+    const amtT = mkText(row.amt, 13, W.semibold, C.hpAction, 'RIGHT', 60); amtT.x = 224; amtT.y = ry + 4; card.appendChild(amtT);
+    if (i < 2) { const div = mkRect(268, 1, C.slate100); div.x = 16; div.y = ry + 36; card.appendChild(div); }
+  });
+
+  const totalDiv = mkRect(268, 1, C.slate100); totalDiv.x = 16; totalDiv.y = 196; card.appendChild(totalDiv);
+  const totalLabel = mkText('Total credited', 11, W.regular, C.hpTextSec); totalLabel.x = 16; totalLabel.y = 206; card.appendChild(totalLabel);
+  const totalAmt = mkText('S$600', 18, W.bold, C.hpTextPri); totalAmt.x = 16; totalAmt.y = 218; card.appendChild(totalAmt);
+  const nextT = mkText('Next credit: 1 Jul 2026', 11, W.semibold, C.hpTextPri, 'RIGHT', 120); nextT.x = 164; nextT.y = 218; card.appendChild(nextT);
+
+  return card;
+}
+
+// ── REFER AND EARN SECTION BUILDERS ─────────────────────────
+
+function mkHeroReferAndEarn() {
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
+
+  const badge = mkPill('Refer and Earn', C.hpBlue100, C.hpAction, 16, 8, 100);
+  badge.x = 144; badge.y = 72;
+  sec.appendChild(badge);
+
+  const h1 = mkH2('Know a business that needs payments? Share your link and earn from every sale they make.', 44, C.hpTextPri, 'LEFT', 560);
+  h1.lineHeight = { value: 52, unit: 'PIXELS' };
+  h1.x = 144; h1.y = 118;
+  sec.appendChild(h1);
+
+  const sub = mkText("You're already on HitPay. Every business you invite earns you 0.1% of their monthly online payments — automatically, every month, for as long as they process. No applications. Your link is ready.", 18, W.regular, C.hpTextSec, 'LEFT', 540);
+  sub.lineHeight = { value: 28, unit: 'PIXELS' };
+  sub.x = 144; sub.y = 336;
+  sec.appendChild(sub);
+
+  const b1 = mkBtn('Find my referral link', C.hpAction, C.white, 24, 14, 12);
+  b1.x = 144; b1.y = 436;
+  sec.appendChild(b1);
+
+  const b2 = mkBtn('See how it works', null, C.hpTextPri, 24, 14, 12, true);
+  b2.x = 360; b2.y = 436;
+  sec.appendChild(b2);
+
+  const fine = mkText('Already a HitPay merchant · Link lives in your dashboard · Paid monthly', 13, W.regular, C.hpTextSec);
+  fine.x = 144; fine.y = 488;
+  sec.appendChild(fine);
+
+  const dash = mockReferDashboard();
+  dash.x = 852; dash.y = 70;
+  sec.appendChild(dash);
+
+  return sec;
+}
+
+function mkReferTrustBar() {
+  const sec = mkFrame('TrustBar', 1440, 200, C.hpBeige);
+  sec.strokes = [{ type: 'SOLID', color: C.slate100 }];
+  sec.strokeWeight = 1;
+  sec.strokeAlign = 'INSIDE';
+
+  const stats = [
+    { val: '500+',    sub: 'Businesses referred' },
+    { val: 'S$1M+',  sub: 'In commissions paid' },
+    { val: '0.1%',   sub: 'Of online TPV, every month' },
+    { val: 'Monthly', sub: 'Auto-credit to your wallet' },
+  ];
+
+  const colW = 1152 / 4;
+  stats.forEach((s, i) => {
+    const val = mkText(s.val, 32, W.bold, C.hpTextPri, 'CENTER', colW);
+    val.x = 144 + i * colW; val.y = 60;
+    sec.appendChild(val);
+
+    const sub = mkText(s.sub, 14, W.regular, C.hpTextSec, 'CENTER', colW);
+    sub.x = 144 + i * colW; sub.y = 100;
+    sec.appendChild(sub);
+  });
+
+  return sec;
+}
+
+function mkReferHowItWorks() {
+  const sec = mkFrame('HowItWorks', 1440, 400, C.white);
+
+  const lbl = mkText('HOW IT WORKS', 11, W.semibold, C.hpAction, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 48;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('Three steps. No paperwork. No waiting.', 36, C.hpTextPri, 'CENTER', 640);
+  h2.lineHeight = { value: 44, unit: 'PIXELS' };
+  h2.x = 400; h2.y = 74;
+  sec.appendChild(h2);
+
+  const sub = mkText('Your referral link is already in your HitPay dashboard. It takes 60 seconds to share.', 16, W.regular, C.hpTextSec, 'CENTER', 640);
+  sub.x = 400; sub.y = 126;
+  sec.appendChild(sub);
+
+  const steps = [
+    { n: '1', title: 'Find your link', body: 'Log in to your HitPay dashboard and click Refer and Earn in the left menu. Your unique referral link is there, ready to copy. No application required.' },
+    { n: '2', title: 'Share with anyone', body: "Send it to a friend, supplier, fellow entrepreneur, or anyone you know who runs a business. They register using your link — that's all it takes." },
+    { n: '3', title: 'Earn every month', body: 'Once they go live and start processing online payments, 0.1% of their monthly volume lands in your HitPay wallet automatically — no action needed.' },
+  ];
+
+  const cardW = 340;
+  steps.forEach((step, i) => {
+    const cx = 144 + i * 384;
+    const bg = mkRect(cardW, 192, C.hpBeige, 16); bg.x = cx; bg.y = 166; sec.appendChild(bg);
+    const numBg = mkRect(36, 36, C.hpAction, 10); numBg.x = cx + 24; numBg.y = 190; sec.appendChild(numBg);
+    const numT = mkText(step.n, 18, W.bold, C.white, 'CENTER', 36); numT.x = cx + 24; numT.y = 196; sec.appendChild(numT);
+    const titleT = mkH2(step.title, 18, C.hpTextPri, 'LEFT', cardW - 48); titleT.x = cx + 24; titleT.y = 240; sec.appendChild(titleT);
+    const bodyT = mkText(step.body, 13, W.regular, C.hpTextSec, 'LEFT', cardW - 48); bodyT.lineHeight = { value: 20, unit: 'PIXELS' }; bodyT.x = cx + 24; bodyT.y = 268; sec.appendChild(bodyT);
+  });
+
+  return sec;
+}
+
+function mkReferCalculator() {
+  const sec = mkFrame('Calculator', 1440, 560, C.hpDeepBlue);
+
+  const lbl = mkText('EARNINGS CALCULATOR', 11, W.semibold, { r:0.576, g:0.773, b:0.988 }, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 48;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('See what one referral could earn you', 36, C.white, 'CENTER', 680);
+  h2.lineHeight = { value: 44, unit: 'PIXELS' };
+  h2.x = 380; h2.y = 76;
+  sec.appendChild(h2);
+
+  const sub = mkText('0.1% of their monthly online payments — automatically, every month.', 16, W.regular, { r:0.663, g:0.831, b:0.996 }, 'CENTER', 680);
+  sub.x = 380; sub.y = 130;
+  sec.appendChild(sub);
+
+  // Slider panel
+  const panelBg = mkRect(520, 272, C.hpAction, 16);
+  panelBg.opacity = 0.18;
+  panelBg.x = 144; panelBg.y = 176;
+  sec.appendChild(panelBg);
+
+  const sliderTitle1 = mkText('Monthly online TPV per referral', 13, W.semibold, C.white);
+  sliderTitle1.x = 168; sliderTitle1.y = 198;
+  sec.appendChild(sliderTitle1);
+
+  const tpvVal = mkPill('S$300,000', C.hpAction, C.white, 14, 6, 8);
+  tpvVal.x = 456; tpvVal.y = 196;
+  sec.appendChild(tpvVal);
+
+  const sliderBar1 = mkRect(472, 8, { r:1, g:1, b:1, a:0.2 }, 100); sliderBar1.x = 168; sliderBar1.y = 226; sec.appendChild(sliderBar1);
+  const sliderFill1 = mkRect(200, 8, C.hpAction, 100); sliderFill1.x = 168; sliderFill1.y = 226; sec.appendChild(sliderFill1);
+
+  const range1Min = mkText('S$10K', 10, W.regular, { r:0.576, g:0.773, b:0.988 }); range1Min.x = 168; range1Min.y = 240; sec.appendChild(range1Min);
+  const range1Max = mkText('S$10M', 10, W.regular, { r:0.576, g:0.773, b:0.988 }, 'RIGHT', 100); range1Max.x = 540; range1Max.y = 240; sec.appendChild(range1Max);
+
+  const sliderTitle2 = mkText('Number of businesses referred', 13, W.semibold, C.white);
+  sliderTitle2.x = 168; sliderTitle2.y = 280;
+  sec.appendChild(sliderTitle2);
+
+  const mVal = mkPill('3', C.hpAction, C.white, 14, 6, 8);
+  mVal.x = 510; mVal.y = 278;
+  sec.appendChild(mVal);
+
+  const sliderBar2 = mkRect(472, 8, { r:1, g:1, b:1, a:0.2 }, 100); sliderBar2.x = 168; sliderBar2.y = 310; sec.appendChild(sliderBar2);
+  const sliderFill2 = mkRect(80, 8, C.hpAction, 100); sliderFill2.x = 168; sliderFill2.y = 310; sec.appendChild(sliderFill2);
+
+  const range2Min = mkText('1', 10, W.regular, { r:0.576, g:0.773, b:0.988 }); range2Min.x = 168; range2Min.y = 324; sec.appendChild(range2Min);
+  const range2Max = mkText('20', 10, W.regular, { r:0.576, g:0.773, b:0.988 }, 'RIGHT', 40); range2Max.x = 600; range2Max.y = 324; sec.appendChild(range2Max);
+
+  const formula = mkText('3 referrals × S$300,000 × 0.1%', 13, W.regular, { r:0.576, g:0.773, b:0.988 }, 'CENTER', 472);
+  formula.x = 168; formula.y = 420;
+  sec.appendChild(formula);
+
+  // Output card
+  const outputBg = mkRect(488, 320, C.hpAction, 20); outputBg.x = 808; outputBg.y = 140; sec.appendChild(outputBg);
+
+  const outLabel = mkText('YOUR MONTHLY COMMISSION', 10, W.semibold, { r:0.663, g:0.831, b:0.996 }, 'CENTER', 400);
+  outLabel.letterSpacing = { value: 1, unit: 'PIXELS' };
+  outLabel.x = 852; outLabel.y = 180;
+  sec.appendChild(outLabel);
+
+  const outVal = mkText('S$900', 52, W.bold, C.white, 'CENTER', 400);
+  outVal.x = 852; outVal.y = 204;
+  sec.appendChild(outVal);
+
+  const perMo = mkText('per month', 14, W.regular, { r:0.663, g:0.831, b:0.996 }, 'CENTER', 400);
+  perMo.x = 852; perMo.y = 272;
+  sec.appendChild(perMo);
+
+  const outDiv = mkRect(400, 1, { r:1, g:1, b:1, a:0.2 }); outDiv.x = 852; outDiv.y = 302; sec.appendChild(outDiv);
+
+  const annualLabel = mkText('Your annual projection', 13, W.regular, { r:0.663, g:0.831, b:0.996 }, 'CENTER', 400);
+  annualLabel.x = 852; annualLabel.y = 318;
+  sec.appendChild(annualLabel);
+
+  const annualVal = mkText('S$10,800', 32, W.bold, C.white, 'CENTER', 400);
+  annualVal.x = 852; annualVal.y = 342;
+  sec.appendChild(annualVal);
+
+  const annualSub = mkText('12 months at the same TPV', 11, W.regular, { r:0.663, g:0.831, b:0.996 }, 'CENTER', 400);
+  annualSub.x = 852; annualSub.y = 388;
+  sec.appendChild(annualSub);
+
+  return sec;
+}
+
+function mkReferFeature1() {
+  const sec = mkFrame('Feature1_Reward', 1440, 520, C.white);
+
+  const lbl = mkText('THE REWARD', 11, W.semibold, C.hpAction);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 64;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('0.1% of everything they make online. Every month. Forever.', 36, C.hpTextPri, 'LEFT', 520);
+  h2.lineHeight = { value: 44, unit: 'PIXELS' };
+  h2.x = 144; h2.y = 98;
+  sec.appendChild(h2);
+
+  const body = mkText('For every online payment your referred business processes — cards, PayNow, GrabPay, ShopeePay, payment links, online checkout — you earn 0.1% per month. No cap, no expiry, no minimum volume threshold. Commission is credited automatically to your HitPay wallet each month.', 15, W.regular, C.hpTextSec, 'LEFT', 520);
+  body.lineHeight = { value: 24, unit: 'PIXELS' };
+  body.x = 144; body.y = 218;
+  sec.appendChild(body);
+
+  const bullets = [
+    '0.1% of online payments — cards, PayNow, GrabPay, payment links, checkout',
+    'Excludes POS/terminal and recurring billing transactions',
+    'No minimum TPV — earns from the very first online transaction',
+    'No expiry — earns as long as they process on HitPay',
+  ];
+  bullets.forEach((b, i) => {
+    const bullet = mkBullet(b, 14, C.hpTextSec, 520); bullet.x = 144; bullet.y = 324 + i * 28; sec.appendChild(bullet);
+  });
+
+  const creditCard = mockReferWalletCredit();
+  creditCard.x = 840; creditCard.y = 120;
+  sec.appendChild(creditCard);
+
+  return sec;
+}
+
+function mkReferFeature2() {
+  const sec = mkFrame('Feature2_AutoPay', 1440, 520, C.hpBeige200);
+
+  const summCard = mockReferEarningsSummary();
+  summCard.x = 144; summCard.y = 140;
+  sec.appendChild(summCard);
+
+  const lbl = mkText('AUTOMATIC PAYOUTS', 11, W.semibold, C.hpAction);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 744; lbl.y = 64;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('No invoicing. Your wallet. Every first of the month.', 36, C.hpTextPri, 'LEFT', 520);
+  h2.lineHeight = { value: 44, unit: 'PIXELS' };
+  h2.x = 744; h2.y = 98;
+  sec.appendChild(h2);
+
+  const body = mkText('On the first of every calendar month, HitPay calculates 0.1% of the previous month\'s online transaction volume for each of your referred businesses and credits the total directly into your HitPay wallet. Nothing to claim, no invoice to raise, no threshold to clear.', 15, W.regular, C.hpTextSec, 'LEFT', 520);
+  body.lineHeight = { value: 24, unit: 'PIXELS' };
+  body.x = 744; body.y = 218;
+  sec.appendChild(body);
+
+  const bullets = [
+    'Calculated on the 1st — previous calendar month\'s online TPV',
+    'Credited to your existing HitPay wallet — no separate account',
+    'One credit for all your active referrals combined',
+    'Track individual referral earnings in your dashboard',
+  ];
+  bullets.forEach((b, i) => {
+    const bullet = mkBullet(b, 14, C.hpTextSec, 520); bullet.x = 744; bullet.y = 352 + i * 28; sec.appendChild(bullet);
+  });
+
+  return sec;
+}
+
+function mkReferStats() {
+  const sec = mkFrame('StatsBar', 1440, 192, C.hpDeepBlue);
+
+  const stats = [
+    { val: '0.1%',    sub: 'Commission on every online payment' },
+    { val: 'Monthly', sub: 'Automatic wallet credit — no action needed' },
+    { val: 'No expiry', sub: 'Earn as long as they process on HitPay' },
+    { val: '60 sec',  sub: 'Time to find and share your referral link' },
+  ];
+
+  const colW = 1152 / 4;
+  stats.forEach((s, i) => {
+    const val = mkText(s.val, 28, W.bold, C.white, 'CENTER', colW);
+    val.x = 144 + i * colW; val.y = 48;
+    sec.appendChild(val);
+
+    const sub = mkText(s.sub, 13, W.regular, { r:0.663, g:0.831, b:0.996 }, 'CENTER', colW);
+    sub.x = 144 + i * colW; sub.y = 88;
+    sec.appendChild(sub);
+  });
+
+  return sec;
+}
+
+// ── REFER AND EARN PAGE BUILDER ──────────────────────────────
+
+function buildReferAndEarn(xOffset = 0) {
+  const page = new Page('Refer and Earn', xOffset);
+
+  page.add(mkNavbar(), 64);
+  page.add(mkHeroReferAndEarn(), 560);
+  page.add(mkReferTrustBar(), 200);
+  page.add(mkReferHowItWorks(), 400);
+  page.add(mkReferCalculator(), 560);
+  page.add(mkReferFeature1(), 520);
+  page.add(mkReferFeature2(), 520);
+  page.add(mkReferStats(), 192);
+
+  // FAQ — 8 questions: 96 + 8×136 + 40 = 1224
+  page.add(mkFaq([
+    { q: 'How does the HitPay Refer and Earn programme work?',
+      a: 'Any existing HitPay merchant can refer businesses using a unique referral link in their dashboard under Refer and Earn. When the referred business registers through that link, goes live, and processes online payments, the referring merchant earns 0.1% of their monthly online payment volume — credited automatically on the first of each month.' },
+    { q: 'How much can a merchant earn from referring businesses to HitPay?',
+      a: 'A merchant earns 0.1% of the total online payment volume processed by each referred business every month. A business processing S$300,000 per month in online payments generates S$300 monthly. There is no cap on earnings and no limit on the number of businesses that can be referred.' },
+    { q: 'Where does a HitPay merchant find their referral link?',
+      a: 'The referral link is inside the HitPay merchant dashboard. Log in, then click Refer and Earn in the left navigation menu. The unique link appears there and can be copied or shared directly. No application or approval is required.' },
+    { q: 'When are referral commissions paid?',
+      a: "Commissions are calculated automatically on the first of each month for the previous calendar month's online transaction volume. The amount is credited directly to the referring merchant's HitPay wallet — no claim, invoice, or request needed." },
+    { q: 'What types of transactions are included in the commission calculation?',
+      a: 'Commission applies to online payment transactions only — cards, PayNow, GrabPay, ShopeePay, payment links, and online checkout. POS/terminal transactions and recurring billing transactions are excluded.' },
+    { q: 'Is there a limit on how many businesses a merchant can refer?',
+      a: 'No. There is no limit on referrals. Every business that registers through the referral link and goes live on HitPay contributes to the monthly commission — no cap on total earnings.' },
+    { q: 'How long does a merchant continue earning commission from a referral?',
+      a: 'There is no expiry. As long as the referred business continues processing online payments through HitPay, the referring merchant earns 0.1% every month — no renewal or action required.' },
+    { q: 'Does the referred business need to be a new HitPay customer?',
+      a: 'The referred business must register through the referral link. Businesses already on HitPay would not count as a new referral. The programme is for businesses that have not yet signed up with HitPay.' },
+  ], C.hpBeige), 1224);
+
+  page.add(mkCta(
+    'Your referral link is already waiting for you.',
+    'Log in to your HitPay dashboard, go to Refer and Earn, and share your link. Every business you help discover HitPay earns you 0.1% of their monthly online payments — forever.',
+    'Go to my dashboard',
+    'Learn about the Affiliate Program'
+  ), 300);
+
+  page.add(mkFooter(
+    ['Virtual Accounts', 'Payment Links', 'POS Software', 'Invoices'],
+    ['E-commerce', 'Retail', 'Restaurants & F&B', 'Health & Beauty']
+  ), 280);
+
+  return page.f;
+}
+
 // ── MAIN ─────────────────────────────────────────────────────
 
 const BUILDERS = {
@@ -5905,6 +6382,7 @@ const BUILDERS = {
   art_craft_fair:    buildArtCraftFair,
   virtual_accounts:  buildVirtualAccounts,
   affiliate:         buildAffiliate,
+  refer_and_earn:    buildReferAndEarn,
 };
 
 async function main() {
