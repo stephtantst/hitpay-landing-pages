@@ -5754,6 +5754,47 @@ function mkAffWhoItsFor() {
   return sec;
 }
 
+/** Quick Answers panel — white bg, Q&A pairs — 600px */
+function mkAffQuickAnswers() {
+  const SEC_H = 600;
+  const sec = mkFrame('QuickAnswers', 1440, SEC_H, C.white);
+
+  const inner = mkFrame('Inner', 720, SEC_H - 112, C.white);
+  inner.x = 360; inner.y = 56;
+
+  const heading = mkText('Quick answers', 22, C.hpTextPri, 720, 36);
+  heading.fontName = { family: 'Hauora', style: 'SemiBold' };
+  heading.y = 0;
+  inner.appendChild(heading);
+
+  const items = [
+    { q: 'Who can join the Affiliate Program?',            a: 'Anyone — developers, agencies, consultants, accountants, business networks, or anyone who knows businesses that need payments. No HitPay merchant account required.' },
+    { q: 'How much do affiliates earn?',                   a: '0.1% of each linked merchant\'s monthly online payment volume (TPV). A merchant processing S$500,000/month earns you S$500/month. No cap on merchants or earnings.' },
+    { q: 'What payments count towards commission?',        a: 'Online payments only — cards, PayNow, GrabPay, ShopeePay, payment links, and online checkout. In-person POS and cash transactions are excluded.' },
+    { q: 'When are commissions paid?',                     a: 'On the first of each month for the previous calendar month\'s volume. Credited automatically to your HitPay wallet — no invoicing or claim needed.' },
+    { q: 'Does commission expire?',                        a: 'No. There is no expiry on affiliate commissions. As long as a linked merchant continues processing, you continue earning — indefinitely.' },
+    { q: 'Can existing HitPay merchants be linked?',       a: 'Yes. Merchants already on HitPay — including those you introduced before joining — can be added retroactively once your partner account is approved.' },
+  ];
+
+  let yOff = 52;
+  items.forEach(item => {
+    const dt = mkText(item.q, 14, C.hpTextPri, 720, 20);
+    dt.fontName = { family: 'Hauora', style: 'SemiBold' };
+    dt.y = yOff;
+    inner.appendChild(dt);
+    yOff += 24;
+
+    const dd = mkText(item.a, 14, C.hpTextSec, 720, 36);
+    dd.textAutoResize = 'HEIGHT';
+    dd.y = yOff;
+    inner.appendChild(dd);
+    yOff += 52;
+  });
+
+  sec.appendChild(inner);
+  return sec;
+}
+
 // ── AFFILIATE PAGE BUILDER ───────────────────────────────────
 
 function buildAffiliate(xOffset = 0) {
@@ -5852,6 +5893,9 @@ function buildAffiliate(xOffset = 0) {
     ],
     ac
   ), 380);
+
+  // Quick Answers panel — 600px
+  page.add(mkAffQuickAnswers(), 600);
 
   // FAQ: 10 items → 96 + 10×136 + 40 = 1496px
   page.add(mkFAQ([
