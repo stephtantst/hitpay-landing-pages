@@ -5176,6 +5176,714 @@ function buildVirtualAccounts(xOffset = 0) {
   return page.f;
 }
 
+// ── AFFILIATE MOCK UIs ───────────────────────────────────────
+
+function mockAffCommissionCard() {
+  const card = mkFrame('CommissionCard', 320, 360, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.10 }, offset: { x:0, y:8 }, radius: 24, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  // Header row
+  const title = mkText('Commission Summary — May 2026', 11, W.semibold, C.hpTextPri);
+  title.x = 20; title.y = 18;
+  card.appendChild(title);
+
+  const autoBadge = mkPill('● Auto-credited', C.green100, C.green600, 8, 4, 100);
+  autoBadge.x = 200; autoBadge.y = 14;
+  card.appendChild(autoBadge);
+
+  const hdrLine = mkRect(280, 1, C.slate100);
+  hdrLine.x = 20; hdrLine.y = 44;
+  card.appendChild(hdrLine);
+
+  // Big amount area
+  const amtBg = mkRect(280, 60, C.hpBlue50, 12);
+  amtBg.x = 20; amtBg.y = 54;
+  card.appendChild(amtBg);
+
+  const earnedLabel = mkText('Earned this month', 10, W.medium, C.hpTextSec, 'CENTER', 280);
+  earnedLabel.letterSpacing = { value: 0.4, unit: 'PIXELS' };
+  earnedLabel.x = 20; earnedLabel.y = 62;
+  card.appendChild(earnedLabel);
+
+  const earnedAmt = mkText('S$3,200', 26, W.bold, C.hpTextPri, 'CENTER', 280);
+  earnedAmt.x = 20; earnedAmt.y = 78;
+  card.appendChild(earnedAmt);
+
+  // Section label
+  const breakdownLabel = mkText('MERCHANT BREAKDOWN', 9, W.semibold, C.hpTextSec);
+  breakdownLabel.letterSpacing = { value: 0.8, unit: 'PIXELS' };
+  breakdownLabel.x = 20; breakdownLabel.y = 128;
+  card.appendChild(breakdownLabel);
+
+  // Merchant rows
+  const merchants = [
+    { name: 'Arcanum Trading',  tpv: 'S$1.2M',  amt: 'S$1,200' },
+    { name: 'Pinnacle Systems', tpv: 'S$800K',   amt: 'S$800'   },
+    { name: 'AgnesStore',       tpv: 'S$500K',   amt: 'S$500'   },
+    { name: 'TechNest',         tpv: 'S$320K',   amt: 'S$320'   },
+    { name: 'Velvet Retail',    tpv: 'S$380K',   amt: 'S$380'   },
+  ];
+  let ry = 146;
+  merchants.forEach(m => {
+    const nameT = mkText(m.name, 12, W.semibold, C.hpTextPri);
+    nameT.x = 20; nameT.y = ry;
+    card.appendChild(nameT);
+
+    const tpvT = mkText(m.tpv + ' TPV', 10, W.regular, C.hpTextSec);
+    tpvT.x = 20; tpvT.y = ry + 14;
+    card.appendChild(tpvT);
+
+    const amtT = mkText(m.amt, 13, W.semibold, C.hpAction, 'RIGHT', 70);
+    amtT.x = 230; amtT.y = ry + 4;
+    card.appendChild(amtT);
+
+    const divRow = mkRect(280, 1, C.slate100);
+    divRow.x = 20; divRow.y = ry + 32;
+    card.appendChild(divRow);
+
+    ry += 36;
+  });
+
+  // Footer
+  const footer = mkText('5 merchants · 0.1% of online TPV · Next payout: Jun 1', 10, W.regular, C.hpTextSec, 'CENTER', 280);
+  footer.x = 20; footer.y = 336;
+  card.appendChild(footer);
+
+  return card;
+}
+
+function mockAffWalletCredit() {
+  const card = mkFrame('WalletCredit', 280, 200, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.08 }, offset: { x:0, y:4 }, radius: 16, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const hdrLabel = mkText('Wallet · May 2026', 11, W.semibold, C.hpTextSec);
+  hdrLabel.x = 16; hdrLabel.y = 16;
+  card.appendChild(hdrLabel);
+
+  const divider = mkRect(248, 1, C.slate100);
+  divider.x = 16; divider.y = 36;
+  card.appendChild(divider);
+
+  const amt = mkText('+S$1,200.00', 24, W.bold, C.hpTextPri);
+  amt.x = 16; amt.y = 48;
+  card.appendChild(amt);
+
+  const badge = mkPill('partner_commission', C.hpBlue50, C.hpAction, 8, 4, 100);
+  badge.x = 16; badge.y = 82;
+  card.appendChild(badge);
+
+  const divider2 = mkRect(248, 1, C.slate100);
+  divider2.x = 16; divider2.y = 108;
+  card.appendChild(divider2);
+
+  const merchant = mkText('Arcanum Trading · 0.1% of S$1,200,000 online TPV', 11, W.regular, C.hpTextSec, 'LEFT', 248);
+  merchant.lineHeight = { value: 18, unit: 'PIXELS' };
+  merchant.x = 16; merchant.y = 116;
+  card.appendChild(merchant);
+
+  const credited = mkText('✓ Credited automatically · No action required', 11, W.medium, C.hpSuccess);
+  credited.x = 16; credited.y = 148;
+  card.appendChild(credited);
+
+  const time = mkText('1 Jun 2026, 00:00 SGT', 10, W.regular, C.slate400);
+  time.x = 16; time.y = 170;
+  card.appendChild(time);
+
+  return card;
+}
+
+function mockAffDashboard() {
+  const card = mkFrame('CommissionDashboard', 300, 280, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.08 }, offset: { x:0, y:4 }, radius: 16, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  // Header bar
+  const hdrBg = mkRect(300, 44, C.hpBeige, 0);
+  hdrBg.x = 0; hdrBg.y = 0;
+  card.appendChild(hdrBg);
+
+  const hdrTitle = mkText('Commission Report · May 2026', 11, W.semibold, C.hpTextPri);
+  hdrTitle.x = 14; hdrTitle.y = 14;
+  card.appendChild(hdrTitle);
+
+  const exportBtn = mkPill('Export CSV →', C.hpBlue50, C.hpAction, 8, 4, 6);
+  exportBtn.x = 196; exportBtn.y = 10;
+  card.appendChild(exportBtn);
+
+  const hdivider = mkRect(300, 1, C.slate100);
+  hdivider.x = 0; hdivider.y = 44;
+  card.appendChild(hdivider);
+
+  // Column headers
+  const chM = mkText('Merchant', 9, W.semibold, C.hpTextSec);
+  chM.letterSpacing = { value: 0.5, unit: 'PIXELS' };
+  chM.x = 14; chM.y = 52;
+  card.appendChild(chM);
+
+  const chT = mkText('TPV', 9, W.semibold, C.hpTextSec, 'RIGHT', 50);
+  chT.x = 162; chT.y = 52;
+  card.appendChild(chT);
+
+  const chC = mkText('Commission', 9, W.semibold, C.hpTextSec, 'RIGHT', 80);
+  chC.x = 206; chC.y = 52;
+  card.appendChild(chC);
+
+  const rows = [
+    { m: 'Arcanum Trading',  t: 'S$1.2M', c: 'S$1,200' },
+    { m: 'Pinnacle Systems', t: 'S$800K', c: 'S$800'   },
+    { m: 'AgnesStore',       t: 'S$500K', c: 'S$500'   },
+    { m: 'TechNest',         t: 'S$320K', c: 'S$320'   },
+  ];
+
+  let ry = 68;
+  rows.forEach((row, i) => {
+    if (i % 2 === 0) {
+      const stripe = mkRect(300, 26, C.hpBeige, 0);
+      stripe.x = 0; stripe.y = ry;
+      card.appendChild(stripe);
+    }
+    const mT = mkText(row.m, 11, W.medium, C.hpTextPri);
+    mT.x = 14; mT.y = ry + 7;
+    card.appendChild(mT);
+
+    const tT = mkText(row.t, 11, W.regular, C.hpTextSec, 'RIGHT', 50);
+    tT.x = 162; tT.y = ry + 7;
+    card.appendChild(tT);
+
+    const cT = mkText(row.c, 11, W.semibold, C.hpAction, 'RIGHT', 80);
+    cT.x = 206; cT.y = ry + 7;
+    card.appendChild(cT);
+
+    ry += 26;
+  });
+
+  // Total row
+  const totalBg = mkRect(300, 36, C.hpDeepBlue, 0);
+  totalBg.x = 0; totalBg.y = 172;
+  card.appendChild(totalBg);
+
+  const totalLabel = mkText('Total earned', 11, W.semibold, C.white);
+  totalLabel.x = 14; totalLabel.y = 184;
+  card.appendChild(totalLabel);
+
+  const totalAmt = mkText('S$2,820', 13, W.bold, C.white, 'RIGHT', 80);
+  totalAmt.x = 206; totalAmt.y = 182;
+  card.appendChild(totalAmt);
+
+  const credited = mkText('✓ All credited to wallet · 1 Jun 2026', 10, W.regular, C.hpSuccess);
+  credited.x = 14; credited.y = 222;
+  card.appendChild(credited);
+
+  const csvNote = mkText('Download: commission-may-2026.csv', 10, W.regular, C.hpTextSec);
+  csvNote.x = 14; csvNote.y = 252;
+  card.appendChild(csvNote);
+
+  return card;
+}
+
+function mockAffTierStack() {
+  const card = mkFrame('TierStack', 280, 196, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r:0, g:0, b:0, a:0.08 }, offset: { x:0, y:4 }, radius: 16, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const title = mkText('Partner Programmes', 13, W.semibold, C.hpTextPri);
+  title.x = 16; title.y = 16;
+  card.appendChild(title);
+
+  const sub = mkText('Your account · All tiers visible', 10, W.regular, C.hpTextSec);
+  sub.x = 16; sub.y = 34;
+  card.appendChild(sub);
+
+  const divider = mkRect(248, 1, C.slate100);
+  divider.x = 16; divider.y = 52;
+  card.appendChild(divider);
+
+  const tiers = [
+    { name: 'Affiliate',        badge: '✓ Active',  badgeBg: C.green100, badgeColor: C.green600 },
+    { name: 'Reseller (MY)',    badge: '✓ Active',  badgeBg: C.green100, badgeColor: C.green600 },
+    { name: 'Platform Partner', badge: '→ Apply',   badgeBg: C.hpBlue50, badgeColor: C.hpAction },
+  ];
+
+  let ty = 62;
+  tiers.forEach(tier => {
+    const nameT = mkText(tier.name, 13, W.medium, C.hpTextPri);
+    nameT.x = 16; nameT.y = ty;
+    card.appendChild(nameT);
+
+    const b = mkPill(tier.badge, tier.badgeBg, tier.badgeColor, 8, 4, 100);
+    b.x = 182; b.y = ty - 2;
+    card.appendChild(b);
+
+    const rowDiv = mkRect(248, 1, C.slate100);
+    rowDiv.x = 16; rowDiv.y = ty + 30;
+    card.appendChild(rowDiv);
+
+    ty += 40;
+  });
+
+  const footerNote = mkText('Programmes stack — earn across all tiers simultaneously', 9, W.regular, C.hpTextSec, 'LEFT', 248);
+  footerNote.x = 16; footerNote.y = 174;
+  card.appendChild(footerNote);
+
+  return card;
+}
+
+// ── AFFILIATE SECTION BUILDERS ───────────────────────────────
+
+function mkHeroAffiliate() {
+  const sec = mkFrame('Hero', 1440, 560, C.hpBlue50);
+
+  const badge = mkPill('Affiliate Program', C.hpBlue100, C.hpAction, 16, 8, 100);
+  badge.x = 144; badge.y = 72;
+  sec.appendChild(badge);
+
+  const h1 = mkH2('Know a business that needs payments? Turn the referral into recurring income.', 44, C.hpTextPri, 'LEFT', 560);
+  h1.lineHeight = { value: 52, unit: 'PIXELS' };
+  h1.x = 144; h1.y = 118;
+  sec.appendChild(h1);
+
+  const sub = mkText('Whether you\'re a developer, agency, consultant, or simply well-connected — any business you refer earns you 0.1% of their monthly online TPV, automatically, every month. No billing. No expiry. No effort.', 18, W.regular, C.hpTextSec, 'LEFT', 540);
+  sub.lineHeight = { value: 28, unit: 'PIXELS' };
+  sub.x = 144; sub.y = 336;
+  sec.appendChild(sub);
+
+  const b1 = mkBtn('Become an affiliate', C.hpAction, C.white, 24, 14, 12);
+  b1.x = 144; b1.y = 436;
+  sec.appendChild(b1);
+
+  const b2 = mkBtn('See how it works', null, C.hpTextPri, 24, 14, 12, true);
+  b2.x = 348; b2.y = 436;
+  sec.appendChild(b2);
+
+  const fine = mkText('Free to join · No minimum TPV · Paid monthly', 13, W.regular, C.hpTextSec);
+  fine.x = 144; fine.y = 488;
+  sec.appendChild(fine);
+
+  const commCard = mockAffCommissionCard();
+  commCard.x = 916; commCard.y = 80;
+  sec.appendChild(commCard);
+
+  return sec;
+}
+
+function mkAffTrustBar() {
+  const sec = mkFrame('TrustBar', 1440, 200, C.hpBeige);
+  sec.strokes = [{ type: 'SOLID', color: C.slate100 }];
+  sec.strokeWeight = 1;
+  sec.strokeAlign = 'INSIDE';
+
+  const stats = [
+    { val: '500+',     sub: 'Developer & agency partners' },
+    { val: 'S$1M+',   sub: 'In commissions paid'         },
+    { val: '20,000+', sub: 'Businesses on platform'      },
+    { val: 'Monthly', sub: 'Automatic wallet payout'     },
+  ];
+
+  const colW = 1152 / 4;
+  stats.forEach((s, i) => {
+    const val = mkText(s.val, 32, W.bold, C.hpTextPri, 'CENTER', colW);
+    val.x = 144 + i * colW; val.y = 60;
+    sec.appendChild(val);
+
+    const sub = mkText(s.sub, 14, W.regular, C.hpTextSec, 'CENTER', colW);
+    sub.x = 144 + i * colW; sub.y = 100;
+    sec.appendChild(sub);
+  });
+
+  return sec;
+}
+
+function mkAffHowItWorks() {
+  const sec = mkFrame('HowItWorks', 1440, 400, C.white);
+
+  const lbl = mkText('HOW IT WORKS', 11, W.semibold, C.hpAction, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 48;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('Up and running in minutes', 36, C.hpTextPri, 'CENTER', 640);
+  h2.lineHeight = { value: 44, unit: 'PIXELS' };
+  h2.x = 400; h2.y = 74;
+  sec.appendChild(h2);
+
+  const sub = mkText('No contracts, no paperwork, no integrations needed to start earning.', 16, W.regular, C.hpTextSec, 'CENTER', 640);
+  sub.x = 400; sub.y = 126;
+  sec.appendChild(sub);
+
+  const steps = [
+    { n: '1', title: 'Apply once',          desc: 'Sign up as a partner in your HitPay dashboard. Approval is typically within 1–3 business days. No fees. No upfront commitment.' },
+    { n: '2', title: 'Link your merchants', desc: 'Connect the businesses you\'ve introduced to your partner account. Existing clients already on HitPay can be linked retroactively.' },
+    { n: '3', title: 'Earn every month',    desc: '0.1% of each merchant\'s monthly online payment volume lands in your wallet on the 1st — automatically. No invoice. No expiry.' },
+  ];
+
+  const cardW = 340;
+  const totalCardsW = cardW * 3 + 48;
+  const startX = (1440 - totalCardsW) / 2;
+
+  steps.forEach((step, i) => {
+    const cx = startX + i * (cardW + 24);
+    const cy = 170;
+
+    const cardBg = mkRect(cardW, 192, C.hpBeige, 16);
+    cardBg.x = cx; cardBg.y = cy;
+    sec.appendChild(cardBg);
+
+    const circle = mkFrame('StepCircle', 36, 36, C.hpAction, 18);
+    circle.x = cx + 20; circle.y = cy + 20;
+    sec.appendChild(circle);
+
+    const numT = mkText(step.n, 16, W.bold, C.white, 'CENTER', 36);
+    numT.x = cx + 20; numT.y = cy + 26;
+    sec.appendChild(numT);
+
+    const titleT = mkText(step.title, 17, W.semibold, C.hpTextPri, 'LEFT', cardW - 40);
+    titleT.x = cx + 20; titleT.y = cy + 68;
+    sec.appendChild(titleT);
+
+    const descT = mkText(step.desc, 13, W.regular, C.hpTextSec, 'LEFT', cardW - 40);
+    descT.lineHeight = { value: 20, unit: 'PIXELS' };
+    descT.x = cx + 20; descT.y = cy + 96;
+    sec.appendChild(descT);
+  });
+
+  return sec;
+}
+
+function mkAffCalculator() {
+  const sec = mkFrame('EarningsCalculator', 1440, 560, C.hpDeepBlue);
+
+  const lbl = mkText('EARNINGS CALCULATOR', 11, W.semibold, C.hpBlue100, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 48;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('See what you could earn', 36, C.white, 'CENTER', 640);
+  h2.x = 400; h2.y = 76;
+  sec.appendChild(h2);
+
+  const sub = mkText('0.1% of your clients\' monthly online payment volume — paid automatically each month, forever.', 16, W.regular, C.hpBlue100, 'CENTER', 700);
+  sub.x = 370; sub.y = 128;
+  sec.appendChild(sub);
+
+  // ── Slider panel (left) ───────────────────────────
+  const panelBg = mkRect(520, 272, C.hpAction, 16);
+  panelBg.opacity = 0.18;
+  panelBg.x = 120; panelBg.y = 188;
+  sec.appendChild(panelBg);
+
+  // Slider 1
+  const s1Label = mkText('Monthly online TPV per merchant', 13, W.semibold, C.white);
+  s1Label.x = 152; s1Label.y = 206;
+  sec.appendChild(s1Label);
+
+  const s1Val = mkText('S$500,000', 18, W.bold, C.hpAction);
+  s1Val.x = 152; s1Val.y = 226;
+  sec.appendChild(s1Val);
+
+  const track1Bg = mkRect(468, 5, C.slate700, 100);
+  track1Bg.x = 148; track1Bg.y = 264;
+  sec.appendChild(track1Bg);
+
+  const track1Fill = mkRect(234, 5, C.hpAction, 100);
+  track1Fill.x = 148; track1Fill.y = 264;
+  sec.appendChild(track1Fill);
+
+  const thumb1 = mkFrame('Thumb1', 18, 18, C.white, 9);
+  thumb1.x = 356; thumb1.y = 256;
+  sec.appendChild(thumb1);
+
+  const s1Min = mkText('S$10K', 10, W.regular, C.hpBlue100);
+  s1Min.x = 148; s1Min.y = 278;
+  sec.appendChild(s1Min);
+
+  const s1Max = mkText('S$10M', 10, W.regular, C.hpBlue100, 'RIGHT', 60);
+  s1Max.x = 556; s1Max.y = 278;
+  sec.appendChild(s1Max);
+
+  // Slider 2
+  const s2Label = mkText('Number of merchants', 13, W.semibold, C.white);
+  s2Label.x = 152; s2Label.y = 310;
+  sec.appendChild(s2Label);
+
+  const s2Val = mkText('5 merchants', 18, W.bold, C.hpAction);
+  s2Val.x = 152; s2Val.y = 330;
+  sec.appendChild(s2Val);
+
+  const track2Bg = mkRect(468, 5, C.slate700, 100);
+  track2Bg.x = 148; track2Bg.y = 370;
+  sec.appendChild(track2Bg);
+
+  const track2Fill = mkRect(42, 5, C.hpAction, 100);
+  track2Fill.x = 148; track2Fill.y = 370;
+  sec.appendChild(track2Fill);
+
+  const thumb2 = mkFrame('Thumb2', 18, 18, C.white, 9);
+  thumb2.x = 182; thumb2.y = 362;
+  sec.appendChild(thumb2);
+
+  const s2Min = mkText('1', 10, W.regular, C.hpBlue100);
+  s2Min.x = 148; s2Min.y = 384;
+  sec.appendChild(s2Min);
+
+  const s2Max = mkText('50', 10, W.regular, C.hpBlue100, 'RIGHT', 40);
+  s2Max.x = 576; s2Max.y = 384;
+  sec.appendChild(s2Max);
+
+  const formula = mkText('5 merchants × S$500,000 × 0.1% = S$2,500/month', 12, W.regular, C.hpBlue100);
+  formula.x = 148; formula.y = 414;
+  sec.appendChild(formula);
+
+  // ── Output panel (right) ─────────────────────────
+  const outputBg = mkRect(500, 272, C.hpAction, 16);
+  outputBg.x = 680; outputBg.y = 188;
+  sec.appendChild(outputBg);
+
+  const monthlyLabel = mkText('YOUR MONTHLY COMMISSION', 10, W.semibold, C.hpBlue100, 'CENTER', 460);
+  monthlyLabel.letterSpacing = { value: 1, unit: 'PIXELS' };
+  monthlyLabel.x = 700; monthlyLabel.y = 216;
+  sec.appendChild(monthlyLabel);
+
+  const monthlyAmt = mkText('S$2,500', 56, W.bold, C.white, 'CENTER', 460);
+  monthlyAmt.x = 700; monthlyAmt.y = 238;
+  sec.appendChild(monthlyAmt);
+
+  const perMonth = mkText('per month', 14, W.regular, C.hpBlue100, 'CENTER', 460);
+  perMonth.x = 700; perMonth.y = 300;
+  sec.appendChild(perMonth);
+
+  const divLine = mkRect(420, 1, C.hpActionHov);
+  divLine.x = 720; divLine.y = 330;
+  sec.appendChild(divLine);
+
+  const annualLabel = mkText('Your annual projection', 13, W.medium, C.hpBlue100, 'CENTER', 460);
+  annualLabel.x = 700; annualLabel.y = 346;
+  sec.appendChild(annualLabel);
+
+  const annualAmt = mkText('S$30,000', 34, W.bold, C.white, 'CENTER', 460);
+  annualAmt.x = 700; annualAmt.y = 368;
+  sec.appendChild(annualAmt);
+
+  const annualSub = mkText('12 months at the same TPV', 11, W.regular, C.hpBlue100, 'CENTER', 460);
+  annualSub.x = 700; annualSub.y = 410;
+  sec.appendChild(annualSub);
+
+  return sec;
+}
+
+function mkAffWhoItsFor() {
+  const sec = mkFrame('WhoItsFor', 1440, 560, C.white);
+
+  const lbl = mkText('WHO IT\'S FOR', 11, W.semibold, C.hpAction, 'CENTER', 1152);
+  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
+  lbl.x = 144; lbl.y = 48;
+  sec.appendChild(lbl);
+
+  const h2 = mkH2('If you work with businesses, you already qualify.', 36, C.hpTextPri, 'CENTER', 700);
+  h2.lineHeight = { value: 44, unit: 'PIXELS' };
+  h2.x = 370; h2.y = 74;
+  sec.appendChild(h2);
+
+  const sub = mkText('No HitPay account required. No technical knowledge needed. If your network includes businesses that take online payments, you have everything you need to start earning.', 16, W.regular, C.hpTextSec, 'CENTER', 700);
+  sub.lineHeight = { value: 24, unit: 'PIXELS' };
+  sub.x = 370; sub.y = 134;
+  sec.appendChild(sub);
+
+  // ── Left panel: You might be ──────────────────────
+  const leftBg = mkRect(560, 320, C.hpBeige, 16);
+  leftBg.x = 144; leftBg.y = 210;
+  sec.appendChild(leftBg);
+
+  const leftLabel = mkText('YOU MIGHT BE', 9, W.semibold, C.hpTextSec);
+  leftLabel.letterSpacing = { value: 0.8, unit: 'PIXELS' };
+  leftLabel.x = 168; leftLabel.y = 230;
+  sec.appendChild(leftLabel);
+
+  const personas = [
+    ['Web & App Developer',       'Tech or Business Consultant'],
+    ['Digital Agency',            'POS & Hardware Provider'    ],
+    ['Event Organiser',           'Business Accountant'        ],
+  ];
+
+  let py = 254;
+  personas.forEach(row => {
+    row.forEach((name, col) => {
+      const px = 168 + col * 268;
+      const dot = mkRect(6, 6, C.hpAction, 3);
+      dot.x = px; dot.y = py + 6;
+      sec.appendChild(dot);
+      const t = mkText(name, 13, W.semibold, C.hpTextPri);
+      t.x = px + 12; t.y = py;
+      sec.appendChild(t);
+    });
+    py += 44;
+  });
+
+  // ── Right panel: Your clients might be ───────────
+  const rightBg = mkRect(560, 320, C.hpBlue50, 16);
+  rightBg.x = 736; rightBg.y = 210;
+  sec.appendChild(rightBg);
+
+  const rightLabel = mkText('YOUR CLIENTS MIGHT BE', 9, W.semibold, C.hpTextSec);
+  rightLabel.letterSpacing = { value: 0.8, unit: 'PIXELS' };
+  rightLabel.x = 760; rightLabel.y = 230;
+  sec.appendChild(rightLabel);
+
+  const rightH3 = mkText('Businesses navigating their payment setup', 15, W.semibold, C.hpTextPri, 'LEFT', 520);
+  rightH3.lineHeight = { value: 22, unit: 'PIXELS' };
+  rightH3.x = 760; rightH3.y = 250;
+  sec.appendChild(rightH3);
+
+  const clients = [
+    'Businesses Exploring Payments', 'Newly Launched Businesses',
+    'Online Store Owners',           'Brick & Mortar Retailers',
+    'Service-based Businesses',      'Growing SMBs',
+    'Businesses Expanding Regionally',
+  ];
+
+  let cpx = 760; let cpy = 284;
+  clients.forEach(ct => {
+    const pill = mkPill(ct, C.white, C.hpTextPri, 10, 6, 100);
+    pill.strokes = [{ type: 'SOLID', color: C.slate200 }];
+    pill.strokeWeight = 1;
+    pill.strokeAlign = 'INSIDE';
+    const estW = ct.length * 6.5 + 24;
+    if (cpx + estW > 1276) { cpx = 760; cpy += 32; }
+    pill.x = cpx; pill.y = cpy;
+    cpx += estW + 8;
+    sec.appendChild(pill);
+  });
+
+  return sec;
+}
+
+// ── AFFILIATE PAGE BUILDER ───────────────────────────────────
+
+function buildAffiliate(xOffset = 0) {
+  const page = new Page('Affiliate Program', xOffset);
+  const ac = C.hpAction;
+
+  page.add(mkNavbar(ac), 64);
+  page.add(mkHeroAffiliate(), 560);
+  page.add(mkAffTrustBar(), 200);
+  page.add(mkAffHowItWorks(), 400);
+  page.add(mkAffCalculator(), 560);
+
+  page.add(mkFeature({
+    label: 'THE MODEL',
+    h2: '0.1% of online TPV. Every month. No cap, no expiry.',
+    p: 'The commission structure is intentionally simple. For every dollar your referred merchants collect through HitPay\'s online channels — payment links, checkout, PayNow, GrabPay, cards — you earn 0.1% per month. No tiers, no thresholds, no expiry. As clients grow their online payment volume, your passive income grows automatically.',
+    bullets: [
+      '0.1% of every succeeded online payment — payment links, checkout, PayNow, GrabPay, cards',
+      'Commission calculated monthly on the previous calendar month\'s online TPV',
+      'No tiered thresholds — you earn from the very first transaction',
+      'Your commission grows as your clients\' online payment volume grows',
+    ],
+    mockUI: mockAffWalletCredit(),
+    bg: C.white,
+    textSide: 'left',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: 'FULL VISIBILITY',
+    h2: 'A dashboard for every merchant, every month.',
+    p: 'Your commissions are never a black box. HitPay gives you a dedicated partner dashboard where every commission record — per merchant, per month — is logged and exportable. See exactly how much each client contributed, drill into per-merchant breakdowns, and export a CSV covering Business Name, Amount, Currency, and billing period.',
+    bullets: [
+      'Paginated commission log — every payout on record',
+      'Per-merchant breakdown view — see each client\'s contribution',
+      'One-click CSV export — Business Name, Amount, Currency, From/To dates',
+      'Commissions credited to your HitPay wallet, paid out via standard payout transfer',
+    ],
+    mockUI: mockAffDashboard(),
+    bg: C.hpBeige200,
+    textSide: 'right',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: 'WORKS WITH EVERYTHING',
+    h2: 'Stack it with your reseller or platform partner tier.',
+    p: 'The affiliate programme sits alongside — not instead of — HitPay\'s reseller and platform partner tiers. Affiliate commission applies in parallel with any other tier. Merchants you\'ve already introduced can be linked retroactively once your partner status is approved. One HitPay account covers all three programmes.',
+    bullets: [
+      'Combinable with Reseller Programme (Malaysia) — earn on both tiers simultaneously',
+      'Combinable with Platform Partner Program — API integration + affiliate commission',
+      'Retroactive linking — existing merchants can be added after approval',
+      'One HitPay partner account covers all three programmes',
+    ],
+    mockUI: mockAffTierStack(),
+    bg: C.white,
+    textSide: 'left',
+    accent: ac,
+  }), 520);
+
+  page.add(mkAffWhoItsFor(), 560);
+
+  page.add(mkStats([
+    { value: '0.1%',     label: 'Commission on online payments' },
+    { value: 'Monthly',  label: 'Automatic wallet credit'       },
+    { value: 'No cap',   label: 'Unlimited merchants, unlimited TPV' },
+    { value: '1–3 days', label: 'Partner approval time'         },
+  ], C.hpDeepBlue, C.white, C.hpBlue100), 192);
+
+  page.add(mkTestimonial(
+    'We had been helping our retail clients set up their payment systems for years. The moment we linked them to our HitPay affiliate account it took under 10 minutes — and now we earn a few thousand dollars a month in commissions we didn\'t even know we were leaving on the table.',
+    '[PLACEHOLDER — replace with verified partner quote]',
+    'Agency Partner · Singapore',
+    ac
+  ), 380);
+
+  page.add(mkGrid(
+    'Everything included. Nothing to configure.',
+    'Join 500+ developer and agency partners already earning recurring commissions on HitPay.',
+    [
+      { title: 'Monthly auto-pay',              desc: 'Commissions calculated on the 1st of each month for the previous period. Credited directly to your HitPay wallet without a single action required.' },
+      { title: 'No minimum TPV',                desc: 'Start earning from the very first online transaction. There is no threshold to hit before commissions activate — the 0.1% applies from day one.' },
+      { title: 'All online payment methods',    desc: 'Every succeeded online payment — cards, PayNow, GrabPay, ShopeePay, payment links, checkout — counts. In-person POS and cash are not included.' },
+      { title: 'CSV export ready',              desc: 'Download a full commission report at any time. One CSV covers all merchants, all months — Business Name, Amount, Currency, and billing period.' },
+      { title: 'Scales with your clients',      desc: 'As each linked merchant grows their online payment volume, your commission grows automatically with no renegotiation required.' },
+      { title: 'Fast approval',                 desc: 'Partner applications are reviewed within 1–3 business days. Start linking merchants immediately on approval. No fees, no upfront commitment.' },
+    ]
+  ), 660);
+
+  page.add(mkRelated(
+    'Explore more partner opportunities',
+    [
+      { emoji: '🤝', title: 'Reseller Programme (MY)', desc: 'Resell HitPay\'s full payment gateway and POS stack to Malaysian businesses and earn recurring commission.' },
+      { emoji: '🛠️', title: 'Platform Partner Program', desc: 'Embed HitPay payments into your platform via API, manage sub-merchants, and earn a share of transaction revenue.' },
+      { emoji: '📖', title: 'Developer Docs',           desc: 'Full REST API, webhooks, and SDKs. Build a custom HitPay integration for your clients from scratch.' },
+    ],
+    ac
+  ), 380);
+
+  // FAQ: 10 items → 96 + 10×136 + 40 = 1496px
+  page.add(mkFAQ([
+    { q: 'How much can a partner earn from the HitPay Affiliate Program?',            a: 'A partner earns 0.1% of the total online payment volume processed by each linked merchant per month. For example, a merchant processing S$1,000,000/month in online payments generates S$1,000 in monthly commission. There is no cap on the number of merchants or total commission amount.' },
+    { q: 'When are commissions paid?',                                                 a: 'Commissions are calculated automatically on the first of each month for the previous calendar month\'s online transaction volume. The amount is credited directly to the partner\'s HitPay wallet. No manual claim, invoice, or request is required.' },
+    { q: 'How does a partner track their affiliate earnings?',                         a: 'Partners have access to a dedicated commission dashboard showing every payout — by merchant and by month. A one-click CSV export covers Business Name, Email, Amount, Currency, and billing period. Per-merchant breakdowns are also available.' },
+    { q: 'Is there a minimum transaction volume required to start earning?',           a: 'No. Commission accrues from the very first successful online transaction processed by a linked merchant. The 0.1% rate applies from day one — no threshold to hit.' },
+    { q: 'How long does a partner continue earning commission from a referred merchant?', a: 'There is no expiry window on affiliate commissions. As long as the linked merchant continues processing online payments through HitPay and the partner account remains in good standing, commissions continue to accrue and be paid monthly.' },
+    { q: 'What transactions are included in the commission calculation?',              a: 'Commission applies to online payment transactions only — cards, PayNow, GrabPay, ShopeePay, payment links, and online checkout processed through HitPay. In-person POS and cash transactions are not included.' },
+    { q: 'Can the Affiliate Program be combined with the Reseller or Platform Partner programs?', a: 'Yes. The affiliate commission programme stacks with HitPay\'s Reseller Programme (Malaysia) and Platform Partner Program. A single HitPay partner account can hold all three programme designations at once.' },
+    { q: 'How does a partner get started with the HitPay Affiliate Program?',         a: 'Partners apply through their HitPay dashboard. After approval, they begin linking merchants — new referrals or existing clients already on HitPay. Once merchants are linked and begin processing, commissions accrue automatically.' },
+    { q: 'How long does affiliate partner approval take?',                             a: 'Partner applications are typically reviewed and approved within 1–3 business days. The process is fully online and requires no upfront fees, minimum revenue commitment, or hardware purchase.' },
+    { q: 'Can a partner add existing HitPay merchants to their affiliate account?',    a: 'Yes. Merchants already active on HitPay — including businesses the partner introduced before formally joining the affiliate programme — can be linked retroactively once the partner account is approved.' },
+  ], ac), 1496);
+
+  page.add(mkCTA(
+    'Your clients are already on HitPay. Start earning from them.',
+    'Join 500+ developer and agency partners already earning recurring commissions. Free to join. Monthly payouts. No expiry.',
+    'Become an affiliate',
+    'Talk to partnerships',
+    ac
+  ), 300);
+
+  page.add(mkFooter(
+    ac,
+    ['Virtual Accounts', 'Payment Links', 'POS Software', 'Invoices'],
+    ['E-commerce', 'Retail', 'Restaurants & F&B', 'Health & Beauty']
+  ), 280);
+
+  return page.f;
+}
+
 // ── MAIN ─────────────────────────────────────────────────────
 
 const BUILDERS = {
@@ -5196,6 +5904,7 @@ const BUILDERS = {
   wholesale:     buildWholesale,
   art_craft_fair:    buildArtCraftFair,
   virtual_accounts:  buildVirtualAccounts,
+  affiliate:         buildAffiliate,
 };
 
 async function main() {
