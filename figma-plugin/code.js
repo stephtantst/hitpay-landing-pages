@@ -6218,75 +6218,6 @@ function mkReferCalculator() {
   return sec;
 }
 
-function mkReferFeature1() {
-  const sec = mkFrame('Feature1_Reward', 1440, 520, C.white);
-
-  const lbl = mkText('THE REWARD', 11, W.semibold, C.hpAction);
-  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
-  lbl.x = 144; lbl.y = 64;
-  sec.appendChild(lbl);
-
-  const h2 = mkH2('0.1% of everything they make online. Every month. Forever.', 36, C.hpTextPri, 'LEFT', 520);
-  h2.lineHeight = { value: 44, unit: 'PIXELS' };
-  h2.x = 144; h2.y = 98;
-  sec.appendChild(h2);
-
-  const body = mkText('For every online payment your referred business processes — cards, PayNow, GrabPay, ShopeePay, payment links, online checkout — you earn 0.1% per month. No cap, no expiry, no minimum volume threshold. Commission is credited automatically to your HitPay wallet each month.', 15, W.regular, C.hpTextSec, 'LEFT', 520);
-  body.lineHeight = { value: 24, unit: 'PIXELS' };
-  body.x = 144; body.y = 218;
-  sec.appendChild(body);
-
-  const bullets = [
-    '0.1% of online payments — cards, PayNow, GrabPay, payment links, checkout',
-    'Excludes POS/terminal and recurring billing transactions',
-    'No minimum TPV — earns from the very first online transaction',
-    'No expiry — earns as long as they process on HitPay',
-  ];
-  bullets.forEach((b, i) => {
-    const bullet = mkBullet(b, 14, C.hpTextSec, 520); bullet.x = 144; bullet.y = 324 + i * 28; sec.appendChild(bullet);
-  });
-
-  const creditCard = mockReferWalletCredit();
-  creditCard.x = 840; creditCard.y = 120;
-  sec.appendChild(creditCard);
-
-  return sec;
-}
-
-function mkReferFeature2() {
-  const sec = mkFrame('Feature2_AutoPay', 1440, 520, C.hpBeige200);
-
-  const summCard = mockReferEarningsSummary();
-  summCard.x = 144; summCard.y = 140;
-  sec.appendChild(summCard);
-
-  const lbl = mkText('AUTOMATIC PAYOUTS', 11, W.semibold, C.hpAction);
-  lbl.letterSpacing = { value: 1.5, unit: 'PIXELS' };
-  lbl.x = 744; lbl.y = 64;
-  sec.appendChild(lbl);
-
-  const h2 = mkH2('No invoicing. Your wallet. Every first of the month.', 36, C.hpTextPri, 'LEFT', 520);
-  h2.lineHeight = { value: 44, unit: 'PIXELS' };
-  h2.x = 744; h2.y = 98;
-  sec.appendChild(h2);
-
-  const body = mkText('On the first of every calendar month, HitPay calculates 0.1% of the previous month\'s online transaction volume for each of your referred businesses and credits the total directly into your HitPay wallet. Nothing to claim, no invoice to raise, no threshold to clear.', 15, W.regular, C.hpTextSec, 'LEFT', 520);
-  body.lineHeight = { value: 24, unit: 'PIXELS' };
-  body.x = 744; body.y = 218;
-  sec.appendChild(body);
-
-  const bullets = [
-    'Calculated on the 1st — previous calendar month\'s online TPV',
-    'Credited to your existing HitPay wallet — no separate account',
-    'One credit for all your active referrals combined',
-    'Track individual referral earnings in your dashboard',
-  ];
-  bullets.forEach((b, i) => {
-    const bullet = mkBullet(b, 14, C.hpTextSec, 520); bullet.x = 744; bullet.y = 352 + i * 28; sec.appendChild(bullet);
-  });
-
-  return sec;
-}
 
 function mkReferStats() {
   const sec = mkFrame('StatsBar', 1440, 192, C.hpDeepBlue);
@@ -6380,8 +6311,37 @@ function buildReferAndEarn(xOffset = 0) {
   page.add(mkReferTrustBar(), 200);
   page.add(mkReferHowItWorks(), 400);
   page.add(mkReferCalculator(), 560);
-  page.add(mkReferFeature1(), 520);
-  page.add(mkReferFeature2(), 520);
+  page.add(mkFeature({
+    label: 'THE REWARD',
+    h2: '0.1% of everything they make online. Every month. Forever.',
+    p: 'For every online payment your referred business processes — cards, PayNow, GrabPay, ShopeePay, payment links, online checkout — you earn 0.1% per month. No cap, no expiry, no minimum volume threshold. Commission is credited automatically to your HitPay wallet each month.',
+    bullets: [
+      '0.1% of online payments — cards, PayNow, GrabPay, payment links, checkout',
+      'Excludes POS/terminal and recurring billing transactions',
+      'No minimum TPV — you earn from their very first online transaction',
+      'No expiry — earns as long as they process on HitPay',
+    ],
+    mockUI: mockReferWalletCredit(),
+    bg: C.white,
+    textSide: 'left',
+    accent: ac,
+  }), 520);
+
+  page.add(mkFeature({
+    label: 'AUTOMATIC PAYOUTS',
+    h2: 'No invoicing. Your wallet. Every first of the month.',
+    p: 'On the first of every calendar month, HitPay calculates 0.1% of the previous month\'s online transaction volume for each of your referred businesses and credits the total directly into your HitPay wallet. Nothing to claim, no invoice to raise, no threshold to clear.',
+    bullets: [
+      'Calculated on the 1st — previous calendar month\'s online TPV',
+      'Credited to your existing HitPay wallet — no separate account needed',
+      'One credit for all your active referrals combined',
+      'Track individual referral earnings in your Refer and Earn dashboard',
+    ],
+    mockUI: mockReferEarningsSummary(),
+    bg: C.hpBeige200,
+    textSide: 'right',
+    accent: ac,
+  }), 520);
 
   // Blue nudge banner — "Not a HitPay merchant yet?"
   page.add(mkReferNudge(), 100);
