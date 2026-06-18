@@ -6312,22 +6312,87 @@ function mkReferStats() {
   return sec;
 }
 
+/** "Not a HitPay merchant?" nudge banner — blue strip between Feature 2 and Stats — 100px */
+function mkReferNudge() {
+  const sec = mkFrame('NotAMerchantNudge', 1440, 100, C.hpBlue50);
+  sec.strokes = [{ type: 'SOLID', color: C.hpBlue50 }];
+
+  const txt = mkText('Not a HitPay merchant yet? The Refer and Earn programme is for existing merchants.', 14, W.regular, C.hpTextPri, 'LEFT', 660);
+  txt.x = 144; txt.y = 30;
+  sec.appendChild(txt);
+
+  const bold = mkText('If you\'re a developer, agency, or consultant:', 14, W.semibold, C.hpTextPri, 'LEFT', 400);
+  bold.x = 144; bold.y = 55;
+  sec.appendChild(bold);
+
+  const btn = mkBtn('Become an Affiliate instead →', C.hpAction, C.white, 20, 10, 8);
+  btn.x = 1080; btn.y = 32;
+  sec.appendChild(btn);
+
+  return sec;
+}
+
+/** Key Facts / Quick Answers panel — white — 560px */
+function mkReferKeyFacts() {
+  const sec = mkFrame('KeyFacts', 1440, 560, C.white);
+  sec.strokes = [{ type: 'SOLID', color: { r: 0.94, g: 0.94, b: 0.94 } }];
+  sec.strokeWeight = 1;
+  sec.strokeAlign = 'OUTSIDE';
+
+  const h2 = mkText('Quick answers', 22, W.semibold, C.hpTextPri, 'LEFT', 720);
+  h2.x = 360; h2.y = 56;
+  sec.appendChild(h2);
+
+  const items = [
+    { q: 'Who can refer?',           a: 'Any active HitPay merchant. No application needed — your referral link is already in your dashboard under Refer and Earn.' },
+    { q: 'How much do I earn?',      a: '0.1% of every referred business\'s monthly online payment volume. A business processing S$300,000/month earns you S$300 every month.' },
+    { q: 'When am I paid?',          a: 'Automatically on the 1st of each month — credited directly to your HitPay wallet. No invoice, no claim required.' },
+    { q: 'What payments count?',     a: 'Online payments only — cards, PayNow, GrabPay, ShopeePay, payment links, online checkout. POS/terminal and recurring billing are excluded.' },
+    { q: 'Does it expire?',          a: 'No. You earn for as long as the referred business continues processing online payments on HitPay. No renewal or re-referral needed.' },
+    { q: 'Not a merchant yet?',      a: 'The Refer and Earn programme is for existing HitPay merchants. The Affiliate Program is open to everyone — no HitPay account required.' },
+  ];
+
+  const colW = 180;
+  let yOff = 106;
+  items.forEach(item => {
+    const dt = mkText(item.q, 13, W.semibold, C.hpTextPri, 'LEFT', colW);
+    dt.x = 360; dt.y = yOff;
+    sec.appendChild(dt);
+
+    const dd = mkText(item.a, 13, W.regular, C.hpTextSec, 'LEFT', 500);
+    dd.x = 560; dd.y = yOff;
+    sec.appendChild(dd);
+
+    yOff += 64;
+  });
+
+  return sec;
+}
+
 // ── REFER AND EARN PAGE BUILDER ──────────────────────────────
 
 function buildReferAndEarn(xOffset = 0) {
   const page = new Page('Refer and Earn', xOffset);
+  const ac = C.hpAction;
 
-  page.add(mkNavbar(), 64);
+  page.add(mkNavbar(ac), 64);
   page.add(mkHeroReferAndEarn(), 560);
   page.add(mkReferTrustBar(), 200);
   page.add(mkReferHowItWorks(), 400);
   page.add(mkReferCalculator(), 560);
   page.add(mkReferFeature1(), 520);
   page.add(mkReferFeature2(), 520);
+
+  // Blue nudge banner — "Not a HitPay merchant yet?"
+  page.add(mkReferNudge(), 100);
+
   page.add(mkReferStats(), 192);
 
+  // Key Facts / Quick Answers panel — 560px
+  page.add(mkReferKeyFacts(), 560);
+
   // FAQ — 8 questions: 96 + 8×136 + 40 = 1224
-  page.add(mkFaq([
+  page.add(mkFAQ([
     { q: 'How does the HitPay Refer and Earn programme work?',
       a: 'Any existing HitPay merchant can refer businesses using a unique referral link in their dashboard under Refer and Earn. When the referred business registers through that link, goes live, and processes online payments, the referring merchant earns 0.1% of their monthly online payment volume — credited automatically on the first of each month.' },
     { q: 'How much can a merchant earn from referring businesses to HitPay?',
@@ -6344,16 +6409,18 @@ function buildReferAndEarn(xOffset = 0) {
       a: 'There is no expiry. As long as the referred business continues processing online payments through HitPay, the referring merchant earns 0.1% every month — no renewal or action required.' },
     { q: 'Does the referred business need to be a new HitPay customer?',
       a: 'The referred business must register through the referral link. Businesses already on HitPay would not count as a new referral. The programme is for businesses that have not yet signed up with HitPay.' },
-  ], C.hpBeige), 1224);
+  ], ac), 1224);
 
-  page.add(mkCta(
+  page.add(mkCTA(
     'Your referral link is already waiting for you.',
     'Log in to your HitPay dashboard, go to Refer and Earn, and share your link. Every business you help discover HitPay earns you 0.1% of their monthly online payments — forever.',
     'Go to my dashboard',
-    'Learn about the Affiliate Program'
+    'Learn about the Affiliate Program',
+    ac
   ), 300);
 
   page.add(mkFooter(
+    ac,
     ['Virtual Accounts', 'Payment Links', 'POS Software', 'Invoices'],
     ['E-commerce', 'Retail', 'Restaurants & F&B', 'Health & Beauty']
   ), 280);
