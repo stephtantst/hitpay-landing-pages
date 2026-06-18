@@ -64,7 +64,7 @@
         "name": "What transactions are included in the commission calculation?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "All succeeded charges processed by linked merchants are included — cards, PayNow, GrabPay, ShopeePay, and all other supported HitPay payment methods. Cash transactions are excluded from the commission calculation. Commissions are currently calculated in the partner's wallet currency; cross-currency merchant volume from merchants operating in a different currency will be added in a future update."
+          "text": "Commission applies to online payment transactions only — cards, PayNow, GrabPay, ShopeePay, payment links, and other online checkout methods processed through HitPay. In-person POS and cash transactions are not included in the commission calculation. Commissions are calculated in the partner's wallet currency; cross-currency merchant volume will be added in a future update."
         }
       },
       {
@@ -401,12 +401,12 @@
             0.1% of TPV. Every month. No cap, no expiry.
           </h2>
           <p class="text-lg text-[#61667C] leading-relaxed mb-8">
-            The commission structure is intentionally simple. For every dollar your referred merchants process through HitPay — cards, PayNow, GrabPay, or any of HitPay's 50+ payment methods — you earn 0.1% per month. There are no tiers, no minimum thresholds to hit before you start earning, and no expiry window on referred merchants. As your clients' businesses grow, your passive income grows with them. A merchant that starts at S$200K/month and scales to S$2M/month takes your commission from S$200 to S$2,000 — automatically, without any action on your part.
+            The commission structure is intentionally simple. For every dollar your referred merchants collect through HitPay's online payment channels — payment links, online checkout, PayNow, GrabPay, cards, and more — you earn 0.1% per month. There are no tiers, no minimum thresholds to hit before you start earning, and no expiry window on referred merchants. As your clients grow their online payment volume, your passive income grows with them. A merchant that starts at S$200K/month and scales to S$2M/month takes your commission from S$200 to S$2,000 — automatically, without any action on your part.
           </p>
           <ul class="space-y-3 mb-8">
             <li class="flex items-start gap-3">
               <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
-              <span class="text-[#61667C]">0.1% of every succeeded transaction — cards, PayNow, wallets, all payment methods</span>
+              <span class="text-[#61667C]">0.1% of every succeeded online payment — payment links, checkout, PayNow, GrabPay, cards</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
@@ -639,7 +639,7 @@
               </div>
               <div>
                 <div class="font-semibold text-[#03102F] text-sm mb-1">Web & App Developer</div>
-                <div class="text-xs text-[#61667C] leading-relaxed">You build products for clients who need checkout, payment links, or POS — you're already halfway there.</div>
+                <div class="text-xs text-[#61667C] leading-relaxed">You build products for clients who need online checkout or payment links — you're already halfway there.</div>
               </div>
             </div>
 
@@ -669,7 +669,7 @@
               </div>
               <div>
                 <div class="font-semibold text-[#03102F] text-sm mb-1">POS & Hardware Provider</div>
-                <div class="text-xs text-[#61667C] leading-relaxed">You install terminals and retail setups. The software payment layer can now earn you recurring commission.</div>
+                <div class="text-xs text-[#61667C] leading-relaxed">You supply hardware to merchants. When they also use HitPay's online checkout and payment links, you earn commission on every online transaction.</div>
               </div>
             </div>
 
@@ -794,8 +794,8 @@
           <div class="hp-icon mb-4">
             <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
           </div>
-          <h3 class="font-semibold text-[#03102F] mb-2">All payment methods count</h3>
-          <p class="text-[#61667C] text-sm leading-relaxed">Every succeeded charge — cards, PayNow, GrabPay, ShopeePay — counts toward your TPV. Only cash transactions are excluded from the commission calculation.</p>
+          <h3 class="font-semibold text-[#03102F] mb-2">All online payment methods count</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed">Every succeeded online payment — cards, PayNow, GrabPay, ShopeePay, payment links, online checkout — counts toward your commission. In-person POS and cash transactions are not included.</p>
         </div>
         <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
           <div class="hp-icon mb-4">
@@ -926,7 +926,7 @@
             <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </summary>
           <div class="px-6 pb-5">
-            <p class="text-[#61667C] leading-relaxed">All succeeded charges processed by linked merchants are included — cards, PayNow, GrabPay, ShopeePay, and all other supported HitPay payment methods. Cash transactions are excluded from the commission calculation. Commissions are currently calculated in the partner's wallet currency; cross-currency merchant volume from merchants operating in a different currency will be added in a future update.</p>
+            <p class="text-[#61667C] leading-relaxed">Commission applies to online payment transactions only — cards, PayNow, GrabPay, ShopeePay, payment links, and online checkout processed through HitPay. In-person POS and cash transactions are not included in the commission calculation. Commissions are calculated in the partner's wallet currency; cross-currency merchant volume will be added in a future update.</p>
           </div>
         </details>
 
