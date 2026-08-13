@@ -1,0 +1,32 @@
+# This is a static marketing site — only root-level *.html and assets/ need to be public.
+# Everything below is internal tooling, docs, or the separate web/ generator app, and must
+# never be served publicly.
+
+.git
+.claude
+.vercel
+node_modules
+web/node_modules
+web
+
+.env
+.env.*
+.DS_Store
+
+CLAUDE.md
+RESEARCH.md
+hitpaysolutionspagegenerator.md
+va-launch-edm.md
+va-launch-social.md
+
+generator
+figma-plugin
+
+server.js
+package.json
+package-lock.json
+*.mjs
+*.py
+
+mpp-preview.png
+virtual-accounts-global-business-collections.png
