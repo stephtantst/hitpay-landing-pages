@@ -1,0 +1,124 @@
+import { NextRequest } from 'next/server'
+import { getSystemPrompt, getResearchContext, refineHtml } from '@/lib/anthropic'
+import { createServerClient } from '@/lib/supabase'
+
+export const maxDuration = 300
+
+function validateInstruction(instruction: unknown): string | null {
+  if (typeof instruction !== 'string' || !instruction.trim()) return 'instruction is required'
+  if (instruction.trim().length < 3) return 'instruction is too short'
+  if (instruction.length > 5_000) return 'instruction exceeds 5,000 character limit'
+  return null
+}
+
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const body = await req.json() as { instruction: string }
+
+  const validationError = validateInstruction(body.instruction)
+  if (validationError) {
+    return new Response(JSON.stringify({ error: validationError }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+  const instruction = body.instruction.trim()
+
+  const supabase = createServerClient()
+  const { data: page, error: pageErr } = await supabase
+    .from('generated_pages')
+    .select('id, html, briefs(vertical, market)')
+    .eq('id', id)
+    .single()
+
+  if (pageErr || !page) {
+    return new Response(JSON.stringify({ error: 'Page not found' }), {
+      status: 404,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  const encoder = new TextEncoder()
+  const stream = new TransformStream()
+  const writer = stream.writable.getWriter()
+
+  const send = async (event: string, data: unknown) => {
+    await writer.write(
+      encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)
+    )
+  }
+
+  ;(async () => {
+    try {
+      await send('status', { step: 'refining', message: 'Refining landing page…' })
+
+      const briefInfo = page.briefs as unknown as { vertical?: string; market?: string[] } | null
+      const vertical = briefInfo?.vertical ?? ''
+      const markets = briefInfo?.market?.length ? briefInfo.market : ['SG', 'MY', 'PH']
+
+      const systemPrompt = getSystemPrompt()
+      const researchContext = getResearchContext(vertical)
+      const previousHtml = page.html as string
+
+      let html = ''
+      const { html: refinedHtml, usage } = await refineHtml(
+        systemPrompt,
+        previousHtml,
+        instruction,
+        researchContext,
+        markets,
+        async (chunk) => {
+          html += chunk
+          await send('chunk', { text: chunk })
+        }
+      )
+      html = refinedHtml
+
+      await send('usage', {
+        html: usage,
+        figma: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 },
+        totalCostUsd: usage.costUsd,
+        cacheHit: usage.cacheRead > 0,
+      })
+
+      await send('status', { step: 'saving_page', message: 'Saving revision…' })
+
+      // Snapshot the pre-refine state so this instruction can be undone later
+      const { error: revisionErr } = await supabase.from('page_revisions').insert({
+        page_id: id,
+        html: previousHtml,
+        instruction,
+      })
+      if (revisionErr) {
+        await send('error', { message: 'Failed to save revision snapshot: ' + revisionErr.message })
+        await writer.close()
+        return
+      }
+
+      const { error: updateErr } = await supabase
+        .from('generated_pages')
+        .update({ html, updated_at: new Date().toISOString() })
+        .eq('id', id)
+
+      if (updateErr) {
+        await send('error', { message: 'Failed to save refined page: ' + updateErr.message })
+        await writer.close()
+        return
+      }
+
+      await send('done', { pageId: id })
+    } catch (err) {
+      await send('error', { message: String(err) })
+    } finally {
+      await writer.close()
+    }
+  })()
+
+  return new Response(stream.readable, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      Connection: 'keep-alive',
+    },
+  })
+}

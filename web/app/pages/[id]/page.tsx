@@ -2,6 +2,9 @@
 
 import { useEffect, useState, use } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Textarea } from '@/components/ui/textarea'
+import { GenerationStream } from '@/components/GenerationStream'
+import { parseSSEEvents } from '@/lib/sse'
 
 type PageDetail = {
   id: string
@@ -17,6 +20,24 @@ type PageDetail = {
   } | null
 }
 
+type TokenUsage = {
+  input: number; output: number; cacheRead: number; cacheWrite: number; costUsd: number
+}
+type UsageStats = {
+  html: TokenUsage; figma: TokenUsage; totalCostUsd: number; cacheHit: boolean
+}
+type LogEntry = {
+  type: 'status' | 'error' | 'done' | 'chunk' | 'usage'
+  message?: string
+  step?: string
+  usage?: UsageStats
+}
+type Revision = {
+  id: string
+  instruction: string
+  created_at: string
+}
+
 export default function PageDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const [page, setPage] = useState<PageDetail | null>(null)
@@ -25,12 +46,125 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const [published, setPublished] = useState(false)
   const [copied, setCopied] = useState(false)
 
+  const [refineInstruction, setRefineInstruction] = useState('')
+  const [refining, setRefining] = useState(false)
+  const [refineLogs, setRefineLogs] = useState<LogEntry[]>([])
+  const [revisions, setRevisions] = useState<Revision[]>([])
+  const [loadingRevisions, setLoadingRevisions] = useState(true)
+  const [restoringId, setRestoringId] = useState<string | null>(null)
+
+  // Reusable refetch — safe to call synchronously from event handlers (handleRefine, handleRestore).
+  const fetchRevisions = () => {
+    setLoadingRevisions(true)
+    fetch(`/api/pages/${id}/revisions`)
+      .then((r) => r.json())
+      .then((data) => setRevisions(data.revisions ?? []))
+      .catch(() => {})
+      .finally(() => setLoadingRevisions(false))
+  }
+
   useEffect(() => {
     fetch(`/api/pages/${id}`)
       .then((r) => r.json())
       .then((data) => { setPage(data); setLoading(false) })
       .catch(() => setLoading(false))
+
+    // Inline (not fetchRevisions()) — loadingRevisions already starts true, avoids a
+    // synchronous setState call in the effect body.
+    fetch(`/api/pages/${id}/revisions`)
+      .then((r) => r.json())
+      .then((data) => setRevisions(data.revisions ?? []))
+      .catch(() => {})
+      .finally(() => setLoadingRevisions(false))
   }, [id])
+
+  const addRefineLog = (entry: LogEntry) => setRefineLogs((l) => [...l, entry])
+
+  const handleRefine = async () => {
+    if (!refineInstruction.trim() || refining) return
+    setRefining(true)
+    setRefineLogs([])
+
+    try {
+      const res = await fetch(`/api/pages/${id}/refine`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instruction: refineInstruction.trim() }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Refine failed' }))
+        addRefineLog({ type: 'error', message: err.error || 'Refine failed' })
+        return
+      }
+      if (!res.body) throw new Error('No response body')
+
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
+      let refinedDone = false
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+        const lastDoubleLF = buffer.lastIndexOf('\n\n')
+        if (lastDoubleLF === -1) continue
+        const toProcess = buffer.slice(0, lastDoubleLF + 2)
+        buffer = buffer.slice(lastDoubleLF + 2)
+
+        for (const { event, data } of parseSSEEvents(toProcess)) {
+          try {
+            const payload = JSON.parse(data)
+            if (event === 'done') {
+              refinedDone = true
+              addRefineLog({ type: 'done' })
+            } else if (event === 'error') {
+              addRefineLog({ type: 'error', message: payload.message })
+            } else if (event === 'usage') {
+              addRefineLog({ type: 'usage', usage: payload as UsageStats })
+            } else if (event === 'status') {
+              addRefineLog({ type: 'status', step: payload.step, message: payload.message })
+            } else if (event === 'chunk') {
+              addRefineLog({ type: 'chunk', message: payload.text })
+            }
+          } catch {
+            // ignore parse errors on individual events
+          }
+        }
+      }
+
+      if (refinedDone) {
+        setRefineInstruction('')
+        const fresh = await fetch(`/api/pages/${id}`).then((r) => r.json())
+        setPage(fresh)
+        fetchRevisions()
+      }
+    } catch (err) {
+      addRefineLog({ type: 'error', message: String(err) })
+    } finally {
+      setRefining(false)
+    }
+  }
+
+  const handleRestore = async (revisionId: string) => {
+    setRestoringId(revisionId)
+    try {
+      const res = await fetch(`/api/pages/${id}/revisions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ restoreId: revisionId }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setPage((p) => p ? { ...p, html: data.html } : p)
+        fetchRevisions()
+      }
+    } finally {
+      setRestoringId(null)
+    }
+  }
 
   const handlePublish = async () => {
     setPublishing(true)
@@ -139,6 +273,68 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
 
           {/* Actions — 1/3 width */}
           <div className="space-y-4">
+
+            {/* Refine */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-5">
+              <h3 className="font-semibold text-[#03102F] mb-1 text-sm">Refine this page</h3>
+              <p className="text-xs text-[#61667C] mb-3">
+                Tell Claude what to change — e.g. &ldquo;shorten the hero headline&rdquo;, &ldquo;add a stat about virtual accounts&rdquo;, &ldquo;swap the testimonial for a Malaysia-based merchant&rdquo;. The rest of the page stays as-is.
+              </p>
+              <Textarea
+                value={refineInstruction}
+                onChange={(e) => setRefineInstruction(e.target.value)}
+                placeholder="What should change?"
+                rows={4}
+                className="text-sm mb-3"
+                disabled={refining}
+              />
+              <button
+                onClick={handleRefine}
+                disabled={refining || refineInstruction.trim().length < 3}
+                className="w-full text-sm font-semibold bg-[#2465DE] text-white rounded-xl px-4 py-2.5 hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
+              >
+                {refining ? 'Refining…' : 'Refine page'}
+              </button>
+              {refineLogs.length > 0 && (
+                <div className="mt-3">
+                  <GenerationStream logs={refineLogs} />
+                </div>
+              )}
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-2xl p-5">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-[#03102F] text-sm">Version history</h3>
+                {revisions.length > 0 && (
+                  <span className="text-xs text-[#61667C]">{revisions.length} revision{revisions.length === 1 ? '' : 's'}</span>
+                )}
+              </div>
+              {loadingRevisions ? (
+                <p className="text-xs text-[#61667C]">Loading…</p>
+              ) : revisions.length === 0 ? (
+                <p className="text-xs text-[#61667C]">No revisions yet — refine the page above to start a history.</p>
+              ) : (
+                <ul className="space-y-2 max-h-64 overflow-auto">
+                  {revisions.map((rev) => (
+                    <li key={rev.id} className="flex items-start justify-between gap-2 text-xs border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                      <div className="min-w-0">
+                        <p className="text-[#03102F] truncate" title={rev.instruction}>{rev.instruction}</p>
+                        <p className="text-[#61667C] mt-0.5">
+                          {new Date(rev.created_at).toLocaleString('en-SG', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => handleRestore(rev.id)}
+                        disabled={restoringId === rev.id}
+                        className="shrink-0 text-[#2465DE] font-semibold hover:text-[#1B4FB8] disabled:opacity-40 transition-colors"
+                      >
+                        {restoringId === rev.id ? 'Restoring…' : 'Restore'}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
             <div className="bg-white border border-slate-200 rounded-2xl p-5">
               <h3 className="font-semibold text-[#03102F] mb-3 text-sm">Actions</h3>

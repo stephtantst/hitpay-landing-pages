@@ -119,12 +119,13 @@ export function BriefForm({ onSubmit, loading }: {
       <div>
         <Label htmlFor="brief">Brief *</Label>
         <p className="text-xs text-[#61667C] mt-0.5 mb-2">
-          Paste anything — a GTM brief, product docs, feature notes, raw copy, a help article.
-          Claude will extract what it needs and apply the HitPay GEO + AEO rules on top.
+          Paste anything — a PRD, GTM brief, product docs, feature notes, raw copy, a help article, even a messy Slack thread.
+          Claude will extract what it needs and apply the HitPay GEO + AEO rules on top. Once the page is generated, you can
+          keep refining it with follow-up instructions from its detail page — no need to get everything right here.
         </p>
         <Textarea
           id="brief"
-          placeholder="Paste your brief here…"
+          placeholder="Paste a PRD, brief, or any product context here…"
           value={form.rawBrief}
           onChange={(e) => set('rawBrief', e.target.value)}
           className={`mt-1 text-sm leading-relaxed ${errors.rawBrief ? 'border-red-400' : ''}`}

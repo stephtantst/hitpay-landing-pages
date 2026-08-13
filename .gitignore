@@ -23,3 +23,5 @@ generate-test.mjs
 generate_fitness_images.py
 screenshot.mjs
 mpp-preview.png
+.vercel
+.env*

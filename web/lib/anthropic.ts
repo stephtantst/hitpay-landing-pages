@@ -170,6 +170,100 @@ export async function generateHtml(
   return { html: fullHtml, usage }
 }
 
+export async function refineHtml(
+  systemPrompt: string,
+  currentHtml: string,
+  instruction: string,
+  researchContext: string,
+  markets: string[],
+  onChunk: (chunk: string) => void
+): Promise<{ html: string; usage: UsageStats['html'] }> {
+  // Mock mode: skip API call, tag the existing HTML so the UI has something to show
+  if (process.env.MOCK_LLM === 'true') {
+    const marker = `<!-- Refined: ${instruction.slice(0, 80).replace(/-->/g, '')} -->`
+    const mockHtml = currentHtml.includes('</head>')
+      ? currentHtml.replace('</head>', `${marker}\n</head>`)
+      : `${marker}\n${currentHtml}`
+    for (let i = 0; i < mockHtml.length; i += 200) {
+      onChunk(mockHtml.slice(i, i + 200))
+      await new Promise((r) => setTimeout(r, 5))
+    }
+    return { html: mockHtml, usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 } }
+  }
+
+  // Same market-override directive as generateHtml, reworded as a reminder for a revision pass
+  const allMarkets = ['SG', 'MY', 'PH']
+  const missingMarkets = allMarkets.filter(m => !markets.includes(m))
+  const marketDirective = missingMarkets.length > 0
+    ? `\n\nMarket constraint still applies: this page covers ONLY ${markets.join(', ')} — never introduce or leave in mentions of ${missingMarkets.join(', ')}.`
+    : ''
+
+  const dynamicContent = [
+    '## Current Page HTML (revise this in place — do not start over)\n',
+    currentHtml,
+    '\n\n## Refinement Instructions\n',
+    instruction,
+    marketDirective,
+    '\n\nApply the refinement instructions to the HTML above and output the COMPLETE revised HTML page. ' +
+    'Preserve everything the instructions did not ask you to change — same structure, copy, and styling elsewhere. ' +
+    'Output ONLY the HTML — no markdown fences, no explanation.',
+  ].join('')
+
+  // Structure for caching:
+  //   system[0]   → system prompt       (static, CACHED — shared with generateHtml)
+  //   user[0]     → research context    (static per vertical, CACHED)
+  //   user[1]     → current HTML + instruction (dynamic, NOT cached)
+  const userContent: Anthropic.MessageParam['content'] = researchContext
+    ? [
+        {
+          type: 'text' as const,
+          text: `## Research Context\n${researchContext}`,
+          cache_control: { type: 'ephemeral' as const },
+        },
+        { type: 'text' as const, text: dynamicContent },
+      ]
+    : dynamicContent
+
+  const stream = anthropic.messages.stream({
+    model: HTML_MODEL,
+    max_tokens: 32000,
+    system: [
+      {
+        type: 'text',
+        text: systemPrompt,
+        cache_control: { type: 'ephemeral' },
+      },
+    ],
+    messages: [{ role: 'user', content: userContent }],
+  })
+
+  let fullHtml = ''
+  for await (const chunk of stream) {
+    if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+      fullHtml += chunk.delta.text
+      onChunk(chunk.delta.text)
+    }
+  }
+
+  const final = await stream.finalMessage()
+  const u = final.usage as unknown as Record<string, number>
+  const cacheRead  = u.cache_read_input_tokens       ?? 0
+  const cacheWrite = u.cache_creation_input_tokens   ?? 0
+  const input      = u.input_tokens                  ?? 0
+  const output     = u.output_tokens                 ?? 0
+
+  const usage = {
+    input, output, cacheRead, cacheWrite,
+    costUsd: calcCost(input, output, cacheRead, cacheWrite, {
+      input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
+      cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
+    }),
+  }
+
+  console.log('[Refine]', usage)
+  return { html: fullHtml, usage }
+}
+
 const FIGMA_SYSTEM_PROMPT = `You are converting a HitPay landing page into a Figma frame.
 A scaffold of validated helper functions is pre-written and will be prepended automatically — DO NOT redefine any functions.
 

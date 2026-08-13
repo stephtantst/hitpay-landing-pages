@@ -26,10 +26,10 @@
 </head>
 <body class="bg-[#F9F9F6] min-h-screen px-6 py-16">
 
-  <div class="max-w-2xl mx-auto">
+  <div class="max-w-5xl mx-auto">
 
     <!-- Header -->
-    <div class="text-center mb-10">
+    <div class="text-center mb-10 max-w-2xl mx-auto">
       <div class="flex items-center justify-center gap-2 mb-4">
         <div class="w-9 h-9 bg-[#2465DE] rounded-xl flex items-center justify-center">
           <span class="text-white font-bold">H</span>
@@ -41,166 +41,278 @@
     </div>
 
     <!-- Existing Pages -->
-    <div id="pageList" class="space-y-3 mb-3">
-      <a href="ecommerce.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛒</div>
-        <div class="flex-1">
-          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">E-commerce</div>
-          <div class="text-slate-500 text-sm mt-0.5">Online checkout, integrations, payment links, and subscriptions</div>
+    <div class="mb-3">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+        <div class="relative flex-1 max-w-sm">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+          <input id="pageSearch" type="text" oninput="filterPages()" placeholder="Search pages, categories, descriptions…" class="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-sm text-[#03102F] placeholder-slate-400 focus:border-slate-400 transition-colors" />
         </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="retail.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🏪</div>
-        <div class="flex-1">
-          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Retail</div>
-          <div class="text-slate-500 text-sm mt-0.5">POS system, Tap to Pay, card terminals, and omnichannel dashboard</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="nonprofits.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">💜</div>
-        <div class="flex-1">
-          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Nonprofits</div>
-          <div class="text-slate-500 text-sm mt-0.5">Donation pages, recurring giving, event QR codes, and grant invoicing</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="landing.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#EBF1FC] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🌏</div>
-        <div class="flex-1">
-          <div class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">General (SEO/AEO)</div>
-          <div class="text-slate-500 text-sm mt-0.5">Cross-channel overview — QR aggregation, cross-border payments, FAQ-optimised</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="landing-plaininspired.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">⚡</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">General v2 (Plain-inspired)</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Punchy copy, pain-first flow, "Speed meet power" comparison section</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="travel.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">✈️</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Travel Agencies & Tour Operators</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Cross-border tourist payments, deposit invoicing, payment links, POS</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="education.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-blue-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🎓</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-blue-700">Educational Services</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Recurring tuition billing, parent WhatsApp payment links, invoicing, online store</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="computers.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-slate-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">💻</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-slate-700">Computers, Peripherals & Software</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Multi-location POS + inventory, BNPL for big-ticket items, B2B invoicing</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#61667C] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="restaurants.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🍜</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Fast Food Restaurants & F&B</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">POS + Soundbox, 2% F&B card rate, cross-border tourist QR payments</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="beauty.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">💆</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Health, Beauty & Spas</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Monthly memberships, deposit collection via WhatsApp, package invoicing</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="furniture.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🛋️</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Furniture & Home Furnishings</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">POS + inventory, BNPL for big-ticket items, B2B trade invoicing</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="fitness.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-green-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">🏋️</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-green-600">Gyms & Fitness Studios</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-600 px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Automated memberships, class pass payment links, POS at reception</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="events.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#2465DE] hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-[#D6E3F9] rounded-xl flex items-center justify-center text-xl flex-shrink-0">🎪</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-[#2465DE]">Event Management & Wedding Planning</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">Milestone invoicing, deposit links via WhatsApp, online ticket sales</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <a href="wholesale.html" class="flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-blue-400 hover:shadow-md transition-all group">
-        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">📦</div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2">
-            <span class="font-semibold text-[#03102F] group-hover:text-blue-700">Wholesale & B2B Trade</span>
-            <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">New</span>
-          </div>
-          <div class="text-slate-500 text-sm mt-0.5">B2B invoicing, cross-border APAC collections, recurring supply contracts</div>
-        </div>
-        <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-
-      <!-- Generated pages injected here by JS -->
-      <div id="generatedCards"></div>
+        <span class="text-xs text-slate-400 whitespace-nowrap" id="pageCount"></span>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-[#F9F9F6] border-b border-slate-200">
+              <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Page</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Category</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider hidden md:table-cell">Description</th>
+              <th class="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">Updated</th>
+              <th class="px-5 py-3"></th>
+            </tr>
+          </thead>
+          <tbody id="pageTableBody">
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="adaptive pricing by product auto local currency checkout overseas revenue lift">
+              <td class="px-5 py-3.5"><a href="adaptive-pricing.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">💱 Adaptive Pricing</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Auto local-currency checkout for overseas customers — avg. 10%+ revenue lift</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Aug 13, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="adaptive-pricing.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="cross-border payments by product hub borderless qr multi-currency payment links">
+              <td class="px-5 py-3.5"><a href="cross-border-payments.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🌏 Cross-Border Payments</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Hub — Borderless QR, Multi-Currency Products, Adaptive Pricing, Payment Links</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Aug 12, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="cross-border-payments.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="customers company logos social proof businesses southeast asia">
+              <td class="px-5 py-3.5"><a href="customers.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🤝 Customers</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full">Company</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Customer logos & social proof — powering 20,000+ businesses across SEA</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Aug 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="customers.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="customer stories index case studies">
+              <td class="px-5 py-3.5"><a href="customer-stories.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">📖 Customer Stories</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Customer Story</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Index of all customer story case studies</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Aug 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="customer-stories.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="mickey leotards customer story case study card payments">
+              <td class="px-5 py-3.5"><a href="mickey-leotards.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🛍️ Mickey Leotards</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Customer Story</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Case study — stopped losing sales to unsupported card payments</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Aug 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="mickey-leotards.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="the durian bakery customer story case study payouts checkout">
+              <td class="px-5 py-3.5"><a href="the-durian-bakery.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🍰 The Durian Bakery</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Customer Story</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Case study — sped up payouts and simplified checkout</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Aug 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="the-durian-bakery.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="billpay by product suppliers xero invoices">
+              <td class="px-5 py-3.5"><a href="billpay%20v2.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🧾 BillPay</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Pay suppliers locally & internationally, synced to Xero</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jul 28, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="billpay%20v2.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="platforms by solution marketplaces embed payments">
+              <td class="px-5 py-3.5"><a href="platforms.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🔌 Platforms</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Offer payments to every business you serve, without becoming a PSP</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jul 8, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="platforms.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="multi-currency collections account by product receivables">
+              <td class="px-5 py-3.5"><a href="multi-currency-collections-account.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">💰 Multi-Currency Collections Account</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Multi-currency collections account for business receivables</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jul 7, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="multi-currency-collections-account.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="virtual accounts philippines by product business collections">
+              <td class="px-5 py-3.5"><a href="virtual-accounts-philippines.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🏦 Business Collections Account (Philippines)</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Local receiving account for Philippine business collections</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jul 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="virtual-accounts-philippines.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="virtual accounts singapore global business collections by product swift">
+              <td class="px-5 py-3.5"><a href="virtual-accounts-global-business-collections.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🏦 Virtual Accounts (Singapore)</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Global business collections — SWIFT reach to 13 currencies</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jul 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="virtual-accounts-global-business-collections.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="travel agencies tour operators by solution cross-border tourist">
+              <td class="px-5 py-3.5"><a href="travel.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">✈️ Travel Agencies & Tour Operators</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Cross-border tourist payments, deposit invoicing, payment links, POS</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jul 6, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="travel.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="wechat pay philippines by product">
+              <td class="px-5 py-3.5"><a href="wechat-pay-philippines.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">💬 WeChat Pay (Philippines)</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Accept WeChat Pay payments in the Philippines</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jun 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="wechat-pay-philippines.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="affiliate program commission refer">
+              <td class="px-5 py-3.5"><a href="affiliate.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎁 Affiliate Program</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full">Program</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Earn 0.1% commission from every business referred</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jun 18, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="affiliate.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="refer and earn program commission">
+              <td class="px-5 py-3.5"><a href="refer-and-earn.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎁 Refer and Earn</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full">Program</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Earn 0.1% from every business you refer</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jun 18, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="refer-and-earn.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="asia art craft fair singapore 2026 campaign">
+              <td class="px-5 py-3.5"><a href="asia-art-craft-fair.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎨 Asia Art & Craft Fair SG 2026</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">Campaign</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Collect payments at Asia Art & Craft Fair Singapore 2026</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jun 5, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="asia-art-craft-fair.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="asia art craft fair slide singapore 2026 campaign">
+              <td class="px-5 py-3.5"><a href="asia-art-craft-fair-slide.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎨 Asia Art & Craft Fair SG 2026 (Slide)</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">Campaign</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Asia Art & Craft Fair SG 2026 — slide deck version</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jun 5, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="asia-art-craft-fair-slide.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="ai shoppers shopping by solution paynow duitnow gcash agents">
+              <td class="px-5 py-3.5"><a href="ai-shoppers.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🤖 AI Shopping</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">AI shopping checkout — PayNow, DuitNow, GCash for SG/MY/PH</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">Jun 4, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="ai-shoppers.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="art craft fair singapore 2026 campaign">
+              <td class="px-5 py-3.5"><a href="art-craft-fair.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎨 Art & Craft Fair Singapore 2026</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">Campaign</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Accept payments at Art & Craft Fair Singapore 2026</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 29, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="art-craft-fair.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="healthcare by solution invoicing recurring billing">
+              <td class="px-5 py-3.5"><a href="healthcare.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🏥 Healthcare</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Invoicing for sessions/packages, payment links, recurring health billing</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 28, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="healthcare.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="gyms fitness studios by solution memberships class pass">
+              <td class="px-5 py-3.5"><a href="fitness.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🏋️ Gyms & Fitness Studios</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Automated memberships, class pass payment links, POS at reception</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 28, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="fitness.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="fast food restaurants fnb by solution pos soundbox">
+              <td class="px-5 py-3.5"><a href="restaurants.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🍜 Fast Food Restaurants & F&B</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">POS + Soundbox, 2% F&B card rate, cross-border tourist QR payments</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="restaurants.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="health beauty spas by solution memberships deposits">
+              <td class="px-5 py-3.5"><a href="beauty.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">💆 Health, Beauty & Spas</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Monthly memberships, deposit collection via WhatsApp, package invoicing</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="beauty.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="event management wedding planning by solution invoicing tickets">
+              <td class="px-5 py-3.5"><a href="events.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎪 Event Management & Wedding Planning</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Milestone invoicing, deposit links via WhatsApp, online ticket sales</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="events.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="wholesale b2b trade by solution invoicing supply contracts">
+              <td class="px-5 py-3.5"><a href="wholesale.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">📦 Wholesale & B2B Trade</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">B2B invoicing, cross-border APAC collections, recurring supply contracts</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="wholesale.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="furniture home furnishings by solution pos bnpl">
+              <td class="px-5 py-3.5"><a href="furniture.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🛋️ Furniture & Home Furnishings</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">POS + inventory, BNPL for big-ticket items, B2B trade invoicing</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="furniture.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="computers peripherals software by solution pos inventory bnpl">
+              <td class="px-5 py-3.5"><a href="computers.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">💻 Computers, Peripherals & Software</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Multi-location POS + inventory, BNPL for big-ticket items, B2B invoicing</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="computers.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="educational services by solution tuition billing invoicing">
+              <td class="px-5 py-3.5"><a href="education.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🎓 Educational Services</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Recurring tuition billing, parent WhatsApp payment links, invoicing</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="education.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="general v2 plain-inspired comparison">
+              <td class="px-5 py-3.5"><a href="landing-plaininspired.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">⚡ General v2 (Plain-inspired)</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">General</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Punchy copy, pain-first flow, "Speed meet power" comparison section</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="landing-plaininspired.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="general seo aeo cross-channel overview faq">
+              <td class="px-5 py-3.5"><a href="landing.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🌐 General (SEO/AEO)</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full">General</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Cross-channel overview — QR aggregation, cross-border payments, FAQ-optimised</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="landing.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="mpp by product ai agents">
+              <td class="px-5 py-3.5"><a href="mpp.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🧠 MPP</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-[#D6E3F9] text-[#2465DE] px-2 py-0.5 rounded-full">By Product</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Get paid by AI agents, automatically</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="mpp.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="nonprofits by solution donations recurring giving">
+              <td class="px-5 py-3.5"><a href="nonprofits.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">💜 Nonprofits</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Donation pages, recurring giving, event QR codes, grant invoicing</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="nonprofits.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="retail by solution pos tap to pay terminals">
+              <td class="px-5 py-3.5"><a href="retail.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🏪 Retail</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">POS system, Tap to Pay, card terminals, omnichannel dashboard</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="retail.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="ecommerce e-commerce by solution checkout integrations subscriptions">
+              <td class="px-5 py-3.5"><a href="ecommerce.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🛒 E-commerce</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">By Solution</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Online checkout, integrations, payment links, subscriptions</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="ecommerce.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+            <tr class="page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors" data-search="brand test rebrand visual internal">
+              <td class="px-5 py-3.5"><a href="brand-test.html" class="font-semibold text-[#03102F] hover:text-[#2465DE]">🧪 Brand Test</a></td>
+              <td class="px-5 py-3.5"><span class="text-xs font-medium bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Internal</span></td>
+              <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Brand rebrand visual test — internal only</td>
+              <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">May 25, 2026</td>
+              <td class="px-5 py-3.5 text-right"><a href="brand-test.html" class="text-slate-400 hover:text-[#2465DE]" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>
+            </tr>
+          </tbody>
+          <tbody id="generatedTableBody"><!-- Generated pages injected here by JS --></tbody>
+        </table>
+      </div>
     </div>
+
+    <div class="max-w-2xl mx-auto">
 
     <!-- Divider -->
     <div class="flex items-center gap-3 my-8">
@@ -366,6 +478,8 @@
     </div>
 
     <p class="text-center text-slate-400 text-xs mt-8">HitPay Growth Team · Internal use only</p>
+
+    </div>
   </div>
 
 <script>
@@ -817,22 +931,39 @@ function addGeneratedCard(industry, filename, html) {
   const blob = new Blob([html], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
   const color = selectedColor;
-  const card = document.createElement('a');
-  card.href = url;
-  card.target = '_blank';
-  card.className = `flex items-center gap-5 bg-white border border-slate-200 rounded-2xl p-5 hover:border-${color}-400 hover:shadow-md transition-all group`;
-  card.innerHTML = `
-    <div class="w-12 h-12 bg-${color}-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">✨</div>
-    <div class="flex-1">
-      <div class="flex items-center gap-2">
-        <span class="font-semibold text-[#03102F] group-hover:text-${color}-700">${industry}</span>
-        <span class="text-[10px] font-bold uppercase tracking-wider bg-${color}-100 text-${color}-700 px-2 py-0.5 rounded-full">Generated</span>
-      </div>
-      <div class="text-slate-500 text-sm mt-0.5">Preview only — download to save permanently</div>
-    </div>
-    <svg class="w-5 h-5 text-slate-400 group-hover:text-${color}-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
-  document.getElementById('generatedCards').appendChild(card);
+  const today = new Date();
+  const dateLabel = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const row = document.createElement('tr');
+  row.className = 'page-row border-b border-slate-100 hover:bg-[#F9F9F6] transition-colors';
+  row.dataset.search = `${industry} generated ai new`.toLowerCase();
+  row.innerHTML = `
+    <td class="px-5 py-3.5"><a href="${url}" target="_blank" class="font-semibold text-[#03102F] hover:text-${color}-600">✨ ${industry}</a></td>
+    <td class="px-5 py-3.5"><span class="text-xs font-medium bg-${color}-100 text-${color}-700 px-2 py-0.5 rounded-full">Generated</span></td>
+    <td class="px-5 py-3.5 text-slate-500 hidden md:table-cell">Preview only — download to save permanently</td>
+    <td class="px-5 py-3.5 text-slate-400 whitespace-nowrap">${dateLabel}</td>
+    <td class="px-5 py-3.5 text-right"><a href="${url}" target="_blank" class="text-slate-400 hover:text-${color}-600" aria-label="Open"><svg class="w-4 h-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a></td>`;
+  document.getElementById('generatedTableBody').appendChild(row);
+  updatePageCount();
 }
+
+function filterPages() {
+  const q = document.getElementById('pageSearch').value.trim().toLowerCase();
+  const rows = document.querySelectorAll('.page-row');
+  let visible = 0;
+  rows.forEach(row => {
+    const match = !q || (row.dataset.search || row.textContent.toLowerCase()).includes(q);
+    row.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.getElementById('pageCount').textContent = `${visible} of ${rows.length} pages`;
+}
+
+function updatePageCount() {
+  const rows = document.querySelectorAll('.page-row');
+  document.getElementById('pageCount').textContent = `${rows.length} of ${rows.length} pages`;
+}
+
+document.addEventListener('DOMContentLoaded', updatePageCount);
 </script>
 </body>
 </html>
