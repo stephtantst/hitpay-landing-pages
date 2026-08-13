@@ -6388,6 +6388,420 @@ function buildReferAndEarn(xOffset = 0) {
   return page.f;
 }
 
+// ── WECHAT PAY PHILIPPINES ───────────────────────────────────
+
+const WECHAT_GREEN = { r: 0.027, g: 0.757, b: 0.376 }; // #07C160
+const WECHAT_GREEN_LIGHT = { r: 0.878, g: 0.976, b: 0.922 }; // #E0F9EB
+
+/** Feature 1 mock — Online Checkout with WeChat Pay selected + QR */
+function mockWechatCheckout() {
+  const card = mkFrame('MockWechatCheckout', 290, 340, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.10 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }]; card.strokeWeight = 1; card.strokeAlign = 'INSIDE';
+
+  // Header bar
+  const hdr = mkRect(290, 48, C.hpTextPri, 0); hdr.x = 0; hdr.y = 0; card.appendChild(hdr);
+  const hdrT = mkText('Café Palanca · Manila', 13, W.semibold, C.white, 'CENTER', 270); hdrT.x = 10; hdrT.y = 16; card.appendChild(hdrT);
+
+  // Order summary
+  const sumBg = mkRect(254, 68, C.hpBeige, 8); sumBg.x = 18; sumBg.y = 60; card.appendChild(sumBg);
+  const r1l = mkText('Cold brew × 2', 12, W.regular, C.hpTextSec, 'LEFT', 140); r1l.x = 28; r1l.y = 70; card.appendChild(r1l);
+  const r1p = mkText('₱260', 12, W.semibold, C.hpTextPri, 'RIGHT', 60); r1p.x = 192; r1p.y = 70; card.appendChild(r1p);
+  const r2l = mkText('Avocado toast × 1', 12, W.regular, C.hpTextSec, 'LEFT', 140); r2l.x = 28; r2l.y = 90; card.appendChild(r2l);
+  const r2p = mkText('₱295', 12, W.semibold, C.hpTextPri, 'RIGHT', 60); r2p.x = 192; r2p.y = 90; card.appendChild(r2p);
+  const div = mkRect(234, 1, C.slate200); div.x = 28; div.y = 110; card.appendChild(div);
+  const totL = mkText('Total', 13, W.semibold, C.hpTextPri); totL.x = 28; totL.y = 116; card.appendChild(totL);
+  const totP = mkText('₱555', 13, W.bold, C.hpTextPri, 'RIGHT', 60); totP.x = 192; totP.y = 116; card.appendChild(totP);
+
+  // Payment method label
+  const pmL = mkText('Pay with', 10, W.semibold, C.slate400, 'LEFT', 200); pmL.x = 18; pmL.y = 144; card.appendChild(pmL);
+
+  // WeChat Pay row — selected
+  const wBg = mkRect(254, 44, WECHAT_GREEN_LIGHT, 10); wBg.x = 18; wBg.y = 156; card.appendChild(wBg);
+  wBg.strokes = [{ type: 'SOLID', color: WECHAT_GREEN }]; wBg.strokeWeight = 1.5; wBg.strokeAlign = 'INSIDE';
+  const wDot = mkRect(8, 8, WECHAT_GREEN, 100); wDot.x = 28; wDot.y = 174; card.appendChild(wDot);
+  const wLabel = mkText('WeChat Pay', 13, W.semibold, C.hpTextPri); wLabel.x = 44; wLabel.y = 168; card.appendChild(wLabel);
+  const wSub = mkText('Scan QR in WeChat', 11, W.regular, C.hpTextSec); wSub.x = 44; wSub.y = 182; card.appendChild(wSub);
+
+  // GCash row — unselected
+  const gBg = mkRect(254, 36, C.white, 10); gBg.x = 18; gBg.y = 206; card.appendChild(gBg);
+  gBg.strokes = [{ type: 'SOLID', color: C.slate200 }]; gBg.strokeWeight = 1; gBg.strokeAlign = 'INSIDE';
+  const gLabel = mkText('GCash', 12, W.regular, C.slate400); gLabel.x = 34; gLabel.y = 218; card.appendChild(gLabel);
+
+  // QR code placeholder box
+  const qrBg = mkRect(100, 100, C.hpBeige, 8); qrBg.x = 95; qrBg.y = 250; card.appendChild(qrBg);
+  // QR grid pattern
+  [[0,0],[1,0],[0,1],[2,2],[1,2],[2,0],[0,2]].forEach(([ci,ri]) => {
+    const qc = mkRect(14, 14, C.hpTextPri, 2); qc.x = 105 + ci * 20; qc.y = 260 + ri * 20; card.appendChild(qc);
+  });
+  const qrSub = mkText('Scan to pay · ₱555', 10, W.regular, C.hpTextSec, 'CENTER', 254); qrSub.x = 18; qrSub.y = 358; card.appendChild(qrSub);
+
+  // Confirm button
+  const btn = mkRect(254, 36, WECHAT_GREEN, 10); btn.x = 18; btn.y = 296; card.appendChild(btn);
+  const btnT = mkText('Pay ₱555 via WeChat Pay', 13, W.semibold, C.white, 'CENTER', 254); btnT.x = 18; btnT.y = 307; card.appendChild(btnT);
+
+  return card;
+}
+
+/** Feature 2 mock — POS terminal showing WeChat Pay QR */
+function mockWechatPOS() {
+  const card = mkFrame('MockWechatPOS', 290, 310, C.hpTextPri, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.28 }, offset: { x: 0, y: 20 }, radius: 50, spread: 0, visible: true, blendMode: 'NORMAL' }];
+
+  const title = mkText('HitPay POS · Table 7', 13, W.semibold, C.white); title.x = 20; title.y = 20; card.appendChild(title);
+  const online = mkText('● Online', 11, W.medium, WECHAT_GREEN); online.x = 200; online.y = 22; card.appendChild(online);
+
+  const items = [
+    { name: 'Halo-halo (large)', price: '₱185' },
+    { name: 'Kare-kare set',     price: '₱420' },
+    { name: 'Iced calamansi × 2', price: '₱130' },
+  ];
+  items.forEach((item, i) => {
+    const row = mkRect(250, 34, { r: 0.063, g: 0.090, b: 0.184 }, 8); row.x = 20; row.y = 52 + i * 42; card.appendChild(row);
+    const nl = mkText(item.name, 12, W.regular, C.white, 'LEFT', 140); nl.x = 30; nl.y = 62 + i * 42; card.appendChild(nl);
+    const pl = mkText(item.price, 12, W.semibold, C.white, 'RIGHT', 70); pl.x = 190; pl.y = 62 + i * 42; card.appendChild(pl);
+  });
+
+  const divL = mkRect(250, 1, { r: 0.118, g: 0.161, b: 0.231 }); divL.x = 20; divL.y = 180; card.appendChild(divL);
+  const totLbl = mkText('Total due', 12, W.regular, C.slate400); totLbl.x = 20; totLbl.y = 190; card.appendChild(totLbl);
+  const totAmt = mkText('₱735', 22, W.bold, C.white, 'RIGHT', 120); totAmt.x = 150; totAmt.y = 186; card.appendChild(totAmt);
+
+  // Payment buttons 2×2 grid
+  const pmLabel = mkText('Accept via', 10, W.semibold, C.slate400); pmLabel.x = 20; pmLabel.y = 224; card.appendChild(pmLabel);
+  [
+    { label: 'WeChat Pay', selected: true,  x: 20,  y: 238 },
+    { label: 'GCash',      selected: false, x: 150, y: 238 },
+    { label: 'QR Ph',      selected: false, x: 20,  y: 270 },
+    { label: 'Visa / MC',  selected: false, x: 150, y: 270 },
+  ].forEach(({ label, selected, x, y }) => {
+    const bg = mkRect(120, 24, selected ? WECHAT_GREEN : { r: 0.063, g: 0.090, b: 0.184 }, 6);
+    bg.x = x; bg.y = y; card.appendChild(bg);
+    const lt = mkText(label, 11, selected ? W.semibold : W.regular, selected ? C.white : C.slate400, 'CENTER', 120);
+    lt.x = x; lt.y = y + 7; card.appendChild(lt);
+  });
+
+  return card;
+}
+
+/** Feature 3 mock — Borderless QR card for WeChat Pay */
+function mockWechatBorderlessQR() {
+  const card = mkFrame('MockWechatBorderlessQR', 260, 300, C.white, 20);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.10 }, offset: { x: 0, y: 16 }, radius: 40, spread: 0, visible: true, blendMode: 'NORMAL' }];
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }]; card.strokeWeight = 1; card.strokeAlign = 'INSIDE';
+
+  const topBg = mkRect(260, 52, C.hpBeige, 0); topBg.x = 0; topBg.y = 0; card.appendChild(topBg);
+  const nameT = mkText('Mercado Weekend Market', 12, W.bold, C.hpTextPri, 'CENTER', 240); nameT.x = 10; nameT.y = 10; card.appendChild(nameT);
+  const locT = mkText('BGC, Taguig · Stall 14', 11, W.regular, C.hpTextSec, 'CENTER', 240); locT.x = 10; locT.y = 30; card.appendChild(locT);
+
+  // QR code
+  const qrOuter = mkRect(140, 140, C.white, 6); qrOuter.x = 60; qrOuter.y = 64;
+  qrOuter.strokes = [{ type: 'SOLID', color: C.slate200 }]; qrOuter.strokeWeight = 1; qrOuter.strokeAlign = 'INSIDE';
+  card.appendChild(qrOuter);
+  // Corner finder patterns
+  [[64,68],[172,68],[64,176]].forEach(([cx,cy]) => {
+    const outer = mkRect(24, 24, C.hpTextPri, 3); outer.x = cx; outer.y = cy; card.appendChild(outer);
+    const inner = mkRect(10, 10, C.white, 2); inner.x = cx + 7; inner.y = cy + 7; card.appendChild(inner);
+    const dot = mkRect(6, 6, C.hpTextPri, 1); dot.x = cx + 9; dot.y = cy + 9; card.appendChild(dot);
+  });
+  // Data cells
+  [[120,76],[136,76],[120,92],[152,108],[104,124],[136,140],[152,156],[120,156]].forEach(([dx,dy]) => {
+    const dc = mkRect(10, 10, C.hpTextPri, 1); dc.x = dx; dc.y = dy; card.appendChild(dc);
+  });
+
+  const scanL = mkText('Scan with WeChat Pay', 12, W.semibold, WECHAT_GREEN, 'CENTER', 240); scanL.x = 10; scanL.y = 214; card.appendChild(scanL);
+
+  // Payment method pills
+  const pillRow = mkH('PillRow', 6, 0, 0, null, 0);
+  pillRow.primaryAxisAlignItems = 'CENTER';
+  pillRow.counterAxisAlignItems = 'CENTER';
+  [
+    { label: 'WeChat Pay', bg: WECHAT_GREEN_LIGHT, color: WECHAT_GREEN },
+    { label: 'GCash',      bg: C.hpBlue50,         color: C.hpAction  },
+    { label: 'Maya',       bg: C.hpBlue50,         color: C.hpAction  },
+  ].forEach(({ label, bg, color }) => {
+    const p = mkPill(label, bg, color, 8, 4, 100);
+    pillRow.appendChild(p);
+  });
+  pillRow.x = 30; pillRow.y = 238; card.appendChild(pillRow);
+
+  // Notification badge
+  const notifBg = mkRect(240, 28, C.hpBlue50, 8); notifBg.x = 10; notifBg.y = 264; card.appendChild(notifBg);
+  const notifT = mkText('✓  ₱850 received via WeChat Pay', 11, W.semibold, WECHAT_GREEN, 'CENTER', 220); notifT.x = 20; notifT.y = 274; card.appendChild(notifT);
+
+  return card;
+}
+
+/** Feature 4 mock — Settlement dashboard in PHP */
+function mockWechatSettlement() {
+  const card = mkFrame('MockWechatSettlement', 280, 290, C.white, 16);
+  card.effects = [{ type: 'DROP_SHADOW', color: { r: 0, g: 0, b: 0, a: 0.08 }, offset: { x: 0, y: 12 }, radius: 30, spread: 0, visible: true, blendMode: 'NORMAL' }];
+  card.strokes = [{ type: 'SOLID', color: C.slate200 }]; card.strokeWeight = 1; card.strokeAlign = 'INSIDE';
+
+  const hT = mkText('WeChat Pay — Settlement', 13, W.semibold, C.hpTextPri); hT.x = 16; hT.y = 18; card.appendChild(hT);
+  const sT = mkText('June 2026 · HitPay Dashboard', 11, W.regular, C.slate400); sT.x = 16; sT.y = 36; card.appendChild(sT);
+
+  const channels = [
+    { label: 'Online Checkout', sub: '14 transactions', value: '₱18,450' },
+    { label: 'Point of Sale',   sub: '31 transactions', value: '₱42,780' },
+    { label: 'Borderless QR',   sub: '9 transactions',  value: '₱11,250' },
+  ];
+  channels.forEach((ch, i) => {
+    const rowBg = mkRect(248, 38, i % 2 === 0 ? C.hpBeige : C.white, 6); rowBg.x = 16; rowBg.y = 60 + i * 46; card.appendChild(rowBg);
+    const ll = mkText(ch.label, 12, W.medium, C.hpTextPri, 'LEFT', 130); ll.x = 24; ll.y = 65 + i * 46; card.appendChild(ll);
+    const sl = mkText(ch.sub, 10, W.regular, C.slate400, 'LEFT', 130); sl.x = 24; sl.y = 79 + i * 46; card.appendChild(sl);
+    const vl = mkText(ch.value, 13, W.bold, C.hpAction, 'RIGHT', 80); vl.x = 188; vl.y = 71 + i * 46; card.appendChild(vl);
+  });
+
+  // Total box
+  const totBg = mkRect(248, 68, C.hpDeepBlue, 10); totBg.x = 16; totBg.y = 204; card.appendChild(totBg);
+  const totLbl = mkText('Total settled this month', 11, W.regular, C.hpBlue100); totLbl.x = 28; totLbl.y = 214; card.appendChild(totLbl);
+  const totAmt = mkText('₱72,480', 22, W.bold, C.white); totAmt.x = 28; totAmt.y = 230; card.appendChild(totAmt);
+  const nextT = mkText('Next settlement: tomorrow · 1.5% fee applied', 10, W.regular, C.hpBlue100); nextT.x = 28; nextT.y = 258; card.appendChild(nextT);
+
+  return card;
+}
+
+/** Mid-page CTA strip for WeChat Pay page */
+function mkMidCTAWechat() {
+  const sec = mkFrame('MidCTA', 1440, 100, C.hpBlue50);
+
+  const txt = mkText('Ready to start accepting WeChat Pay?', 20, W.semibold, C.hpTextPri, 'LEFT', 520);
+  txt.x = 144; txt.y = 30; sec.appendChild(txt);
+
+  const btn = mkBtn('Start for free →', C.hpAction, C.white, 24, 12, 10);
+  btn.x = 880; btn.y = 28; sec.appendChild(btn);
+
+  const fine = mkText('No setup fees · Free to sign up · Approval in 1–3 days', 13, W.regular, C.hpTextSec);
+  fine.x = 1060; fine.y = 38; sec.appendChild(fine);
+
+  return sec;
+}
+
+/** Payment methods table — Philippines-only methods */
+function mkPaymentMethodsTableWechat() {
+  const sec = mkFrame('PaymentMethodsTable', 1440, 440, C.hpBeige);
+
+  const h2 = mkH2('Payment methods accepted by HitPay merchants', 26, C.hpTextPri, 'CENTER', 800);
+  h2.x = 320; h2.y = 40; sec.appendChild(h2);
+
+  const sub = mkText('WeChat Pay sits alongside 50+ local and international payment methods on one integration', 16, W.regular, C.hpTextSec, 'CENTER', 700);
+  sub.x = 370; sub.y = 84; sec.appendChild(sub);
+
+  const rows = [
+    { method: 'WeChat Pay',         market: 'Philippines (tourist)',  type: 'Chinese digital wallet' },
+    { method: 'Alipay+',            market: 'Philippines (tourist)',  type: 'Chinese digital wallet' },
+    { method: 'GCash',              market: 'Philippines',            type: 'Mobile wallet'          },
+    { method: 'Maya',               market: 'Philippines',            type: 'Mobile wallet'          },
+    { method: 'QR Ph',              market: 'Philippines',            type: 'QR / Instant transfer'  },
+    { method: 'InstaPay / PESONet', market: 'Philippines',            type: 'Bank transfer'          },
+    { method: 'Visa, Mastercard',   market: 'Philippines',            type: 'Credit / debit card'    },
+  ];
+
+  const colW = [300, 280, 280];
+  const headers = ['Payment Method', 'Available in', 'Type'];
+  const tableX = 180;
+  const hdrBg = mkRect(1080, 40, C.hpDeepBlue, 0); hdrBg.x = tableX; hdrBg.y = 124; sec.appendChild(hdrBg);
+  headers.forEach((h, i) => {
+    const ht = mkText(h, 13, W.semibold, C.white, 'LEFT', colW[i] - 24);
+    ht.x = tableX + 12 + colW.slice(0, i).reduce((a, b) => a + b, 0);
+    ht.y = 140; sec.appendChild(ht);
+  });
+
+  rows.forEach((row, ri) => {
+    const rowBg = mkRect(1080, 36, ri % 2 === 0 ? C.white : C.hpBeige, 0);
+    rowBg.x = tableX; rowBg.y = 164 + ri * 36; sec.appendChild(rowBg);
+    const isWechat = row.method === 'WeChat Pay';
+    [row.method, row.market, row.type].forEach((val, ci) => {
+      const tx = mkText(val, 13, isWechat && ci === 0 ? W.semibold : W.regular, isWechat && ci === 0 ? WECHAT_GREEN : C.hpTextSec, 'LEFT', colW[ci] - 24);
+      tx.x = tableX + 12 + colW.slice(0, ci).reduce((a, b) => a + b, 0);
+      tx.y = 178 + ri * 36; sec.appendChild(tx);
+    });
+  });
+
+  return sec;
+}
+
+/** Full WeChat Pay Philippines page */
+function buildWechatPayPhilippines(xOffset) {
+  const ac = C.hpAction;
+  const page = new Page('WeChat Pay Philippines — HitPay', xOffset);
+
+  const cfg = {
+    heroBg:  C.hpBlue50,
+    pillBg:  C.hpBlue50,
+    badge:   'WeChat Pay — Now Live',
+    heroH1:  'Accept WeChat Pay across the Philippines — online, in-store and via QR',
+    heroSub: 'Chinese customers pay with WeChat Pay — you receive settlements in PHP the next business day. One integration covers Online Checkout, Payment Links, POS and Borderless QR.',
+    heroMockFn: () => mockWechatCheckout(),
+    heroMockX: 880, heroMockY: 100,
+  };
+
+  page.add(mkNavbar(ac), 64);
+  page.add(mkHeroIndustry(cfg, ac), 560);
+
+  // Trust bar
+  page.add(mkTrustBar(
+    'TRUSTED BY BUSINESSES ACROSS THE PHILIPPINES',
+    ['Restaurants', 'Retail Stores', 'Beauty Salons', 'Online Stores', 'Pop-up Vendors', 'Cafés', 'Service Businesses'],
+  ), 120);
+
+  // Intro
+  page.add(mkIntro(
+    'Give Chinese customers the payment method they already use',
+    'HitPay is a payment platform that lets merchants in the Philippines accept WeChat Pay across Online Checkout, Payment Links, Point of Sale and Borderless QR — with zero monthly fees and next business day settlement in PHP. From a restaurant in Bonifacio Global City to a retail store in Makati and a beauty salon in Ortigas, merchants enable WeChat Pay once and immediately serve Chinese visitors. HitPay Payment Solutions, Inc. is a Registered Operator of Payment Systems (OPSCOR-2023-0006) regulated by Bangko Sentral ng Pilipinas, and is PCI DSS Level 1 certified.',
+  ), 260);
+
+  // Feature 1 — Online Checkout (text left, mock right, bg beige)
+  page.add(mkFeature({
+    label: 'Online Payments',
+    h2: 'Accept WeChat Pay on your online store and payment links — capture every checkout',
+    p: 'Philippine online stores lose sales when Chinese customers reach checkout and don\'t find WeChat Pay among the payment options — they abandon the cart rather than enter an unfamiliar card number. HitPay Payment Gateway adds WeChat Pay to any website or Shopify store without additional development. When a customer selects WeChat Pay, a QR code appears on screen. They scan it in the WeChat app and the payment confirms instantly. Payment Links extend the same experience to WhatsApp, email and social — merchants share a URL and customers pay with WeChat Pay in one tap.',
+    bullets: [
+      'Drop-in WeChat Pay QR at checkout — works on any website or Shopify store',
+      'Payment Links shareable via WhatsApp, Instagram and email — no website needed',
+      'GCash, Maya, Visa and 50+ other payment methods available on the same checkout',
+      'Instant payment confirmation — order processing starts immediately on success',
+    ],
+    mockUI: mockWechatCheckout(),
+    bg: C.hpBlue50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  // Feature 2 — POS (mock left, text right, bg white)
+  page.add(mkFeature({
+    label: 'Point of Sale',
+    h2: 'Let Chinese customers pay at your counter with the wallet they already have',
+    p: 'Restaurants and retail stores in Manila lose counter sales when Chinese visitors reach for their phone — only to find no WeChat Pay QR code displayed. Staff then scramble for a workaround that doesn\'t exist, and the customer pays cash or leaves empty-handed. HitPay Point of Sale displays a WeChat Pay QR code on screen the moment the merchant selects it. The customer scans, confirms, and the transaction completes in seconds. The same POS accepts GCash, Maya, QR Ph, Visa and Mastercard — every customer pays, every time, with no separate terminal or QR printout needed.',
+    bullets: [
+      'Runs on iPad or Android tablet — no proprietary hardware required',
+      'WeChat Pay QR displays on screen — customer scans with WeChat app in seconds',
+      'All transactions tracked in one dashboard — no separate reconciliation',
+      'Works for restaurants, retail, beauty, service counters and hospitality businesses',
+    ],
+    mockUI: mockWechatPOS(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  // Mid-page CTA strip
+  page.add(mkMidCTAWechat(), 100);
+
+  // Feature 3 — Borderless QR (text left, mock right, bg beige)
+  page.add(mkFeature({
+    label: 'Borderless QR',
+    h2: 'Print a QR code and accept WeChat Pay anywhere — without hardware or a counter',
+    p: 'Pop-up vendors and market stall owners at events in BGC, Taguig or Quezon City can\'t afford a card terminal — and Chinese tourists visiting the Philippines don\'t carry pesos and prefer not to use international cards. HitPay Borderless QR solves both problems at once. Merchants generate a QR code from the HitPay Dashboard and print it as a sign, table card or phone sticker. Chinese customers scan it with WeChat Pay in seconds. Payment confirmation arrives instantly on the merchant\'s phone. No WiFi terminal, no card reader, no power socket required — just the QR code and a working phone to receive notifications.',
+    bullets: [
+      'Generate a printed QR in seconds — no hardware or card terminal needed',
+      'Works for markets, events, food stalls, pop-up stores and outdoor venues',
+      'Instant payment notification on the merchant\'s phone — no manual checking',
+      'Same QR accepts GCash, Maya and QR Ph from local Filipino customers too',
+    ],
+    mockUI: mockWechatBorderlessQR(),
+    bg: C.hpBlue50,
+    textSide: 'left',
+    accent: ac,
+  }), 480);
+
+  // Feature 4 — Settlement (mock left, text right, bg white)
+  page.add(mkFeature({
+    label: 'Settlement & Pricing',
+    h2: 'Receive PHP payouts the next business day — at 1.5% per WeChat Pay transaction',
+    p: 'Philippine merchants worry about currency conversion delays and hidden fees when accepting cross-border payment methods like WeChat Pay. HitPay eliminates both. Chinese customers pay in CNY — you receive PHP the next business day, with no manual withdrawal required. The rate is a flat 1.5% per successful WeChat Pay transaction — no monthly subscription, no setup fee, no minimum volume. All WeChat Pay revenue from Online Checkout, Payment Links, POS and Borderless QR settles into the same PHP bank account. View full details at hitpayapp.com/pricing.',
+    bullets: [
+      'PHP 0 monthly fees — pay only 1.5% per successful WeChat Pay transaction',
+      'Next business day settlement in PHP — automatic, no withdrawal needed',
+      'WeChat Pay revenue from all channels appears in one unified dashboard',
+      'No minimum transaction volume — suitable for businesses of any size',
+    ],
+    mockUI: mockWechatSettlement(),
+    bg: C.white,
+    textSide: 'right',
+    accent: ac,
+  }), 480);
+
+  // Payment methods table
+  page.add(mkPaymentMethodsTableWechat(), 440);
+
+  // Stats bar
+  page.add(mkStats([
+    { value: 'PHP 0',           label: 'Monthly fees'                        },
+    { value: '1.5%',            label: 'Per WeChat Pay transaction'           },
+    { value: 'Next biz day',    label: 'PHP payout speed in the Philippines'  },
+    { value: '4',               label: 'Sales channels: Online, Links, POS, QR' },
+  ], C.hpDeepBlue, C.white, C.hpBlue100), 192);
+
+  // Testimonial
+  page.add(mkTestimonial(
+    'Philippine merchants accepting WeChat Pay through HitPay serve Chinese visitors without a separate system — customers pay with the wallet they already use, and the merchant receives next business day PHP settlements from Online, POS and Borderless QR in one dashboard.',
+    'HitPay Philippines',
+    'Based on WeChat Pay merchant data — Philippines',
+    ac,
+    C.hpBlue100,
+  ), 380);
+
+  // Feature grid
+  page.add(mkGrid(
+    'Everything your business needs to accept WeChat Pay',
+    'One account. One dashboard. Four channels. Settlements in your local currency.',
+    [
+      { title: 'Online Checkout',           desc: 'WeChat Pay appears as a payment option on any HitPay-powered checkout page — on your website, Shopify store or WooCommerce shop.' },
+      { title: 'Payment Links',             desc: 'Share a WeChat Pay-enabled payment link via WhatsApp, Facebook or email. Customers pay without visiting your website.' },
+      { title: 'Point of Sale',             desc: 'Accept WeChat Pay at your counter from a single iPad or Android tablet alongside GCash, Maya, QR Ph and card payments.' },
+      { title: 'Borderless QR',             desc: 'Print a QR code and accept WeChat Pay at markets, events, pop-ups and food stalls — with no hardware and no card terminal.' },
+      { title: 'Next Business Day Settlement', desc: 'WeChat Pay revenue settles directly to your Philippine bank account in PHP — every next business day, automatically.' },
+      { title: 'Unified Revenue Dashboard', desc: 'All WeChat Pay transactions — from Online, POS and QR — appear in one dashboard with daily settlement reports and transaction-level detail.' },
+    ],
+  ), 660);
+
+  // Related
+  page.add(mkRelated('Explore more HitPay payment solutions', [
+    { emoji: '🛒', title: 'HitPay Online Payment Gateway',    desc: 'Accept GCash, Maya, WeChat Pay, Visa and 50+ payment methods on your website or Shopify store.' },
+    { emoji: '🖥️', title: 'HitPay Point of Sale for Philippines', desc: 'Accept WeChat Pay, GCash, Maya and cards at your counter from a single iPad.' },
+    { emoji: '🔗', title: 'HitPay Payment Links for SMEs',   desc: 'Create a WeChat Pay-enabled payment link in 60 seconds. Share via WhatsApp or email.' },
+  ], ac), 380);
+
+  // FAQ
+  const faqs = [
+    { q: 'What is WeChat Pay and how can merchants in the Philippines accept it through HitPay?', a: 'WeChat Pay is a digital wallet used by hundreds of millions of people in China. HitPay is a payment platform that lets merchants in the Philippines accept WeChat Pay across Online Checkout, Payment Links, Point of Sale and Borderless QR — through a single integration. Merchants receive settlements in PHP the next business day. HitPay Payment Solutions, Inc. is a Registered Operator of Payment Systems (OPSCOR-2023-0006) regulated by Bangko Sentral ng Pilipinas.' },
+    { q: 'How do Philippine merchants enable WeChat Pay on their HitPay account?', a: 'Philippine merchants log in to their HitPay Dashboard, navigate to Payment Methods, and click "Turn On" for WeChat Pay. No separate merchant agreement or new integration is required. WeChat Pay becomes available across all active HitPay sales channels — Online Checkout, Payment Links, POS and Borderless QR — immediately after activation.' },
+    { q: 'Which HitPay sales channels support WeChat Pay in the Philippines?', a: 'WeChat Pay is available across four HitPay channels in the Philippines: Online Checkout (embedded on any website or Shopify store), Payment Links (shareable URL sent via WhatsApp or email), Point of Sale (iPad or Android tablet at the counter), and Borderless QR (a printed QR code for markets, pop-ups and events). One activation covers all four channels simultaneously.' },
+    { q: 'How much does it cost for Philippine merchants to accept WeChat Pay through HitPay?', a: 'HitPay charges 1.5% per successful WeChat Pay transaction. There is no monthly subscription fee, no setup fee and no minimum transaction volume. Merchants pay only when a transaction succeeds. For full pricing across all payment methods, visit hitpayapp.com/pricing.' },
+    { q: 'How long does it take to set up WeChat Pay on HitPay for a Philippine business?', a: 'Philippine merchants can sign up for HitPay for free at hitpayapp.com and submit their DTI or SEC registration plus a valid government-issued ID. Account approval takes 1–3 business days. After approval, enabling WeChat Pay in the dashboard takes under one minute — no additional integration steps are required.' },
+    { q: 'What support does HitPay provide to Philippine merchants accepting WeChat Pay?', a: 'HitPay provides live chat support, email support, and a self-serve help centre at support.hitpayapp.com. Philippine merchants can also contact the sales team for onboarding assistance. Enterprise operators with multiple locations can access a dedicated account manager. Support is available in English for merchants across the Philippines.' },
+    { q: 'How do Philippine restaurants accept WeChat Pay at the counter through HitPay POS?', a: 'Restaurants using HitPay POS display a WeChat Pay QR code on their iPad or Android tablet at the counter. Chinese customers open WeChat, tap Pay, and scan the code. The transaction completes in seconds. The merchant sees the confirmed payment on the POS screen and the customer receives a digital receipt. No card terminal or additional hardware is needed.' },
+    { q: 'How do online stores in the Philippines accept WeChat Pay on their checkout page?', a: 'Philippine online stores using HitPay Payment Gateway or Shopify integration display WeChat Pay as a payment option at checkout. When a Chinese customer selects WeChat Pay, a QR code appears on screen. The customer scans it with the WeChat app and the payment confirms instantly. Settlement arrives in PHP the next business day. Learn more at hitpayapp.com/payment-gateway.' },
+    { q: 'How do pop-up stores and market vendors accept WeChat Pay via Borderless QR?', a: 'Merchants generate a Borderless QR code from the HitPay Dashboard and print it as a sign, table card or sticker. Chinese customers scan the QR code with WeChat Pay and enter the amount — or merchants enter a fixed amount via the HitPay app. No hardware, card reader or internet terminal is required. Payment confirmation appears instantly on the merchant\'s phone.' },
+    { q: 'When do Philippine merchants receive their payouts from WeChat Pay transactions?', a: 'HitPay settles WeChat Pay funds to Philippine merchants the next business day in PHP — no manual withdrawal required. This predictable settlement schedule helps businesses manage cash flow without waiting for weekly or monthly batch payouts. HitPay Payment Solutions, Inc. is regulated by Bangko Sentral ng Pilipinas (OPSCOR-2023-0006).' },
+    { q: 'Do Chinese customers need a Philippine bank account to pay with WeChat Pay through HitPay?', a: 'No. Chinese customers pay using their existing WeChat Pay balance or linked Chinese bank account — entirely within the WeChat app. The merchant receives PHP. No currency conversion is required by the customer. WeChat Pay handles the cross-border exchange, and HitPay settles the equivalent PHP amount to the merchant the next business day.' },
+    { q: 'Can Philippine merchants accept WeChat Pay alongside GCash and Maya on the same checkout?', a: 'Yes. When a Philippine merchant enables WeChat Pay on HitPay, it appears alongside GCash, Maya, QR Ph, Visa and Mastercard on the same checkout page, POS screen and Borderless QR code. Chinese customers see WeChat Pay while local Filipino customers see GCash and Maya — each paying with the method they already use. One integration, one activation, all payment methods.' },
+    { q: 'What currency do Chinese customers pay in, and what currency does the Philippine merchant receive?', a: 'Chinese customers pay from their WeChat Pay balance or Chinese bank account in CNY. The merchant sees the transaction amount in PHP on their HitPay Dashboard. HitPay and WeChat Pay handle the cross-border conversion. Philippine merchants receive PHP settlements the next business day without needing to manage foreign exchange manually.' },
+    { q: 'What documents do Philippine merchants need to sign up for HitPay to accept WeChat Pay?', a: 'Philippine merchants need their DTI or SEC registration certificate and a valid government-issued ID. Sole proprietors may use a valid government ID in lieu of a business registration certificate, subject to HitPay\'s verification requirements. All applicants must provide a Philippine bank account for PHP settlement. Sign up free at hitpayapp.com.' },
+    { q: 'What other tourist payment methods does HitPay support alongside WeChat Pay in the Philippines?', a: 'HitPay also supports Alipay+ for Chinese and Southeast Asian tourists in the Philippines. Combined with WeChat Pay, this gives merchants coverage of the two most widely used Chinese digital wallets. In addition, HitPay accepts GCash, Maya, QR Ph, Visa, Mastercard and over 50 payment methods — so every customer, local or international, can pay.' },
+    { q: 'How does HitPay Borderless QR for WeChat Pay work at events and pop-up stores in the Philippines?', a: 'Merchants print a HitPay Borderless QR code and display it at their stall. Chinese visitors scan it with WeChat Pay, enter the purchase amount, and confirm payment — all within the WeChat app. The merchant receives an instant notification on their phone. No WiFi terminal, card reader or power outlet is needed. Settlement arrives in PHP the next business day.' },
+  ];
+  page.add(mkFAQ(faqs, ac), 96 + faqs.length * 136 + 40);
+
+  // CTA
+  page.add(mkCTA(
+    'Start accepting WeChat Pay today',
+    'Give Chinese customers a familiar payment experience wherever you sell — online, in-store, or through QR — and receive payouts in PHP the next business day. Trusted by 20,000+ businesses across Southeast Asia.',
+    'Start for free',
+    'Talk to sales',
+    ac,
+  ), 300);
+
+  // Footer
+  page.add(mkFooter(ac,
+    ['Online Payment Gateway', 'Point of Sale', 'Payment Links', 'Borderless QR', 'Recurring Billing'],
+    ['WeChat Pay for Philippines merchants', 'Alipay+ for Philippines merchants', 'GCash and Maya payment acceptance', 'QR Ph and InstaPay bank transfers', 'Visa and Mastercard card payments'],
+  ), 280);
+
+  return page.f;
+}
+
 // ── MAIN ─────────────────────────────────────────────────────
 
 const BUILDERS = {
@@ -6410,6 +6824,7 @@ const BUILDERS = {
   virtual_accounts:  buildVirtualAccounts,
   affiliate:         buildAffiliate,
   refer_and_earn:    buildReferAndEarn,
+  wechat_pay_ph:     buildWechatPayPhilippines,
 };
 
 async function main() {

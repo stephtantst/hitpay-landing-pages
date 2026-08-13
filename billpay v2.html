@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BillPay — Pay Suppliers Locally &amp; Internationally | HitPay Singapore &amp; Philippines</title>
+  <meta name="description" content="HitPay BillPay lets SG &amp; PH merchants capture invoices with OCR, route bills through approvals, and pay suppliers locally or overseas — synced to Xero, no monthly fees.">
+  <meta property="og:title" content="BillPay — Supplier Payments Built Into HitPay | Singapore &amp; Philippines">
+  <meta property="og:description" content="Capture, approve, pay, and reconcile supplier invoices from the same HitPay account you already use to accept payments. OCR capture, approval workflows, Xero sync.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+  <style>
+    .diag-divider { display: block; width: 100%; height: 56px; }
+    @media (min-width: 768px) { .diag-divider { height: 96px; } }
+    .float-card-back {
+      transform: rotate(-6deg) translate(18px, 22px);
+    }
+    .float-card-front {
+      transition: transform .35s ease;
+    }
+    .float-card-front:hover { transform: translateY(-6px); }
+    .icon-bubble {
+      width: 2.25rem; height: 2.25rem; border-radius: 0.7rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .stack-tile { transition: transform .3s ease; }
+    .stack-tile:hover { transform: translateY(-6px); }
+    .blob-shape {
+      position: absolute; border-radius: 9999px; filter: blur(0px);
+    }
+  </style>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is HitPay BillPay and how does it work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay BillPay is an accounts payable tool built into a merchant's existing HitPay account. A merchant uploads or forwards a supplier invoice by email, OCR and AI extract the vendor, amount, account number, and due date automatically, the bill routes through an approval workflow, and the merchant pays the supplier locally or internationally. Every payment reconciles automatically with Xero — no manual data entry and no second platform."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who can create, submit, and approve bills in HitPay BillPay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Any staff member with BillPay access can upload an invoice or forward it to the account's dedicated bill email address to create a draft bill. Designated approvers — typically owners or finance managers — review and approve bills before payment. Multi-level approval rules can require sign-off by invoice amount, so a staff member preparing a bill and the owner approving it can be different people, with every action logged."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which currencies and payment methods does HitPay BillPay support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In Singapore, BillPay funds local SGD payments via PayNow or FAST bank transfer, and pays international suppliers in their local currency across a wide network of receiving countries. In the Philippines, BillPay funds local PHP payments via InstaPay and PESONet at launch. Each bill can be funded by PayNow, QRPH, or bank transfer, so the merchant decides exactly how and when money leaves the account."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does bill payment scheduling work in HitPay BillPay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A merchant can approve a bill ahead of time and schedule it to pay automatically on its due date, or any date chosen. Cash stays in the account until the scheduled date, and the payment executes and notifies the merchant without a calendar reminder. This protects cash flow while avoiding the late-payment friction of forgetting a due date."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the different bill statuses in HitPay BillPay mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A bill moves through clear stages in HitPay BillPay: Draft (captured but not submitted), Pending Approval (awaiting sign-off), Approved / Scheduled (approved and waiting for its funding date), Processing (payment initiated), Paid (completed), and Failed (payment did not go through, with a reason shown). The full timeline is visible on every bill, so a merchant always knows exactly where a payment stands."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many bills or suppliers a merchant can manage in HitPay BillPay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. HitPay BillPay is built for merchants processing anywhere from a handful to hundreds of vendor bills a month, with no cap on the number of bills, vendors, or approvers. Vendors can be added one at a time or bulk-imported from a spreadsheet, and bills can be approved and paid individually or in a single batch action."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What documents besides invoices can be forwarded into HitPay BillPay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Merchants can forward any supplier bill, receipt, or payment demand as a PDF or image — not only formal invoices — to their BillPay bill-forwarding email address, or upload the same file types directly. OCR extracts the vendor, amount, account details, and due date from whatever format the supplier sends, so a merchant doesn't need to standardise documents before capture."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is HitPay BillPay different for Singapore merchants specifically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Singapore merchants can pay local suppliers instantly via PayNow or FAST and pay overseas suppliers in the same workflow, funding each bill from the same HitPay account used to accept customer payments. Local transfers cost S$0.50 per payment, with no monthly subscription. This is the only combination in the Singapore market of accepting customer payments and paying suppliers, local and international, on one platform."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Singapore merchants pay overseas suppliers directly through HitPay BillPay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Singapore merchants can pay an overseas supplier — for example, a manufacturer in China — in the supplier's local currency, in the same batch and workflow as a local SGD PayNow payment to a domestic vendor. International payments carry a transparent rate; the current published rate is available at hitpayapp.com/pricing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What local payment rails does HitPay BillPay use for the Philippines?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the Philippines, HitPay BillPay funds supplier payments via InstaPay and PESONet, the country's two standard bank-to-bank transfer rails, at launch. Local Philippine transfers cost ₱15 per payment, with no monthly subscription fee. Philippine merchants get the same OCR capture, approval workflow, and payment tracking as Singapore merchants, scoped to local domestic payments at this stage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is HitPay BillPay available to Philippine merchants at launch, and what will expand later?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, HitPay BillPay launches in the Philippines with local InstaPay and PESONet supplier payments, OCR invoice capture, approval workflows, and Xero sync — the same core workflow available in Singapore. International supplier payments from the Philippines are not part of the initial launch scope; Singapore is the only market with international payment capability at this stage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does HitPay BillPay cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay BillPay has no monthly subscription fee — merchants pay per transaction only. Local Singapore transfers via PayNow or FAST cost S$0.50 per payment; local Philippine transfers via InstaPay or PESONet cost ₱15 per payment. International payments from Singapore carry a transparent rate. Full current pricing is published at hitpayapp.com/pricing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do merchants need to start using HitPay BillPay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Existing HitPay merchants in Singapore and the Philippines can activate BillPay directly from their existing dashboard under Finances — no new sign-up, no second KYB process, and no additional vendor relationship. New merchants complete standard HitPay onboarding once and gain access to both customer payment tools and BillPay together."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does HitPay BillPay sync with Xero?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. HitPay BillPay syncs bills to Xero automatically, including splitting a single bill into multiple line items with per-line accounting categories before the sync, so finance teams avoid manual re-entry and double handling. Every payment status updates in both HitPay and Xero, keeping the general ledger current without a separate reconciliation step."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HitPay BillPay",
+    "description": "Accounts payable and supplier payment tool built into HitPay. Capture invoices with OCR, route approvals, pay local and international suppliers, and reconcile automatically with Xero.",
+    "url": "https://hitpayapp.com/sg/products/billpay",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web browser, iOS, Android",
+    "dateModified": "[YYYY-MM-DD]",
+    "areaServed": ["Singapore", "Philippines"],
+    "featureList": [
+      "OCR invoice capture with AI data extraction",
+      "Forward-to-email bill intake",
+      "Vendor directory with bulk import",
+      "Multi-level approval workflows by amount",
+      "Bulk approve and batch pay in one funding action",
+      "Local Singapore payments via PayNow and FAST",
+      "Local Philippines payments via InstaPay and PESONet",
+      "International supplier payments from Singapore",
+      "Due-date payment scheduling with auto-execution",
+      "Per-bill funding control — PayNow, QRPH, or bank transfer",
+      "Full payment tracking and status timeline",
+      "Two-way Xero sync with line-item accounting categories"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "SGD",
+      "description": "No monthly subscription. Pay per transaction: S$0.50 per SG local transfer, ₱15 per PH local transfer. International rates published separately.",
+      "url": "https://hitpayapp.com/pricing"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hitpayapp.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://hitpayapp.com/sg/products" },
+      { "@type": "ListItem", "position": 3, "name": "BillPay", "item": "https://hitpayapp.com/sg/products/billpay" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: Review [REAL QUOTE REQUIRED] -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "SoftwareApplication", "name": "HitPay BillPay" },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "name": "[REAL QUOTE REQUIRED — replace placeholder before publishing]",
+    "reviewBody": "[REAL QUOTE REQUIRED — replace with an actual pilot merchant testimonial, ideally with a quantified hours/month or cost saving]",
+    "author": { "@type": "Person", "name": "[Merchant Name]" }
+  }
+  </script>
+</head>
+<body class="bg-white text-[#03102F]">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="https://hitpayapp.com/pricing" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#" class="hover:text-[#03102F]">Developers</a>
+          <a href="#" class="hover:text-[#03102F]">Resources</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="https://dashboard.hit-pay.com/register" class="text-sm font-semibold bg-[#2465DE] text-white px-4 py-2 rounded-lg hover:bg-[#1B4FB8] transition-colors">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="gradient-hero pt-32 pb-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <a href="#cfo-stack" class="inline-flex items-center gap-1 text-xs font-semibold text-[#2465DE] hover:text-[#1B4FB8] mb-3">← Part of HitPay's CFO Stack — the all-in-one finance stack for SEA businesses</a>
+          <span class="section-label">BillPay</span>
+          <h1 class="text-5xl lg:text-6xl text-[#03102F] leading-tight mb-6">
+            Make paying suppliers as easy as getting paid
+          </h1>
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
+            Forward or upload an invoice, let OCR read the details, route it for approval, and pay local or international suppliers — from the same HitPay account you already use to accept payments. Available in Singapore (local &amp; international) and the Philippines (local).
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#1B4FB8] transition-colors text-base">
+              Start Paying Suppliers Today
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 bg-white text-[#03102F] font-semibold px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-base">
+              Book a Call Now
+            </a>
+          </div>
+          <p class="text-sm text-[#61667C] mt-4">No monthly subscription · Existing merchants activate in minutes</p>
+        </div>
+        <div class="relative lg:flex justify-end hidden">
+          <!-- Decorative diagonal accent shapes -->
+          <div class="blob-shape -right-8 -top-12 w-72 h-72 bg-[#2465DE]/10 rotate-12"></div>
+          <div class="blob-shape right-24 bottom-4 w-36 h-36 bg-[#002771]/10"></div>
+          <!-- Secondary card floating behind -->
+          <div class="absolute top-4 right-0 bg-[#EBF1FC] rounded-2xl border border-[#D6E3F9] w-80 h-72 float-card-back"></div>
+          <!-- Bill inbox mock UI -->
+          <div class="relative bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-80 float-card-front">
+            <div class="flex items-center justify-between mb-4">
+              <div class="font-semibold text-[#03102F] text-sm">Bills — Inbox</div>
+              <span class="text-xs bg-[#EBF1FC] text-[#2465DE] px-2 py-1 rounded-full font-medium">3 pending</span>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center justify-between p-3 bg-[#F9F9F6] rounded-xl border border-slate-100">
+                <div>
+                  <div class="text-sm font-medium text-[#03102F]">Uni-Tat Supplies Pte Ltd</div>
+                  <div class="text-[10px] text-[#61667C]">Forwarded from bills@ · OCR read</div>
+                </div>
+                <span class="text-sm font-semibold text-[#03102F]">S$4,280</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-[#F9F9F6] rounded-xl border border-slate-100">
+                <div>
+                  <div class="text-sm font-medium text-[#03102F]">Guangzhou Textile Co.</div>
+                  <div class="text-[10px] text-[#61667C]">International · CNY</div>
+                </div>
+                <span class="text-sm font-semibold text-[#03102F]">¥18,500</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-[#EBF1FC] rounded-xl border border-[#D6E3F9]">
+                <div>
+                  <div class="text-sm font-medium text-[#2465DE]">3 bills selected</div>
+                  <div class="text-[10px] text-[#61667C]">Ready for approval</div>
+                </div>
+                <button class="text-xs bg-[#2465DE] text-white px-3 py-1.5 rounded-full font-semibold">Approve all</button>
+              </div>
+            </div>
+            <div class="border-t border-slate-100 pt-3 flex items-center justify-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-green-500"></div>
+              <span class="text-xs text-[#61667C]">Synced to Xero</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="py-14 bg-[#F9F9F6] border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-center text-[#61667C] text-xs font-semibold uppercase tracking-widest mb-8">BUILT FOR HITPAY MERCHANTS ACROSS SINGAPORE &amp; THE PHILIPPINES</p>
+      <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-4 mb-8">
+        <span class="text-lg font-semibold text-[#61667C]/70">Retail</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">F&amp;B</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">Fashion &amp; Jewelry</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">Wholesale &amp; Distribution</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">Health &amp; Wellness</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">Professional Services</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">E-commerce</span>
+        <span class="text-lg font-semibold text-[#61667C]/70">and more</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CFO STACK -->
+  <section id="cfo-stack" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">YOUR CFO STACK</span>
+        <h2 class="text-4xl text-[#03102F] leading-tight mt-4 mb-5">Your All-in-One CFO Finance Stack</h2>
+        <p class="text-lg text-[#61667C] max-w-2xl mx-auto leading-relaxed">
+          Most Southeast Asian businesses run money-in and money-out on entirely different systems — a payment processor for customer collections, a bank for local supplier transfers, and a separate service for anything international. HitPay is building one connected stack instead: accept customer payments, collect from local and overseas business partners, and now pay suppliers — all from the same account, the same login, and the same Xero sync.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 lg:items-start">
+        <div class="stack-tile bg-[#F9F9F6] rounded-2xl p-5 border border-slate-200 lg:mt-6">
+          <div class="text-xs font-semibold text-green-700 bg-green-100 inline-block px-2 py-0.5 rounded-full mb-3">Live</div>
+          <h3 class="font-semibold text-[#03102F] mb-1.5 text-sm">Accept Payments</h3>
+          <p class="text-[#61667C] text-xs leading-relaxed">Local and cross-border — cards, QRs, e-wallets, and BNPL, across 50+ payment methods.</p>
+        </div>
+        <div class="stack-tile bg-[#F9F9F6] rounded-2xl p-5 border border-slate-200">
+          <div class="text-xs font-semibold text-green-700 bg-green-100 inline-block px-2 py-0.5 rounded-full mb-3">Live</div>
+          <h3 class="font-semibold text-[#03102F] mb-1.5 text-sm">B2B Collection</h3>
+          <p class="text-[#61667C] text-xs leading-relaxed">Collect your business receivables from local and overseas business partners with HitPay Virtual Accounts.</p>
+        </div>
+        <div class="stack-tile bg-[#002771] rounded-2xl p-5 border-2 border-[#2465DE] lg:-mt-3 shadow-xl">
+          <div class="text-xs font-semibold text-white bg-[#2465DE] inline-block px-2 py-0.5 rounded-full mb-3">You are here</div>
+          <h3 class="font-semibold text-white mb-1.5 text-sm">Pay Suppliers</h3>
+          <p class="text-blue-100 text-xs leading-relaxed">BillPay — OCR capture, approvals, and local + international supplier payments, synced to Xero.</p>
+        </div>
+        <div class="stack-tile bg-[#F9F9F6] rounded-2xl p-5 border border-dashed border-slate-300">
+          <div class="text-xs font-semibold text-[#61667C] bg-white inline-block px-2 py-0.5 rounded-full mb-3 border border-slate-200">Coming next</div>
+          <h3 class="font-semibold text-[#03102F] mb-1.5 text-sm">Payroll</h3>
+          <p class="text-[#61667C] text-xs leading-relaxed">Pay your team from the same account you use to pay suppliers and accept customer payments.</p>
+        </div>
+        <div class="stack-tile bg-[#F9F9F6] rounded-2xl p-5 border border-dashed border-slate-300 lg:mt-6">
+          <div class="text-xs font-semibold text-[#61667C] bg-white inline-block px-2 py-0.5 rounded-full mb-3 border border-slate-200">Coming next</div>
+          <h3 class="font-semibold text-[#03102F] mb-1.5 text-sm">Spend Management</h3>
+          <p class="text-[#61667C] text-xs leading-relaxed">Issue corporate cards for team spend, reconciled automatically alongside every other transaction.</p>
+        </div>
+      </div>
+      <div class="text-center mt-6">
+        <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1B4FB8] transition-colors text-sm">
+          Activate BillPay Now
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-STEP VISUAL -->
+  <section class="py-16 bg-[#F9F9F6]">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <span class="section-label">HOW IT WORKS</span>
+        <h2 class="text-3xl text-[#03102F] mt-4">Forward. Approve. Paid.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white rounded-2xl p-6 text-center border border-slate-200">
+          <div class="w-10 h-10 rounded-full bg-[#2465DE] text-white font-semibold flex items-center justify-center mx-auto mb-4">1</div>
+          <!-- Mini mockup: forward-to-email -->
+          <div class="bg-[#F9F9F6] rounded-xl border border-slate-100 p-3 mb-4 text-left">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 bg-[#EBF1FC] rounded-md flex items-center justify-center flex-shrink-0">
+                <svg class="w-3.5 h-3.5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="text-[11px] font-medium text-[#03102F] truncate">bills@merchant.hit-pay.com</div>
+            </div>
+            <div class="flex justify-between items-center text-[11px]">
+              <span class="text-[#61667C]">Uni-Tat Supplies.pdf</span>
+              <span class="bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-semibold">OCR read</span>
+            </div>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Forward</h3>
+          <p class="text-sm text-[#61667C]">Upload an invoice or forward it to your BillPay email. OCR and AI read the vendor, amount, account number, and due date automatically.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center border border-slate-200">
+          <div class="w-10 h-10 rounded-full bg-[#2465DE] text-white font-semibold flex items-center justify-center mx-auto mb-4">2</div>
+          <!-- Mini mockup: bulk approve -->
+          <div class="bg-[#F9F9F6] rounded-xl border border-slate-100 p-3 mb-4 text-left">
+            <div class="flex items-center justify-between text-[11px] mb-1.5">
+              <span class="flex items-center gap-1.5 text-[#03102F] font-medium">
+                <span class="w-3.5 h-3.5 rounded bg-[#2465DE] flex items-center justify-center text-white text-[8px] flex-shrink-0">✓</span>Uni-Tat Supplies
+              </span>
+              <span class="text-[#61667C]">S$4,280</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] mb-2">
+              <span class="flex items-center gap-1.5 text-[#03102F] font-medium">
+                <span class="w-3.5 h-3.5 rounded bg-[#2465DE] flex items-center justify-center text-white text-[8px] flex-shrink-0">✓</span>Goldenroy Bakery
+              </span>
+              <span class="text-[#61667C]">S$1,150</span>
+            </div>
+            <div class="bg-[#2465DE] rounded-lg py-1.5 text-center text-white text-[11px] font-semibold">Approve all</div>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Approve</h3>
+          <p class="text-sm text-[#61667C]">Bills route through multi-level approval by amount. Select several at once and approve them together — no more 50 separate sign-offs.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center border border-slate-200">
+          <div class="w-10 h-10 rounded-full bg-[#2465DE] text-white font-semibold flex items-center justify-center mx-auto mb-4">3</div>
+          <!-- Mini mockup: paid + synced -->
+          <div class="bg-[#F9F9F6] rounded-xl border border-slate-100 p-3 mb-4 text-left">
+            <div class="flex items-center justify-between text-[11px] mb-1.5">
+              <span class="text-[#03102F] font-medium">PayNow · SGD</span>
+              <span class="text-green-700 font-semibold">Paid ✓</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] mb-2">
+              <span class="text-[#03102F] font-medium">International · CNY</span>
+              <span class="text-green-700 font-semibold">Paid ✓</span>
+            </div>
+            <div class="flex items-center justify-center gap-1.5 border-t border-slate-100 pt-2">
+              <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+              <span class="text-[10px] text-[#61667C]">Synced to Xero</span>
+            </div>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Paid</h3>
+          <p class="text-sm text-[#61667C]">Pay local suppliers via PayNow, QRPH, or bank transfer, and international suppliers in one batch — funded and reconciled to Xero automatically.</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1B4FB8] transition-colors text-sm">
+          Forward Your First Invoice Today
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 1: OCR capture — bg-white, text left, mockup right -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="section-label">OCR &amp; AI CAPTURE</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Turn every invoice into a ready-to-approve bill automatically
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            Most merchants in Singapore and the Philippines still enter supplier invoices into a spreadsheet by hand, one line at a time. HitPay BillPay removes that step. Upload an invoice as a PDF or photo, or forward it straight from a supplier's email to your account's dedicated bill address, and OCR combined with AI reads the vendor name, amount, bank or GCash account number, and due date directly into a draft bill. For merchants processing dozens of invoices a month, this turns hours of manual data entry into a single review — no re-typing, no transposition errors, and no invoice sitting forgotten in an inbox.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-5 mb-8">
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Instant OCR</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Reads vendor, amount, account number, and due date automatically.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Email Forwarding</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">No manual upload required — invoices land straight from a supplier's email.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-4-4"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Vendor Directory</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Bulk import for merchants migrating off spreadsheets.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">AI Categorisation</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Line items split and pre-coded before they ever hit Xero.</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
+            Capture Your First Bill Today <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <!-- OCR extraction mock UI -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl p-6 w-72">
+            <div class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-4">Bill detail — OCR extracted</div>
+            <div class="bg-[#F9F9F6] rounded-xl p-4 mb-4 space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-[#61667C]">Vendor</span><span class="font-medium text-[#03102F]">Uni-Tat Supplies</span></div>
+              <div class="flex justify-between"><span class="text-[#61667C]">Amount</span><span class="font-medium text-[#03102F]">S$4,280.00</span></div>
+              <div class="flex justify-between"><span class="text-[#61667C]">Account no.</span><span class="font-medium text-[#03102F]">048-XXXXXX-X</span></div>
+              <div class="flex justify-between"><span class="text-[#61667C]">Due date</span><span class="font-medium text-[#03102F]">15 Aug 2026</span></div>
+            </div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">✓ OCR matched</span>
+            </div>
+            <div class="bg-[#EBF1FC] rounded-lg p-3 text-center">
+              <div class="text-xs font-semibold text-[#2465DE]">Submit for approval →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 2: Approval workflows — bg-#F3F3ED, mockup left, text right -->
+  <section class="py-20 bg-[#F3F3ED]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center">
+          <!-- Approval mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-72">
+            <div class="text-sm font-semibold text-[#03102F] mb-4">Pending your approval</div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center justify-between p-3 bg-[#F9F9F6] rounded-xl border border-slate-100">
+                <div>
+                  <div class="text-sm font-medium text-[#03102F]">Uni-Tat Supplies</div>
+                  <div class="text-[10px] text-[#61667C]">Under S$5,000 · auto-route</div>
+                </div>
+                <span class="text-sm font-semibold text-[#03102F]">S$4,280</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-amber-50 rounded-xl border border-amber-100">
+                <div>
+                  <div class="text-sm font-medium text-[#03102F]">Guangzhou Textile Co.</div>
+                  <div class="text-[10px] text-amber-700">Above S$10,000 · owner sign-off</div>
+                </div>
+                <span class="text-sm font-semibold text-[#03102F]">¥18,500</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="flex-1 text-xs bg-[#2465DE] text-white px-3 py-2 rounded-lg font-semibold">Approve</button>
+              <button class="flex-1 text-xs bg-white border border-slate-200 text-[#61667C] px-3 py-2 rounded-lg font-semibold">Decline</button>
+            </div>
+            <div class="mt-3 flex items-center justify-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-[#2465DE]"></div>
+              <span class="text-xs text-[#61667C]">Audit trail logged automatically</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="section-label">APPROVAL CONTROLS</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            The right sign-off before money moves, every time
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            A finance manager or staff member can prepare and submit a bill, while the business owner retains final sign-off — without either party needing to be in the same room or on the same bank login. HitPay BillPay's multi-level approval rules route bills by amount, so a small recurring invoice can auto-clear while a large or international payment always reaches the owner first. Every approval, decline, and edit is timestamped and logged, giving audit-ready visibility by default rather than as an add-on — a control most banks and basic bill-pay tools simply don't offer.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-5 mb-8">
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Rules by Amount</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Multi-level approval routing configured to the bill amount.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Bulk Approve</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Select multiple bills and approve them in one action.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Full Audit Trail</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Every approval, decline, and edit timestamped automatically.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Free, No Tier</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Included by default — no separate paid approvals plan.</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
+            Set Up Approvals Now <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 3: Local + international payments — bg-white, text left, mockup right -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="section-label">LOCAL &amp; INTERNATIONAL, ONE WORKFLOW</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Pay a local supplier and an overseas supplier in the same batch
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            Most businesses use their bank for local supplier payments and a separate service for international transfers — two logins, two workflows, two reconciliation exports. HitPay BillPay combines both. In Singapore, a merchant pays a local supplier in SGD via PayNow or FAST and an overseas supplier — say, a manufacturer in China — in the same review and the same funding action, choosing PayNow, QRPH, or bank transfer per bill. In the Philippines, BillPay funds local supplier payments via InstaPay and PESONet at launch. Due-date scheduling lets a merchant approve ahead and hold cash until the day a payment is actually due.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-5 mb-8">
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Singapore</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Local PayNow/FAST and international supplier payments together.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Philippines</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Local InstaPay and PESONet supplier payments at launch.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M13 3h5m0 0v5m0-5L10 16"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Per-Bill Funding</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Choose PayNow, QRPH, or bank transfer for each bill.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-[#EBF1FC]"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Due-Date Scheduling</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Approve ahead, pay automatically, hold your cash till then.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-5">
+            <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-5 py-3 rounded-xl hover:bg-[#1B4FB8] transition-colors text-sm">
+              Pay Your First Supplier Today
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://hitpayapp.com/pricing" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
+              See full pricing <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <!-- Batch payment mock UI -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl p-6 w-72">
+            <div class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-4">Batch payment — 3 bills</div>
+            <div class="space-y-2 mb-4 text-sm">
+              <div class="flex justify-between items-center py-1.5 border-b border-slate-50">
+                <div>
+                  <div class="font-medium text-[#03102F]">Uni-Tat Supplies</div>
+                  <div class="text-[10px] text-[#61667C]">PayNow · SGD</div>
+                </div>
+                <span class="font-semibold text-[#03102F]">S$4,280</span>
+              </div>
+              <div class="flex justify-between items-center py-1.5 border-b border-slate-50">
+                <div>
+                  <div class="font-medium text-[#03102F]">Goldenroy Bakery Co-op</div>
+                  <div class="text-[10px] text-[#61667C]">Bank transfer · SGD</div>
+                </div>
+                <span class="font-semibold text-[#03102F]">S$1,150</span>
+              </div>
+              <div class="flex justify-between items-center py-1.5">
+                <div>
+                  <div class="font-medium text-[#03102F]">Guangzhou Textile Co.</div>
+                  <div class="text-[10px] text-[#61667C]">International · CNY</div>
+                </div>
+                <span class="font-semibold text-[#03102F]">¥18,500</span>
+              </div>
+            </div>
+            <div class="bg-[#2465DE] rounded-lg py-2 text-center">
+              <div class="text-white text-xs font-semibold">Fund &amp; pay all 3 →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 4: Xero sync + tracking — bg-#F3F3ED, mockup left, text right -->
+  <section class="py-20 bg-[#F3F3ED]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center">
+          <!-- Timeline + Xero mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-72">
+            <div class="text-sm font-semibold text-[#03102F] mb-4">Payment timeline</div>
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center gap-3 text-sm">
+                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                <span class="text-[#61667C]">Created — OCR extracted</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                <span class="text-[#61667C]">Approved — S. Tan, owner</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                <span class="text-[#61667C]">Paid — PayNow, 15 Aug 2026</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <div class="w-2 h-2 rounded-full bg-[#2465DE]"></div>
+                <span class="font-medium text-[#2465DE]">Synced to Xero</span>
+              </div>
+            </div>
+            <div class="bg-[#F9F9F6] rounded-xl p-3 text-center">
+              <div class="text-xs text-[#61667C]">3 line items · GL-coded</div>
+              <div class="text-xs font-semibold text-[#03102F] mt-0.5">No manual re-entry</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="section-label">XERO SYNC &amp; TRACKING</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Every payment reconciles to Xero — no double entry
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            Once a bill is paid, HitPay BillPay pushes the payment record straight into Xero, splitting it into line items with accounting categories already assigned — the manual reconciliation step most finance teams dread simply disappears. Every bill also carries a full status timeline, from creation and OCR extraction through approval and payment, so a merchant or finance manager can see exactly where any payment stands: pending, processing, completed, or failed, with a timestamp at each stage. Nothing gets lost between a forwarded email and a supplier's bank account.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-5 mb-8">
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Two-Way Xero Sync</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Per-line-item accounting categories, synced automatically.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Full Timeline</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Pending, processing, completed, or failed — timestamped.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Zero Manual Entry</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">No manual reconciliation or duplicate entry, ever.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="icon-bubble bg-white"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg></div>
+              <div>
+                <div class="font-semibold text-[#03102F] text-sm mb-0.5">Never Miss a Due Date</div>
+                <p class="text-[#61667C] text-xs leading-relaxed">Notifications at every step of the payment journey.</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
+            Connect Xero Today <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON + WHY HITPAY -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">WHY HITPAY</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">A platform that combines accepting payments and paying suppliers</h2>
+        <p class="text-[#61667C] max-w-2xl mx-auto">Every Accounts Payable tool automates bill capture — that's table stakes. What's different is where it lives: the same account your business already uses to get paid, built for Singapore and Philippine payment rails, at no monthly cost.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+        <div class="bg-[#F9F9F6] rounded-2xl p-5">
+          <div class="icon-bubble bg-[#EBF1FC] mb-3"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-1.5 text-sm">Payment acceptance + BillPay</div>
+          <p class="text-[#61667C] text-sm">Accept customer payments and pay suppliers from one platform — no moving money between providers.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-2xl p-5">
+          <div class="icon-bubble bg-[#EBF1FC] mb-3"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-1.5 text-sm">Built for Southeast Asia</div>
+          <p class="text-[#61667C] text-sm">Local rails for Singapore and the Philippines, on a MAS-regulated platform — not a global tool with SEA bolted on.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-2xl p-5">
+          <div class="icon-bubble bg-[#EBF1FC] mb-3"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-1.5 text-sm">No additional platform</div>
+          <p class="text-[#61667C] text-sm">Existing HitPay merchants activate BillPay with no new onboarding, no new integration, no new subscription.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-2xl p-5">
+          <div class="icon-bubble bg-[#EBF1FC] mb-3"><svg class="w-4 h-4 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div>
+          <div class="font-semibold text-[#03102F] mb-1.5 text-sm">AI that reduces manual work</div>
+          <p class="text-[#61667C] text-sm">OCR capture, AI categorisation, and line-item extraction — designed for SME finance teams, not enterprise IT.</p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-[#F9F9F6]">
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Capability</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#2465DE] uppercase tracking-wider border-b border-slate-200 bg-[#EBF1FC]">HitPay BillPay</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Business Bank</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Aspire</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Airwallex</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Wise Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100">
+              <td class="px-5 py-4 text-[#03102F] font-medium">Monthly platform cost</td>
+              <td class="px-5 py-4 text-center font-semibold text-[#03102F] bg-[#EBF1FC]">S$0</td>
+              <td class="px-5 py-4 text-center text-[#61667C]">Per-txn fees, opaque FX</td>
+              <td class="px-5 py-4 text-center text-[#61667C]">S$0 (Basic) / S$15 (Premium)</td>
+              <td class="px-5 py-4 text-center text-[#61667C]">Approvals require Grow, from S$79</td>
+              <td class="px-5 py-4 text-center text-[#61667C]">S$0 + one-time S$99 setup</td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="px-5 py-4 text-[#03102F] font-medium">Payment acceptance + bill pay, one account</td>
+              <td class="px-5 py-4 text-center bg-[#EBF1FC]"><span class="text-[#4DAB80] font-bold">✓✓</span><span class="block text-[#61667C] text-xs mt-0.5">Full acquiring + AP</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-amber-600 font-bold">◐</span><span class="block text-[#61667C] text-xs mt-0.5">Accepts payments, no bill pay workflow</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-amber-600 font-bold">◐</span><span class="block text-[#61667C] text-xs mt-0.5">Limited acceptance</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-amber-600 font-bold">◐</span><span class="block text-[#61667C] text-xs mt-0.5">Cards via links only</span></td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="px-5 py-4 text-[#03102F] font-medium">OCR + email-forwarded bill capture</td>
+              <td class="px-5 py-4 text-center bg-[#EBF1FC]"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-red-500 font-bold">✕</span><span class="block text-[#61667C] text-xs mt-0.5">Not available</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="px-5 py-4 text-[#03102F] font-medium">Multi-level approval workflows</td>
+              <td class="px-5 py-4 text-center bg-[#EBF1FC]"><span class="text-[#4DAB80] font-bold">✓</span><span class="block text-[#61667C] text-xs mt-0.5">Free</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-amber-600 font-bold">◐</span><span class="block text-[#61667C] text-xs mt-0.5">Basic approvals only</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span><span class="block text-[#61667C] text-xs mt-0.5">Paid plan required</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span><span class="block text-[#61667C] text-xs mt-0.5">1–2 approvers</span></td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="px-5 py-4 text-[#03102F] font-medium">Local SG &amp; PH rails</td>
+              <td class="px-5 py-4 text-center bg-[#EBF1FC]"><span class="text-[#4DAB80] font-bold">✓✓</span><span class="block text-[#61667C] text-xs mt-0.5">PayNow/FAST + InstaPay/PESONet</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓✓</span><span class="block text-[#61667C] text-xs mt-0.5">Varies by bank</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-amber-600 font-bold">◐</span><span class="block text-[#61667C] text-xs mt-0.5">SG only confirmed</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="px-5 py-4 text-[#03102F] font-medium">Xero two-way sync with line items</td>
+              <td class="px-5 py-4 text-center bg-[#EBF1FC]"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-red-500 font-bold">✕</span><span class="block text-[#61667C] text-xs mt-0.5">Not supported</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-red-500 font-bold">✕</span><span class="block text-[#61667C] text-xs mt-0.5">Reconciliation only</span></td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 text-[#03102F] font-medium">Batch payments</td>
+              <td class="px-5 py-4 text-center bg-[#EBF1FC]"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-amber-600 font-bold">◐</span><span class="block text-[#61667C] text-xs mt-0.5">Limited functionality</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span></td>
+              <td class="px-5 py-4 text-center"><span class="text-[#4DAB80] font-bold">✓</span><span class="block text-[#61667C] text-xs mt-0.5">Up to 1,000 recipients</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-[#61667C] mt-3 mb-8">Comparison based on published competitor pricing and product pages, verified July 2026. Full HitPay pricing at <a href="https://hitpayapp.com/pricing" class="text-[#2465DE] font-medium">hitpayapp.com/pricing</a>.</p>
+      <div class="text-center">
+        <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1B4FB8] transition-colors text-sm">
+          Choose HitPay for Free Today
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGONAL DIVIDER: white → navy -->
+  <div class="bg-white">
+    <svg class="diag-divider" viewBox="0 0 1440 100" preserveAspectRatio="none"><polygon points="0,100 1440,0 1440,100" fill="#002771"/></svg>
+  </div>
+
+  <!-- STATS BAR -->
+  <section class="py-16 bg-[#002771] -mt-px">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">S$0</div>
+          <div class="text-blue-300 text-sm">Monthly subscription — pay per transaction</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">1</div>
+          <div class="text-blue-300 text-sm">Account for accepting payments and paying suppliers</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">0</div>
+          <div class="text-blue-300 text-sm">Manual re-entry — OCR capture to Xero sync</div>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-white text-[#002771] font-semibold px-6 py-3 rounded-xl hover:bg-[#EBF1FC] transition-colors text-sm">
+          Start Saving Finance Hours Today
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGONAL DIVIDER: navy → white -->
+  <div class="bg-[#002771]">
+    <svg class="diag-divider" viewBox="0 0 1440 100" preserveAspectRatio="none"><polygon points="0,100 1440,0 1440,100" fill="#FFFFFF"/></svg>
+  </div>
+
+  <!-- TESTIMONIAL -->
+  <section class="py-20 bg-white -mt-px">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="relative bg-[#002771] rounded-3xl p-10 md:p-14 overflow-hidden">
+        <div class="blob-shape -right-10 -top-10 w-56 h-56 bg-[#2465DE]/25 rotate-12"></div>
+        <div class="blob-shape -left-8 -bottom-8 w-40 h-40 bg-white/5"></div>
+        <div class="relative flex gap-1 mb-6">
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <!-- [PLACEHOLDER — replace with a real pilot merchant testimonial before publishing, ideally quantified in hours/month or $ saved] -->
+        <blockquote class="relative text-2xl text-white leading-relaxed mb-8">
+          "We used to log into three different bank portals every week just to pay suppliers, then re-key everything into Xero afterwards. Now our invoices land in HitPay, our finance manager submits them, I approve from my phone, and they're paid and reconciled by the time I check the dashboard the next morning."
+        </blockquote>
+        <div class="relative flex items-center gap-4">
+          <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white font-semibold text-sm">[TBC]</div>
+          <div>
+            <div class="font-semibold text-white">[Merchant name — pilot testimonial required]</div>
+            <div class="text-blue-200 text-sm">[Role, Company] · Singapore</div>
+          </div>
+        </div>
+        <div class="relative text-center mt-8">
+          <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-1 text-white font-semibold hover:text-blue-200 text-sm">
+            Join Them Today <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE GRID -->
+  <section class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl text-[#03102F] mb-4">Everything your finance team needs</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">From invoice capture to a paid, reconciled bill — one workflow, one account, no monthly fee.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">OCR invoice capture</h3>
+          <p class="text-[#61667C] text-sm">Upload or forward any invoice, receipt, or bill and OCR reads the vendor, amount, and due date — no manual entry.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-4-4"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Vendor directory</h3>
+          <p class="text-[#61667C] text-sm">One place for every supplier's payment details, with bulk import for merchants migrating off spreadsheets.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Multi-level approvals</h3>
+          <p class="text-[#61667C] text-sm">Route bills by amount so staff can prepare payments while owners retain final sign-off — audit-ready by default.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Bulk approve, batch pay</h3>
+          <p class="text-[#61667C] text-sm">Select multiple bills, approve them together, and fund them in one action — what used to be 50 bank logins.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Due-date scheduling</h3>
+          <p class="text-[#61667C] text-sm">Approve ahead of time, hold your cash, and let payments execute automatically on the due date you choose.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Xero sync</h3>
+          <p class="text-[#61667C] text-sm">Every payment reconciles to Xero automatically, split into line items with accounting categories pre-assigned.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Local + international payments</h3>
+          <p class="text-[#61667C] text-sm">Pay a Singapore supplier via PayNow and an overseas supplier in the same batch, from the same account.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Payment tracking</h3>
+          <p class="text-[#61667C] text-sm">Full status timeline on every bill — pending, processing, completed, or failed — so you always know where your money is.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">No monthly subscription</h3>
+          <p class="text-[#61667C] text-sm">Pay per transaction only — S$0.50 per SG local transfer, ₱15 per PH local transfer. No platform fee at any tier.</p>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1B4FB8] transition-colors text-sm">
+          Explore BillPay Now
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE MORE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl text-[#03102F] mb-8">Explore more HitPay products</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="virtual-accounts-global-business-collections.html" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#EBF1FC] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Virtual Accounts &amp; Global Collections</div>
+            <div class="text-[#61667C] text-sm mb-3">Receive in 13 currencies from local and overseas business partners — the money-IN side of the same account BillPay pays out from.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+        <a href="#" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#F3F3ED] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M13 3h5m0 0v5m0-5L10 16"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Payment Links</div>
+            <div class="text-[#61667C] text-sm mb-3">Send a link via WhatsApp, email, or SMS and collect from customers via PayNow, GCash, or card in seconds.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+        <a href="#" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#EBF1FC] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Invoices</div>
+            <div class="text-[#61667C] text-sm mb-3">Create and send professional invoices to your customers, with payment status synced to the same Xero connection as BillPay.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">Learn more <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl text-[#03102F] mb-4">Frequently asked questions</h2>
+        <p class="text-[#61667C]">Everything Singapore and Philippine merchants need to know about HitPay BillPay.</p>
+      </div>
+      <div class="space-y-3">
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white" open>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is HitPay BillPay and how does it work?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay BillPay is an accounts payable tool built into a merchant's existing HitPay account. A merchant uploads or forwards a supplier invoice by email, OCR and AI extract the vendor, amount, account number, and due date automatically, the bill routes through an approval workflow, and the merchant pays the supplier locally or internationally. Every payment reconciles automatically with Xero — no manual data entry and no second platform.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Who can create, submit, and approve bills in HitPay BillPay?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Any staff member with BillPay access can upload an invoice or forward it to the account's dedicated bill email address to create a draft bill. Designated approvers — typically owners or finance managers — review and approve bills before payment. Multi-level approval rules can require sign-off by invoice amount, so a staff member preparing a bill and the owner approving it can be different people, with every action logged.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Which currencies and payment methods does HitPay BillPay support?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">In Singapore, BillPay funds local SGD payments via PayNow or FAST bank transfer, and pays international suppliers in their local currency across a wide network of receiving countries. In the Philippines, BillPay funds local PHP payments via InstaPay and PESONet at launch. Each bill can be funded by PayNow, QRPH, or bank transfer, so the merchant decides exactly how and when money leaves the account.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How does bill payment scheduling work in HitPay BillPay?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">A merchant can approve a bill ahead of time and schedule it to pay automatically on its due date, or any date chosen. Cash stays in the account until the scheduled date, and the payment executes and notifies the merchant without a calendar reminder. This protects cash flow while avoiding the late-payment friction of forgetting a due date.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What do the different bill statuses in HitPay BillPay mean?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">A bill moves through clear stages in HitPay BillPay: Draft (captured but not submitted), Pending Approval (awaiting sign-off), Approved / Scheduled (approved and waiting for its funding date), Processing (payment initiated), Paid (completed), and Failed (payment did not go through, with a reason shown). The full timeline is visible on every bill, so a merchant always knows exactly where a payment stands.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Is there a limit to how many bills or suppliers a merchant can manage?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">No. HitPay BillPay is built for merchants processing anywhere from a handful to hundreds of vendor bills a month, with no cap on the number of bills, vendors, or approvers. Vendors can be added one at a time or bulk-imported from a spreadsheet, and bills can be approved and paid individually or in a single batch action.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What documents besides invoices can be forwarded into HitPay BillPay?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Merchants can forward any supplier bill, receipt, or payment demand as a PDF or image — not only formal invoices — to their BillPay bill-forwarding email address, or upload the same file types directly. OCR extracts the vendor, amount, account details, and due date from whatever format the supplier sends, so a merchant doesn't need to standardise documents before capture.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How is HitPay BillPay different for Singapore merchants specifically?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Singapore merchants can pay local suppliers instantly via PayNow or FAST and pay overseas suppliers in the same workflow, funding each bill from the same HitPay account used to accept customer payments. Local transfers cost S$0.50 per payment, with no monthly subscription. This is the only combination in the Singapore market of accepting customer payments and paying suppliers, local and international, on one platform.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can Singapore merchants pay overseas suppliers directly through HitPay BillPay?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Yes. Singapore merchants can pay an overseas supplier — for example, a manufacturer in China — in the supplier's local currency, in the same batch and workflow as a local SGD PayNow payment to a domestic vendor. International payments carry a transparent rate; the current published rate is available at <a href="https://hitpayapp.com/pricing" class="text-[#2465DE] font-medium">hitpayapp.com/pricing</a>.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What local payment rails does HitPay BillPay use for the Philippines?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">In the Philippines, HitPay BillPay funds supplier payments via InstaPay and PESONet, the country's two standard bank-to-bank transfer rails, at launch. Local Philippine transfers cost ₱15 per payment, with no monthly subscription fee. Philippine merchants get the same OCR capture, approval workflow, and payment tracking as Singapore merchants, scoped to local domestic payments at this stage.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Is HitPay BillPay available to Philippine merchants at launch, and what will expand later?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Yes, HitPay BillPay launches in the Philippines with local InstaPay and PESONet supplier payments, OCR invoice capture, approval workflows, and Xero sync — the same core workflow available in Singapore. International supplier payments from the Philippines are not part of the initial launch scope; Singapore is the only market with international payment capability at this stage.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How much does HitPay BillPay cost?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay BillPay has no monthly subscription fee — merchants pay per transaction only. Local Singapore transfers via PayNow or FAST cost S$0.50 per payment; local Philippine transfers via InstaPay or PESONet cost ₱15 per payment. International payments from Singapore carry a transparent rate. Full current pricing is published at <a href="https://hitpayapp.com/pricing" class="text-[#2465DE] font-medium">hitpayapp.com/pricing</a>.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What do merchants need to start using HitPay BillPay?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Existing HitPay merchants in Singapore and the Philippines can activate BillPay directly from their existing dashboard under Finances — no new sign-up, no second KYB process, and no additional vendor relationship. New merchants complete standard HitPay onboarding once and gain access to both customer payment tools and BillPay together.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay BillPay sync with Xero?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Yes. HitPay BillPay syncs bills to Xero automatically, including splitting a single bill into multiple line items with per-line accounting categories before the sync, so finance teams avoid manual re-entry and double handling. Every payment status updates in both HitPay and Xero, keeping the general ledger current without a separate reconciliation step.</p>
+          </div>
+        </details>
+
+      </div>
+      <div class="text-center mt-10">
+        <p class="text-[#61667C] text-sm mb-4">Still have questions?</p>
+        <a href="#" class="inline-flex items-center gap-2 bg-white text-[#03102F] font-semibold px-6 py-3 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-sm">
+          Talk to Us Today
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="py-14 bg-[#F9F9F6] border-t border-slate-100">
+    <div class="max-w-3xl mx-auto px-6">
+      <p class="text-center text-[#61667C] text-sm leading-relaxed">
+        HitPay BillPay is built for Singapore and Philippine merchants already using HitPay to accept customer payments — a Jurong wholesaler paying local suppliers via PayNow and a manufacturer in Guangzhou in the same batch, or a Quezon City retailer settling vendor invoices via InstaPay — that still track supplier bills across spreadsheets, email threads, and separate bank logins.
+      </p>
+    </div>
+  </section>
+
+  <!-- DIAGONAL DIVIDER: beige → gradient -->
+  <div class="bg-[#F9F9F6]">
+    <svg class="diag-divider" viewBox="0 0 1440 100" preserveAspectRatio="none"><polygon points="0,100 1440,0 1440,100" fill="#002771"/></svg>
+  </div>
+
+  <!-- CTA BANNER -->
+  <section class="py-20 gradient-cta -mt-px">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl text-white mb-5">Ready to pay suppliers as easily as you get paid?</h2>
+      <p class="text-blue-100 text-xl mb-10">Join HitPay merchants across Singapore and the Philippines already using BillPay. No monthly fees — pay per transaction, activate in minutes.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://dashboard.hit-pay.com/register" class="bg-white text-[#002771] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Activate BillPay Today</a>
+        <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Book a Call Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIAGONAL DIVIDER: gradient → footer navy -->
+  <div class="gradient-cta">
+    <svg class="diag-divider" viewBox="0 0 1440 100" preserveAspectRatio="none"><polygon points="0,100 1440,0 1440,100" fill="#03102F"/></svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#03102F] text-slate-400 py-12 -mt-px">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond. MAS licensed (PS20200643).</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="billpay.html" class="hover:text-slate-300">BillPay</a></li>
+            <li><a href="virtual-accounts-global-business-collections.html" class="hover:text-slate-300">Virtual Accounts</a></li>
+            <li><a href="#" class="hover:text-slate-300">Payment Links</a></li>
+            <li><a href="#" class="hover:text-slate-300">POS Software</a></li>
+            <li><a href="#" class="hover:text-slate-300">Invoices</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Solutions</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="ecommerce.html" class="hover:text-slate-300">E-commerce</a></li>
+            <li><a href="retail.html" class="hover:text-slate-300">Retail</a></li>
+            <li><a href="restaurants.html" class="hover:text-slate-300">Restaurants &amp; F&amp;B</a></li>
+            <li><a href="wholesale.html" class="hover:text-slate-300">Wholesale</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-slate-300">About</a></li>
+            <li><a href="#" class="hover:text-slate-300">Blog</a></li>
+            <li><a href="https://hitpayapp.com/pricing" class="hover:text-slate-300">Pricing</a></li>
+            <li><a href="#" class="hover:text-slate-300">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-[#61667C]">© 2026 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!--
+PRE-PUBLISH CHECKLIST
+
+Content:
+✅ H1 = official positioning line from GTH-181 ("Make paying suppliers as easy as getting paid")
+✅ Subheadline names OCR, approval, local/international, and both launch markets (SG + PH)
+✅ Trust bar entity paragraph names specific city references per market (Jurong, Quezon City)
+✅ Every feature intro is 80–120-word prose, not bullet leads
+✅ FX markup % deliberately omitted everywhere per ticket instruction ("don't mention fx markup %") — links to hitpayapp.com/pricing instead
+✅ PH scope correctly limited to local rails only (InstaPay/PESONet) — no international PH claims
+✅ Comparison table sourced from GTH-181's pre-verified competitor table (Aspire/Airwallex/Wise, July 2026)
+✅ Stats bar adapted for an AP/money-OUT product (not the standard money-IN payout-speed template)
+✅ Testimonial is a PLACEHOLDER — must be replaced with a real pilot merchant quote (creative brief calls for quantified $/hours saved)
+
+FAQ:
+✅ 14 questions total, third person
+✅ Mirrors creative brief topics: who can create/submit/approve, currencies/methods, scheduling, bill statuses, bill limit, non-invoice documents
+✅ 2 SG-specific + 2 PH-specific questions
+✅ Pricing question has no FX %, links to hitpayapp.com/pricing
+✅ Signup/activation question covers existing vs. new merchants
+
+Schema:
+✅ FAQPage schema includes all 14 questions
+✅ SoftwareApplication schema has [YYYY-MM-DD] dateModified placeholder + areaServed SG/PH
+✅ BreadcrumbList schema correct (Home → Products → BillPay)
+✅ Review schema flagged [REAL QUOTE REQUIRED]
+
+Excluded by design (per review — internal GTM data, not customer-facing):
+- The 1,692-merchant target cohort, named merchant list, contact-coverage %, internal take-rate/pricing strategy notes, and "who we displace" competitive framing from the GTM doc — those are internal targeting/sales inputs, not page copy.
+
+Before publishing:
+□ Replace testimonial with a verified real pilot quote, ideally with hours/month or $ saved
+□ Confirm live international payment corridor list before publishing FAQ answer on cross-border scope
+□ Update [YYYY-MM-DD] in SoftwareApplication schema
+□ Verify S$0.50 / ₱15 pricing against hitpayapp.com/pricing at go-live (launch date: 4 Aug 2026)
+□ Swap footer/product placeholder links (#) once Payment Links / Invoices / POS pages are confirmed URLs
+-->

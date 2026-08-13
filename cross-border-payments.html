@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cross-Border Payment Solutions | HitPay SG, MY &amp; PH</title>
+  <meta name="description" content="HitPay lets SG, MY &amp; PH businesses accept cross-border payments online and in-person across APAC — 14 payment methods, next business day payouts, no setup fees.">
+  <meta property="og:title" content="Cross-Border Payment Solutions | HitPay SG, MY & PH">
+  <meta property="og:description" content="Choose the right cross-border product — Adaptive Pricing, Multi-Currency Payment Links, Borderless QR, or Multi-Currency Products — and accept payments from customers across Asia-Pacific.">
+
+  <link rel="alternate" hreflang="en-sg" href="https://hitpayapp.com/cross-border-payments">
+  <link rel="alternate" hreflang="en-my" href="https://hitpayapp.com/my/cross-border-payments">
+  <link rel="alternate" hreflang="en-ph" href="https://hitpayapp.com/ph/cross-border-payments">
+  <link rel="alternate" hreflang="x-default" href="https://hitpayapp.com/cross-border-payments">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+
+  <!-- JSON-LD: SpeakableSpecification -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".speakable-summary"]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is HitPay and how does it work for businesses accepting cross-border payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay is a Singapore-headquartered payment platform, licensed as a Major Payment Institution (PS20200643) under the Monetary Authority of Singapore, that lets Singapore, Malaysia, and Philippine businesses accept cross-border payments from customers across Asia-Pacific. Businesses choose from four products — Borderless QR, Multi-Currency Products, Adaptive Pricing, and Multi-Currency Payment Links — depending on whether they sell online or in person and who sets the exchange rate. There are zero monthly fees; standard transaction fees vary by payment method."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What cross-border payment methods does HitPay support, and in which markets are they popular?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay supports 14 cross-border payment methods across nine Asia-Pacific markets: PayNow (Singapore), UPI (India), WeChat Pay (China), Touch 'n Go and DuitNow (Malaysia), QRPH (Philippines), VietQR and ZaloPay (Vietnam), PromptPay, TrueMoney, and LINE Pay (Thailand), QRIS (Indonesia), and PayCo, KakaoPay, and NaverPay (South Korea). Most support both online checkout and in-person QR acceptance; PayCo, KakaoPay, NaverPay, and Touch 'n Go are online-only today."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Borderless QR and Multi-Currency Products?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both are in-person, point-of-sale products, but they serve opposite scenarios. Borderless QR suits a fixed storefront serving foreign tourists — the business charges in its home currency and HitPay converts automatically so customers pay in their own local currency. Multi-Currency Products suits a business travelling to sell overseas — the merchant prices the product directly in the foreign currency, with no automatic HitPay conversion."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Adaptive Pricing and Multi-Currency Payment Links?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both are online products, but pricing control differs. Adaptive Pricing keeps prices in the merchant's home currency and automatically shows international customers the converted amount in their local currency at checkout, with HitPay handling the FX. Multi-Currency Payment Links let a merchant create a link denominated directly in the customer's currency, with the merchant — not HitPay — setting that price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which cross-border product should an online business use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Online businesses that price everything in their home currency and want HitPay to handle currency conversion automatically should use Adaptive Pricing — it detects the customer's location and displays local pricing with no extra setup per currency. Businesses that prefer to set a specific price directly in a customer's currency, such as when quoting a fixed rate to an overseas client, should use Multi-Currency Payment Links instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which cross-border product should an in-person or overseas pop-up business use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A fixed storefront serving foreign tourists — a café, retail shop, or restaurant — should use Borderless QR, which lets customers scan and pay in their home currency while the business receives its own home currency. A business travelling overseas for a market, pop-up, or event should use Multi-Currency Products, pricing items directly in that country's local currency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What fees apply to cross-border payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An FX markup applies on top of the mid-market rate when HitPay handles the currency conversion — on Borderless QR and Adaptive Pricing. Multi-Currency Products and Multi-Currency Payment Links carry no automatic FX conversion, since the merchant sets the price directly in the foreign currency. Standard payment processing fees also apply, and customers are never charged an additional FX fee. Full rates are at hitpayapp.com/pricing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the cross-border exchange rate determined?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay uses the mid-market exchange rate plus a standard FX markup — see hitpayapp.com/pricing for exact rates. The rate refreshes daily at 6:00am SGT and is cached for the rest of the day, so every transaction, settlement, and refund processed that day uses the same rate. For Adaptive Pricing specifically, the rate is locked when the customer's checkout page loads and only refreshes if the page is reloaded."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do businesses receive their cross-border payout?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cross-border payments are credited to a business's HitPay Balance on a next business day basis in Singapore, Malaysia, and the Philippines. The collected amount is automatically converted to the merchant's home currency and included in the regular daily payout, with no separate cross-border settlement cycle to track."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do refunds work for cross-border payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A cross-border refund is issued in the original charge currency. The amount deducted from the merchant's home-currency wallet is converted at the live exchange rate at the time of the refund, not the rate used for the original transaction — so the merchant may see a small FX gain or loss depending on how rates moved between sale and refund."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do businesses enable cross-border payment methods?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Businesses go to Settings > Payment Methods in their HitPay dashboard, click Connect on the desired payment method, and complete the required information. Partner providers typically review new requests within three to five business days. Once approved, businesses go to Integrations, select their sales channel, and enable the payment method for that channel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do businesses need additional hardware for in-person cross-border payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Borderless QR and Multi-Currency Products both work with the HitPay POS app a business already uses — no additional terminal, reader, or hardware purchase is required. A business only needs a smartphone or tablet running the existing HitPay POS app to accept a tourist's local QR payment method."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Adaptive Pricing work with recurring billing or subscriptions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Adaptive Pricing currently supports one-time hosted checkout payments only. Recurring billing and subscription charges fall outside its scope, so a business billing customers on a subscription basis should quote prices in a single settlement currency rather than relying on Adaptive Pricing's automatic local-currency detection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if a customer's currency is not supported by Adaptive Pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If the customer's detected country maps to a currency Adaptive Pricing doesn't support, or one that matches the merchant's own default currency, the checkout simply displays the merchant's default currency and payment methods, with no currency selector shown. The customer completes the payment exactly as a domestic customer would."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to set up HitPay cross-border payments for a Singapore, Malaysian, or Philippine business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Businesses that already hold a HitPay account can enable cross-border payment methods and Adaptive Pricing directly from their dashboard, with partner review typically taking three to five business days per payment method. New businesses first complete HitPay account verification — approval typically takes one to three business days — before connecting cross-border methods."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What support does HitPay provide to businesses using cross-border payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay provides live chat and email support to help businesses connect cross-border payment methods, troubleshoot checkout issues, and reconcile cross-border settlements, alongside a self-serve help centre covering setup, fees, and refund handling for every supported market."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do businesses test Adaptive Pricing before going live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Businesses simulate a specific country by appending a \"+location_XX\" suffix to a test customer's email, where XX is a two-letter ISO country code — for example, test+location_FR@example.com for France. Entering this in the Payment Request API's email field, or in the dashboard's send-by-email flow, makes the checkout present currency and pricing exactly as a customer from that country would see it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can businesses build a custom cross-border checkout using HitPay's API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Developers can integrate cross-border payments through the Payment Request API, which supports the localised_pricing parameter for Adaptive Pricing on hosted checkout pages, or through the Borderless QR API for custom in-person integrations. HitPay's Developer Cross-Border Guide compares both approaches for teams building their own checkout flow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Singapore, Malaysia, and Philippine businesses all eligible for every cross-border product?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Eligibility depends on the specific payment method and product rather than a blanket rule — most of HitPay's 14 cross-border payment methods are available to merchants in Singapore, Malaysia, and the Philippines, though partner coverage can vary by market. Businesses should check availability for their specific payment method in Settings > Payment Methods after signing up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does HitPay cost for businesses accepting cross-border payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is zero monthly fee for accepting cross-border payments in any market. Businesses pay a standard per-transaction processing fee plus, where HitPay handles the FX conversion (Borderless QR and Adaptive Pricing), an FX markup over the mid-market rate. Multi-Currency Products and Multi-Currency Payment Links carry no FX markup, since the merchant sets the price directly. Full pricing is at hitpayapp.com/pricing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does HitPay offer a way for developers to build a custom cross-border payment integration?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Developers can use the Borderless QR API for API-level access to the same FX and QR-network mechanic used in HitPay's native in-person Borderless QR product, or the Payment Request API for the adaptive, currency-aware pricing mechanic behind Adaptive Pricing — both let a team build their own POS or checkout experience instead of using HitPay's native interface."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between using HitPay's native Borderless QR product and the Borderless QR API?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay's native Borderless QR product runs entirely inside the existing HitPay POS app, using HitPay's own exchange rate and interface. The Borderless QR API exposes the same underlying FX and QR-network mechanic so a developer or partner can build the acceptance flow into their own custom POS or checkout, rather than using HitPay's native app."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to set up HitPay cross-border payments for a business",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Create your free HitPay account",
+        "text": "Sign up for a free HitPay account at hitpayapp.com and provide basic business details for Singapore, Malaysia, or Philippine registration."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Submit business verification documents",
+        "text": "Submit business verification documents — ACRA UEN and NRIC/passport in Singapore, SSM registration and MyKad in Malaysia, or DTI/SEC registration and a valid government ID in the Philippines."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Connect cross-border payment methods and integrate",
+        "text": "Connect the cross-border payment methods needed in Settings > Payment Methods, then integrate HitPay with an existing website, point-of-sale setup, or invoicing tool."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Accept your first cross-border payment",
+        "text": "Enable the connected cross-border payment methods for the relevant sales channel in Integrations, then accept the first cross-border payment from an international customer."
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HitPay Cross-Border Payments",
+    "description": "Four ways for Singapore, Malaysia, and Philippine businesses to accept cross-border payments from customers across Asia-Pacific: Borderless QR and Multi-Currency Products for in-person acceptance, Adaptive Pricing and Multi-Currency Payment Links for online checkout. 14 payment methods across 9 markets, an FX markup applies where HitPay handles conversion, next business day payouts.",
+    "url": "https://hitpayapp.com/payments/cross-border-payments",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web browser, iOS, Android",
+    "dateModified": "[YYYY-MM-DD]",
+    "datePublished": "[YYYY-MM-DD]",
+    "areaServed": ["Singapore", "Malaysia", "Philippines"],
+    "featureList": [
+      "Borderless QR — in-person, home-currency pricing, automatic FX conversion for tourists",
+      "Multi-Currency Products — in-person, merchant-set foreign-currency pricing for overseas selling",
+      "Adaptive Pricing — online, home-currency pricing, automatic local-currency checkout for international customers",
+      "Multi-Currency Payment Links — online, merchant-set customer-currency payment links",
+      "14 cross-border payment methods across 9 Asia-Pacific markets",
+      "FX markup over the mid-market rate on HitPay-converted products — see pricing for rates",
+      "No additional FX fee charged to customers",
+      "Next business day payouts in home currency",
+      "Works with the existing HitPay POS app — no additional hardware",
+      "Borderless QR API — developer access to the same FX/QR-network mechanic for custom POS or checkout integrations",
+      "Payment Request API — developer access to the adaptive pricing mechanic via the localised_pricing parameter",
+      "PCI DSS Level 1 certified checkout infrastructure",
+      "No monthly or setup fees"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "SGD",
+      "description": "No monthly fees. No setup fees. Standard processing fees and, where applicable, an FX markup apply — see hitpayapp.com/pricing.",
+      "url": "https://hitpayapp.com/pricing"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hitpayapp.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://hitpayapp.com/products" },
+      { "@type": "ListItem", "position": 3, "name": "Cross-Border Payments", "item": "https://hitpayapp.com/payments/cross-border-payments" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: Review [REAL QUOTE REQUIRED] -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "SoftwareApplication", "name": "HitPay" },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "name": "[REAL QUOTE REQUIRED — replace placeholder]",
+    "reviewBody": "[REAL QUOTE REQUIRED — replace with actual testimonial from a business using HitPay's cross-border payment products]",
+    "author": { "@type": "Person", "name": "[Merchant Name]" }
+  }
+  </script>
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HitPay",
+    "url": "https://www.hitpayapp.com",
+    "logo": "https://www.hitpayapp.com/assets/logo.png",
+    "sameAs": ["https://www.linkedin.com/company/hitpay", "https://twitter.com/hitpaysg"],
+    "areaServed": ["Singapore", "Malaysia", "Philippines"]
+  }
+  </script>
+</head>
+<body class="bg-white text-[#03102F]">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="https://hitpayapp.com/pricing" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#developers" class="hover:text-[#03102F]">Developers</a>
+          <a href="#" class="hover:text-[#03102F]">Resources</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p text-sm px-4 py-2">Create free account</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="gradient-hero pt-32 pb-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-label">Cross-Border Payments</span>
+          <h1 class="text-5xl lg:text-6xl text-[#03102F] leading-tight mb-6">
+            Sell to customers across Asia-Pacific without opening a single foreign business entity or bank account
+          </h1>
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
+            HitPay gives Singapore, Malaysia, and Philippine businesses four ways to accept cross-border payments — online or in person — across <strong>14 payment methods in 9 Asia-Pacific markets</strong>, with an <strong>FX markup</strong> where HitPay handles the conversion and <strong>next business day payouts</strong> in your home currency.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">
+              Start Accepting Cross-Border Payments
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#which-product" class="hp-btn hp-btn-s">
+              Find Your Cross-Border Product
+            </a>
+          </div>
+          <p class="text-sm text-[#61667C] mt-4">Free to sign up · No monthly or setup fees — per-transaction fees apply · Approval in 1–3 business days</p>
+        </div>
+        <div class="relative lg:flex justify-end hidden">
+          <!-- Adaptive Pricing checkout mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-80">
+            <div class="flex items-center justify-between mb-4">
+              <div class="font-semibold text-[#03102F] text-sm">Checkout — Luna Home Décor</div>
+              <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">● Live</span>
+            </div>
+            <div class="text-xs font-semibold text-[#61667C] uppercase tracking-widest mb-2">Pay in</div>
+            <div class="flex gap-2 mb-4">
+              <div class="flex-1 text-center text-sm font-semibold text-[#61667C] border border-slate-200 rounded-lg py-2">SGD 120.00</div>
+              <div class="flex-1 text-center text-sm font-semibold text-white bg-[#2465DE] rounded-lg py-2">IDR 1,895,000</div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center justify-between text-sm p-2.5 bg-[#F9F9F6] rounded-lg">
+                <span class="text-[#03102F] font-medium">QRIS</span>
+                <span class="text-[10px] text-[#61667C] font-semibold">🇮🇩 Indonesia</span>
+              </div>
+              <div class="flex items-center justify-between text-sm p-2.5 bg-[#F9F9F6] rounded-lg opacity-60">
+                <span class="text-[#03102F] font-medium">Card</span>
+                <span class="text-[10px] text-[#61667C] font-semibold">Visa · Mastercard</span>
+              </div>
+            </div>
+            <div class="bg-[#2465DE] rounded-lg py-2.5 text-center">
+              <span class="text-white text-sm font-semibold">Pay IDR 1,895,000</span>
+            </div>
+            <div class="mt-3 text-center text-[10px] text-[#61667C]">Merchant receives SGD 120.00 · rate locked at page load</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="py-14 bg-[#F9F9F6] border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-center text-[#61667C] text-xs font-semibold uppercase tracking-widest mb-6">TRUSTED BY 20,000+ BUSINESSES ACROSS SINGAPORE, MALAYSIA &amp; THE PHILIPPINES</p>
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇸🇬 Singapore — PayNow, UPI, WeChat Pay</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇲🇾 Malaysia — DuitNow, Touch 'n Go, WeChat Pay</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇵🇭 Philippines — QRPH</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇹🇭 Thailand — PromptPay, TrueMoney, LINE Pay</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇮🇩 Indonesia — QRIS</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇻🇳 Vietnam — VietQR, ZaloPay</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇮🇳 India — UPI</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇰🇷 South Korea — KakaoPay, NaverPay, PayCo</span>
+      </div>
+      <p class="text-center text-[#61667C] text-sm max-w-2xl mx-auto leading-relaxed">
+        From an online store shipping across the region to a storefront serving tourists, HitPay merchants accept 14 cross-border payment methods across 9 Asia-Pacific markets in one dashboard.
+      </p>
+    </div>
+  </section>
+
+  <!-- AUDIENCE SPLIT -->
+  <section class="py-14 bg-white border-b border-slate-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="section-label">START HERE</span>
+      <h2 class="text-2xl text-[#03102F] mt-3 mb-6">Are you a merchant, or building your own integration?</h2>
+      <div class="grid md:grid-cols-2 gap-5">
+        <a href="#which-product" class="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 border-[#2465DE] bg-[#EBF1FC] hover:bg-[#D6E3F9] transition-colors">
+          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+          <div class="font-semibold text-[#03102F]">I'm a merchant</div>
+          <p class="text-sm text-[#61667C]">Find the right cross-border product for how and where you sell</p>
+        </a>
+        <a href="#developers" class="flex flex-col items-center gap-3 p-6 rounded-2xl border-2 border-slate-200 hover:border-[#D6E3F9] transition-colors">
+          <div class="w-12 h-12 bg-[#F9F9F6] rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M7 8l-4 4 4 4M14 4l-4 16"/></svg>
+          </div>
+          <div class="font-semibold text-[#03102F]">I'm a developer</div>
+          <p class="text-sm text-[#61667C]">Integrate cross-border FX and QR acceptance directly via API</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHICH PRODUCT — CHANNEL FIRST -->
+  <section id="which-product" class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">CHOOSE YOUR PRODUCT</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">Start with how you sell — offline or online</h2>
+        <p class="text-[#61667C] max-w-2xl mx-auto">Channel decides the product family. Within each channel, the only remaining question is who sets the exchange rate — HitPay, or the merchant.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- OFFLINE COLUMN -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-[#2465DE] uppercase tracking-widest">Offline</div>
+              <div class="font-semibold text-[#03102F]">HitPay POS, in person</div>
+            </div>
+          </div>
+          <a href="#borderless-qr" class="block bg-[#F9F9F6] rounded-2xl p-5 mb-4 hover:bg-[#F3F3ED] transition-colors">
+            <div class="text-xs bg-white text-[#61667C] px-2.5 py-1 rounded-full font-semibold inline-block mb-3">Fixed storefront serving tourists</div>
+            <h3 class="font-semibold text-[#03102F] mb-2">Borderless QR</h3>
+            <p class="text-[#61667C] text-sm">A Singapore retailer with Chinese or Malaysian tourist customers charges in SGD; the tourist scans and pays in their own currency via their home payment app.</p>
+          </a>
+          <a href="#multi-currency-products" class="block bg-[#F9F9F6] rounded-2xl p-5 hover:bg-[#F3F3ED] transition-colors">
+            <div class="text-xs bg-white text-[#61667C] px-2.5 py-1 rounded-full font-semibold inline-block mb-3">Selling at a popup or market abroad</div>
+            <h3 class="font-semibold text-[#03102F] mb-2">Multi-Currency Products</h3>
+            <p class="text-[#61667C] text-sm">A merchant travelling to sell overseas — a popup booth, market, or trade fair — charges in the local currency of the country they're operating in.</p>
+          </a>
+        </div>
+        <!-- ONLINE COLUMN -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-[#2465DE] uppercase tracking-widest">Online</div>
+              <div class="font-semibold text-[#03102F]">Hosted checkout</div>
+            </div>
+          </div>
+          <a href="#adaptive-pricing" class="block bg-[#F9F9F6] rounded-2xl p-5 mb-4 hover:bg-[#F3F3ED] transition-colors">
+            <div class="text-xs bg-white text-[#61667C] px-2.5 py-1 rounded-full font-semibold inline-block mb-3">Priced in your currency</div>
+            <h3 class="font-semibold text-[#03102F] mb-2">Adaptive Pricing</h3>
+            <p class="text-[#61667C] text-sm">The same mechanic as Borderless QR, brought online: merchant prices in home currency, and international customers see and pay in their own currency at checkout.</p>
+          </a>
+          <a href="#payment-links" class="block bg-[#F9F9F6] rounded-2xl p-5 hover:bg-[#F3F3ED] transition-colors">
+            <div class="text-xs bg-white text-[#61667C] px-2.5 py-1 rounded-full font-semibold inline-block mb-3">Priced in customer's currency</div>
+            <h3 class="font-semibold text-[#03102F] mb-2">Multi-Currency Payment Links</h3>
+            <p class="text-[#61667C] text-sm">An online seller quotes an overseas client a fixed price by creating a payment link denominated directly in that customer's own currency.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNEL DIVIDER: OFFLINE -->
+  <div class="bg-[#F9F9F6] pt-4">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-semibold text-[#2465DE] uppercase tracking-widest">Offline products</span>
+        <span class="flex-1 h-px bg-slate-200"></span>
+        <span class="text-xs text-[#61667C]">HitPay POS, in person</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 1: Borderless QR — bg white, text left, mockup right -->
+  <section id="borderless-qr" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="section-label">OFFLINE · FIXED STOREFRONT</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Let tourists pay with the app already on their phone — no currency exchange counter needed
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            A storefront near a tourist district often loses a sale when a foreign visitor doesn't carry local cash and their card isn't accepted, or the exchange counter is too far to bother with. Borderless QR lets that storefront charge in its own home currency while the tourist scans one QR code and pays in their own currency, using WeChat Pay, Alipay+, UPI, or another home payment app. The business still receives its home currency, so nothing changes in daily reconciliation — it's the same QR code doing more work.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">One QR code accepts every connected cross-border wallet</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Works on the existing HitPay POS app — no new hardware</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">FX markup over the mid-market rate; merchant receives home currency</span>
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Start Accepting Borderless QR Payments Today</a>
+            <a href="/pos/borderless-qr" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859]">Learn More <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="text-sm text-[#61667C] mt-4">Building your own POS or checkout instead of using HitPay's native app? See the <a href="#developers" class="text-[#2465DE] hover:underline">Borderless QR API</a>.</p>
+        </div>
+        <div class="flex justify-center">
+          <!-- Borderless QR mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-72">
+            <div class="text-sm font-semibold text-[#03102F] mb-4">Table 4 — SGD 42.00</div>
+            <div class="bg-[#F9F9F6] rounded-xl p-5 flex items-center justify-center mb-4">
+              <div class="w-32 h-32 bg-white rounded-lg border border-slate-200 flex items-center justify-center">
+                <svg class="w-20 h-20 text-[#03102F]" fill="currentColor" viewBox="0 0 24 24"><path d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM6 6v2h2V6H6zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm2 1v2h2v-2H6zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zm2 1v2h2V6h-2zM14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z"/></svg>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-sm p-2 bg-[#F9F9F6] rounded-lg">
+                <span class="text-[#61667C]">Customer pays</span>
+                <span class="font-semibold text-[#03102F]">¥228 via WeChat Pay</span>
+              </div>
+              <div class="flex items-center justify-between text-sm p-2 bg-[#F9F9F6] rounded-lg">
+                <span class="text-[#61667C]">You receive</span>
+                <span class="font-semibold text-green-700">SGD 42.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 2: Multi-Currency Products — bg F3F3ED, mockup left, text right -->
+  <section id="multi-currency-products" class="py-20 bg-[#F3F3ED]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center order-2 lg:order-1">
+          <!-- Multi-currency products mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-72">
+            <div class="text-sm font-semibold text-[#03102F] mb-1">Pop-up POS — Bangkok craft fair</div>
+            <div class="text-xs text-[#61667C] mb-4">Price list · THB</div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center justify-between text-sm p-2.5 bg-[#F9F9F6] rounded-lg">
+                <span class="text-[#03102F] font-medium">Woven tote bag</span>
+                <span class="font-semibold text-[#03102F]">฿450</span>
+              </div>
+              <div class="flex items-center justify-between text-sm p-2.5 bg-[#F9F9F6] rounded-lg">
+                <span class="text-[#03102F] font-medium">Ceramic mug set</span>
+                <span class="font-semibold text-[#03102F]">฿890</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between p-2.5 bg-[#EBF1FC] rounded-lg text-sm mb-3">
+              <span class="font-medium text-[#03102F]">PromptPay</span>
+              <span class="text-[10px] text-[#2465DE] font-semibold">🇹🇭 Thailand</span>
+            </div>
+            <div class="text-xs text-center text-[#61667C]">Payout converts to your home currency</div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <span class="section-label">OFFLINE · SELLING OVERSEAS</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Sell at an overseas pop-up or trade fair with prices your local customers actually recognise
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            A business travelling to sell at a foreign market, trade fair, or pop-up booth struggles when it prices in a home currency few local shoppers can mentally convert on the spot — sales slow down while customers do the maths. Multi-Currency Products lets that business price its catalogue directly in the local currency of wherever it's selling, so a Singapore merchant at a Bangkok craft fair prices in Thai baht, and a Philippine merchant at a Kuala Lumpur market prices in Malaysian ringgit.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Merchant sets the local-currency price — no automatic FX markup</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Works on the existing HitPay POS app — no additional hardware</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Payout still converts back to the merchant's home currency</span>
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Set Up Multi-Currency Products Now</a>
+            <a href="/pos/multi-currency-products" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859]">Learn More <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE CTA STRIP -->
+  <section class="bg-[#EBF1FC] py-10">
+    <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
+      <p class="text-xl font-semibold text-[#03102F]">Ready to start accepting payments?</p>
+      <div class="flex flex-col items-center md:items-end gap-2">
+        <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Start For Free</a>
+        <p class="text-xs text-[#61667C]">No setup fees · Free to sign up · Approval in 1–3 business days</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNEL DIVIDER: ONLINE -->
+  <div class="bg-[#F3F3ED] pt-4">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-semibold text-[#2465DE] uppercase tracking-widest">Online products</span>
+        <span class="flex-1 h-px bg-slate-300"></span>
+        <span class="text-xs text-[#61667C]">Hosted checkout</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 3: Adaptive Pricing — bg F3F3ED, text left, mockup right -->
+  <section id="adaptive-pricing" class="py-20 bg-[#F3F3ED]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="section-label">ONLINE · PRICED IN YOUR CURRENCY</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Stop losing international carts to unfamiliar currency and unexpected FX charges
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            Online stores that price only in their home currency often lose international shoppers at checkout, when a customer can't tell what they're actually being charged. Adaptive Pricing brings the same mechanic as Borderless QR online: it detects a customer's location by IP address and automatically displays the converted amount in their local currency alongside relevant local payment methods, while the business still creates every payment request in its own home currency. The FX rate is locked when the checkout page loads and refreshes only if the customer reloads it, so the price never shifts mid-payment. Because it applies at the HitPay hosted checkout itself, Adaptive Pricing works inside an existing online store integration — Shopify, Wix, WooCommerce, and more — with no rebuild required.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Merchant prices stay in one home currency — no separate link per market</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Currency selector shown only to customers whose local currency differs from the merchant's</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Turned on in Checkout Customisation settings — no code required</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Works with your existing online store integration — Shopify, Wix, WooCommerce, and more — with no extra setup per platform</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Not available on the default payment link, open-amount links, or recurring billing</span>
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Turn On Adaptive Pricing Today</a>
+            <a href="/payments/adaptive-pricing" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859]">Learn More <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="text-sm text-[#61667C] mt-4">Building your own checkout instead of using HitPay's hosted page? See the <a href="#developers" class="text-[#2465DE] hover:underline">Payment Request API</a>.</p>
+        </div>
+        <div class="flex justify-center">
+          <!-- Adaptive pricing flow mock UI -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl p-6 w-72">
+            <div class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-4">SGD 120 payment request</div>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3 p-3 bg-[#F9F9F6] rounded-xl">
+                <div class="w-8 h-8 bg-[#EBF1FC] rounded-full flex items-center justify-center text-xs font-bold text-[#2465DE]">1</div>
+                <div class="text-sm text-[#03102F]">Merchant creates request in <strong>SGD 120</strong></div>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#F9F9F6] rounded-xl">
+                <div class="w-8 h-8 bg-[#EBF1FC] rounded-full flex items-center justify-center text-xs font-bold text-[#2465DE]">2</div>
+                <div class="text-sm text-[#03102F]">HitPay detects an Indonesian IP</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#EBF1FC] rounded-xl border border-[#D6E3F9]">
+                <div class="w-8 h-8 bg-[#2465DE] rounded-full flex items-center justify-center text-xs font-bold text-white">3</div>
+                <div class="text-sm text-[#03102F]">Customer sees <strong>IDR 1,895,000</strong> + QRIS</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#F9F9F6] rounded-xl">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-xs font-bold text-green-700">✓</div>
+                <div class="text-sm text-[#03102F]">Merchant is paid out in <strong>SGD</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 4: Multi-Currency Payment Links — bg white, mockup left, text right -->
+  <section id="payment-links" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="flex justify-center order-2 lg:order-1">
+          <!-- Payment link mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-72">
+            <div class="text-sm font-semibold text-[#03102F] mb-1">Invoice #INV-2044</div>
+            <div class="text-xs text-[#61667C] mb-4">Bao Viet Trading Co. · Hanoi</div>
+            <div class="bg-[#F9F9F6] rounded-xl p-4 mb-4 text-center">
+              <div class="text-xs text-[#61667C] mb-1">Amount due</div>
+              <div class="text-2xl font-semibold text-[#03102F]">₫8,450,000</div>
+              <div class="text-xs text-[#61667C] mt-1">VND — set by merchant</div>
+            </div>
+            <div class="flex items-center justify-between p-2.5 bg-[#EBF1FC] rounded-lg text-sm mb-3">
+              <span class="font-medium text-[#03102F]">VietQR</span>
+              <span class="text-[10px] text-[#2465DE] font-semibold">🇻🇳 Vietnam</span>
+            </div>
+            <div class="bg-[#2465DE] rounded-lg py-2.5 text-center">
+              <span class="text-white text-sm font-semibold">Pay ₫8,450,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <span class="section-label">ONLINE · PRICED IN CUSTOMER'S CURRENCY</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            Quote overseas clients a fixed price in their own currency, with no FX surprises for either side
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            Businesses invoicing overseas clients directly — a freelancer billing a Vietnamese client, a wholesaler quoting a Thai distributor — often need to commit to a specific price in the buyer's currency, not a rate that moves with the market. Multi-Currency Payment Links let a business create a link denominated directly in the customer's currency, so the buyer knows exactly what they'll pay before they click through, and the business controls the price without waiting on HitPay's daily FX rate.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Price set directly in the customer's currency — no automatic FX markup</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Shareable via WhatsApp, email, or SMS — no storefront required</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5">✓</span>
+              <span class="text-[#61667C]">Payout still lands in the merchant's home currency</span>
+            </li>
+          </ul>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Create Your First Payment Link Now</a>
+            <a href="/payments/checkout-customisation" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859]">Learn More <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT METHODS TABLE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="section-label">PAYMENT METHODS</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">14 cross-border payment methods, across 9 Asia-Pacific markets</h2>
+        <p class="text-[#61667C] max-w-2xl mx-auto">One HitPay integration connects every method below — no separate contract per country.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm mb-6">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-[#F9F9F6]">
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Payment Method</th>
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Popular In</th>
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Customers Pay In</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Online</th>
+              <th class="text-center px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">In-Person (QR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">PayNow</td><td class="px-5 py-3.5 text-[#61667C]">Singapore</td><td class="px-5 py-3.5 text-[#61667C]">SGD</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">UPI</td><td class="px-5 py-3.5 text-[#61667C]">India</td><td class="px-5 py-3.5 text-[#61667C]">SGD</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">WeChat Pay</td><td class="px-5 py-3.5 text-[#61667C]">China</td><td class="px-5 py-3.5 text-[#61667C]">SGD / MYR</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">Touch 'n Go</td><td class="px-5 py-3.5 text-[#61667C]">Malaysia</td><td class="px-5 py-3.5 text-[#61667C]">MYR</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-red-500 font-bold">✕</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">DuitNow</td><td class="px-5 py-3.5 text-[#61667C]">Malaysia</td><td class="px-5 py-3.5 text-[#61667C]">MYR</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">QRPH</td><td class="px-5 py-3.5 text-[#61667C]">Philippines</td><td class="px-5 py-3.5 text-[#61667C]">PHP</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">VietQR / ZaloPay</td><td class="px-5 py-3.5 text-[#61667C]">Vietnam</td><td class="px-5 py-3.5 text-[#61667C]">VND</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">PromptPay</td><td class="px-5 py-3.5 text-[#61667C]">Thailand</td><td class="px-5 py-3.5 text-[#61667C]">THB</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">TrueMoney</td><td class="px-5 py-3.5 text-[#61667C]">Thailand</td><td class="px-5 py-3.5 text-[#61667C]">THB</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">LINE Pay</td><td class="px-5 py-3.5 text-[#61667C]">Thailand</td><td class="px-5 py-3.5 text-[#61667C]">THB</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">QRIS</td><td class="px-5 py-3.5 text-[#61667C]">Indonesia</td><td class="px-5 py-3.5 text-[#61667C]">IDR</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">PayCo</td><td class="px-5 py-3.5 text-[#61667C]">South Korea</td><td class="px-5 py-3.5 text-[#61667C]">KRW</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-red-500 font-bold">✕</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-3.5 text-[#03102F] font-medium">KakaoPay</td><td class="px-5 py-3.5 text-[#61667C]">South Korea</td><td class="px-5 py-3.5 text-[#61667C]">KRW</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-red-500 font-bold">✕</td></tr>
+            <tr><td class="px-5 py-3.5 text-[#03102F] font-medium">NaverPay</td><td class="px-5 py-3.5 text-[#61667C]">South Korea</td><td class="px-5 py-3.5 text-[#61667C]">KRW</td><td class="px-5 py-3.5 text-center text-[#4DAB80] font-bold">✓</td><td class="px-5 py-3.5 text-center text-red-500 font-bold">✕</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-[#61667C]">Alongside these 14 cross-border methods, HitPay merchants also access <strong>50+ payment methods</strong> overall, including cards, local wallets, and BNPL — see <a href="/payment-methods/paynow" class="text-[#2465DE] hover:underline">the full payment methods list</a>.</p>
+    </div>
+  </section>
+
+  <!-- WHICH PRODUCT COMPARISON TABLE -->
+  <section class="py-20 bg-[#F3F3ED]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="section-label">SIDE BY SIDE</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">Comparing all four cross-border products</h2>
+        <p class="text-[#61667C] max-w-2xl mx-auto">Channel and pricing control are the two variables that decide which product fits. Building a custom integration instead? See the <a href="#developers" class="text-[#2465DE] hover:underline">developer comparison below</a>.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+        <table class="w-full text-sm border-collapse min-w-[720px]">
+          <thead>
+            <tr>
+              <th class="bg-[#F9F9F6] border-b border-slate-200"></th>
+              <th colspan="2" class="text-center px-5 py-2 text-xs font-semibold text-[#2465DE] uppercase tracking-wider border-b border-slate-200 bg-[#EBF1FC]">Offline · HitPay POS</th>
+              <th colspan="2" class="text-center px-5 py-2 text-xs font-semibold text-[#2465DE] uppercase tracking-wider border-b border-slate-200 bg-[#EBF1FC]">Online · Checkout</th>
+            </tr>
+            <tr class="bg-[#F9F9F6]">
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200"></th>
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Borderless QR</th>
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Multi-Currency Products</th>
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Adaptive Pricing</th>
+              <th class="text-left px-5 py-3.5 text-xs font-semibold text-[#61667C] uppercase tracking-wider border-b border-slate-200">Multi-Currency Payment Links</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="px-5 py-4 font-semibold text-[#03102F]">Channel</td><td class="px-5 py-4 text-[#61667C]">In-person (POS)</td><td class="px-5 py-4 text-[#61667C]">In-person (POS)</td><td class="px-5 py-4 text-[#61667C]">Online</td><td class="px-5 py-4 text-[#61667C]">Online</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-4 font-semibold text-[#03102F]">Who's it for</td><td class="px-5 py-4 text-[#61667C]">Fixed storefront serving tourists</td><td class="px-5 py-4 text-[#61667C]">Merchant travelling overseas</td><td class="px-5 py-4 text-[#61667C]">Online store, priced in home currency</td><td class="px-5 py-4 text-[#61667C]">Online store, priced in customer's currency</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-4 font-semibold text-[#03102F]">You charge in</td><td class="px-5 py-4 text-[#61667C]">Your home currency</td><td class="px-5 py-4 text-[#61667C]">The foreign currency</td><td class="px-5 py-4 text-[#61667C]">Your home currency</td><td class="px-5 py-4 text-[#61667C]">Customer's currency</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-4 font-semibold text-[#03102F]">Customer pays in</td><td class="px-5 py-4 text-[#61667C]">Their local currency</td><td class="px-5 py-4 text-[#61667C]">Their local currency</td><td class="px-5 py-4 text-[#61667C]">Their local currency</td><td class="px-5 py-4 text-[#61667C]">Their local currency</td></tr>
+            <tr class="border-b border-slate-100"><td class="px-5 py-4 font-semibold text-[#03102F]">FX handled by</td><td class="px-5 py-4 text-[#61667C]">HitPay (automatic)</td><td class="px-5 py-4 text-[#61667C]">You set the price</td><td class="px-5 py-4 text-[#61667C]">HitPay (automatic)</td><td class="px-5 py-4 text-[#61667C]">You set the price</td></tr>
+            <tr><td class="px-5 py-4 font-semibold text-[#03102F]">Payout currency</td><td class="px-5 py-4 text-[#61667C]">Your home currency</td><td class="px-5 py-4 text-[#61667C]">Your home currency</td><td class="px-5 py-4 text-[#61667C]">Your home currency</td><td class="px-5 py-4 text-[#61667C]">Your home currency</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-white border-l-4 border-[#2465DE] rounded-r-2xl p-5 mt-6">
+        <p class="font-semibold text-[#03102F] mb-1">Building a custom integration?</p>
+        <p class="text-[#61667C]">See the <a href="/apis/guide/cross-border-payments" class="text-[#2465DE] hover:underline">Developer Cross-Border Guide</a> to compare the Borderless QR API against the Payment Request API for custom checkout flows.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="py-16 bg-[#002771]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">0</div>
+          <div class="text-blue-300 text-sm">SGD/MYR/PHP — Monthly fees in any market</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">14</div>
+          <div class="text-blue-300 text-sm">Cross-border payment methods across 9 Asia-Pacific markets</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">Level 1</div>
+          <div class="text-blue-300 text-sm">PCI DSS certified checkout infrastructure</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">1</div>
+          <div class="text-blue-300 text-sm">Next business day payout in SG, MY &amp; PH</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVELOPER CROSS-BORDER -->
+  <section id="developers" class="py-20 bg-[#03102F]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label text-blue-300">FOR DEVELOPERS</span>
+        <h2 class="text-3xl text-white mt-4 mb-4">Build your own cross-border payment experience</h2>
+        <p class="text-blue-200 max-w-2xl mx-auto">Two APIs expose the same mechanics that power HitPay's native SME products, for partners and developers building a custom POS or checkout instead of using HitPay's native interface and exchange rate.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-3">In-person · QR acceptance</div>
+          <h3 class="font-semibold text-white text-lg mb-2">Borderless QR API</h3>
+          <p class="text-blue-200 text-sm mb-5">API-level access to the same FX and QR-network mechanic behind HitPay's native Borderless QR product — for merchants and partners building their own POS or checkout flow rather than using HitPay's native app and exchange rate.</p>
+          <a href="/apis/guide/embedded-qr-code-payments/borderless-qr" class="hp-btn hp-btn-s text-sm">See Borderless QR API Docs</a>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-3">Online · Adaptive checkout</div>
+          <h3 class="font-semibold text-white text-lg mb-2">Payment Request API</h3>
+          <p class="text-blue-200 text-sm mb-5">API-level access to the adaptive, currency-aware pricing mechanic behind Adaptive Pricing — for partners and developers building their own checkout experience via the <code class="text-xs bg-white/10 px-1.5 py-0.5 rounded">localised_pricing</code> parameter.</p>
+          <a href="/apis/guide/cross-border-payments" class="hp-btn hp-btn-s text-sm">See Payment Request API Docs</a>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5 mt-6">
+        <p class="text-blue-200 text-sm">Not sure which API fits your integration? The <a href="/apis/guide/cross-border-payments" class="text-white hover:underline font-semibold">Developer Cross-Border Guide</a> compares the Borderless QR API against the Payment Request API — which mechanic each exposes, and when to use which.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-[#F9F9F6] rounded-3xl p-10 md:p-14">
+        <div class="flex gap-1 mb-6">
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <!-- [PLACEHOLDER — replace with a real verified testimonial before publishing] -->
+        <blockquote class="text-2xl text-[#03102F] leading-relaxed mb-8">
+          "We used to lose Indonesian and Thai shoppers at checkout because the price only made sense in Singapore dollars. Adaptive Pricing showed them the amount in rupiah or baht automatically, and our conversion rate from those markets improved within the first month — without us touching our pricing page."
+        </blockquote>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-[#D6E3F9] rounded-full flex items-center justify-center text-[#2465DE] font-semibold text-sm">RS</div>
+          <div>
+            <div class="font-semibold text-[#03102F]">[Merchant Name]</div>
+            <div class="text-[#61667C] text-sm">[Title], [Company] · Singapore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE GRID -->
+  <section class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl text-[#03102F] mb-4">Everything else businesses get with cross-border payments</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">Beyond the four core products, every cross-border payment shares the same protections and reporting.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4M16 17H4m0 0l4 4m-4-4l4-4"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Daily mid-market exchange rate</h3>
+          <p class="text-[#61667C] text-sm">Refreshed at 6:00am SGT and cached for the day, so every transaction, settlement, and refund on Borderless QR and Adaptive Pricing uses one consistent rate.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Next business day payouts</h3>
+          <p class="text-[#61667C] text-sm">Cross-border collections credit to the HitPay Balance on a next business day basis in Singapore, Malaysia, and the Philippines — converted to the merchant's home currency automatically.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">No additional hardware</h3>
+          <p class="text-[#61667C] text-sm">Borderless QR and Multi-Currency Products both run on the existing HitPay POS app — no new terminal, reader, or device purchase required.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">PCI DSS Level 1 checkout</h3>
+          <p class="text-[#61667C] text-sm">Every cross-border checkout — QR, card, or link — runs on HitPay's PCI DSS Level 1 certified infrastructure, the highest tier of card data security.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Refunds at the live rate</h3>
+          <p class="text-[#61667C] text-sm">Refunds issue in the original charge currency, converted from the home-currency wallet at the live rate on the refund date — shown clearly in the transaction record.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">One dashboard, one ledger</h3>
+          <p class="text-[#61667C] text-sm">Every cross-border payment, whatever the product or currency, appears in the same HitPay dashboard as domestic sales — no separate report to reconcile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE MORE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl text-[#03102F] mb-8">Explore more HitPay products for global collections</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="billpay%20v2.html" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#EBF1FC] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">BillPay</div>
+            <div class="text-[#61667C] text-sm mb-3">Capture supplier invoices with OCR, route them through approvals, and pay suppliers locally or overseas — synced to Xero, no monthly fees.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">See BillPay <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+        <a href="multi-currency-collections-account.html" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#F3F3ED] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Multi-Currency Virtual Accounts</div>
+            <div class="text-[#61667C] text-sm mb-3">Local SGD and PHP receiving accounts, plus SWIFT reach to 13 currencies for Singapore entities — for business receivables, not just customer checkout.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">See multi-currency virtual accounts <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+        <a href="virtual-accounts-global-business-collections.html" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#EBF1FC] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M13 3h5m0 0v5m0-5L10 16"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">SG Virtual Accounts</div>
+            <div class="text-[#61667C] text-sm mb-3">Singapore entities collect SWIFT wires from overseas partners and clients into a local-name account, unified with customer payments.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">See SG virtual accounts <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl text-[#03102F] mb-4">Frequently asked questions: Cross-border payments</h2>
+        <p class="text-[#61667C]">Everything Singapore, Malaysia, and Philippine businesses need to know about accepting payments from customers across Asia-Pacific.</p>
+      </div>
+      <div class="space-y-3">
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is HitPay and how does it work for businesses accepting cross-border payments?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay is a Singapore-headquartered payment platform, licensed as a Major Payment Institution (PS20200643) under the Monetary Authority of Singapore, that lets Singapore, Malaysia, and Philippine businesses accept cross-border payments from customers across Asia-Pacific. Businesses choose from four products — Borderless QR, Multi-Currency Products, Adaptive Pricing, and Multi-Currency Payment Links — depending on whether they sell online or in person and who sets the exchange rate. There are zero monthly fees; standard transaction fees vary by payment method.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What cross-border payment methods does HitPay support, and in which markets are they popular?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay supports 14 cross-border payment methods across nine Asia-Pacific markets: PayNow (Singapore), UPI (India), WeChat Pay (China), Touch 'n Go and DuitNow (Malaysia), QRPH (Philippines), VietQR and ZaloPay (Vietnam), PromptPay, TrueMoney, and LINE Pay (Thailand), QRIS (Indonesia), and PayCo, KakaoPay, and NaverPay (South Korea). Most support both online checkout and in-person QR acceptance; PayCo, KakaoPay, NaverPay, and Touch 'n Go are online-only today.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is the difference between Borderless QR and Multi-Currency Products?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Both are in-person, point-of-sale products, but they serve opposite scenarios. Borderless QR suits a fixed storefront serving foreign tourists — the business charges in its home currency and HitPay converts automatically so customers pay in their own local currency. Multi-Currency Products suits a business travelling to sell overseas — the merchant prices the product directly in the foreign currency, with no automatic HitPay conversion.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is the difference between Adaptive Pricing and Multi-Currency Payment Links?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Both are online products, but pricing control differs. Adaptive Pricing keeps prices in the merchant's home currency and automatically shows international customers the converted amount in their local currency at checkout, with HitPay handling the FX. Multi-Currency Payment Links let a merchant create a link denominated directly in the customer's currency, with the merchant — not HitPay — setting that price.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Which cross-border product should an online business use?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Online businesses that price everything in their home currency and want HitPay to handle currency conversion automatically should use Adaptive Pricing — it detects the customer's location and displays local pricing with no extra setup per currency. Businesses that prefer to set a specific price directly in a customer's currency, such as when quoting a fixed rate to an overseas client, should use Multi-Currency Payment Links instead.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Which cross-border product should an in-person or overseas pop-up business use?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">A fixed storefront serving foreign tourists — a café, retail shop, or restaurant — should use Borderless QR, which lets customers scan and pay in their home currency while the business receives its own home currency. A business travelling overseas for a market, pop-up, or event should use Multi-Currency Products, pricing items directly in that country's local currency.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What fees apply to cross-border payments?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">An FX markup applies on top of the mid-market rate when HitPay handles the currency conversion — on Borderless QR and Adaptive Pricing. Multi-Currency Products and Multi-Currency Payment Links carry no automatic FX conversion, since the merchant sets the price directly in the foreign currency. Standard payment processing fees also apply, and customers are never charged an additional FX fee. Full rates are at <a href="https://hitpayapp.com/pricing" class="text-[#2465DE] hover:underline">hitpayapp.com/pricing</a>.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How is the cross-border exchange rate determined?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay uses the mid-market exchange rate plus a standard FX markup — see hitpayapp.com/pricing for exact rates. The rate refreshes daily at 6:00am SGT and is cached for the rest of the day, so every transaction, settlement, and refund processed that day uses the same rate. For Adaptive Pricing specifically, the rate is locked when the customer's checkout page loads and only refreshes if the page is reloaded.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">When do businesses receive their cross-border payout?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Cross-border payments are credited to a business's HitPay Balance on a next business day basis in Singapore, Malaysia, and the Philippines. The collected amount is automatically converted to the merchant's home currency and included in the regular daily payout, with no separate cross-border settlement cycle to track.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do refunds work for cross-border payments?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">A cross-border refund is issued in the original charge currency. The amount deducted from the merchant's home-currency wallet is converted at the live exchange rate at the time of the refund, not the rate used for the original transaction — so the merchant may see a small FX gain or loss depending on how rates moved between sale and refund.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do businesses enable cross-border payment methods?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Businesses go to Settings &gt; Payment Methods in their HitPay dashboard, click Connect on the desired payment method, and complete the required information. Partner providers typically review new requests within three to five business days. Once approved, businesses go to Integrations, select their sales channel, and enable the payment method for that channel.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Do businesses need additional hardware for in-person cross-border payments?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">No. Borderless QR and Multi-Currency Products both work with the HitPay POS app a business already uses — no additional terminal, reader, or hardware purchase is required. A business only needs a smartphone or tablet running the existing HitPay POS app to accept a tourist's local QR payment method.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does Adaptive Pricing work with recurring billing or subscriptions?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">No. Adaptive Pricing currently supports one-time hosted checkout payments only. Recurring billing and subscription charges fall outside its scope, so a business billing customers on a subscription basis should quote prices in a single settlement currency rather than relying on Adaptive Pricing's automatic local-currency detection.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What happens if a customer's currency is not supported by Adaptive Pricing?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">If the customer's detected country maps to a currency Adaptive Pricing doesn't support, or one that matches the merchant's own default currency, the checkout simply displays the merchant's default currency and payment methods, with no currency selector shown. The customer completes the payment exactly as a domestic customer would.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How long does it take to set up HitPay cross-border payments for a Singapore, Malaysian, or Philippine business?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Businesses that already hold a HitPay account can enable cross-border payment methods and Adaptive Pricing directly from their dashboard, with partner review typically taking three to five business days per payment method. New businesses first complete HitPay account verification — approval typically takes one to three business days — before connecting cross-border methods.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What support does HitPay provide to businesses using cross-border payments?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay provides live chat and email support to help businesses connect cross-border payment methods, troubleshoot checkout issues, and reconcile cross-border settlements, alongside a self-serve help centre covering setup, fees, and refund handling for every supported market.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do businesses test Adaptive Pricing before going live?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Businesses simulate a specific country by appending a "+location_XX" suffix to a test customer's email, where XX is a two-letter ISO country code — for example, test+location_FR@example.com for France. Entering this in the Payment Request API's email field, or in the dashboard's send-by-email flow, makes the checkout present currency and pricing exactly as a customer from that country would see it.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Can businesses build a custom cross-border checkout using HitPay's API?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Yes. Developers can integrate cross-border payments through the Payment Request API, which supports the localised_pricing parameter for Adaptive Pricing on hosted checkout pages, or through the Borderless QR API for custom in-person integrations. HitPay's Developer Cross-Border Guide compares both approaches for teams building their own checkout flow.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Are Singapore, Malaysia, and Philippine businesses all eligible for every cross-border product?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Eligibility depends on the specific payment method and product rather than a blanket rule — most of HitPay's 14 cross-border payment methods are available to merchants in Singapore, Malaysia, and the Philippines, though partner coverage can vary by market. Businesses should check availability for their specific payment method in Settings &gt; Payment Methods after signing up.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How much does HitPay cost for businesses accepting cross-border payments?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">There is zero monthly fee for accepting cross-border payments in any market. Businesses pay a standard per-transaction processing fee plus, where HitPay handles the FX conversion (Borderless QR and Adaptive Pricing), an FX markup over the mid-market rate. Multi-Currency Products and Multi-Currency Payment Links carry no FX markup, since the merchant sets the price directly. Full pricing is at <a href="https://hitpayapp.com/pricing" class="text-[#2465DE] hover:underline">hitpayapp.com/pricing</a>.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does HitPay offer a way for developers to build a custom cross-border payment integration?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Yes. Developers can use the Borderless QR API for API-level access to the same FX and QR-network mechanic used in HitPay's native in-person Borderless QR product, or the Payment Request API for the adaptive, currency-aware pricing mechanic behind Adaptive Pricing — both let a team build their own POS or checkout experience instead of using HitPay's native interface.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is the difference between using HitPay's native Borderless QR product and the Borderless QR API?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay's native Borderless QR product runs entirely inside the existing HitPay POS app, using HitPay's own exchange rate and interface. The Borderless QR API exposes the same underlying FX and QR-network mechanic so a developer or partner can build the acceptance flow into their own custom POS or checkout, rather than using HitPay's native app.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REGULATORY INFORMATION -->
+  <section class="py-14 bg-white border-t border-slate-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-sm font-semibold text-[#03102F] uppercase tracking-widest mb-4">Regulatory information</h2>
+      <div class="space-y-3 text-xs text-[#61667C] leading-relaxed">
+        <p><strong>Singapore:</strong> HitPay Payment Solutions Pte Ltd is licensed as a Major Payment Institution (PS20200643) under Singapore's Payment Services Act — regulated by the Monetary Authority of Singapore (MAS).</p>
+        <p><strong>Malaysia:</strong> HitPay operates through HitPay Payment Solutions Sdn Bhd (SSM: 202101017021) and Mobiedge E-commerce Sdn Bhd (SSM: 201501003595) as a registered merchant acquirer regulated by Bank Negara Malaysia.</p>
+        <p><strong>Philippines:</strong> HitPay Payment Solutions, Inc. is a Registered Operator of Payment Systems (OPSCOR-2023-0006) regulated by Bangko Sentral ng Pilipinas (BSP), and a member of the Fintech Philippines Association.</p>
+        <p>All cross-border checkout flows — Borderless QR, Multi-Currency Products, Adaptive Pricing, and Multi-Currency Payment Links — run on HitPay's PCI DSS Level 1 certified payment infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="py-20 gradient-cta">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl text-white mb-5">Reach more customers across Asia-Pacific — starting with your next sale</h2>
+      <p class="text-blue-100 text-xl mb-10">Accept 14 cross-border payment methods across 9 markets, online or in person, with an FX markup where HitPay handles the conversion and next business day payouts in your home currency. No monthly or setup fees.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://dashboard.hit-pay.com/register" class="bg-white text-[#002771] font-semibold px-8 py-4 rounded-full hover:bg-[#EBF1FC] transition-colors text-base">Start Accepting Cross-Border Payments</a>
+        <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS / INTRO RECAP -->
+  <section class="py-20 bg-white border-t border-slate-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <span class="section-label">HOW IT WORKS</span>
+      <h2 class="text-3xl text-[#03102F] mt-4 mb-6">One HitPay account, four ways to get paid across borders</h2>
+      <p class="speakable-summary text-lg text-[#61667C] leading-relaxed mb-5">
+        HitPay is a payment platform that lets Singapore, Malaysia, and Philippine businesses accept cross-border payments from customers across Asia-Pacific, choosing between four products depending on whether they sell online or in person, and who sets the exchange rate. A café near Orchard Road in Singapore can let a tourist scan and pay in Chinese yuan via WeChat Pay; a boutique at Pavilion Kuala Lumpur in Malaysia can let a Thai shopper check out in Thai baht via PromptPay; and an online seller shipping from Makati in the Philippines can let a Vietnamese buyer pay in Vietnamese dong via VietQR — all without opening a foreign bank account or holding foreign currency.
+      </p>
+      <p class="text-lg text-[#61667C] leading-relaxed">
+        Businesses that let HitPay handle the conversion — Borderless QR in person, Adaptive Pricing online — pay an <strong>FX markup</strong> over the mid-market rate and receive their own home currency automatically. Businesses that prefer to set the foreign-currency price themselves use Multi-Currency Products in person or Multi-Currency Payment Links online, with no automatic FX markup. Every checkout, in every product, runs on HitPay's <strong>PCI DSS Level 1</strong> certified infrastructure, so card details from cross-border customers are protected to the same standard as domestic payments. Developers building a custom POS or checkout can access the same mechanics directly via the Borderless QR API and Payment Request API — see the <a href="#developers" class="text-[#2465DE] hover:underline">developer section above</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#03102F] text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond. MAS licensed (PS20200643).</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Cross-border products</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="cross-border-payments.html#adaptive-pricing" class="hover:text-slate-300">Adaptive Pricing</a></li>
+            <li><a href="cross-border-payments.html#payment-links" class="hover:text-slate-300">Multi-Currency Payment Links</a></li>
+            <li><a href="cross-border-payments.html#borderless-qr" class="hover:text-slate-300">Borderless QR</a></li>
+            <li><a href="cross-border-payments.html#multi-currency-products" class="hover:text-slate-300">Multi-Currency Products</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="multi-currency-collections-account.html" class="hover:text-slate-300">Multi-Currency Collections Account</a></li>
+            <li><a href="virtual-accounts-global-business-collections.html" class="hover:text-slate-300">Virtual Accounts (Singapore)</a></li>
+            <li><a href="virtual-accounts-philippines.html" class="hover:text-slate-300">Business Collections Account (Philippines)</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-slate-300">About</a></li>
+            <li><a href="#" class="hover:text-slate-300">Blog</a></li>
+            <li><a href="https://hitpayapp.com/pricing" class="hover:text-slate-300">Pricing</a></li>
+            <li><a href="#" class="hover:text-slate-300">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 mb-4">Page last reviewed: [Month YYYY]</p>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-[#61667C]">© 2026 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!--
+PRE-PUBLISH CHECKLIST
+
+Content:
+✅ All copy built from the updated cross-border product docs supplied (4 products: Borderless QR, Multi-Currency Products, Adaptive Pricing, Multi-Currency Payment Links) — replaces the old docs.hitpayapp.com marketing page structure and its "700+ local payment options" claim, which conflicts with this repo's house rule (never claim 700+ payment methods — that figure is for wallets)
+✅ Payment methods table reproduces the 14-method / 9-market table from the docs exactly (PayNow, UPI, WeChat Pay, Touch 'n Go, DuitNow, QRPH, VietQR/ZaloPay, PromptPay, TrueMoney, LINE Pay, QRIS, PayCo, KakaoPay, NaverPay)
+✅ Which-product comparison table reproduces the docs' 4-column x 6-row table verbatim (Channel, Who's it for, You charge in, Customer pays in, FX handled by, Payout currency)
+✅ Fee facts (FX markup on Borderless QR & Adaptive Pricing only, no specific rate stated on-page per request; no automatic FX on Multi-Currency Products / Payment Links; no customer FX fee) match the docs' FAQ and fees sections
+✅ Payout timing stated as "next business day" per house GEO rule (not "T+1"), matching docs' "T+1 calendar day" fact
+✅ Testimonial is a PLACEHOLDER — must be replaced with a real verified quote before publishing
+✅ Regulatory block covers all three core markets (SG, MY, PH) plus a visible PCI DSS Level 1 mention, per house rule 28
+
+Schema:
+✅ FAQPage schema includes 21 questions (exceeds 15 minimum), covering definitional, cost, setup, support, and developer objections
+✅ SoftwareApplication schema has [YYYY-MM-DD] placeholders for dateModified/datePublished; areaServed = Singapore, Malaysia, Philippines; featureList includes Borderless QR API and Payment Request API
+✅ BreadcrumbList, Review (flagged [REAL QUOTE REQUIRED]), Organization, SpeakableSpecification, and HowTo schema blocks all present
+
+REVISION (per "Cross-border educational content" positioning brief, pasted 2026-08-12):
+✅ Restructured as a routing/comparison hub matching deliverable #1 in the brief's 5-landing-page plan: Channel (Offline vs Online) is now the PRIMARY filter in the "which-product" section and the comparison table (grouped column headers), with who-sets-the-FX as the secondary axis within each channel — previously FX-handling was presented as primary
+✅ Added a light SME vs Developer split near the top (new "AUDIENCE SPLIT" section right after the trust bar), routing merchants to #which-product and developers to the new #developers section
+✅ Reordered and regrouped the four feature sections into Offline pair (Borderless QR, Multi-Currency Products) then Online pair (Adaptive Pricing, Multi-Currency Payment Links), with channel-divider labels between groups; mid-page CTA strip still sits after the 2nd feature section per house rule 32
+✅ Added a new "For Developers" section covering the two API variants named in the brief — Borderless QR API and Payment Request API — with copy matching the brief's exact framing ("API-level access to the same FX/QR-network mechanic... rather than using HitPay's native POS & exchange rate")
+✅ Fixed Adaptive Pricing's primary CTA, which previously linked to the developer API guide as an SME-facing button — now links to the actual SME setup doc (/payments/adaptive-pricing), with a separate small dev-routing note pointing to #developers
+✅ Added 2 new FAQ entries (visible + schema) covering the developer-integration distinction
+✅ Checked Linear for the brief's referenced wireframe (crossborder-hub-wireframe-v2.html) — attachment is private/inaccessible (401); also checked FEA-594 ("Update Cross-Border Payment Docs") which proposed changing partner review to 7 business days — that ticket was Canceled, so this page keeps the 3–5 business day figure from the docs supplied in this conversation
+
+Before publishing:
+□ Per the brief's deliverables table, this page is deliverable #1 ("General landing page — hub, routes to pages 2–5"). Deliverables #3 (Multi-Currency Products SME page), #4 (Adaptive Pricing SME page), and #5 (Developer Cross-Border page) are meant to be SEPARATE landing pages, not sections of this hub — currently the hub still carries full feature-section depth for all 4 SME products plus a Developer section inline, as a stand-in until those are split out. Confirm with Steph/team whether to build those as separate files before the 18 Aug deadline.
+□ Replace testimonial with a verified real quote from an actual HitPay merchant using Adaptive Pricing, Borderless QR, or another cross-border product
+□ Confirm which 9-market / 14-method payment list is still current with Product before launch — docs snippet supplied did not include per-market fee or transaction-rate specifics
+□ Confirm final URL structure (/payments/cross-border-payments vs a new root-level slug) with the web team
+□ Update [YYYY-MM-DD] in SoftwareApplication schema and [Month YYYY] in footer "Page last reviewed" line
+□ Link the "Talk to Sales" CTAs to the real contact-sales URL (currently "#")
+□ Verify all product deep-link anchors (#adaptive-pricing, #payment-links, #borderless-qr, #multi-currency-products, #developers) once separate deep-dive pages exist, if the team splits this into a hub + 4/5 pages
+□ Verify pricing against live hitpayapp.com/pricing
+-->

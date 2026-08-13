@@ -16,6 +16,7 @@ import {
 // ─── Static pages ──────────────────────────────────────────────────────────
 
 const STATIC_PAGES = [
+  { href: 'ai-shoppers.html',          emoji: '🤖', label: 'AI Shoppers',                          desc: 'ChatGPT product discovery, agentic checkout, AI-readiness — automatic for every Online Store merchant' },
   { href: 'ecommerce.html',            emoji: '🛒', label: 'E-commerce',                          desc: 'Online checkout, integrations, payment links, and subscriptions' },
   { href: 'retail.html',               emoji: '🏪', label: 'Retail',                               desc: 'POS system, Tap to Pay, card terminals, and omnichannel dashboard' },
   { href: 'nonprofits.html',           emoji: '💜', label: 'Nonprofits',                           desc: 'Donation pages, recurring giving, event QR codes, and grant invoicing' },

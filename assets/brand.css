@@ -134,7 +134,7 @@ h3, h4, h5, h6 {
 .hp-wrap  { max-width: 72rem; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
 
 /* Buttons */
-.hp-btn   { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; border-radius: 0.75rem; padding: 0.875rem 1.5rem; transition: background-color 0.15s; font-size: 1rem; }
+.hp-btn   { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; border-radius: 9999px; padding: 0.875rem 1.5rem; transition: background-color 0.15s; font-size: 1rem; }
 .hp-btn-p { background-color: #2465DE; color: #fff; }
 .hp-btn-p:hover { background-color: #1B4FB8; }
 .hp-btn-s { background-color: #fff; color: #03102F; border: 1px solid #CBD5E1; }

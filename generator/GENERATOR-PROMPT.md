@@ -78,13 +78,14 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 32. After Feature Section 2 (⑥), insert a compact CTA strip (`bg-[#EBF1FC]` band, `py-10`): a single-line headline ("Ready to start accepting payments?"), the primary CTA button ("Start for free →"), and trust micro-copy ("No setup fees · Free to sign up · Approval in 1–3 business days"). This is section ⑥-B in the template.
 33. Every page's FAQ must include at minimum these three objection-handling question types: (a) Cost — "How much does HitPay cost for [vertical] businesses?" (answer: zero monthly fee, transaction rates, link to /pricing); (b) Setup — "How long does it take to set up HitPay for [vertical] in [market]?" (answer: sign-up time and approval window); (c) Support — "What support does HitPay provide to [vertical] businesses?" (answer: name support channels — live chat, email, help centre).
 34. The trust bar paragraph must include a specific merchant count: "Trusted by 20,000+ [vertical] businesses across Singapore, Malaysia, and the Philippines." Place this before the payment method / brand pill row.
+35. **Every clickable CTA must be a solid, pill-shaped button — never a bare text-plus-arrow link.** This includes the feature-section secondary links that previously used lightweight styling like `text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm` with just a chevron icon ("Learn more", "See full pricing", "View pricing details" are no longer acceptable patterns). Every CTA — hero, feature-section, mid-page strip, and closing banner — must use `rounded-full` (pill shape), not `rounded-xl`: primary CTAs use `bg-[#2465DE] text-white` (or the `hp-btn hp-btn-p` shorthand); secondary CTAs use `bg-white border border-slate-300` (or `hp-btn hp-btn-s`). CTA button copy must be a specific, benefit-led action phrase in Title Case — e.g. "Open Your [Product] Account Today", "Start Accepting [Payment Method] Today", "Simplify Your [Vertical] Collections Today" — never a generic label like "Learn more", "Click here", "See full pricing", or "View pricing details".
 
 ---
 
 ## Readability Rules — SME Audience (follow without exception)
 
-35. All body copy sentences must be 25 words or fewer. Use active voice. Avoid nominalisations and jargon — write "customers scan a QR code to pay" not "QR-initiated payment initiation." Headings and subheadings may be noun phrases; body copy must use active-verb sentences.
-36. Each feature section's 80–120-word prose intro must open with 1–2 sentences naming the specific pain point that vertical faces before pivoting to HitPay's solution. The pain sentence must be specific to the vertical — not a generic "businesses often struggle with…" opener.
+36. All body copy sentences must be 25 words or fewer. Use active voice. Avoid nominalisations and jargon — write "customers scan a QR code to pay" not "QR-initiated payment initiation." Headings and subheadings may be noun phrases; body copy must use active-verb sentences.
+37. Each feature section's 80–120-word prose intro must open with 1–2 sentences naming the specific pain point that vertical faces before pivoting to HitPay's solution. The pain sentence must be specific to the vertical — not a generic "businesses often struggle with…" opener.
 
 ---
 
@@ -164,10 +165,10 @@ Use `travel.html` as the canonical reference. Match its structure exactly — se
         <h1 class="text-5xl lg:text-6xl font-medium text-[#03102F] leading-tight mb-6">[H1 — geographic signal]</h1>
         <p class="text-xl text-[#61667C] leading-relaxed mb-8">[Subheadline naming 1 payment method per market]</p>
         <div class="flex flex-wrap gap-4">
-          <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#1B4FB8] text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-[#0E2859] transition-colors text-base">
-            Start for free <svg ...chevron...></svg>
+          <a href="https://dashboard.hit-pay.com/register" class="inline-flex items-center gap-2 bg-[#1B4FB8] text-white font-semibold px-6 py-3.5 rounded-full hover:bg-[#0E2859] transition-colors text-base">
+            [Specific action CTA, Title Case — e.g. "Start Accepting Payments Today"] <svg ...chevron...></svg>
           </a>
-          <a href="#" class="inline-flex items-center gap-2 bg-white text-slate-800 font-semibold px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 transition-colors text-base">Contact sales</a>
+          <a href="#" class="inline-flex items-center gap-2 bg-white text-slate-800 font-semibold px-6 py-3.5 rounded-full border border-slate-300 hover:border-slate-400 transition-colors text-base">Contact sales</a>
         </div>
         <p class="text-sm text-slate-500 mt-4">Free to sign up · No setup fees · Pay per transaction</p>
       </div>
@@ -228,8 +229,8 @@ Use `travel.html` as the canonical reference. Match its structure exactly — se
       <span class="text-slate-700">[Benefit]</span>
     </li>
   </ul>
-  <a href="#" class="inline-flex items-center gap-1 text-[#2465DE] font-semibold hover:text-[#0E2859] text-sm">
-    [Learn more text] <svg ...chevron...></svg>
+  <a href="[relevant hitpayapp.com URL, not href="#"]" class="inline-flex items-center gap-2 bg-[#2465DE] text-white font-semibold px-6 py-3.5 rounded-full hover:bg-[#1B4FB8] transition-colors text-base">
+    [Specific, benefit-led action CTA in Title Case — e.g. "Start Accepting GCash Today" — NOT "Learn more" or "See full pricing"] <svg ...chevron...></svg>
   </a>
   Mock UI: bg-white rounded-2xl border border-slate-200 shadow-xl p-6 w-72 — vertical-specific
 -->
@@ -346,8 +347,8 @@ Use `travel.html` as the canonical reference. Match its structure exactly — se
     <h2 class="text-4xl font-medium text-white mb-5">[CTA headline]</h2>
     <p class="text-blue-100 text-xl mb-10">[Supporting copy with social proof number]</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="https://dashboard.hit-pay.com/register" class="bg-white text-[#0E2859] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Start for free</a>
-      <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
+      <a href="https://dashboard.hit-pay.com/register" class="bg-white text-[#0E2859] font-semibold px-8 py-4 rounded-full hover:bg-[#EBF1FC] transition-colors text-base">[Specific action CTA, Title Case]</a>
+      <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to sales</a>
     </div>
   </div>
 </section>
@@ -419,8 +420,8 @@ brand.css ships these utility classes. **Always use them** — they keep HTML co
 | `hp-act` | `text-[#2465DE]` |
 | `hp-body` | `text-[#61667C] leading-relaxed` |
 | `hp-wrap` | `max-w-6xl mx-auto px-6` |
-| `hp-btn hp-btn-p` | primary CTA button (blue fill) |
-| `hp-btn hp-btn-s` | secondary button (white/bordered) |
+| `hp-btn hp-btn-p` | primary CTA button (blue fill, pill-shaped — `border-radius: 9999px`) |
+| `hp-btn hp-btn-s` | secondary button (white/bordered, pill-shaped) |
 | `hp-li` | `flex items-start gap-3` (feature list row) |
 | `hp-check` | `text-[#4DAB80] font-bold text-lg flex-shrink-0 mt-0.5` (✓ icon) |
 | `hp-card` | `bg-white rounded-2xl p-6 border border-slate-200` + hover shadow |
@@ -511,6 +512,8 @@ After outputting the HTML, produce this checklist with ✅ or ❌:
 - [ ] Mid-page CTA strip (⑥-B) present between Feature 2 and Feature 3
 - [ ] FAQ includes cost, setup, and support objection-handling questions
 - [ ] Trust bar includes "20,000+ businesses" merchant count
+- [ ] Every CTA button is pill-shaped (`rounded-full`) — no bare text-plus-arrow links used as CTAs anywhere on the page
+- [ ] Every CTA button's copy is a specific, benefit-led Title Case action phrase — not a generic label ("Learn more", "See full pricing", "View pricing details", "Click here")
 
 **Readability:**
 - [ ] No body copy sentence exceeds 25 words

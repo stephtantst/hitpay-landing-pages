@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Customer Stories | HitPay</title>
+  <meta name="description" content="Every HitPay customer story in one place — filter by use case, ecosystem, or market across Singapore, Malaysia, and the Philippines.">
+  <link rel="canonical" href="https://hitpayapp.com/customers/all">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="All Customer Stories | HitPay">
+  <meta property="og:description" content="Every HitPay customer story in one place — filter by use case, ecosystem, or market.">
+  <meta property="og:url" content="https://hitpayapp.com/customers/all">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="All Customer Stories | HitPay">
+  <meta name="twitter:description" content="Every HitPay customer story in one place — filter by use case, ecosystem, or market.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Hauora-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+
+  <style>
+    .pill-btn { padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.8125rem; font-weight: 600; transition: background-color .15s, color .15s, border-color .15s; }
+    .pill-btn--sm { padding: 0.375rem 0.875rem; font-size: 0.75rem; }
+    .bento-tile { position: relative; display: block; border-radius: 1rem; overflow: hidden; }
+    .bento-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.08) 55%, transparent 100%); }
+    .bento-content { position: relative; height: 100%; padding: 1.1rem; display: flex; flex-direction: column; justify-content: space-between; }
+    .bento-content--light { justify-content: flex-start; }
+    .bento-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; }
+    .bento-brand { color: #fff; font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+    .bento-icon { width: 1.1rem; height: 1.1rem; color: rgba(255,255,255,.85); flex-shrink: 0; }
+    .bento-headline { color: #fff; font-size: 1rem; font-weight: 600; line-height: 1.35; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+    .bento-bottom { display: flex; flex-direction: column; gap: .5rem; }
+    .bento-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .bento-tag { font-size: .625rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: #fff; background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.35); padding: .15rem .55rem; border-radius: 9999px; }
+    .story-tile { height: 16rem; }
+  </style>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hitpayapp.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Customers", "item": "https://hitpayapp.com/customers" },
+      { "@type": "ListItem", "position": 3, "name": "All customer stories", "item": "https://hitpayapp.com/customers/all" }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-white text-[#03102F]">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="#" class="hover:text-[#03102F]">Products</a>
+          <a href="#" class="hover:text-[#03102F]">Solutions</a>
+          <a href="customers.html" class="text-[#03102F]">Customers</a>
+          <a href="#" class="hover:text-[#03102F]">Pricing</a>
+          <a href="https://docs.hitpayapp.com" class="hover:text-[#03102F]">Developers</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="https://hitpayapp.com/contact-us" class="text-sm font-semibold bg-[#2465DE] text-white px-4 py-2 rounded-lg hover:bg-[#1B4FB8] transition-colors">Contact Sales</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HEADER / FILTERS -->
+  <section class="pt-32 pb-10 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-5 mb-5 text-sm font-semibold">
+        <span class="text-[#61667C]">Customers</span>
+        <span class="text-slate-300">|</span>
+        <a href="customers.html" class="text-[#61667C] hover:text-[#03102F]">Overview</a>
+        <a href="customer-stories.html" class="text-[#2465DE]">All customer stories</a>
+      </div>
+      <h1 class="text-4xl lg:text-5xl text-[#03102F] leading-tight mb-8 max-w-2xl" style="font-family:'MD Nichrome Trial','Hauora',sans-serif;font-weight:500">
+        Businesses of all types accelerate their growth with HitPay
+      </h1>
+
+      <div class="flex flex-wrap gap-3">
+        <select id="storyCatFilter" onchange="filterStories()" class="text-sm font-semibold text-[#03102F] bg-white border border-slate-200 rounded-full px-4 py-2 cursor-pointer">
+          <option value="all">All categories</option>
+          <option value="ecommerce">E-commerce</option>
+          <option value="retail">Retail</option>
+          <option value="fnb">Restaurants &amp; F&amp;B</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="education">Education</option>
+          <option value="travel">Travel</option>
+          <option value="nonprofits">Nonprofits</option>
+          <option value="smbs">SMBs</option>
+          <option value="startups">Startups</option>
+          <option value="enterprise">Enterprise</option>
+          <option value="platforms">Platforms</option>
+          <option value="developers">Developer Partners</option>
+        </select>
+        <select id="storyCountryFilter" onchange="filterStories()" class="text-sm font-semibold text-[#03102F] bg-white border border-slate-200 rounded-full px-4 py-2 cursor-pointer">
+          <option value="all">All markets</option>
+          <option value="sg">🇸🇬 Singapore</option>
+          <option value="my">🇲🇾 Malaysia</option>
+          <option value="ph">🇵🇭 Philippines</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES WALL -->
+  <section class="pb-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5" id="stories-grid">
+
+        <a href="ecommerce.html" data-cat="ecommerce" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#F2A65A 0%,#7A3E1D 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Bob the Baker Boy</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Payment Gateway APIs</span></div>
+              <p class="bento-headline">Bob the Baker Boy turns a home bakery into an acclaimed local brand with HitPay</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="retail.html" data-cat="retail" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#3EC1B8 0%,#0E3B36 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">MTMojo Traders</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">POS Software</span></div>
+              <p class="bento-headline">MTMojo Traders sets up fast and keeps fees transparent with HitPay retail</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="retail.html" data-cat="retail" data-country="my" class="bento-tile story-tile" style="background:linear-gradient(160deg,#2FB4A8 0%,#0A2E2A 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Saint àvia</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Online Store</span><span class="bento-tag">Payment Gateway APIs</span></div>
+              <p class="bento-headline">Saint àvia redefines online payments with a seamless, secure HitPay checkout in Malaysia</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="mickey-leotards.html" data-cat="retail" data-country="my" class="bento-tile story-tile" style="background:linear-gradient(160deg,#A855F7 0%,#3D1030 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Mickey</span>
+              <svg class="bento-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Card Terminal</span><span class="bento-tag">Tap to Pay</span></div>
+              <p class="bento-headline">How Mickey stopped losing sales to unsupported card payments</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="the-durian-bakery.html" data-cat="fnb" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#E8646B 0%,#5C1A1F 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">The Durian Bakery</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Payment Links</span></div>
+              <p class="bento-headline">How The Durian Bakery sped up payouts and simplified checkout</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="healthcare.html" data-cat="healthcare" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#4DAB80 0%,#113B2E 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">The Senses Therapy</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Payment Links</span><span class="bento-tag">Invoices</span></div>
+              <p class="bento-headline">The Senses Therapy calls HitPay's reliability and support a step up for their wellness studio</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="education.html" data-cat="education" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#6C63FF 0%,#1E1A5E 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Education Merchant</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Invoices</span></div>
+              <p class="bento-headline">A tuition provider calls HitPay "reliable, easy to use" for collecting term fees</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="travel.html" data-cat="travel" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#3AA0DE 0%,#0B2E4D 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Travel Agency</span>
+              <svg class="bento-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">POS Software</span></div>
+              <p class="bento-headline">A travel agency saves hours weekly with HitPay POS's automated reports and reconciliation</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="travel.html" data-cat="travel" data-country="ph" class="bento-tile story-tile" style="background:linear-gradient(160deg,#5AC0E0 0%,#0B3A52 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Hotels &amp; Resorts</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Payment Gateway APIs</span></div>
+              <p class="bento-headline">Hotels &amp; Resorts calls HitPay a welcome addition to the Philippines payment gateway scene</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="nonprofits.html" data-cat="nonprofits" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#D6558C 0%,#3D1030 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Nonprofit Merchant</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Payment Links</span></div>
+              <p class="bento-headline">A Singapore charity collects donations through a single shareable HitPay link</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="ecommerce.html" data-cat="smbs startups" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#F2A65A 0%,#7A3E1D 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">Bob the Baker Boy</span>
+              <svg class="bento-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3h8a2 2 0 012 2v14a1 1 0 01-1.45.9L12 18l-4.55 1.9A1 1 0 016 19V5a2 2 0 012-2z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">SMB</span><span class="bento-tag">Startup</span></div>
+              <p class="bento-headline">20,000+ SMBs like Bob the Baker Boy — a home-based bakery turned brand — run on HitPay</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="platforms.html" data-cat="platforms startups" data-country="sg" class="bento-tile story-tile" style="background:linear-gradient(160deg,#2465DE 0%,#002771 100%)">
+          <div class="bento-overlay"></div>
+          <div class="bento-content">
+            <div class="bento-top">
+              <span class="bento-brand">GetGo</span>
+              <svg class="bento-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="bento-bottom">
+              <div class="bento-tags"><span class="bento-tag">Recurring Billing</span></div>
+              <p class="bento-headline">GetGo, starting a business in an uncertain economy, automates GIRO billing to scale car-sharing subscriptions</p>
+            </div>
+          </div>
+        </a>
+
+        <div data-cat="enterprise" data-country="sg my ph" class="bento-tile story-tile bg-white border border-slate-200">
+          <div class="bento-content bento-content--light">
+            <div class="hp-icon mb-3">
+              <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M5 21V7l7-4 7 4v14M9 21V12h6v9"/></svg>
+            </div>
+            <h3 class="text-base font-semibold text-[#03102F] mb-2">Enterprise</h3>
+            <p class="text-sm text-[#61667C] leading-relaxed mb-3">Custom pricing, dedicated onboarding, and compliance handled across markets for high-volume merchants.</p>
+            <a href="https://hitpayapp.com/contact-us" class="text-sm font-semibold text-[#2465DE]">Talk to Sales →</a>
+          </div>
+        </div>
+
+        <div data-cat="platforms" data-country="sg my ph" class="bento-tile story-tile bg-white border border-slate-200">
+          <div class="bento-content bento-content--light">
+            <div class="hp-icon mb-3">
+              <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </div>
+            <h3 class="text-base font-semibold text-[#03102F] mb-2">Platforms</h3>
+            <p class="text-sm text-[#61667C] leading-relaxed mb-3">Offer payments to every business you serve under HitPay's licences, and earn commission on every transaction.</p>
+            <a href="platforms.html" class="text-sm font-semibold text-[#2465DE]">Explore Platform APIs →</a>
+          </div>
+        </div>
+
+        <div data-cat="developers" data-country="sg my ph" class="bento-tile story-tile bg-white border border-slate-200">
+          <div class="bento-content bento-content--light">
+            <div class="hp-icon mb-3">
+              <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-4 4 4 4m8-8l4 4-4 4M12 4l-1 16"/></svg>
+            </div>
+            <h3 class="text-base font-semibold text-[#03102F] mb-2">Developer Partners</h3>
+            <p class="text-sm text-[#61667C] leading-relaxed mb-3">Build once against 50+ payment methods, sandbox freely, and go live with webhooks and full API docs.</p>
+            <a href="https://docs.hitpayapp.com" class="text-sm font-semibold text-[#2465DE]">Read the API docs →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="py-20 gradient-cta">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl text-white mb-5" style="font-family:'MD Nichrome Trial','Hauora',sans-serif;font-weight:500">Join 20,000+ businesses growing with HitPay</h2>
+      <p class="text-blue-100 text-xl mb-10">Whichever ecosystem you sit in — SMB, startup, enterprise, platform, or developer — get started in minutes.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://dashboard.hit-pay.com/register" class="bg-white text-[#002771] font-semibold px-8 py-4 rounded-xl hover:bg-[#EBF1FC] transition-colors text-base">Start using HitPay for free</a>
+        <a href="https://hitpayapp.com/contact-us" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-colors text-base">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#03102F] text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond. MAS licensed (PS20200643).</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-slate-300">Virtual Accounts</a></li>
+            <li><a href="#" class="hover:text-slate-300">Payment Links</a></li>
+            <li><a href="#" class="hover:text-slate-300">POS Software</a></li>
+            <li><a href="#" class="hover:text-slate-300">Invoices</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Solutions</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="ecommerce.html" class="hover:text-slate-300">E-commerce</a></li>
+            <li><a href="retail.html" class="hover:text-slate-300">Retail</a></li>
+            <li><a href="restaurants.html" class="hover:text-slate-300">Restaurants &amp; F&amp;B</a></li>
+            <li><a href="healthcare.html" class="hover:text-slate-300">Healthcare</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="customers.html" class="hover:text-slate-300">Customers</a></li>
+            <li><a href="customer-stories.html" class="hover:text-slate-300">Customer Stories</a></li>
+            <li><a href="platforms.html" class="hover:text-slate-300">Platforms</a></li>
+            <li><a href="https://hitpayapp.com/pricing" class="hover:text-slate-300">Pricing</a></li>
+            <li><a href="https://hitpayapp.com/contact-us" class="hover:text-slate-300">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-[#61667C]">© 2026 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterStories() {
+      const cat = document.getElementById('storyCatFilter').value;
+      const country = document.getElementById('storyCountryFilter').value;
+      document.querySelectorAll('#stories-grid [data-cat]').forEach(card => {
+        const cats = (card.dataset.cat || '').split(' ');
+        const catMatch = cat === 'all' || cats.includes(cat);
+        const countries = (card.dataset.country || 'sg my ph').split(' ');
+        const countryMatch = country === 'all' || countries.includes(country);
+        card.style.display = (catMatch && countryMatch) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
