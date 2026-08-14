@@ -110,13 +110,14 @@ GEO rules enforced in `generator/GENERATOR-PROMPT.md` (must be followed for all 
 
 ## Web app architecture
 
-- `app/page.tsx` — dashboard listing all generated pages (client component, fetches `/api/pages`)
-- `app/new/page.tsx` — brief form + SSE stream consumer
-- `app/pages/[id]/page.tsx` — page detail: iframe preview, HTML source tab, Figma JS copy panel, publish button
-- `components/BriefForm/` — controlled form; auto-derives filename from vertical name on blur
+- `app/page.tsx` — dashboard listing all generated + static pages (client component, fetches `/api/pages`); list-only, no embedded create form
+- `app/new/page.tsx` — the "Create New Landing Page" flow: brief form + SSE stream consumer. Also handles regenerate via `?edit=<pageId>` (prefills vertical/markets/filename from the existing page, bumps the filename). Auto-navigates to `/pages/[id]` once generation finishes.
+- `app/pages/[id]/page.tsx` — page detail: iframe preview, HTML source tab, refine-by-re-prompting with version history, Figma JS copy panel, publish button
+- `components/CreatePageForm/` — the single shared brief form (industry quick-pick chips, vertical, markets, filename, free-text brief) used by `app/new/page.tsx`; auto-derives filename from vertical name on blur
 - `components/GenerationStream/` — renders the SSE log entries during generation
 - `lib/supabase.ts` — `createServerClient()` (service role, for API routes) and `createBrowserClient()` (anon, for client components)
 - `lib/anthropic.ts` — both LLM calls with prompt caching; exports `UsageStats` type; cost tracking per model
 - `lib/mcp.ts` — three parallel MCP queries (general, brief-specific, changelog) merged into a single context string
+- `lib/sse.ts` — shared SSE event parser used by both `app/new/page.tsx` and the refine flow in `app/pages/[id]/page.tsx`
 
 UI components are from **shadcn/ui** (`components.json` at `web/components.json`). Add new components with `npx shadcn@latest add <component>` from the `web/` directory.

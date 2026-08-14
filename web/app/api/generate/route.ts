@@ -2,14 +2,14 @@ import { NextRequest } from 'next/server'
 import { enrichBriefContext } from '@/lib/mcp'
 import { generateHtml, generateFigmaJs, getSystemPrompt, getResearchContext } from '@/lib/anthropic'
 import { createServerClient } from '@/lib/supabase'
-import type { BriefFormData } from '@/components/BriefForm'
+import type { CreatePageFormData } from '@/components/CreatePageForm'
 
 export const maxDuration = 300
 
 const VALID_MARKETS = new Set(['SG', 'MY', 'PH'])
 const FILENAME_RE = /^[a-z0-9][a-z0-9-]*\.html$/
 
-function validateBrief(brief: BriefFormData): string | null {
+function validateBrief(brief: CreatePageFormData): string | null {
   if (!brief.vertical?.trim()) return 'vertical is required'
   if (!Array.isArray(brief.markets) || brief.markets.length === 0) return 'at least one market is required'
   if (brief.markets.some((m) => !VALID_MARKETS.has(m))) return 'invalid market — must be SG, MY, or PH'
@@ -21,7 +21,7 @@ function validateBrief(brief: BriefFormData): string | null {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json() as { brief: BriefFormData }
+  const body = await req.json() as { brief: CreatePageFormData }
   const { brief } = body
 
   // Server-side validation — reject before touching Supabase or Claude
