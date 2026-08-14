@@ -18,6 +18,7 @@ type LogEntry = {
 
 const STEP_ICONS: Record<string, string> = {
   saving: '💾', mcp: '🔍', generating: '✍️', figma: '🎨', saving_page: '📦',
+  editing: '🔎', applying: '✂️',
 }
 
 function fmt(n: number) { return n.toLocaleString() }

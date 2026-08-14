@@ -119,6 +119,29 @@ function DeleteDialog({
 // ─── Row components ─────────────────────────────────────────────────────────
 
 function StaticRow({ page }: { page: typeof STATIC_PAGES[0] }) {
+  const router = useRouter()
+  const [importing, setImporting] = useState(false)
+
+  const handleEdit = async () => {
+    setImporting(true)
+    try {
+      const res = await fetch('/api/pages/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: page.href }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        router.push(`/pages/${data.id}`)
+      } else {
+        const err = await res.json().catch(() => ({ error: 'Import failed' }))
+        alert(err.error || 'Import failed')
+      }
+    } finally {
+      setImporting(false)
+    }
+  }
+
   return (
     <tr className="border-b border-slate-50 hover:bg-slate-50/70 transition-colors">
       <td className="px-5 py-3">
@@ -139,17 +162,24 @@ function StaticRow({ page }: { page: typeof STATIC_PAGES[0] }) {
       <td className="px-5 py-3 text-slate-300 text-sm">—</td>
       <td className="px-5 py-3 text-slate-300 text-sm">—</td>
       <td className="px-5 py-3 text-right">
-        <a
-          href={`/${page.href}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs font-semibold text-[#2465DE] hover:text-[#1B4FB8] transition-colors"
-        >
-          View
-          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-          </svg>
-        </a>
+        <div className="flex items-center justify-end gap-1">
+          <a
+            href={`/${page.href}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-[#2465DE] hover:text-[#1B4FB8] px-2.5 py-1.5 rounded-lg hover:bg-[#EBF1FC] transition-colors"
+          >
+            View
+          </a>
+          <button
+            onClick={handleEdit}
+            disabled={importing}
+            title="Bring this page into the refine/version-history system"
+            className="text-xs font-semibold text-[#61667C] hover:text-[#03102F] px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition-colors disabled:opacity-40"
+          >
+            {importing ? 'Opening…' : 'Edit'}
+          </button>
+        </div>
       </td>
     </tr>
   )

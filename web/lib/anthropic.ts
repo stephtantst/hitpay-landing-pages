@@ -271,6 +271,150 @@ export async function refineHtml(
   return { html: fullHtml, usage }
 }
 
+// ─── Edit-based refine ──────────────────────────────────────────────────────
+// Refining by regenerating the whole page (refineHtml above) re-emits every
+// output token of the page even for a one-word change — output tokens are the
+// dominant cost of a generation. This proposes a small set of precise
+// find-and-replace edits instead (the same model Claude Code's own Edit tool
+// uses), applied locally with no further API cost. refineHtml is kept as an
+// automatic fallback for when an edit can't be matched cleanly.
+
+export type ProposedEdit = { old_string: string; new_string: string }
+
+export class EditApplyError extends Error {}
+
+// Mirrors Claude Code's Edit tool semantics: old_string must match exactly once.
+export function applyEdits(html: string, edits: ProposedEdit[]): string {
+  let result = html
+  edits.forEach((edit, i) => {
+    if (edit.old_string === edit.new_string) return
+    const occurrences = result.split(edit.old_string).length - 1
+    if (occurrences === 0) {
+      throw new EditApplyError(`Edit ${i + 1}: old_string not found verbatim in the page.`)
+    }
+    if (occurrences > 1) {
+      throw new EditApplyError(`Edit ${i + 1}: old_string matches ${occurrences} places — not unique.`)
+    }
+    result = result.replace(edit.old_string, edit.new_string)
+  })
+  return result
+}
+
+const PROPOSE_EDITS_TOOL: Anthropic.Tool = {
+  name: 'propose_edits',
+  description: 'Propose the minimal set of precise find-and-replace edits to the current HTML that satisfy the refinement instruction. Prefer as few, as small edits as possible.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      edits: {
+        type: 'array',
+        description: 'Ordered list of edits. Keep this as small as possible — only touch what the instruction asks for.',
+        items: {
+          type: 'object',
+          properties: {
+            old_string: {
+              type: 'string',
+              description: 'Exact, verbatim substring of the current HTML to find, including exact whitespace. Must occur exactly once in the whole document — include a few surrounding words for uniqueness if the text alone would repeat elsewhere.',
+            },
+            new_string: {
+              type: 'string',
+              description: 'The replacement text for old_string.',
+            },
+          },
+          required: ['old_string', 'new_string'],
+        },
+      },
+    },
+    required: ['edits'],
+  },
+}
+
+export async function proposeEdits(
+  systemPrompt: string,
+  currentHtml: string,
+  instruction: string,
+  researchContext: string,
+  markets: string[]
+): Promise<{ edits: ProposedEdit[]; usage: UsageStats['html'] }> {
+  // Mock mode: propose a trivial, always-matchable edit so the apply path is exercised locally
+  if (process.env.MOCK_LLM === 'true') {
+    const marker = `<!-- Refined: ${instruction.slice(0, 80).replace(/-->/g, '')} -->`
+    return {
+      edits: currentHtml.includes('</head>')
+        ? [{ old_string: '</head>', new_string: `${marker}\n</head>` }]
+        : [],
+      usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 },
+    }
+  }
+
+  const allMarkets = ['SG', 'MY', 'PH']
+  const missingMarkets = allMarkets.filter(m => !markets.includes(m))
+  const marketDirective = missingMarkets.length > 0
+    ? `\n\nMarket constraint still applies: this page covers ONLY ${markets.join(', ')} — never introduce or leave in mentions of ${missingMarkets.join(', ')}.`
+    : ''
+
+  const dynamicContent = [
+    '## Current Page HTML\n',
+    currentHtml,
+    '\n\n## Refinement Instructions\n',
+    instruction,
+    marketDirective,
+    '\n\nCall propose_edits with the smallest set of find-and-replace edits that satisfies the instructions above. ' +
+    'Do not touch anything the instructions did not ask you to change. Each old_string must be copied VERBATIM ' +
+    'from the current HTML, including exact whitespace, and must occur exactly once in the document.',
+  ].join('')
+
+  const userContent: Anthropic.MessageParam['content'] = researchContext
+    ? [
+        {
+          type: 'text' as const,
+          text: `## Research Context\n${researchContext}`,
+          cache_control: { type: 'ephemeral' as const },
+        },
+        { type: 'text' as const, text: dynamicContent },
+      ]
+    : dynamicContent
+
+  const msg = await anthropic.messages.create({
+    model: HTML_MODEL,
+    max_tokens: 4096,
+    system: [
+      {
+        type: 'text',
+        text: systemPrompt,
+        cache_control: { type: 'ephemeral' },
+      },
+    ],
+    tools: [PROPOSE_EDITS_TOOL],
+    tool_choice: { type: 'tool', name: 'propose_edits' },
+    messages: [{ role: 'user', content: userContent }],
+  })
+
+  const toolUse = msg.content.find(
+    (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use'
+  )
+  if (!toolUse) throw new Error('Claude did not return a propose_edits tool call')
+  const input = toolUse.input as { edits?: ProposedEdit[] }
+  const edits = input.edits ?? []
+
+  const u = msg.usage as unknown as Record<string, number>
+  const cacheRead  = u.cache_read_input_tokens       ?? 0
+  const cacheWrite = u.cache_creation_input_tokens   ?? 0
+  const inputTok   = u.input_tokens                  ?? 0
+  const outputTok  = u.output_tokens                 ?? 0
+
+  const usage = {
+    input: inputTok, output: outputTok, cacheRead, cacheWrite,
+    costUsd: calcCost(inputTok, outputTok, cacheRead, cacheWrite, {
+      input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
+      cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
+    }),
+  }
+
+  console.log('[ProposeEdits]', usage, `${edits.length} edit(s)`)
+  return { edits, usage }
+}
+
 const FIGMA_SYSTEM_PROMPT = `You are converting a HitPay landing page into a Figma frame.
 A scaffold of validated helper functions is pre-written and will be prepended automatically — DO NOT redefine any functions.
 

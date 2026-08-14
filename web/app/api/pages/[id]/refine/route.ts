@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { getSystemPrompt, getResearchContext, refineHtml } from '@/lib/anthropic'
+import { getSystemPrompt, getResearchContext, refineHtml, proposeEdits, applyEdits, EditApplyError } from '@/lib/anthropic'
 import { createServerClient } from '@/lib/supabase'
 
 export const maxDuration = 300
@@ -50,8 +50,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   ;(async () => {
     try {
-      await send('status', { step: 'refining', message: 'Refining landing page…' })
-
       const briefInfo = page.briefs as unknown as { vertical?: string; market?: string[] } | null
       const vertical = briefInfo?.vertical ?? ''
       const markets = briefInfo?.market?.length ? briefInfo.market : ['SG', 'MY', 'PH']
@@ -60,25 +58,47 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       const researchContext = getResearchContext(vertical)
       const previousHtml = page.html as string
 
-      let html = ''
-      const { html: refinedHtml, usage } = await refineHtml(
-        systemPrompt,
-        previousHtml,
-        instruction,
-        researchContext,
-        markets,
-        async (chunk) => {
-          html += chunk
-          await send('chunk', { text: chunk })
-        }
-      )
-      html = refinedHtml
+      let html: string
+      let usage: Awaited<ReturnType<typeof proposeEdits>>['usage']
+      let editCount: number | null = null
+
+      // Try the cheap path first: a handful of precise find-and-replace edits,
+      // applied locally, instead of re-emitting the entire page as output.
+      try {
+        await send('status', { step: 'editing', message: 'Determining the minimal edit…' })
+        const { edits, usage: editUsage } = await proposeEdits(
+          systemPrompt, previousHtml, instruction, researchContext, markets
+        )
+        if (edits.length === 0) throw new EditApplyError('No edits proposed')
+        await send('status', { step: 'applying', message: `Applying ${edits.length} edit${edits.length === 1 ? '' : 's'}…` })
+        html = applyEdits(previousHtml, edits)
+        usage = editUsage
+        editCount = edits.length
+      } catch (editErr) {
+        // Fall back to a full regeneration if an edit couldn't be matched cleanly
+        const reason = editErr instanceof Error ? editErr.message : String(editErr)
+        console.warn('[Refine] edit-based path failed, falling back to full regeneration:', reason)
+        await send('status', { step: 'refining', message: 'Falling back to full regeneration…' })
+        const { html: refinedHtml, usage: regenUsage } = await refineHtml(
+          systemPrompt,
+          previousHtml,
+          instruction,
+          researchContext,
+          markets,
+          async (chunk) => {
+            await send('chunk', { text: chunk })
+          }
+        )
+        html = refinedHtml
+        usage = regenUsage
+      }
 
       await send('usage', {
         html: usage,
         figma: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 },
         totalCostUsd: usage.costUsd,
         cacheHit: usage.cacheRead > 0,
+        editCount,
       })
 
       await send('status', { step: 'saving_page', message: 'Saving revision…' })

@@ -54,6 +54,22 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const [loadingRevisions, setLoadingRevisions] = useState(true)
   const [restoringId, setRestoringId] = useState<string | null>(null)
 
+  const [editedHtml, setEditedHtml] = useState('')
+  const [syncedHtml, setSyncedHtml] = useState<string | null>(null)
+  const [savingEdit, setSavingEdit] = useState(false)
+  const [saveEditError, setSaveEditError] = useState<string | null>(null)
+
+  // Keep the editable draft in sync with the loaded/refined/restored page — resets
+  // whenever page.html changes (new load, refine, or restore) so the editor never
+  // shows a stale draft. Adjusting state during render (React's recommended pattern
+  // for "reset state when a prop changes") rather than in an effect.
+  if (page && page.html !== syncedHtml) {
+    setSyncedHtml(page.html)
+    setEditedHtml(page.html)
+  }
+
+  const editDirty = page ? editedHtml !== page.html : false
+
   // Reusable refetch — safe to call synchronously from event handlers (handleRefine, handleRestore).
   const fetchRevisions = () => {
     setLoadingRevisions(true)
@@ -167,6 +183,54 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
     }
   }
 
+  const handleSaveEdit = async () => {
+    setSavingEdit(true)
+    setSaveEditError(null)
+    try {
+      const res = await fetch(`/api/pages/${id}/edit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ html: editedHtml }),
+      })
+      if (res.ok) {
+        setPage((p) => p ? { ...p, html: editedHtml } : p)
+        fetchRevisions()
+      } else {
+        const err = await res.json().catch(() => ({ error: 'Save failed' }))
+        setSaveEditError(err.error || 'Save failed')
+      }
+    } finally {
+      setSavingEdit(false)
+    }
+  }
+
+  const handleDiscardEdit = () => {
+    if (page) setEditedHtml(page.html)
+    setSaveEditError(null)
+  }
+
+  // Drops an HTML comment at the cursor position — a quick way to leave a note
+  // for whoever (e.g. a designer) opens this HTML file next, right next to the
+  // section it's about. Falls back to appending at the end if nothing's focused.
+  const handleInsertComment = () => {
+    const template = '<!-- NOTE:  -->'
+    const el = document.getElementById('html-editor') as HTMLTextAreaElement | null
+    if (!el) {
+      setEditedHtml((prev) => prev + `\n${template}\n`)
+      return
+    }
+    const start = el.selectionStart ?? editedHtml.length
+    const end = el.selectionEnd ?? editedHtml.length
+    const next = `${editedHtml.slice(0, start)}\n${template}\n${editedHtml.slice(end)}`
+    setEditedHtml(next)
+    // Restore focus and place the cursor right inside the comment, ready to type
+    requestAnimationFrame(() => {
+      const cursor = start + 1 + template.indexOf('  ') + 1
+      el.focus()
+      el.setSelectionRange(cursor, cursor)
+    })
+  }
+
   const handlePublish = async () => {
     setPublishing(true)
     setPublishError(null)
@@ -219,7 +283,7 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
               <span className="font-semibold text-sm text-[#61667C]">HitPay</span>
             </div>
             <h1 className="text-2xl font-bold text-[#03102F] capitalize">
-              {page.briefs?.vertical ?? 'Landing page'}
+              {page.briefs?.vertical ?? page.filename.replace(/\.html$/, '').replace(/-/g, ' ')}
             </h1>
             <div className="flex items-center gap-3 mt-1.5">
               <span className="text-sm font-mono text-[#61667C]">{page.filename}</span>
@@ -267,11 +331,45 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
                 </div>
               </TabsContent>
               <TabsContent value="html">
-                <div className="rounded-2xl overflow-auto border border-slate-200 bg-white p-4" style={{ height: '75vh' }}>
-                  <pre className="text-xs font-mono text-slate-700 whitespace-pre-wrap break-words">
-                    {page.html}
-                  </pre>
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <p className="text-xs text-[#61667C]">
+                    Edit the HTML directly — drop in <code className="bg-slate-100 px-1 rounded">&lt;!-- NOTE: ... --&gt;</code> comments
+                    anywhere for a designer to see when they open this file.
+                  </p>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={handleInsertComment}
+                      className="text-xs font-medium text-[#03102F] border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-[#F9F9F6] transition-colors"
+                    >
+                      + Insert comment
+                    </button>
+                    {editDirty && (
+                      <button
+                        onClick={handleDiscardEdit}
+                        disabled={savingEdit}
+                        className="text-xs font-medium text-[#61667C] hover:text-[#03102F] px-3 py-1.5 transition-colors disabled:opacity-40"
+                      >
+                        Discard
+                      </button>
+                    )}
+                    <button
+                      onClick={handleSaveEdit}
+                      disabled={!editDirty || savingEdit}
+                      className="text-xs font-semibold bg-[#2465DE] text-white rounded-lg px-3 py-1.5 hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
+                    >
+                      {savingEdit ? 'Saving…' : editDirty ? 'Save changes' : 'Saved'}
+                    </button>
+                  </div>
                 </div>
+                {saveEditError && <p className="text-xs text-red-500 mb-2">{saveEditError}</p>}
+                <Textarea
+                  id="html-editor"
+                  value={editedHtml}
+                  onChange={(e) => setEditedHtml(e.target.value)}
+                  spellCheck={false}
+                  className="text-xs font-mono text-slate-700 leading-relaxed resize-none"
+                  style={{ height: '70vh' }}
+                />
               </TabsContent>
             </Tabs>
           </div>
