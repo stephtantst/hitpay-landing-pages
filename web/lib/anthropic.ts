@@ -42,20 +42,27 @@ function calcCost(
   )
 }
 
-function loadFile(relativePath: string): string {
-  const absPath = path.join(process.cwd(), '..', relativePath)
-  try { return fs.readFileSync(absPath, 'utf-8') } catch { return '' }
+// `web/` is deployed as a self-contained unit (no access to the parent repo at
+// runtime), so these are read from committed copies under web/content/ — kept
+// in sync with the repo-root originals by the predev/prebuild script in
+// package.json. Falls back to the repo-root originals for local runs where
+// that copy step hasn't happened yet.
+function loadFile(filename: string, rootRelativePath: string): string {
+  const contentPath = path.join(process.cwd(), 'content', filename)
+  try { return fs.readFileSync(contentPath, 'utf-8') } catch { /* fall through */ }
+  const rootPath = path.join(process.cwd(), '..', rootRelativePath)
+  try { return fs.readFileSync(rootPath, 'utf-8') } catch { return '' }
 }
 
 // Memoize at module level — only read from disk once per process lifetime
 let _systemPrompt: string | null = null
 export function getSystemPrompt(): string {
-  if (!_systemPrompt) _systemPrompt = loadFile('generator/GENERATOR-PROMPT.md')
+  if (!_systemPrompt) _systemPrompt = loadFile('GENERATOR-PROMPT.md', 'generator/GENERATOR-PROMPT.md')
   return _systemPrompt!
 }
 
 export function getResearchContext(vertical: string): string {
-  const research = loadFile('RESEARCH.md')
+  const research = loadFile('RESEARCH.md', 'RESEARCH.md')
   if (!research) return ''
   const lines = research.split('\n')
   const relevantLines: string[] = []
@@ -84,7 +91,7 @@ export async function generateHtml(
 ): Promise<{ html: string; usage: UsageStats['html'] }> {
   // Mock mode: skip API call, stream an existing page file
   if (process.env.MOCK_LLM === 'true') {
-    const mockHtml = loadFile('restaurants.html') || '<html><body><h1>Mock page</h1></body></html>'
+    const mockHtml = loadFile('restaurants.html', 'restaurants.html') || '<html><body><h1>Mock page</h1></body></html>'
     for (let i = 0; i < mockHtml.length; i += 200) {
       onChunk(mockHtml.slice(i, i + 200))
       await new Promise((r) => setTimeout(r, 10))

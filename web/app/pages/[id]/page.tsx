@@ -44,6 +44,7 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const [loading, setLoading] = useState(true)
   const [publishing, setPublishing] = useState(false)
   const [published, setPublished] = useState(false)
+  const [publishError, setPublishError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
 
   const [refineInstruction, setRefineInstruction] = useState('')
@@ -168,10 +169,14 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
 
   const handlePublish = async () => {
     setPublishing(true)
+    setPublishError(null)
     const res = await fetch(`/api/pages/${id}/publish`, { method: 'POST' })
     if (res.ok) {
       setPublished(true)
       setPage((p) => p ? { ...p, status: 'published' } : p)
+    } else {
+      const err = await res.json().catch(() => ({ error: 'Publish failed' }))
+      setPublishError(err.error || 'Publish failed')
     }
     setPublishing(false)
   }
@@ -364,6 +369,9 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
                 >
                   {page.status === 'published' ? '✓ Published to repo' : 'Publish to repo root'}
                 </button>
+                {publishError && (
+                  <p className="text-xs text-red-500 mt-1">{publishError}</p>
+                )}
               </div>
             </div>
 

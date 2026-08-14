@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import { join } from 'path'
 
 // Generic hero for generated landing pages — not in code.js (which has vertical-specific heroes)
@@ -48,8 +48,14 @@ let _scaffold: string | null = null
 export function getFigmaScaffold(): string {
   if (_scaffold) return _scaffold
 
-  // Read code.js, extract everything up to (not including) the bespoke hero builders
-  const codeJsPath = join(process.cwd(), '..', 'figma-plugin', 'code.js')
+  // Read code.js, extract everything up to (not including) the bespoke hero builders.
+  // web/ is deployed as a self-contained unit, so prefer the committed copy under
+  // web/content/ (kept in sync by the predev/prebuild script) and fall back to the
+  // repo-root original for local runs where that copy step hasn't happened yet.
+  const selfContainedPath = join(process.cwd(), 'content', 'figma-plugin-code.js')
+  const codeJsPath = existsSync(selfContainedPath)
+    ? selfContainedPath
+    : join(process.cwd(), '..', 'figma-plugin', 'code.js')
   const fullCode = readFileSync(codeJsPath, 'utf-8')
 
   const heroMarker = '// ── HERO BUILDERS'

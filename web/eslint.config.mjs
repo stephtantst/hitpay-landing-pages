@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Synced from the repo root at build time (see scripts/sync-content.sh) —
+    // not app source, shouldn't be linted.
+    "content/**",
   ]),
 ]);
 

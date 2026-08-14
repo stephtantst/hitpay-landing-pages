@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Pricing for Online Checkout | HitPay Cross-Border Payments</title>
+  <meta name="description" content="Charge in your home currency while overseas customers pay in theirs — by card or local payment method. HitPay Adaptive Pricing auto-detects location and shows local currency at checkout, lifting international revenue by an average of over 10% — no code required.">
+  <meta property="og:title" content="Adaptive Pricing for Online Checkout | HitPay">
+  <meta property="og:description" content="Auto-detects an overseas customer's location and shows the price in their own currency and payment methods — card included. Merchants enabling Adaptive Pricing see international revenue grow by an average of over 10%.">
+
+  <link rel="alternate" hreflang="en-sg" href="https://hitpayapp.com/payments/adaptive-pricing">
+  <link rel="alternate" hreflang="en-my" href="https://hitpayapp.com/my/payments/adaptive-pricing">
+  <link rel="alternate" hreflang="en-ph" href="https://hitpayapp.com/ph/payments/adaptive-pricing">
+  <link rel="alternate" hreflang="x-default" href="https://hitpayapp.com/payments/adaptive-pricing">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="assets/fonts/Hauora-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/brand.css">
+
+  <!-- JSON-LD: SpeakableSpecification -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".speakable-summary"]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Adaptive Pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adaptive Pricing is a HitPay checkout feature that lets online merchants keep pricing in their home currency while international customers automatically see and pay in their own local currency — using either their card or a local payment method such as DuitNow, PayNow, QRPh, QRIS, or VietQR. The merchant always receives their payout in their home currency. Merchants who enable it see international revenue grow by an average of over 10%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can international customers pay by card through Adaptive Pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Card is one of the payment options Adaptive Pricing presents — the customer's card is simply charged in their own local currency instead of the merchant's home currency, using the same locked FX rate as any other payment method. Adaptive Pricing isn't limited to QR or wallet methods; it applies across the payment methods available at checkout."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which customers see the currency selector?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only customers whose detected country maps to a currency that differs from the merchant's default currency. Domestic customers, whose currency matches the merchant's default, see the standard checkout with no currency selector."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the exchange rate determined for Adaptive Pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The rate is based on the mid-market exchange rate at the time the checkout page loads. The FX rate and associated FX cost are borne by the customer — the merchant always receives their payout in their home currency. The rate is locked for the duration of that checkout session and refreshes only when the customer reloads the page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does enabling Adaptive Pricing cost anything extra?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Standard payment processing fees apply as normal, and international cards are charged at the standard higher international-card rate. Non-card cross-border payment methods usually cost the merchant less per transaction than a card payment. The FX rate and FX cost are borne by the customer, not the merchant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if a customer's currency is not supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If the detected currency is not supported, or it matches the merchant's default currency, the checkout falls back to showing only the merchant's default currency and payment methods — no currency selector is shown, and the customer pays exactly as a domestic customer would."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Adaptive Pricing work with API-created payment requests?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Payment requests created via the Payment Request API also support Adaptive Pricing on the hosted checkout, as long as Adaptive Pricing is enabled in Checkout Customisation settings. The localised_pricing parameter enables currency selection on the hosted checkout page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Adaptive Pricing work with recurring billing or subscriptions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Adaptive Pricing is currently available for one-time hosted checkout payments only. Recurring billing and subscription charges are out of scope for this feature."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the payout timing for payments collected through Adaptive Pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cross-border payments processed via Adaptive Pricing are credited to the merchant's HitPay Balance on a next business day basis in Singapore, Malaysia, and the Philippines."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is Adaptive Pricing not available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adaptive Pricing is not available on the default payment link on a merchant's account, or on open-amount payment links that have no fixed amount set. It supports hosted checkout, standard payment links with a fixed amount, and API-created payment requests."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I turn on Adaptive Pricing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Go to Settings > Payment Methods and connect the cross-border payment methods to support (partner review takes 3-5 business days). Then go to Settings > Checkout Customisation > Adaptive Pricing and turn on Enable Adaptive Pricing. Save — all hosted checkout sessions activate Adaptive Pricing for international customers automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do businesses test Adaptive Pricing before going live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Businesses can simulate a specific country by appending a \"+location_XX\" suffix to a test customer's email, where XX is a two-letter ISO country code — for example, test+location_ID@example.com for Indonesia. Entering this in the Payment Request API's email field, or in the dashboard's send-by-email flow, makes the checkout present currency and pricing exactly as a customer from that country would see it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which cross-border payment methods can appear at Adaptive Pricing checkout?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HitPay surfaces relevant local payment methods based on the customer's detected country, including DuitNow (Malaysia), PayNow (Singapore), QRPh (Philippines), QRIS (Indonesia), VietQR (Vietnam), and other supported cross-border methods. Merchants see their available methods in the HitPay Dashboard under Payment Methods."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to enable Adaptive Pricing on HitPay",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Connect cross-border payment methods",
+        "text": "Go to Settings > Payment Methods and connect the cross-border payment methods to support, such as DuitNow, PayNow, QRPh, QRIS, or VietQR. Partner review takes 3-5 business days."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Enable Adaptive Pricing in Checkout Customisation",
+        "text": "Go to Settings > Checkout Customisation > Adaptive Pricing and turn on the Enable Adaptive Pricing toggle."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Save and go live",
+        "text": "Save your settings. All hosted checkout sessions will activate Adaptive Pricing for international customers automatically — no further setup per currency or per payment link."
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HitPay Adaptive Pricing",
+    "description": "A HitPay checkout feature that auto-detects an overseas customer's location, shows the amount in their local currency, and lets them pay by card or local payment method — while the merchant is paid out in their home currency. Merchants enabling it see international revenue grow by an average of over 10%.",
+    "url": "https://hitpayapp.com/payments/adaptive-pricing",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web browser",
+    "dateModified": "2026-08-13",
+    "datePublished": "2026-08-13",
+    "areaServed": ["Singapore", "Malaysia", "Philippines"],
+    "featureList": [
+      "Auto-detects customer location and displays local currency automatically",
+      "Accepts both card and local payment methods in the customer's own currency — DuitNow, PayNow, QRPh, QRIS, VietQR, and more",
+      "Average lift of over 10% in international revenue after enabling",
+      "Opens net new sales in markets where customers predominantly pay via local payment methods",
+      "Lower transaction fees when customers choose a non-card payment method",
+      "FX rate locked at checkout page load, borne by the customer",
+      "Merchant always paid out in home currency",
+      "Works with hosted checkout, payment links, and API-created payment requests",
+      "No code required — enabled from Checkout Customisation settings"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "SGD",
+      "description": "No monthly or setup fee to enable Adaptive Pricing. Standard processing fees apply — see hitpayapp.com/pricing.",
+      "url": "https://hitpayapp.com/pricing"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hitpayapp.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Cross-Border Payments", "item": "https://hitpayapp.com/payments/cross-border-payments" },
+      { "@type": "ListItem", "position": 3, "name": "Adaptive Pricing", "item": "https://hitpayapp.com/payments/adaptive-pricing" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: Review [REAL QUOTE REQUIRED] -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": { "@type": "SoftwareApplication", "name": "HitPay Adaptive Pricing" },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "name": "[REAL QUOTE REQUIRED — replace placeholder]",
+    "reviewBody": "[REAL QUOTE REQUIRED — replace with an actual testimonial from a business using Adaptive Pricing]",
+    "author": { "@type": "Person", "name": "[Merchant Name]" }
+  }
+  </script>
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HitPay",
+    "url": "https://www.hitpayapp.com",
+    "logo": "https://www.hitpayapp.com/assets/logo.png",
+    "sameAs": ["https://www.linkedin.com/company/hitpay", "https://twitter.com/hitpaysg"],
+    "areaServed": ["Singapore", "Malaysia", "Philippines"]
+  }
+  </script>
+</head>
+<body class="bg-white text-[#03102F]">
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="assets/logos/hitpay.svg" alt="HitPay" class="h-8">
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#61667C]">
+          <a href="cross-border-payments.html" class="hover:text-[#03102F]">Cross-Border Payments</a>
+          <a href="#how-it-works" class="hover:text-[#03102F]">How It Works</a>
+          <a href="https://hitpayapp.com/pricing" class="hover:text-[#03102F]">Pricing</a>
+          <a href="#developers" class="hover:text-[#03102F]">Developers</a>
+          <a href="#faq" class="hover:text-[#03102F]">FAQ</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="text-sm font-medium text-[#61667C] hover:text-[#03102F]">Sign in</a>
+        <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p text-sm px-4 py-2">Create free account</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="gradient-hero pt-32 pb-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-label">🎉 New · Cross-Border Payments</span>
+          <h1 class="text-5xl lg:text-6xl text-[#03102F] leading-tight mb-6">
+            Charge in your home currency. Let overseas customers pay in theirs.
+          </h1>
+          <p class="text-xl text-[#61667C] leading-relaxed mb-8">
+            Adaptive Pricing shows overseas customers your price in <strong>their own currency</strong> — by card or a local method like DuitNow, PayNow, QRPh, QRIS, or VietQR. Merchants who turn it on see international revenue grow by <strong>over 10%</strong> on average. You're still paid out in your home currency, every time.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">
+              Turn On Adaptive Pricing Today
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#how-it-works" class="hp-btn hp-btn-s">
+              See How It Works
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-x-6 gap-y-2">
+            <span class="inline-flex items-center gap-1.5 text-sm text-[#61667C]"><svg class="w-4 h-4 text-[#4DAB80]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>No code required</span>
+            <span class="inline-flex items-center gap-1.5 text-sm text-[#61667C]"><svg class="w-4 h-4 text-[#4DAB80]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>No extra monthly fee</span>
+            <span class="inline-flex items-center gap-1.5 text-sm text-[#61667C]"><svg class="w-4 h-4 text-[#4DAB80]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Card + local methods, both supported</span>
+          </div>
+        </div>
+        <div class="relative lg:flex justify-end hidden">
+          <!-- Adaptive Pricing checkout mock UI -->
+          <div class="bg-white shadow-2xl rounded-2xl border border-slate-200 p-6 w-80">
+            <div class="flex items-center justify-between mb-4">
+              <div class="font-semibold text-[#03102F] text-sm">Checkout — Luna Home Décor</div>
+              <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">● Live</span>
+            </div>
+            <div class="text-xs font-semibold text-[#61667C] uppercase tracking-widest mb-2">Pay in</div>
+            <div class="flex gap-2 mb-4">
+              <div class="flex-1 text-center text-sm font-semibold text-[#61667C] border border-slate-200 rounded-lg py-2">SGD 120.00</div>
+              <div class="flex-1 text-center text-sm font-semibold text-white bg-[#2465DE] rounded-lg py-2">IDR 1,895,000</div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center justify-between text-sm p-2.5 bg-[#EBF1FC] rounded-lg border border-[#D6E3F9]">
+                <span class="text-[#03102F] font-medium">QRIS</span>
+                <span class="text-[10px] text-[#2465DE] font-semibold">🇮🇩 Indonesia</span>
+              </div>
+              <div class="flex items-center justify-between text-sm p-2.5 bg-[#F9F9F6] rounded-lg">
+                <span class="text-[#03102F] font-medium">Card</span>
+                <span class="text-[10px] text-[#61667C] font-semibold">Charged in IDR too</span>
+              </div>
+            </div>
+            <div class="bg-[#2465DE] rounded-lg py-2.5 text-center">
+              <span class="text-white text-sm font-semibold">Pay IDR 1,895,000</span>
+            </div>
+            <div class="mt-3 text-center text-[10px] text-[#61667C]">Merchant receives SGD 120.00 · rate locked at page load</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="py-14 bg-[#F9F9F6] border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-center text-[#61667C] text-xs font-semibold uppercase tracking-widest mb-6">CARD AND CROSS-BORDER PAYMENT METHODS, BOTH IN LOCAL CURRENCY</p>
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">💳 Card — priced in local currency</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇲🇾 DuitNow — Malaysia</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇸🇬 PayNow — Singapore</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇵🇭 QRPh — Philippines</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇮🇩 QRIS — Indonesia</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">🇻🇳 VietQR — Vietnam</span>
+        <span class="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-[#61667C] font-medium">+ many more</span>
+      </div>
+      <div class="flex items-center justify-center gap-3 bg-[#EBF1FC] border border-[#D6E3F9] rounded-2xl px-6 py-4 max-w-2xl mx-auto text-center sm:text-left">
+        <svg class="w-8 h-8 text-[#2465DE] flex-shrink-0 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 21h18M4 21V8l8-5 8 5v13M9 21v-6h6v6"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5l14 14"/></svg>
+        <p class="text-[#03102F] text-sm sm:text-base font-semibold leading-snug">
+          No foreign entity or foreign bank account needed — turn on any method above straight from your HitPay Dashboard under <span class="text-[#2465DE]">Payment Methods</span>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO / PROBLEM -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="section-label">THE PROBLEM</span>
+          <h2 class="text-3xl text-[#03102F] mt-4 mb-6">Have overseas customers? They can now pay without you lifting a finger.</h2>
+          <p class="text-lg text-[#61667C] leading-relaxed">
+            Online stores that price only in one home currency often lose international shoppers right at checkout — the customer can't tell what they're actually being charged and hesitates, whether they're reaching for a card or a local payment app. Adaptive Pricing removes that friction automatically, showing every overseas customer a price they recognise, while every payment request you create stays priced in your own home currency, with no separate link to manage per market.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-3">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 w-36 text-center opacity-70">
+            <div class="text-[10px] font-semibold text-[#61667C] uppercase tracking-wider mb-2">Before</div>
+            <div class="text-lg font-semibold text-[#03102F]">SGD 120.00</div>
+            <div class="text-[10px] text-red-500 mt-2">Unfamiliar to an overseas buyer</div>
+          </div>
+          <svg class="w-6 h-6 text-[#2465DE] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 12h14"/></svg>
+          <div class="bg-white border-2 border-[#2465DE] rounded-2xl p-5 w-36 text-center shadow-md">
+            <div class="text-[10px] font-semibold text-[#2465DE] uppercase tracking-wider mb-2">Adaptive Pricing</div>
+            <div class="text-lg font-semibold text-[#03102F]">IDR 1,895,000</div>
+            <div class="text-[10px] text-[#4DAB80] mt-2 font-semibold">✓ Recognised instantly</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY BENEFITS -->
+  <section class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">KEY BENEFITS</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">Everything Adaptive Pricing does automatically</h2>
+        <p class="text-[#61667C] max-w-2xl mx-auto">Turn it on once in Checkout Customisation settings — every hosted checkout session handles the rest.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="md:col-span-2 bg-white rounded-2xl p-6 border-2 border-[#2465DE] feature-card flex flex-col md:flex-row md:items-center gap-6">
+          <div class="flex-1">
+            <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <h3 class="font-semibold text-[#03102F] mb-2">Better checkout conversion</h3>
+            <p class="text-[#61667C] text-sm">Customers see a price and payment method they recognise, in their own currency — the difference behind the average 10%+ international revenue lift.</p>
+          </div>
+          <div class="flex-shrink-0 bg-[#F9F9F6] rounded-xl px-6 py-4 text-center">
+            <div class="text-3xl font-bold text-[#2465DE]">+10%</div>
+            <div class="text-[10px] text-[#61667C] uppercase tracking-wide mt-1">Avg. revenue lift</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Auto-detects location</h3>
+          <p class="text-[#61667C] text-sm">Shows the amount in the customer's local currency automatically — no manual setup per country.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Card and cross-border methods, both in local currency</h3>
+          <p class="text-[#61667C] text-sm">Customers can pay by card, priced in their own currency, or a local method like DuitNow, PayNow, QRPh, QRIS, or VietQR. See what's available in Payment Methods.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">You get paid the same way</h3>
+          <p class="text-[#61667C] text-sm">Payouts always land in your home currency, on a next business day basis in Singapore, Malaysia &amp; the Philippines — nothing changes in reconciliation.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">No code required</h3>
+          <p class="text-[#61667C] text-sm">Enabled entirely from Checkout Customisation settings in your dashboard — works inside your existing store integration.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 feature-card">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Reach markets card-only checkout misses</h3>
+          <p class="text-[#61667C] text-sm">Surfacing DuitNow, PayNow, QRPh, QRIS, VietQR, and more brings in net new sales from customers who predominantly pay via local methods, not cards.</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Create Your Free HitPay Account Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="section-label">HOW IT WORKS</span>
+          <h2 class="text-4xl text-[#03102F] leading-tight mb-5">
+            From your price to their currency, in four automatic steps
+          </h2>
+          <p class="text-lg text-[#61667C] leading-relaxed mb-8">
+            You price in your home currency exactly as you do today — no separate link per market. Adaptive Pricing handles detection, conversion, and payment method selection the moment a customer opens checkout, with the rate locked for that session. Card still works too, just priced in the customer's own currency.
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Turn On Adaptive Pricing Today</a>
+          </div>
+          <p class="text-sm text-[#61667C] mt-4">Building your own checkout instead of using HitPay's hosted page? See the <a href="#developers" class="text-[#2465DE] hover:underline">Payment Request API</a>.</p>
+        </div>
+        <div class="flex justify-center">
+          <!-- Adaptive pricing flow mock UI -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl p-6 w-80">
+            <div class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-4">SGD 120 payment request</div>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3 p-3 bg-[#F9F9F6] rounded-xl">
+                <div class="w-8 h-8 bg-[#EBF1FC] rounded-full flex items-center justify-center text-xs font-bold text-[#2465DE]">1</div>
+                <div class="text-sm text-[#03102F]">Merchant creates a payment request in <strong>SGD 120</strong> — as usual</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#F9F9F6] rounded-xl">
+                <div class="w-8 h-8 bg-[#EBF1FC] rounded-full flex items-center justify-center text-xs font-bold text-[#2465DE]">2</div>
+                <div class="text-sm text-[#03102F]">Customer opens checkout — HitPay detects an Indonesian IP</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#EBF1FC] rounded-xl border border-[#D6E3F9]">
+                <div class="w-8 h-8 bg-[#2465DE] rounded-full flex items-center justify-center text-xs font-bold text-white">3</div>
+                <div class="text-sm text-[#03102F]">Customer sees <strong>IDR 1,895,000</strong>, rate locked at page load — pays by card or QRIS</div>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#F9F9F6] rounded-xl">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-xs font-bold text-green-700">✓</div>
+                <div class="text-sm text-[#03102F]">Customer pays in IDR — merchant is paid out in <strong>SGD</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GETTING STARTED -->
+  <section class="py-20 bg-[#F3F3ED]">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">GETTING STARTED</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">Three steps, then it runs by itself</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 relative">
+        <div class="hidden md:block absolute top-8 left-[16.6%] right-[16.6%] h-0.5 bg-[#D6E3F9] -z-0"></div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center relative">
+          <div class="w-14 h-14 mx-auto mb-4 bg-[#2465DE] rounded-full flex items-center justify-center text-white relative z-10">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-4 4a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l4-4a4 4 0 015.656 5.656l-1.5 1.5"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-1">Connect payment methods</h3>
+          <p class="text-[#61667C] text-sm"><strong>Settings &gt; Payment Methods</strong> — partner review takes 3–5 business days.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center relative">
+          <div class="w-14 h-14 mx-auto mb-4 bg-[#2465DE] rounded-full flex items-center justify-center text-white relative z-10">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4M16 17H4m0 0l4 4m-4-4l4-4"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-1">Turn on Adaptive Pricing</h3>
+          <p class="text-[#61667C] text-sm"><strong>Checkout Customisation &gt; Adaptive Pricing</strong> — switch on the toggle.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 text-center relative">
+          <div class="w-14 h-14 mx-auto mb-4 bg-[#2465DE] rounded-full flex items-center justify-center text-white relative z-10">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-1">Save — you're live</h3>
+          <p class="text-[#61667C] text-sm">Every hosted checkout activates automatically — no setup per currency or link.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Enable Adaptive Pricing Now</a>
+        <a href="/payments/adaptive-pricing" class="hp-btn hp-btn-s">Read the Documentation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUITABLE FOR -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">SUITABLE FOR</span>
+        <h2 class="text-3xl text-[#03102F] mt-4 mb-4">Businesses selling online to overseas customers</h2>
+        <p class="text-[#61667C] max-w-2xl mx-auto">Anyone who wants higher conversion at checkout, without managing a separate payment link per currency.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-[#F9F9F6] rounded-2xl p-6 text-center feature-card">
+          <div class="text-3xl mb-3">🛒</div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Cross-Border E-Commerce</h3>
+          <p class="text-[#61667C] text-sm">Sell to overseas shoppers without creating a separate link per currency.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-2xl p-6 text-center feature-card">
+          <div class="text-3xl mb-3">🎓</div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Online Course Sellers</h3>
+          <p class="text-[#61667C] text-sm">Let international students check out in a currency they recognise.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-2xl p-6 text-center feature-card">
+          <div class="text-3xl mb-3">🧾</div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Regional Service Providers</h3>
+          <p class="text-[#61667C] text-sm">Bill clients across markets, and get paid the same way every time.</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="https://dashboard.hit-pay.com/register" class="hp-btn hp-btn-p">Start Selling Cross-Border Today</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="py-16 bg-[#002771]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">0</div>
+          <div class="text-blue-300 text-sm">SGD/MYR/PHP — Monthly fees</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">1</div>
+          <div class="text-blue-300 text-sm">Next business day payout in SG, MY &amp; PH</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">50+</div>
+          <div class="text-blue-300 text-sm">Payment methods available on HitPay</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-white mb-2">Level 1</div>
+          <div class="text-blue-300 text-sm">PCI DSS certified checkout infrastructure</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-[#F9F9F6] rounded-3xl p-10 md:p-14">
+        <div class="flex gap-1 mb-6">
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <!-- [PLACEHOLDER — replace with a real verified testimonial before publishing] -->
+        <blockquote class="text-2xl text-[#03102F] leading-relaxed mb-8">
+          "We used to lose Indonesian and Malaysian shoppers at checkout because the price only made sense in Singapore dollars. Adaptive Pricing showed them the amount in rupiah or ringgit automatically, and our conversion rate from those markets improved within the first month — without us touching our pricing page."
+        </blockquote>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-[#D6E3F9] rounded-full flex items-center justify-center text-[#2465DE] font-semibold text-sm">RS</div>
+          <div>
+            <div class="font-semibold text-[#03102F]">[Merchant Name]</div>
+            <div class="text-[#61667C] text-sm">[Title], [Company] · Singapore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVAILABILITY -->
+  <section class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label">AVAILABILITY</span>
+        <h2 class="text-3xl text-[#03102F] mb-4">Works across every checkout surface</h2>
+        <p class="text-[#61667C] max-w-xl mx-auto">Adaptive Pricing activates automatically wherever you already collect payments — no separate setup per surface.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Hosted Checkout</h3>
+          <p class="text-[#61667C] text-sm mb-5 flex-1">Every hosted checkout session activates Adaptive Pricing for international customers automatically, once enabled — no extra step per sale.</p>
+          <a href="cross-border-payments.html" class="text-[#2465DE] font-semibold text-sm inline-flex items-center gap-1 hover:text-[#0E2859]">See Cross-Border Payments <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-4 4a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l4-4a4 4 0 015.656 5.656l-1.5 1.5"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Payment Links</h3>
+          <p class="text-[#61667C] text-sm mb-5 flex-1">Any payment link with a fixed amount adapts too — share it by WhatsApp, email, or SMS and it still shows the customer's own currency.</p>
+          <a href="cross-border-payments.html#payment-links" class="text-[#2465DE] font-semibold text-sm inline-flex items-center gap-1 hover:text-[#0E2859]">See Payment Links <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col">
+          <div class="w-10 h-10 bg-[#EBF1FC] rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M7 8l-4 4 4 4M14 4l-4 16"/></svg>
+          </div>
+          <h3 class="font-semibold text-[#03102F] mb-2">Payment Request API</h3>
+          <p class="text-[#61667C] text-sm mb-5 flex-1">Built your own checkout? Set <code class="text-xs bg-slate-100 px-1 rounded">localised_pricing</code> on any API-created payment request.</p>
+          <a href="/apis/guide/cross-border-payments" class="text-[#2465DE] font-semibold text-sm inline-flex items-center gap-1 hover:text-[#0E2859]">See API Docs <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVELOPERS -->
+  <section id="developers" class="py-20 bg-[#03102F]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="section-label text-blue-300">FOR DEVELOPERS</span>
+        <h2 class="text-3xl text-white mt-4 mb-4">Build Adaptive Pricing into your own checkout</h2>
+        <p class="text-blue-200 max-w-2xl mx-auto">Integrate the same adaptive, currency-aware pricing mechanic via the Payment Request API instead of using HitPay's hosted checkout page.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-center">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-3">Online · Adaptive checkout</div>
+          <h3 class="font-semibold text-white text-lg mb-2">Payment Request API</h3>
+          <p class="text-blue-200 text-sm mb-5">Set <code class="text-xs bg-white/10 px-1.5 py-0.5 rounded">localised_pricing</code> to enable currency selection on hosted checkout. Test any market with a <code class="text-xs bg-white/10 px-1.5 py-0.5 rounded">+location_XX</code> email suffix.</p>
+          <a href="/apis/guide/cross-border-payments" class="hp-btn hp-btn-s text-sm">See API Docs</a>
+        </div>
+        <div class="bg-black/30 border border-white/10 rounded-2xl p-5 font-mono text-xs text-blue-100 overflow-x-auto">
+          <div class="text-blue-400 mb-3">POST /v1/payment-requests</div>
+          <pre class="whitespace-pre leading-relaxed">{
+  "amount": 120,
+  "currency": "SGD",
+  "email": "test+location_ID@example.com",
+  "localised_pricing": true
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE MORE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl text-[#03102F] mb-8">Explore more HitPay cross-border products</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="cross-border-payments.html" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#EBF1FC] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Cross-Border Payments</div>
+            <div class="text-[#61667C] text-sm mb-3">Compare all four ways to accept cross-border payments — online or in person — across 9 Asia-Pacific markets.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">See all cross-border products <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+        <a href="multi-currency-collections-account.html" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#F3F3ED] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Multi-Currency Virtual Accounts</div>
+            <div class="text-[#61667C] text-sm mb-3">Local SGD and PHP receiving accounts, plus SWIFT reach to 13 currencies — for business receivables, not just customer checkout.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">See multi-currency virtual accounts <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+        <a href="cross-border-payments.html#payment-links" class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#D6E3F9] hover:shadow-md transition-all">
+          <div class="h-32 bg-[#EBF1FC] flex items-center justify-center">
+            <svg class="w-12 h-12 text-[#2465DE]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 010 5.656l-4 4a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l4-4a4 4 0 015.656 5.656l-1.5 1.5"/></svg>
+          </div>
+          <div class="p-5">
+            <div class="font-semibold text-[#03102F] mb-1 group-hover:text-[#2465DE]">Multi-Currency Payment Links</div>
+            <div class="text-[#61667C] text-sm mb-3">Quote an overseas client a fixed price directly in their own currency — you set the rate, not HitPay.</div>
+            <div class="text-[#2465DE] font-medium text-sm flex items-center gap-1">See payment links <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-[#F9F9F6]">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl text-[#03102F] mb-4">Frequently asked questions: Adaptive Pricing</h2>
+        <p class="text-[#61667C]">Everything businesses need to know before enabling Adaptive Pricing at checkout.</p>
+      </div>
+      <div class="space-y-3">
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white" open>
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is Adaptive Pricing?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Adaptive Pricing is a HitPay checkout feature that lets online merchants keep pricing in their home currency while international customers automatically see and pay in their own local currency and preferred local payment methods, such as DuitNow, PayNow, QRPh, QRIS, or VietQR. The merchant always receives their payout in their home currency.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Which customers see the currency selector?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Only customers whose detected country maps to a currency that differs from the merchant's default currency. Domestic customers, whose currency matches the merchant's default, see the standard checkout with no currency selector.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How is the exchange rate determined?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">The rate is based on the mid-market exchange rate at the time the checkout page loads. The FX rate and associated FX cost are borne by the customer — the merchant always receives their payout in their home currency. The rate is locked for the duration of that checkout session and refreshes only when the customer reloads the page.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does enabling Adaptive Pricing cost anything extra?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">No. Standard payment processing fees apply as normal, and international cards are charged at the standard higher international-card rate. Non-card cross-border payment methods usually cost the merchant less per transaction than a card payment. The FX rate and FX cost are borne by the customer, not the merchant.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What happens if a customer's currency is not supported?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">If the detected currency is not supported, or it matches the merchant's default currency, the checkout falls back to showing only the merchant's default currency and payment methods — no currency selector is shown, and the customer pays exactly as a domestic customer would.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does Adaptive Pricing work with API-created payment requests?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Yes. Payment requests created via the Payment Request API also support Adaptive Pricing on the hosted checkout, as long as Adaptive Pricing is enabled in Checkout Customisation settings. The <code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">localised_pricing</code> parameter enables currency selection on the hosted checkout page.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Does Adaptive Pricing work with recurring billing or subscriptions?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">No. Adaptive Pricing is currently available for one-time hosted checkout payments only. Recurring billing and subscription charges are out of scope for this feature.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">What is the payout timing for payments collected through Adaptive Pricing?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Cross-border payments processed via Adaptive Pricing are credited to the merchant's HitPay Balance on a next business day basis in Singapore, Malaysia, and the Philippines.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Where is Adaptive Pricing not available?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Adaptive Pricing is not available on the default payment link on a merchant's account, or on open-amount payment links that have no fixed amount set. It supports hosted checkout, standard payment links with a fixed amount, and API-created payment requests.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do I turn on Adaptive Pricing?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Go to Settings &gt; Payment Methods and connect the cross-border payment methods to support (partner review takes 3–5 business days). Then go to Settings &gt; Checkout Customisation &gt; Adaptive Pricing and turn on Enable Adaptive Pricing. Save — all hosted checkout sessions activate Adaptive Pricing for international customers automatically.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">How do businesses test Adaptive Pricing before going live?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">Businesses can simulate a specific country by appending a "+location_XX" suffix to a test customer's email, where XX is a two-letter ISO country code — for example, test+location_ID@example.com for Indonesia. Entering this in the Payment Request API's email field, or in the dashboard's send-by-email flow, makes the checkout present currency and pricing exactly as a customer from that country would see it.</p>
+          </div>
+        </details>
+
+        <details class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+          <summary class="px-6 py-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#F9F9F6] transition-colors list-none">
+            <span class="font-semibold text-[#03102F]">Which cross-border payment methods can appear at Adaptive Pricing checkout?</span>
+            <svg class="w-5 h-5 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-[#61667C] leading-relaxed">HitPay surfaces relevant local payment methods based on the customer's detected country, including DuitNow (Malaysia), PayNow (Singapore), QRPh (Philippines), QRIS (Indonesia), VietQR (Vietnam), and other supported cross-border methods. Merchants see their available methods in the HitPay Dashboard under Payment Methods.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REGULATORY INFORMATION -->
+  <section class="py-14 bg-white border-t border-slate-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-sm font-semibold text-[#03102F] uppercase tracking-widest mb-4">Regulatory information</h2>
+      <div class="grid sm:grid-cols-3 gap-4 mb-4">
+        <div class="bg-[#F9F9F6] rounded-xl p-4">
+          <div class="text-xl mb-2">🇸🇬</div>
+          <p class="text-xs text-[#61667C] leading-relaxed"><strong class="text-[#03102F]">Singapore:</strong> HitPay Payment Solutions Pte Ltd, licensed as a Major Payment Institution (PS20200643) under the Payment Services Act, regulated by MAS.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-xl p-4">
+          <div class="text-xl mb-2">🇲🇾</div>
+          <p class="text-xs text-[#61667C] leading-relaxed"><strong class="text-[#03102F]">Malaysia:</strong> HitPay Payment Solutions Sdn Bhd (SSM 202101017021) &amp; Mobiedge E-commerce Sdn Bhd (SSM 201501003595), regulated by Bank Negara Malaysia.</p>
+        </div>
+        <div class="bg-[#F9F9F6] rounded-xl p-4">
+          <div class="text-xl mb-2">🇵🇭</div>
+          <p class="text-xs text-[#61667C] leading-relaxed"><strong class="text-[#03102F]">Philippines:</strong> HitPay Payment Solutions, Inc., a Registered Operator of Payment Systems (OPSCOR-2023-0006), regulated by BSP.</p>
+        </div>
+      </div>
+      <p class="text-xs text-[#61667C]">Adaptive Pricing checkout runs on HitPay's PCI DSS Level 1 certified payment infrastructure.</p>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="py-20 gradient-cta">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl text-white mb-5">Stop losing overseas carts to unfamiliar currency</h2>
+      <p class="text-blue-100 text-xl mb-10">Merchants who enable Adaptive Pricing see international revenue grow by an average of over 10% — no code required, and you're still paid out in your home currency, every time.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="https://dashboard.hit-pay.com/register" class="bg-white text-[#002771] font-semibold px-8 py-4 rounded-full hover:bg-[#EBF1FC] transition-colors text-base">Turn On Adaptive Pricing Today</a>
+        <a href="#" class="bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/30 hover:bg-white/20 transition-colors text-base">Talk to Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEAKABLE SUMMARY -->
+  <section class="py-20 bg-white border-t border-slate-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <span class="section-label">IN SHORT</span>
+      <h2 class="text-3xl text-[#03102F] mt-4 mb-6">Adaptive Pricing, in one paragraph</h2>
+      <p class="speakable-summary text-lg text-[#61667C] leading-relaxed">
+        HitPay Adaptive Pricing lets online merchants in Singapore, Malaysia, and the Philippines price in their home currency while overseas customers pay in their own local currency — by card or a local method like DuitNow, PayNow, QRPh, QRIS, or VietQR. Enabled from Checkout Customisation settings with no code required, it lifts international revenue by an average of over 10%, with the merchant always paid out in their home currency on a next business day basis. It isn't available on the default payment link, open-amount links, or recurring billing — developers can access the same mechanic via the Payment Request API's <code class="text-sm bg-slate-100 px-1.5 py-0.5 rounded">localised_pricing</code> parameter, see the <a href="#developers" class="text-[#2465DE] hover:underline">developer section above</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#03102F] text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-5 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <img src="assets/logos/hitpay-white.svg" alt="HitPay" class="h-7">
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">All-in-one payment platform for growing businesses in Southeast Asia and beyond. MAS licensed (PS20200643).</p>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Cross-border products</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="adaptive-pricing.html" class="hover:text-slate-300">Adaptive Pricing</a></li>
+            <li><a href="cross-border-payments.html#payment-links" class="hover:text-slate-300">Multi-Currency Payment Links</a></li>
+            <li><a href="cross-border-payments.html#borderless-qr" class="hover:text-slate-300">Borderless QR</a></li>
+            <li><a href="cross-border-payments.html#multi-currency-products" class="hover:text-slate-300">Multi-Currency Products</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Products</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="multi-currency-collections-account.html" class="hover:text-slate-300">Multi-Currency Collections Account</a></li>
+            <li><a href="virtual-accounts-global-business-collections.html" class="hover:text-slate-300">Virtual Accounts (Singapore)</a></li>
+            <li><a href="virtual-accounts-philippines.html" class="hover:text-slate-300">Business Collections Account (Philippines)</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold text-slate-300 text-sm mb-3">Company</div>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-slate-300">About</a></li>
+            <li><a href="#" class="hover:text-slate-300">Blog</a></li>
+            <li><a href="https://hitpayapp.com/pricing" class="hover:text-slate-300">Pricing</a></li>
+            <li><a href="#" class="hover:text-slate-300">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 mb-4">Page last reviewed: August 2026</p>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-sm text-[#61667C]">© 2026 HitPay Payment Solutions Pte. Ltd. All rights reserved.</div>
+        <div class="flex gap-6 text-sm text-[#61667C]">
+          <a href="#" class="hover:text-slate-400">Privacy</a>
+          <a href="#" class="hover:text-slate-400">Terms</a>
+          <a href="#" class="hover:text-slate-400">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!--
+PRE-PUBLISH CHECKLIST
+
+Content:
+✅ Built as deliverable #4 ("Adaptive Pricing SME page") from the 5-landing-page cross-border plan referenced in cross-border-payments.html's pre-publish notes — a SEPARATE standalone page, not a section of the hub
+✅ All copy sourced from the 2026-08-13 product announcement email (Aditya @ HitPay) and the docs.hitpayapp.com/payments/adaptive-pricing page supplied in this conversation — key benefits, getting-started steps, suitable-for use cases, fees, restrictions, testing method, and FAQ all reproduced faithfully
+✅ Payout timing stated as "next business day" per house GEO rule (not "T+1"), matching docs' underlying "T+1 calendar day" fact
+✅ Payment methods framed as "50+ payment methods" in the stats bar per house rule (never claim 700+ — that figure is for wallets)
+✅ Stats bar opens with "SGD/MYR/PHP 0 — Monthly fees" per house GEO rule
+✅ Testimonial is a PLACEHOLDER — must be replaced with a real verified quote before publishing
+✅ Regulatory block covers all three core markets (SG, MY, PH) plus PCI DSS Level 1 mention
+✅ Cross-links to cross-border-payments.html (hub) and its other 3 products, plus multi-currency virtual accounts
+
+Schema:
+✅ FAQPage schema includes 12 questions covering definitional, fee, restriction, setup, and testing objections
+✅ HowTo schema mirrors the 3-step "Getting Started" section from the email
+✅ SoftwareApplication, BreadcrumbList, Review (flagged [REAL QUOTE REQUIRED]), Organization, and SpeakableSpecification schema blocks all present
+
+Before publishing:
+□ Replace testimonial with a verified real quote from an actual HitPay merchant using Adaptive Pricing
+□ Confirm live URL slug (/payments/adaptive-pricing vs a new root-level slug) with the web team
+□ Link the "Talk to Sales" CTA to the real contact-sales URL (currently "#")
+□ Verify current partner review SLA (3–5 business days) is still accurate with Product before the 18 Aug 2026 deadline
+□ Verify pricing/fee language against live hitpayapp.com/pricing
+□ Once cross-border-payments.html is split into separate pages, update its #adaptive-pricing anchor/footer link to point here instead
+-->

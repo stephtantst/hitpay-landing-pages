@@ -15,7 +15,10 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
 
   if (error || !data) return NextResponse.json({ error: 'Page not found' }, { status: 404 })
 
-  // Write HTML to repo root (one level up from web/)
+  // Write HTML to repo root (one level up from web/) — only possible when running
+  // locally against a real checkout. Deployed serverless functions have a read-only
+  // filesystem, so this always fails there; callers should download the HTML and
+  // commit it manually instead.
   const repoRoot = path.join(process.cwd(), '..')
   const outputPath = path.join(repoRoot, data.filename)
 
@@ -25,7 +28,13 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'Invalid filename' }, { status: 400 })
   }
 
-  fs.writeFileSync(outputPath, data.html, 'utf-8')
+  try {
+    fs.writeFileSync(outputPath, data.html, 'utf-8')
+  } catch {
+    return NextResponse.json({
+      error: 'Publishing directly to the repo isn\'t available in this deployment. Download the HTML from the page detail view and commit it manually instead.',
+    }, { status: 501 })
+  }
 
   await supabase
     .from('generated_pages')

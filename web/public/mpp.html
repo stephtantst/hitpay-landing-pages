@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HitPay MPP — Get Paid by AI Agents, Automatically</title>
+  <meta name="description" content="HitPay MPP (Machine Payment Protocol) lets your business automatically charge AI agents for accessing your data or services. No new setup — works with your existing HitPay account." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --blue-deep: #002771;
+      --blue-action: #2465DE;
+      --blue-hover: #1B4FB8;
+      --text-primary: #03102F;
+      --text-secondary: #61667C;
+      --beige: #F9F9F6;
+      --blue-50: #EBF1FC;
+      --blue-100: #D6E3F9;
+      --success: #4DAB80;
+    }
+    body { font-family: 'Manrope', sans-serif; color: var(--text-primary); background: #fff; }
+    h1, h2, h3, h4 { font-family: 'IBM Plex Sans Condensed', sans-serif; }
+    .brand-gradient { background: linear-gradient(135deg, #002771 0%, #2465DE 100%); }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(36,101,222,0.12); color: var(--blue-action); border: 1px solid rgba(36,101,222,0.25); border-radius: 100px; padding: 4px 12px; font-size: 13px; font-weight: 600; font-family: 'Manrope', sans-serif; }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-action); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; }
+    .card-dark { background: var(--text-primary); border-radius: 16px; }
+    .step-number { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-50); color: var(--blue-action); font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'IBM Plex Sans Condensed', sans-serif; }
+    .flow-arrow { color: #CBD5E1; font-size: 20px; }
+    .tag { background: var(--blue-50); color: var(--blue-action); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 600; }
+    .tag-green { background: #ECFDF5; color: #059669; border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 600; }
+    .code-block { background: #0D1117; color: #E6EDF3; border-radius: 12px; padding: 20px 24px; font-family: 'Menlo', 'Monaco', monospace; font-size: 13px; line-height: 1.7; overflow-x: auto; }
+    .code-comment { color: #8B949E; }
+    .code-key { color: #79C0FF; }
+    .code-val { color: #A5D6FF; }
+    .code-str { color: #A5D6FF; }
+    .code-num { color: #F78166; }
+    .code-green { color: #56D364; }
+    .divider { border: none; border-top: 1px solid #E2E8F0; }
+    .nav-link { font-size: 14px; color: var(--text-secondary); font-weight: 500; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .btn-primary { background: var(--blue-action); color: #fff; border-radius: 8px; padding: 12px 24px; font-weight: 600; font-size: 15px; transition: background 0.15s; display: inline-block; }
+    .btn-primary:hover { background: var(--blue-hover); }
+    .btn-secondary { background: var(--blue-50); color: var(--blue-action); border-radius: 8px; padding: 12px 24px; font-weight: 600; font-size: 15px; transition: background 0.15s; display: inline-block; }
+    .btn-secondary:hover { background: var(--blue-100); }
+    .flow-line { stroke: #D6E3F9; stroke-width: 2; stroke-dasharray: 6,4; fill: none; }
+    .flow-line-active { stroke: var(--blue-action); stroke-width: 2; fill: none; }
+    .node { fill: #fff; stroke: #D6E3F9; stroke-width: 1.5; rx: 12; }
+    .node-active { fill: var(--blue-50); stroke: var(--blue-action); stroke-width: 1.5; }
+    .node-success { fill: #ECFDF5; stroke: #6EE7B7; stroke-width: 1.5; }
+    .comparison-col { border-radius: 16px; padding: 28px; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Nav -->
+  <nav class="border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur z-50">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <svg width="88" height="22" viewBox="0 0 88 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="18" font-family="IBM Plex Sans Condensed" font-weight="700" font-size="20" fill="#03102F">HitPay</text>
+        </svg>
+        <span class="text-[#61667C] font-light text-lg">/</span>
+        <span style="font-family:'IBM Plex Sans Condensed',sans-serif; font-weight:600; font-size:17px; color:#2465DE;">MPP</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#how-it-works" class="nav-link">How it works</a>
+        <a href="#example" class="nav-link">Example</a>
+        <a href="#developers" class="nav-link">Developers</a>
+        <a href="#waitlist" class="btn-primary text-sm py-2 px-5">Join waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-20 pb-24 px-6" style="background: #F9F9F6;">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-3xl">
+        <div class="badge mb-6">
+          <span class="badge-dot"></span>
+          Sandbox preview — join the waitlist
+        </div>
+        <h1 class="text-6xl font-medium leading-[1.05] text-[#03102F] mb-6">
+          Your business data<br>has value.<br>
+          <span style="color:#2465DE;">Start charging AI for it.</span>
+        </h1>
+        <p class="text-xl text-[#61667C] leading-relaxed mb-10 max-w-xl">
+          AI agents are replacing human queries — checking availability, getting quotes, pulling data. MPP lets you automatically charge them, using your existing HitPay account.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#waitlist" class="btn-primary">Join the waitlist</a>
+          <a href="https://mpp.hitpay.dev" class="btn-secondary">Read the docs</a>
+        </div>
+      </div>
+
+      <!-- Hero visual -->
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Before -->
+        <div class="card p-6">
+          <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-4">Today</p>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+              <span class="text-2xl">🧑</span>
+              <div>
+                <p class="text-sm font-semibold">Human visits your website</p>
+                <p class="text-xs text-[#61667C]">Browses, fills a form, calls you</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-center text-gray-300 text-xl">↓</div>
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+              <span class="text-2xl">🏢</span>
+              <div>
+                <p class="text-sm font-semibold">Your team responds manually</p>
+                <p class="text-xs text-[#61667C]">Email, WhatsApp, phone call</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-center text-gray-300 text-xl">↓</div>
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50">
+              <span class="text-2xl">💸</span>
+              <div>
+                <p class="text-sm font-semibold">Sale made (maybe)</p>
+                <p class="text-xs text-[#61667C]">After significant effort</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- After -->
+        <div class="card p-6" style="border-color:#2465DE; box-shadow: 0 0 0 1px #2465DE20;">
+          <p class="text-xs font-semibold text-[#2465DE] uppercase tracking-wider mb-4">Tomorrow, with MPP</p>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#EBF1FC;">
+              <span class="text-2xl">🤖</span>
+              <div>
+                <p class="text-sm font-semibold">AI agent queries your data</p>
+                <p class="text-xs text-[#61667C]">Automated, programmatic, instant</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-center" style="color:#2465DE; font-size:20px;">↓</div>
+            <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#EBF1FC;">
+              <span class="text-2xl">💳</span>
+              <div>
+                <p class="text-sm font-semibold">Agent pays automatically</p>
+                <p class="text-xs text-[#61667C]">Via stored token — no human needed</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-center" style="color:#2465DE; font-size:20px;">↓</div>
+            <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#ECFDF5;">
+              <span class="text-2xl">✅</span>
+              <div>
+                <p class="text-sm font-semibold">Money in your HitPay account</p>
+                <p class="text-xs text-[#61667C]">Tagged <code class="text-xs bg-white px-1 rounded">source=mpp</code> in your dashboard</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-14">
+        <p class="text-sm font-semibold text-[#2465DE] uppercase tracking-wider mb-3">How it works</p>
+        <h2 class="text-4xl font-medium text-[#03102F]">The payment happens in the background.<br>You just set the price.</h2>
+      </div>
+
+      <!-- System Diagram -->
+      <div class="card p-8 mb-12 overflow-x-auto">
+        <svg viewBox="0 0 780 320" width="100%" xmlns="http://www.w3.org/2000/svg" style="min-width:600px;">
+
+          <!-- Nodes -->
+          <!-- AI Agent -->
+          <rect x="20" y="120" width="130" height="72" rx="12" fill="#EBF1FC" stroke="#2465DE" stroke-width="1.5"/>
+          <text x="85" y="149" text-anchor="middle" font-family="IBM Plex Sans Condensed" font-size="13" font-weight="600" fill="#03102F">AI Agent</text>
+          <text x="85" y="167" text-anchor="middle" font-family="Manrope" font-size="11" fill="#61667C">(your customer's</text>
+          <text x="85" y="181" text-anchor="middle" font-family="Manrope" font-size="11" fill="#61667C">assistant)</text>
+
+          <!-- Your Server -->
+          <rect x="240" y="120" width="130" height="72" rx="12" fill="#F9F9F6" stroke="#E2E8F0" stroke-width="1.5"/>
+          <text x="305" y="149" text-anchor="middle" font-family="IBM Plex Sans Condensed" font-size="13" font-weight="600" fill="#03102F">Your Server</text>
+          <text x="305" y="167" text-anchor="middle" font-family="Manrope" font-size="11" fill="#61667C">(with MPP</text>
+          <text x="305" y="181" text-anchor="middle" font-family="Manrope" font-size="11" fill="#61667C">middleware)</text>
+
+          <!-- HitPay -->
+          <rect x="460" y="50" width="130" height="72" rx="12" fill="#002771" stroke="#002771" stroke-width="1.5"/>
+          <text x="525" y="80" text-anchor="middle" font-family="IBM Plex Sans Condensed" font-size="13" font-weight="600" fill="#fff">HitPay</text>
+          <text x="525" y="98" text-anchor="middle" font-family="Manrope" font-size="11" fill="#A3B8E8">Checkout + Payment</text>
+          <text x="525" y="112" text-anchor="middle" font-family="Manrope" font-size="11" fill="#A3B8E8">Processing</text>
+
+          <!-- Receipt / Token -->
+          <rect x="460" y="200" width="130" height="72" rx="12" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5"/>
+          <text x="525" y="228" text-anchor="middle" font-family="IBM Plex Sans Condensed" font-size="13" font-weight="600" fill="#03102F">Token Issued</text>
+          <text x="525" y="248" text-anchor="middle" font-family="Manrope" font-size="11" fill="#61667C">Signed receipt +</text>
+          <text x="525" y="262" text-anchor="middle" font-family="Manrope" font-size="11" fill="#61667C">reusable credential</text>
+
+          <!-- Arrows -->
+          <!-- 1: Agent → Server (request) -->
+          <line x1="152" y1="148" x2="238" y2="148" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <polygon points="238,144 248,148 238,152" fill="#CBD5E1"/>
+          <text x="195" y="138" text-anchor="middle" font-family="Manrope" font-size="10" fill="#61667C">① Request</text>
+
+          <!-- 2: Server → HitPay (402 challenge) -->
+          <line x1="305" y1="120" x2="480" y2="106" stroke="#2465DE" stroke-width="1.5"/>
+          <polygon points="476,101 488,104 479,111" fill="#2465DE"/>
+          <text x="390" y="102" text-anchor="middle" font-family="Manrope" font-size="10" fill="#2465DE" font-weight="600">② 402 + checkout URL</text>
+
+          <!-- 3: Agent → HitPay (pays) -->
+          <line x1="152" y1="138" x2="458" y2="88" stroke="#2465DE" stroke-width="1.5"/>
+          <polygon points="454,83 466,86 457,93" fill="#2465DE"/>
+          <text x="295" y="80" text-anchor="middle" font-family="Manrope" font-size="10" fill="#2465DE" font-weight="600">③ Pays (first time: checkout</text>
+          <text x="295" y="93" text-anchor="middle" font-family="Manrope" font-size="10" fill="#2465DE" font-weight="600">/ after: auto via token)</text>
+
+          <!-- 4: HitPay → Token (issues) -->
+          <line x1="525" y1="123" x2="525" y2="198" stroke="#059669" stroke-width="1.5"/>
+          <polygon points="521,198 525,210 529,198" fill="#059669"/>
+          <text x="560" y="165" text-anchor="start" font-family="Manrope" font-size="10" fill="#059669" font-weight="600">④ Issues token</text>
+
+          <!-- 5: Token → Agent (credential) -->
+          <line x1="458" y1="236" x2="154" y2="175" stroke="#059669" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <polygon points="158,170 146,173 153,182" fill="#059669"/>
+          <text x="300" y="225" text-anchor="middle" font-family="Manrope" font-size="10" fill="#059669" font-weight="600">⑤ Agent stores token</text>
+
+          <!-- 6: Agent → Server (retry) -->
+          <line x1="152" y1="168" x2="238" y2="168" stroke="#059669" stroke-width="2"/>
+          <polygon points="238,164 250,168 238,172" fill="#059669"/>
+          <text x="195" y="188" text-anchor="middle" font-family="Manrope" font-size="10" fill="#059669" font-weight="600">⑥ Retry + token → access granted</text>
+
+          <!-- HitPay webhook note -->
+          <text x="525" y="290" text-anchor="middle" font-family="Manrope" font-size="10" fill="#61667C">Money settled to your</text>
+          <text x="525" y="303" text-anchor="middle" font-family="Manrope" font-size="10" fill="#61667C">HitPay account</text>
+
+        </svg>
+      </div>
+
+      <!-- Steps -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <div class="step-number mb-4">1</div>
+          <h3 class="text-lg font-semibold mb-2">Agent requests your data</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed">An AI assistant — acting on behalf of a customer or business — sends an HTTP request to your endpoint asking for a quote, availability, pricing, or any service you offer.</p>
+        </div>
+        <div class="card p-6">
+          <div class="step-number mb-4">2</div>
+          <h3 class="text-lg font-semibold mb-2">Your server asks for payment</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed">Your server responds with <span class="tag">402 Payment Required</span> — the standard HTTP code for "pay first." A HitPay payment challenge is included. The agent handles this automatically.</p>
+        </div>
+        <div class="card p-6">
+          <div class="step-number mb-4">3</div>
+          <h3 class="text-lg font-semibold mb-2">Payment processed, access granted</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed">First time: agent's operator pays once and a token is stored. Every request after that: agent uses the token — HitPay charges it silently. Money appears in your dashboard tagged <span class="tag">source=mpp</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Example -->
+  <section id="example" class="py-24 px-6" style="background:#F9F9F6;">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-14">
+        <p class="text-sm font-semibold text-[#2465DE] uppercase tracking-wider mb-3">Real example</p>
+        <h2 class="text-4xl font-medium text-[#03102F]">A boutique gym that stopped giving ClassPass 30% — and started charging AI directly</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <div class="card p-8 mb-6">
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background:#EBF1FC;">🏋️</div>
+              <div>
+                <h3 class="text-xl font-semibold">Flow Studio</h3>
+                <p class="text-[#61667C] text-sm">Boutique yoga &amp; HIIT studio, Tanjong Pagar</p>
+              </div>
+            </div>
+            <p class="text-[#61667C] text-sm leading-relaxed mb-6">Flow Studio lists classes on ClassPass and pays 25–30% commission on every booking. Their corporate clients — banks, tech companies, law firms — are now rolling out employee wellness programs managed by AI coordinators that book fitness classes on behalf of staff.</p>
+            <hr class="divider mb-6"/>
+            <p class="text-sm font-semibold mb-4">With MPP, this is their new reality:</p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="tag-green mt-0.5">✓</span>
+                <p class="text-sm text-[#03102F]">Corporate wellness AI queries available slots → books directly, bypassing ClassPass entirely</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="tag-green mt-0.5">✓</span>
+                <p class="text-sm text-[#03102F]">Each booking costs <strong>S$3</strong> — charged automatically to the wellness platform's account</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="tag-green mt-0.5">✓</span>
+                <p class="text-sm text-[#03102F]">Full class price goes to the studio. No middleman margin lost.</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="tag-green mt-0.5">✓</span>
+                <p class="text-sm text-[#03102F]">Recurring token means the wellness platform's card is charged silently every booking — forever</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-6" style="border-color:#2465DE20; background:#EBF1FC;">
+            <p class="text-sm font-semibold text-[#03102F] mb-2">The pitch to them:</p>
+            <p class="text-[#002771] font-medium">"Your corporate clients' AI is already booking fitness classes. Make sure it's booking yours — and paying you directly."</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-3">Wellness AI sends a booking request</p>
+          <div class="code-block mb-4">
+<span class="code-comment"># Corporate wellness AI books a class for an employee</span>
+POST /api/classes/book HTTP/1.1
+Host: flowstudio.sg
+
+{
+  <span class="code-key">"class_id"</span>: <span class="code-str">"hiit-0700-thu"</span>,
+  <span class="code-key">"employee_id"</span>: <span class="code-str">"emp_8821"</span>,
+  <span class="code-key">"date"</span>: <span class="code-str">"2026-05-15"</span>
+}
+          </div>
+
+          <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-3">Studio asks for payment first</p>
+          <div class="code-block mb-4">
+HTTP/1.1 <span class="code-num">402</span> Payment Required
+WWW-Authenticate: Payment method="hitpay",
+  amount=<span class="code-num">3.00</span>, currency=<span class="code-str">"SGD"</span>,
+  checkout_url=<span class="code-str">"https://checkout.hit-pay.com/..."</span>
+          </div>
+
+          <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-3">Paid → booking confirmed instantly</p>
+          <div class="code-block">
+HTTP/1.1 <span class="code-green">200</span> OK
+X-MPP-Receipt: <span class="code-str">eyJhbGciOiJFZERTQSJ9...</span>
+
+{
+  <span class="code-key">"booking_id"</span>: <span class="code-str">"bk_9Xk2mP"</span>,
+  <span class="code-key">"class"</span>: <span class="code-str">"HIIT Express"</span>,
+  <span class="code-key">"instructor"</span>: <span class="code-str">"Coach Daniel"</span>,
+  <span class="code-key">"time"</span>: <span class="code-str">"7:00 AM, Thu 15 May"</span>,
+  <span class="code-key">"slot_confirmed"</span>: <span class="code-num">true</span>
+}
+          </div>
+        </div>
+      </div>
+
+      <!-- More use cases -->
+      <div class="mt-12">
+        <p class="text-sm font-semibold text-[#61667C] uppercase tracking-wider mb-6">Other HitPay merchants that can use MPP</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="card p-5">
+            <span class="text-2xl mb-3 block">💆</span>
+            <h4 class="font-semibold text-sm mb-1">Hair &amp; Beauty Salon</h4>
+            <p class="text-xs text-[#61667C]">Charge AI grooming concierges per appointment booked on behalf of customers</p>
+          </div>
+          <div class="card p-5">
+            <span class="text-2xl mb-3 block">🛍️</span>
+            <h4 class="font-semibold text-sm mb-1">Retail / Ecommerce</h4>
+            <p class="text-xs text-[#61667C]">Charge AI shopping assistants per real-time inventory or pricing lookup</p>
+          </div>
+          <div class="card p-5">
+            <span class="text-2xl mb-3 block">🍜</span>
+            <h4 class="font-semibold text-sm mb-1">F&amp;B / Restaurant</h4>
+            <p class="text-xs text-[#61667C]">Let AI dining concierges check availability and book tables with a per-reservation fee</p>
+          </div>
+          <div class="card p-5">
+            <span class="text-2xl mb-3 block">🩺</span>
+            <h4 class="font-semibold text-sm mb-1">Clinic / TCM</h4>
+            <p class="text-xs text-[#61667C]">Let AI health assistants check doctor slots and book consultations automatically</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Set up once -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-sm font-semibold text-[#2465DE] uppercase tracking-wider mb-3">How payment works</p>
+          <h2 class="text-4xl font-medium text-[#03102F] mb-6">Set up once.<br>Get paid forever.</h2>
+          <p class="text-[#61667C] leading-relaxed mb-8">The first time an AI agent queries your endpoint, their operator goes through a normal HitPay checkout — just like any customer paying online. Their card or PayNow is stored as a token. Every request after that happens automatically, with no human involved.</p>
+          <p class="text-[#61667C] leading-relaxed">It's the same technology behind HitPay's recurring billing — the payment infrastructure you already have, now working for machine-to-machine transactions.</p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- First time -->
+          <div class="card p-6" style="border-left: 3px solid #2465DE;">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style="background:#002771; color:#fff;">1</div>
+              <div>
+                <p class="font-semibold text-sm mb-1">First time — one human action</p>
+                <p class="text-[#61667C] text-sm mb-4">The agent's operator goes through a normal HitPay checkout once. Their payment method is tokenised and stored securely — same infrastructure as HitPay recurring billing.</p>
+                <!-- Payment methods table -->
+                <div class="rounded-xl overflow-hidden border border-gray-100">
+                  <div class="px-3 py-2 bg-gray-50 border-b border-gray-100">
+                    <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider">Singapore — Recurring Payments</p>
+                  </div>
+                  <!-- Domestic cards -->
+                  <div class="flex items-center justify-between px-3 py-2.5 border-b border-gray-50">
+                    <div>
+                      <p class="text-xs font-semibold text-[#03102F]">Domestic cards</p>
+                      <div class="flex items-center gap-1.5 mt-1">
+                        <span class="text-xs font-bold px-1.5 py-0.5 rounded" style="background:#1A1F71;color:#fff;">VISA</span>
+                        <svg width="20" height="13" viewBox="0 0 20 13" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="6.5" r="6" fill="#EB001B"/><circle cx="13" cy="6.5" r="6" fill="#F79E1B"/><path d="M10 1.5a6 6 0 010 10A6 6 0 0110 1.5z" fill="#FF5F00"/></svg>
+                        <span class="text-xs font-bold px-1.5 py-0.5 rounded" style="background:#016FD0;color:#fff;">AMEX</span>
+                        <span class="text-xs text-[#61667C]">Apple Pay</span>
+                        <span class="text-xs text-[#61667C]">Google Pay</span>
+                      </div>
+                    </div>
+                    <span class="text-xs font-semibold text-[#03102F] whitespace-nowrap">2.8% + S$0.50</span>
+                  </div>
+                  <!-- International cards -->
+                  <div class="flex items-center justify-between px-3 py-2.5 border-b border-gray-50">
+                    <div>
+                      <p class="text-xs font-semibold text-[#03102F]">International cards</p>
+                      <div class="flex items-center gap-1.5 mt-1">
+                        <span class="text-xs font-bold px-1.5 py-0.5 rounded" style="background:#1A1F71;color:#fff;">VISA</span>
+                        <svg width="20" height="13" viewBox="0 0 20 13" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="6.5" r="6" fill="#EB001B"/><circle cx="13" cy="6.5" r="6" fill="#F79E1B"/><path d="M10 1.5a6 6 0 010 10A6 6 0 0110 1.5z" fill="#FF5F00"/></svg>
+                        <span class="text-xs font-bold px-1.5 py-0.5 rounded" style="background:#016FD0;color:#fff;">AMEX</span>
+                        <span class="text-xs text-[#61667C]">Apple Pay</span>
+                        <span class="text-xs text-[#61667C]">Google Pay</span>
+                      </div>
+                    </div>
+                    <span class="text-xs font-semibold text-[#03102F] whitespace-nowrap">3.65% + S$0.50</span>
+                  </div>
+                  <!-- GIRO -->
+                  <div class="flex items-center justify-between px-3 py-2.5 border-b border-gray-50">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold px-2 py-0.5 rounded" style="background:#EBF1FC;color:#002771;">GIRO</span>
+                      <span class="text-xs text-[#61667C]">Direct bank debit (SG)</span>
+                    </div>
+                    <span class="text-xs font-semibold text-[#03102F] whitespace-nowrap">S$2.25 + 0.65%</span>
+                  </div>
+                  <!-- ShopeePay -->
+                  <div class="flex items-center justify-between px-3 py-2.5 border-b border-gray-50">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold px-2 py-0.5 rounded" style="background:#EE4D2D;color:#fff;">SPay</span>
+                      <span class="text-xs text-[#61667C]">ShopeePay</span>
+                    </div>
+                    <span class="text-xs font-semibold text-[#03102F]">3%</span>
+                  </div>
+                  <!-- ShopeePay Later -->
+                  <div class="flex items-center justify-between px-3 py-2.5 border-b border-gray-50">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold px-2 py-0.5 rounded" style="background:#EE4D2D;color:#fff;">SPay Later</span>
+                      <span class="text-xs text-[#61667C]">ShopeePay Later</span>
+                    </div>
+                    <span class="text-xs font-semibold text-[#03102F]">5.5%</span>
+                  </div>
+                  <!-- GrabPay -->
+                  <div class="flex items-center justify-between px-3 py-2.5">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold px-2 py-0.5 rounded" style="background:#00B14F;color:#fff;">GrabPay</span>
+                    </div>
+                    <span class="text-xs font-semibold text-[#03102F]">3%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cross-border recurring note -->
+          <div class="rounded-xl border border-gray-100 overflow-hidden">
+            <div class="px-3 py-2 bg-gray-50 border-b border-gray-100">
+              <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider">Cross-Border Recurring</p>
+            </div>
+            <div class="flex items-center justify-between px-3 py-2.5 border-b border-gray-50">
+              <div class="flex items-center gap-2">
+                <span>🇲🇾</span>
+                <span class="text-xs font-semibold text-[#03102F]">Malaysia</span>
+                <span class="text-xs text-[#61667C]">MYR · Touch 'n Go</span>
+              </div>
+              <span class="text-xs font-semibold text-[#03102F]">1.9% <span class="text-[#61667C] font-normal">+ 1% FX</span></span>
+            </div>
+            <div class="flex items-center justify-between px-3 py-2.5">
+              <div class="flex items-center gap-2">
+                <span>🇻🇳</span>
+                <span class="text-xs font-semibold text-[#03102F]">Vietnam</span>
+                <span class="text-xs text-[#61667C]">VND · ZaloPay</span>
+              </div>
+              <span class="text-xs font-semibold text-[#03102F]">3.35% <span class="text-[#61667C] font-normal">+ 1% FX</span></span>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="flex justify-center text-gray-300 text-xl">↓</div>
+
+          <!-- Every time after -->
+          <div class="card p-6" style="border-left: 3px solid #4DAB80;">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style="background:#4DAB80; color:#fff;">∞</div>
+              <div>
+                <p class="font-semibold text-sm mb-1">Every request after — fully automatic</p>
+                <p class="text-[#61667C] text-sm">Agent presents stored token → HitPay charges the saved payment method in the background → your server grants access → money in your HitPay dashboard</p>
+                <div class="flex gap-2 mt-3">
+                  <span class="tag-green">No human needed</span>
+                  <span class="tag-green">Instant</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div class="rounded-xl p-5 mt-2" style="background:#EBF1FC;">
+            <p class="text-sm text-[#002771] font-medium">The same tokenisation powering HitPay recurring billing — now extended to AI agents.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HitPay fit -->
+  <section class="py-24 px-6" style="background:#03102F;">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="text-sm font-semibold text-[#2465DE] uppercase tracking-wider mb-3">Built on HitPay</p>
+        <h2 class="text-4xl font-medium text-white mb-4">No new account. No new setup.</h2>
+        <p class="text-[#61667C] text-lg max-w-xl mx-auto">MPP plugs directly into your existing HitPay merchant account. Your payment rails, your dashboard, your settlement schedule.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card-dark p-7" style="border: 1px solid rgba(255,255,255,0.08);">
+          <div class="text-2xl mb-4">🔌</div>
+          <h3 class="text-white font-semibold text-lg mb-2">Uses your existing account</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed">MPP charges appear in your HitPay dashboard alongside all your other payments — tagged <code class="text-xs bg-white/10 text-white px-1 rounded">source=mpp</code> so you can track them separately.</p>
+        </div>
+        <div class="card-dark p-7" style="border: 1px solid rgba(255,255,255,0.08);">
+          <div class="text-2xl mb-4">💳</div>
+          <h3 class="text-white font-semibold text-lg mb-2">All recurring billing methods supported</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed mb-4">Agent operators pay using HitPay's full recurring billing stack. Funds settle to your Singapore bank account the next business day.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">Visa</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">Mastercard</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">Amex</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">Apple Pay</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">Google Pay</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">GIRO</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">ShopeePay</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">ShopeePay Later</span>
+            <span class="text-xs font-semibold px-2 py-1 rounded" style="background:rgba(255,255,255,0.08);color:#A3B8E8;">GrabPay</span>
+          </div>
+        </div>
+        <div class="card-dark p-7" style="border: 1px solid rgba(255,255,255,0.08);">
+          <div class="text-2xl mb-4">🔐</div>
+          <h3 class="text-white font-semibold text-lg mb-2">Cryptographically verified</h3>
+          <p class="text-[#61667C] text-sm leading-relaxed">Every payment produces an Ed25519-signed receipt. Your server verifies it locally — no round-trip to HitPay needed. Nonce-binding prevents replay attacks.</p>
+        </div>
+      </div>
+
+      <!-- Open standard note -->
+      <div class="mt-10 rounded-2xl p-6" style="border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04);">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+          <div class="flex-1">
+            <p class="text-white font-semibold mb-1">Built on open standards</p>
+            <p class="text-[#61667C] text-sm">MPP uses HTTP's <code class="text-xs bg-white/10 text-white px-1 rounded">402 Payment Required</code> — the same protocol as Stripe's MPP and other implementations. Any HTTP client that speaks MPP can pay your server. HitPay provides the local payment rails (PayNow, DuitNow, SEA e-wallets) that global processors don't offer.</p>
+          </div>
+          <div class="flex-shrink-0">
+            <span class="badge" style="background:rgba(36,101,222,0.2);">RFC-compatible</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developers -->
+  <section id="developers" class="py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-14">
+        <p class="text-sm font-semibold text-[#2465DE] uppercase tracking-wider mb-3">For developers</p>
+        <h2 class="text-4xl font-medium text-[#03102F]">Wrap your existing endpoint.<br>Three lines of code.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-3">Server — protect any endpoint</p>
+          <div class="code-block">
+<span class="code-comment">// Install: npm install @hit-pay/mpp</span>
+<span class="code-key">import</span> { mppGate } <span class="code-key">from</span> <span class="code-str">'@hit-pay/mpp'</span>;
+
+app.post(<span class="code-str">'/api/classes/book'</span>, mppGate({
+  amount: <span class="code-num">3.00</span>,
+  currency: <span class="code-str">'SGD'</span>,
+  apiKey: process.env.HITPAY_API_KEY,
+}), (req, res) => {
+  <span class="code-comment">// Only runs after payment is verified</span>
+  res.json(confirmBooking(req.body));
+});
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold text-[#61667C] uppercase tracking-wider mb-3">Client — agent pays automatically</p>
+          <div class="code-block">
+<span class="code-comment">// Install: npm install @hit-pay/mpp-client</span>
+<span class="code-key">import</span> { MppClient } <span class="code-key">from</span> <span class="code-str">'@hit-pay/mpp-client'</span>;
+
+<span class="code-key">const</span> client = <span class="code-key">new</span> MppClient({
+  paymentToken: process.env.AGENT_PAYMENT_TOKEN,
+});
+
+<span class="code-comment">// Handles 402s automatically — agent just</span>
+<span class="code-comment">// calls fetch(), MPP handles the rest</span>
+<span class="code-key">const</span> booking = <span class="code-key">await</span> client.fetch(<span class="code-str">'/api/classes/book'</span>, {
+  method: <span class="code-str">'POST'</span>,
+  body: JSON.stringify({ class_id: <span class="code-str">'hiit-0700-thu'</span>, employee_id: <span class="code-str">'emp_8821'</span> })
+});
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 card p-6 flex flex-col md:flex-row items-start md:items-center gap-4" style="background:#F9F9F6; border-color:#E2E8F0;">
+        <div class="flex-1">
+          <p class="font-semibold text-sm mb-1">Currently in sandbox</p>
+          <p class="text-[#61667C] text-sm">Production payment rails are coming soon. Join the waitlist to get early access and help shape the product — including Express/Fastify adapters and multi-rail support.</p>
+        </div>
+        <a href="https://mpp.hitpay.dev" class="btn-secondary flex-shrink-0 text-sm">Read full docs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Waitlist -->
+  <section id="waitlist" class="py-24 px-6 brand-gradient">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-5xl font-medium text-white mb-6">AI agents are coming to your industry.</h2>
+      <p class="text-blue-200 text-lg mb-10 leading-relaxed">Make sure you're charging them, not just serving them for free. Join the waitlist to get early access to HitPay MPP.</p>
+
+      <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
+        <input
+          type="email"
+          placeholder="your@email.com"
+          class="flex-1 px-4 py-3 rounded-lg text-[#03102F] text-sm outline-none focus:ring-2 focus:ring-white/50"
+          style="font-family:'Manrope',sans-serif;"
+        />
+        <button type="submit" class="bg-white text-[#002771] px-6 py-3 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-colors" style="font-family:'Manrope',sans-serif;">
+          Join waitlist
+        </button>
+      </form>
+      <p class="text-blue-300 text-xs">Already a HitPay merchant? No new account needed — MPP plugs into what you have.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 px-6 bg-[#03102F] border-t border-white/5">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span style="font-family:'IBM Plex Sans Condensed',sans-serif; font-weight:700; font-size:18px; color:#fff;">HitPay</span>
+        <span class="text-white/30">/</span>
+        <span style="font-family:'IBM Plex Sans Condensed',sans-serif; font-weight:600; font-size:16px; color:#2465DE;">MPP</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://mpp.hitpay.dev" class="text-[#61667C] text-sm hover:text-white transition-colors">Documentation</a>
+        <a href="https://hit-pay.com" class="text-[#61667C] text-sm hover:text-white transition-colors">HitPay.com</a>
+      </div>
+      <p class="text-[#61667C] text-xs">© 2026 HitPay Payment Solutions Pte Ltd. MAS licensed.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
