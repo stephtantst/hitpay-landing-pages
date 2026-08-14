@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, use } from 'react'
+import Link from 'next/link'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { GenerationStream } from '@/components/GenerationStream'
@@ -53,6 +54,8 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const [revisions, setRevisions] = useState<Revision[]>([])
   const [loadingRevisions, setLoadingRevisions] = useState(true)
   const [restoringId, setRestoringId] = useState<string | null>(null)
+
+  const [panelOpen, setPanelOpen] = useState(true)
 
   const [editedHtml, setEditedHtml] = useState('')
   const [syncedHtml, setSyncedHtml] = useState<string | null>(null)
@@ -264,118 +267,120 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   )
 
   return (
-    <div className="min-h-screen px-6 py-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="h-screen flex flex-col overflow-hidden">
 
-        {/* Header */}
-        <div className="mb-6 flex items-start justify-between gap-4">
-          <div>
-            <a href="/" className="inline-flex items-center gap-1.5 text-sm text-[#61667C] hover:text-[#03102F] transition-colors mb-2">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              All pages
-            </a>
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-7 h-7 bg-[#2465DE] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xs">H</span>
-              </div>
-              <span className="font-semibold text-sm text-[#61667C]">HitPay</span>
-            </div>
-            <h1 className="text-2xl font-bold text-[#03102F] capitalize">
+      {/* Header — condensed, full width */}
+      <div className="flex-shrink-0 border-b border-slate-200 bg-white px-5 py-2.5 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4 min-w-0">
+          <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-[#61667C] hover:text-[#03102F] transition-colors flex-shrink-0">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            All pages
+          </Link>
+          <div className="w-px h-5 bg-slate-200 flex-shrink-0" />
+          <div className="flex items-center gap-2 min-w-0">
+            <h1 className="text-sm font-bold text-[#03102F] capitalize truncate">
               {page.briefs?.vertical ?? page.filename.replace(/\.html$/, '').replace(/-/g, ' ')}
             </h1>
-            <div className="flex items-center gap-3 mt-1.5">
-              <span className="text-sm font-mono text-[#61667C]">{page.filename}</span>
-              <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
-                page.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-[#EBF1FC] text-[#2465DE]'
-              }`}>
-                {page.status}
-              </span>
-              {(page.briefs?.market ?? []).length > 0 && (
-                <span className="text-xs text-[#61667C]">{(page.briefs?.market ?? []).join(', ')}</span>
-              )}
-            </div>
+            <span className="text-xs font-mono text-[#61667C] truncate">{page.filename}</span>
+            <span className={`text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0 ${
+              page.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-[#EBF1FC] text-[#2465DE]'
+            }`}>
+              {page.status}
+            </span>
           </div>
+        </div>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button
+            onClick={() => setPanelOpen((o) => !o)}
+            className="flex items-center gap-1.5 text-sm font-medium text-[#61667C] hover:text-[#03102F] border border-slate-200 rounded-xl px-3 py-1.5 hover:bg-[#F9F9F6] transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 4v16m6-16v16M4 8h4m8 0h4M4 16h4m8 0h4" />
+            </svg>
+            {panelOpen ? 'Hide panel' : 'Edit'}
+          </button>
           <button
             onClick={handlePublish}
             disabled={publishing || page.status === 'published'}
-            className="shrink-0 px-4 py-2 text-sm font-semibold bg-[#2465DE] text-white rounded-xl hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
+            className="px-4 py-1.5 text-sm font-semibold bg-[#2465DE] text-white rounded-xl hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
           >
             {publishing ? 'Publishing…' : published ? '✓ Published' : 'Publish to repo'}
           </button>
         </div>
+      </div>
 
-        {/* Content grid */}
-        <div className="grid grid-cols-3 gap-5">
+      {/* Main — full-page preview + collapsible editing panel */}
+      <div className="flex-1 flex overflow-hidden">
 
-          {/* Preview — 2/3 width */}
-          <div className="col-span-2">
-            <Tabs defaultValue="preview">
-              <TabsList className="mb-3 bg-white border border-slate-200 rounded-xl p-1 h-auto">
-                <TabsTrigger value="preview" className="rounded-lg px-4 py-1.5 text-sm font-medium data-[state=active]:bg-[#03102F] data-[state=active]:text-white">
-                  Preview
-                </TabsTrigger>
-                <TabsTrigger value="html" className="rounded-lg px-4 py-1.5 text-sm font-medium data-[state=active]:bg-[#03102F] data-[state=active]:text-white">
-                  HTML source
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="preview">
-                <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white" style={{ height: '75vh' }}>
-                  <iframe
-                    srcDoc={page.html}
-                    title={page.filename}
-                    className="w-full h-full"
-                    sandbox="allow-scripts allow-same-origin"
-                  />
-                </div>
-              </TabsContent>
-              <TabsContent value="html">
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <p className="text-xs text-[#61667C]">
-                    Edit the HTML directly — drop in <code className="bg-slate-100 px-1 rounded">&lt;!-- NOTE: ... --&gt;</code> comments
-                    anywhere for a designer to see when they open this file.
-                  </p>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <button
-                      onClick={handleInsertComment}
-                      className="text-xs font-medium text-[#03102F] border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-[#F9F9F6] transition-colors"
-                    >
-                      + Insert comment
-                    </button>
-                    {editDirty && (
-                      <button
-                        onClick={handleDiscardEdit}
-                        disabled={savingEdit}
-                        className="text-xs font-medium text-[#61667C] hover:text-[#03102F] px-3 py-1.5 transition-colors disabled:opacity-40"
-                      >
-                        Discard
-                      </button>
-                    )}
-                    <button
-                      onClick={handleSaveEdit}
-                      disabled={!editDirty || savingEdit}
-                      className="text-xs font-semibold bg-[#2465DE] text-white rounded-lg px-3 py-1.5 hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
-                    >
-                      {savingEdit ? 'Saving…' : editDirty ? 'Save changes' : 'Saved'}
-                    </button>
-                  </div>
-                </div>
-                {saveEditError && <p className="text-xs text-red-500 mb-2">{saveEditError}</p>}
-                <Textarea
-                  id="html-editor"
-                  value={editedHtml}
-                  onChange={(e) => setEditedHtml(e.target.value)}
-                  spellCheck={false}
-                  className="text-xs font-mono text-slate-700 leading-relaxed resize-none"
-                  style={{ height: '70vh' }}
+        {/* Preview / HTML source — fills all available space */}
+        <div className="flex-1 flex flex-col overflow-hidden min-w-0 px-5 py-3">
+          <Tabs defaultValue="preview" className="flex-1 min-h-0">
+            <TabsList className="mb-3 bg-white border border-slate-200 rounded-xl p-1 h-auto flex-shrink-0">
+              <TabsTrigger value="preview" className="rounded-lg px-4 py-1.5 text-sm font-medium data-[state=active]:bg-[#03102F] data-[state=active]:text-white">
+                Preview
+              </TabsTrigger>
+              <TabsTrigger value="html" className="rounded-lg px-4 py-1.5 text-sm font-medium data-[state=active]:bg-[#03102F] data-[state=active]:text-white">
+                HTML source
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview" className="flex flex-col min-h-0">
+              <div className="flex-1 rounded-2xl overflow-hidden border border-slate-200 bg-white min-h-0">
+                <iframe
+                  srcDoc={page.html}
+                  title={page.filename}
+                  className="w-full h-full"
+                  sandbox="allow-scripts allow-same-origin"
                 />
-              </TabsContent>
-            </Tabs>
-          </div>
+              </div>
+            </TabsContent>
+            <TabsContent value="html" className="flex flex-col min-h-0">
+              <div className="flex items-center justify-between gap-3 mb-2 flex-shrink-0">
+                <p className="text-xs text-[#61667C]">
+                  Edit the HTML directly — drop in <code className="bg-slate-100 px-1 rounded">&lt;!-- NOTE: ... --&gt;</code> comments
+                  anywhere for a designer to see when they open this file.
+                </p>
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    onClick={handleInsertComment}
+                    className="text-xs font-medium text-[#03102F] border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-[#F9F9F6] transition-colors"
+                  >
+                    + Insert comment
+                  </button>
+                  {editDirty && (
+                    <button
+                      onClick={handleDiscardEdit}
+                      disabled={savingEdit}
+                      className="text-xs font-medium text-[#61667C] hover:text-[#03102F] px-3 py-1.5 transition-colors disabled:opacity-40"
+                    >
+                      Discard
+                    </button>
+                  )}
+                  <button
+                    onClick={handleSaveEdit}
+                    disabled={!editDirty || savingEdit}
+                    className="text-xs font-semibold bg-[#2465DE] text-white rounded-lg px-3 py-1.5 hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
+                  >
+                    {savingEdit ? 'Saving…' : editDirty ? 'Save changes' : 'Saved'}
+                  </button>
+                </div>
+              </div>
+              {saveEditError && <p className="text-xs text-red-500 mb-2 flex-shrink-0">{saveEditError}</p>}
+              <Textarea
+                id="html-editor"
+                value={editedHtml}
+                onChange={(e) => setEditedHtml(e.target.value)}
+                spellCheck={false}
+                className="flex-1 text-xs font-mono text-slate-700 leading-relaxed resize-none min-h-0"
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
 
-          {/* Actions — 1/3 width */}
-          <div className="space-y-4">
+        {/* Collapsible editing panel */}
+        {panelOpen && (
+          <div className="w-[380px] flex-shrink-0 border-l border-slate-200 bg-[#F9F9F6] overflow-y-auto p-4 space-y-4">
 
             {/* Refine */}
             <div className="bg-white border border-slate-200 rounded-2xl p-5">
@@ -519,7 +524,7 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
             </div>
 
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
