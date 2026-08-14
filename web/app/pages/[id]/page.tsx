@@ -73,12 +73,12 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
 
   const editDirty = page ? editedHtml !== page.html : false
 
-  // The preview renders via srcDoc, so relative URLs (e.g. "assets/brand.css") would
-  // otherwise resolve against this /pages/[id] route instead of the site root, and
-  // fonts/logos/css silently fail to load. Injecting <base href="/"> fixes every
-  // relative reference at once, so the preview matches how the real page renders.
+  // The preview renders via srcDoc, whose document URL is the opaque "about:srcdoc" —
+  // a path-only <base href="/"> resolves against that instead of the real origin, so
+  // relative asset URLs still 404. Using the full absolute origin fixes it.
+  const previewOrigin = typeof window !== 'undefined' ? window.location.origin : ''
   const previewHtml = page
-    ? page.html.replace(/<head[^>]*>/i, (match) => `${match}<base href="/">`)
+    ? page.html.replace(/<head[^>]*>/i, (match) => `${match}<base href="${previewOrigin}/">`)
     : ''
 
   // Reusable refetch — safe to call synchronously from event handlers (handleRefine, handleRestore).
