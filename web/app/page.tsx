@@ -15,6 +15,23 @@ import {
 // ─── Static pages ──────────────────────────────────────────────────────────
 
 const STATIC_PAGES = [
+  { href: 'adaptive-pricing.html',      emoji: '💱', label: 'Adaptive Pricing',                     desc: 'Auto local-currency checkout for overseas customers — avg. 10%+ revenue lift' },
+  { href: 'cross-border-payments.html', emoji: '🌏', label: 'Cross-Border Payments',                desc: 'Hub — Borderless QR, Multi-Currency Products, Adaptive Pricing, Payment Links' },
+  { href: 'customers.html',             emoji: '🤝', label: 'Customers',                            desc: 'Customer logos & social proof — powering 20,000+ businesses across SEA' },
+  { href: 'customer-stories.html',      emoji: '📖', label: 'Customer Stories',                     desc: 'Index of all customer story case studies' },
+  { href: 'mickey-leotards.html',       emoji: '🛍️', label: 'Mickey Leotards (Customer Story)',     desc: 'Case study — stopped losing sales to unsupported card payments' },
+  { href: 'the-durian-bakery.html',     emoji: '🍰', label: 'The Durian Bakery (Customer Story)',    desc: 'Case study — sped up payouts and simplified checkout' },
+  { href: 'billpay v2.html',            emoji: '🧾', label: 'BillPay',                               desc: 'Pay suppliers locally & internationally, synced to Xero' },
+  { href: 'platforms.html',             emoji: '🔌', label: 'Platforms',                             desc: 'Offer payments to every business you serve, without becoming a PSP' },
+  { href: 'multi-currency-collections-account.html', emoji: '💰', label: 'Multi-Currency Collections Account', desc: 'Multi-currency collections account for business receivables' },
+  { href: 'virtual-accounts-philippines.html', emoji: '🏦', label: 'Business Collections Account (Philippines)', desc: 'Local receiving account for Philippine business collections' },
+  { href: 'virtual-accounts-global-business-collections.html', emoji: '🏦', label: 'Virtual Accounts (Singapore)', desc: 'Global business collections — SWIFT reach to 13 currencies' },
+  { href: 'wechat-pay-philippines.html', emoji: '💬', label: 'WeChat Pay (Philippines)',             desc: 'Accept WeChat Pay payments in the Philippines' },
+  { href: 'affiliate.html',             emoji: '🎁', label: 'Affiliate Program',                     desc: 'Earn 0.1% commission from every business referred' },
+  { href: 'refer-and-earn.html',        emoji: '🎁', label: 'Refer and Earn',                        desc: 'Earn 0.1% from every business you refer' },
+  { href: 'asia-art-craft-fair.html',   emoji: '🎨', label: 'Asia Art & Craft Fair SG 2026',         desc: 'Collect payments at Asia Art & Craft Fair Singapore 2026' },
+  { href: 'asia-art-craft-fair-slide.html', emoji: '🎨', label: 'Asia Art & Craft Fair SG 2026 (Slide)', desc: 'Asia Art & Craft Fair SG 2026 — slide deck version' },
+  { href: 'art-craft-fair.html',        emoji: '🎨', label: 'Art & Craft Fair Singapore 2026',       desc: 'Accept payments at Art & Craft Fair Singapore 2026' },
   { href: 'ai-shoppers.html',          emoji: '🤖', label: 'AI Shoppers',                          desc: 'ChatGPT product discovery, agentic checkout, AI-readiness — automatic for every Online Store merchant' },
   { href: 'ecommerce.html',            emoji: '🛒', label: 'E-commerce',                          desc: 'Online checkout, integrations, payment links, and subscriptions' },
   { href: 'retail.html',               emoji: '🏪', label: 'Retail',                               desc: 'POS system, Tap to Pay, card terminals, and omnichannel dashboard' },
@@ -32,6 +49,7 @@ const STATIC_PAGES = [
   { href: 'wholesale.html',            emoji: '📦', label: 'Wholesale & B2B Trade',               desc: 'B2B invoicing, cross-border APAC collections, recurring supply contracts' },
   { href: 'healthcare.html',           emoji: '🏥', label: 'Healthcare & Clinics',                desc: 'Session invoicing, post-consult payment links, recurring health plan billing' },
   { href: 'mpp.html',                  emoji: '🔗', label: 'Multi-Party Payments',                desc: 'Split payments, marketplace payouts, platform billing with automated splits' },
+  { href: 'brand-test.html',           emoji: '🧪', label: 'Brand Test',                           desc: 'Brand rebrand visual test — internal only' },
 ]
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -122,7 +140,7 @@ function StaticRow({ page }: { page: typeof STATIC_PAGES[0] }) {
       <td className="px-5 py-3 text-slate-300 text-sm">—</td>
       <td className="px-5 py-3 text-right">
         <a
-          href={`https://hitpay-landing-pages.vercel.app/${page.href}`}
+          href={`/${page.href}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-xs font-semibold text-[#2465DE] hover:text-[#1B4FB8] transition-colors"
