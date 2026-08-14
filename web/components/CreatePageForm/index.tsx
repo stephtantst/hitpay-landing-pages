@@ -44,7 +44,6 @@ type FormErrors = Partial<Record<keyof FormFields, string>>
 
 function validate(f: FormFields): FormErrors {
   const e: FormErrors = {}
-  if (!f.vertical.trim()) e.vertical = 'Required'
   if (f.markets.length === 0) e.markets = 'Select at least one market'
   if (!f.outputFilename.trim()) {
     e.outputFilename = 'Required'
@@ -108,8 +107,12 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
     const e = validate(form)
     setErrors(e)
     if (Object.keys(e).length === 0) {
+      // Industry/use case is optional in the UI, but the API still needs a vertical —
+      // derive one from the filename if the user left it blank.
+      const vertical = form.vertical.trim() ||
+        form.outputFilename.replace(/\.html$/, '').replace(/-/g, ' ')
       onSubmit({
-        vertical: form.vertical.trim(),
+        vertical,
         markets: form.markets,
         outputFilename: form.outputFilename.trim(),
         keyProducts: [],
@@ -125,7 +128,6 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
     'text-[#61667C]'
 
   const canSubmit =
-    form.vertical.trim().length > 0 &&
     form.markets.length > 0 &&
     /^[a-z0-9][a-z0-9-]*\.html$/.test(form.outputFilename) &&
     form.rawBrief.trim().length >= BRIEF_MIN &&
@@ -135,40 +137,56 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
     <Card className="p-6 space-y-5">
 
       <div>
-        <Label>Quick pick</Label>
+        <Label htmlFor="brief">Brief *</Label>
         <p className="text-xs text-[#61667C] mt-0.5 mb-2">
-          Optional — prefills the industry, filename, and brief below with a starting template you can edit freely.
+          Paste anything — a PRD, GTM brief, product docs, feature notes, raw copy, a help article, even a messy Slack thread.
+          Claude will extract what it needs and apply the HitPay GEO + AEO rules on top. Once the page is generated, you can
+          keep refining it with follow-up instructions from its detail page — no need to get everything right here.
         </p>
-        <div className="flex flex-wrap gap-2">
-          {CHIPS.map((chip) => (
-            <button
-              key={chip.label}
-              type="button"
-              onClick={() => selectChip(chip)}
-              className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
-                selectedChip?.label === chip.label
-                  ? 'bg-[#03102F] text-white border-[#03102F]'
-                  : 'border-slate-200 bg-[#F9F9F6] hover:bg-white hover:border-slate-400 text-[#61667C]'
-              }`}
-            >
-              <span>{chip.emoji}</span><span>{chip.label}</span>
-            </button>
-          ))}
+        <Textarea
+          id="brief"
+          placeholder="Paste a PRD, brief, or any product context here…"
+          value={form.rawBrief}
+          onChange={(e) => set('rawBrief', e.target.value)}
+          className={`mt-1 text-sm leading-relaxed ${errors.rawBrief ? 'border-red-400' : ''}`}
+          rows={32}
+        />
+        <div className="flex justify-between items-center mt-1">
+          {errors.rawBrief
+            ? <p className="text-xs text-red-500">{errors.rawBrief}</p>
+            : <p className="text-xs text-[#61667C]">Minimum {BRIEF_MIN} characters</p>
+          }
+          <p className={`text-xs ${briefCountColor}`}>{briefLen.toLocaleString()} / {BRIEF_MAX.toLocaleString()}</p>
         </div>
+      </div>
+
+      <div>
+        <Label htmlFor="filename">Output filename *</Label>
+        <Input
+          id="filename"
+          placeholder="e.g. ai-shoppers.html"
+          value={form.outputFilename}
+          onChange={(e) => set('outputFilename', e.target.value)}
+          className={`mt-1 font-mono ${errors.outputFilename ? 'border-red-400' : ''}`}
+        />
+        {errors.outputFilename
+          ? <p className="text-xs text-red-500 mt-1">{errors.outputFilename}</p>
+          : <p className="text-xs text-[#61667C] mt-1">Lowercase, hyphens, must end in .html</p>
+        }
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="vertical">Industry or use case *</Label>
+          <Label htmlFor="vertical">Industry or use case</Label>
           <Input
             id="vertical"
-            placeholder="e.g. Restaurants, Beauty & Wellness, SaaS…"
+            placeholder="e.g. Restaurants, Beauty & Wellness, SaaS… (optional)"
             value={form.vertical}
             onChange={(e) => set('vertical', e.target.value)}
             onBlur={handleVerticalBlur}
-            className={`mt-1 ${errors.vertical ? 'border-red-400' : ''}`}
+            className="mt-1"
           />
-          {errors.vertical && <p className="text-xs text-red-500 mt-1">{errors.vertical}</p>}
+          <p className="text-xs text-[#61667C] mt-1">Optional — inferred from the filename if left blank</p>
         </div>
         <div>
           <Label>Target markets *</Label>
@@ -193,41 +211,25 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
       </div>
 
       <div>
-        <Label htmlFor="filename">Output filename *</Label>
-        <Input
-          id="filename"
-          placeholder="e.g. ai-shoppers.html"
-          value={form.outputFilename}
-          onChange={(e) => set('outputFilename', e.target.value)}
-          className={`mt-1 font-mono ${errors.outputFilename ? 'border-red-400' : ''}`}
-        />
-        {errors.outputFilename
-          ? <p className="text-xs text-red-500 mt-1">{errors.outputFilename}</p>
-          : <p className="text-xs text-[#61667C] mt-1">Lowercase, hyphens, must end in .html</p>
-        }
-      </div>
-
-      <div>
-        <Label htmlFor="brief">Brief *</Label>
+        <Label>Quick pick</Label>
         <p className="text-xs text-[#61667C] mt-0.5 mb-2">
-          Paste anything — a PRD, GTM brief, product docs, feature notes, raw copy, a help article, even a messy Slack thread.
-          Claude will extract what it needs and apply the HitPay GEO + AEO rules on top. Once the page is generated, you can
-          keep refining it with follow-up instructions from its detail page — no need to get everything right here.
+          Optional — prefills the industry, filename, and brief above with a starting template you can edit freely.
         </p>
-        <Textarea
-          id="brief"
-          placeholder="Paste a PRD, brief, or any product context here…"
-          value={form.rawBrief}
-          onChange={(e) => set('rawBrief', e.target.value)}
-          className={`mt-1 text-sm leading-relaxed ${errors.rawBrief ? 'border-red-400' : ''}`}
-          rows={16}
-        />
-        <div className="flex justify-between items-center mt-1">
-          {errors.rawBrief
-            ? <p className="text-xs text-red-500">{errors.rawBrief}</p>
-            : <p className="text-xs text-[#61667C]">Minimum {BRIEF_MIN} characters</p>
-          }
-          <p className={`text-xs ${briefCountColor}`}>{briefLen.toLocaleString()} / {BRIEF_MAX.toLocaleString()}</p>
+        <div className="flex flex-wrap gap-2">
+          {CHIPS.map((chip) => (
+            <button
+              key={chip.label}
+              type="button"
+              onClick={() => selectChip(chip)}
+              className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
+                selectedChip?.label === chip.label
+                  ? 'bg-[#03102F] text-white border-[#03102F]'
+                  : 'border-slate-200 bg-[#F9F9F6] hover:bg-white hover:border-slate-400 text-[#61667C]'
+              }`}
+            >
+              <span>{chip.emoji}</span><span>{chip.label}</span>
+            </button>
+          ))}
         </div>
       </div>
 
