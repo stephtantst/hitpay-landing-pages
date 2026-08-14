@@ -73,6 +73,14 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
 
   const editDirty = page ? editedHtml !== page.html : false
 
+  // The preview renders via srcDoc, so relative URLs (e.g. "assets/brand.css") would
+  // otherwise resolve against this /pages/[id] route instead of the site root, and
+  // fonts/logos/css silently fail to load. Injecting <base href="/"> fixes every
+  // relative reference at once, so the preview matches how the real page renders.
+  const previewHtml = page
+    ? page.html.replace(/<head[^>]*>/i, (match) => `${match}<base href="/">`)
+    : ''
+
   // Reusable refetch — safe to call synchronously from event handlers (handleRefine, handleRestore).
   const fetchRevisions = () => {
     setLoadingRevisions(true)
@@ -328,7 +336,7 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
             <TabsContent value="preview" className="flex flex-col min-h-0">
               <div className="flex-1 rounded-2xl overflow-hidden border border-slate-200 bg-white min-h-0">
                 <iframe
-                  srcDoc={page.html}
+                  srcDoc={previewHtml}
                   title={page.filename}
                   className="w-full h-full"
                   sandbox="allow-scripts allow-same-origin"
