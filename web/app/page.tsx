@@ -122,7 +122,7 @@ function StaticRow({ page }: { page: typeof STATIC_PAGES[0] }) {
       <td className="px-5 py-3 text-slate-300 text-sm">—</td>
       <td className="px-5 py-3 text-right">
         <a
-          href={`/view/${page.href}`}
+          href={`https://hitpay-landing-pages.vercel.app/${page.href}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-xs font-semibold text-[#2465DE] hover:text-[#1B4FB8] transition-colors"
