@@ -4,6 +4,7 @@ import { useEffect, useState, use } from 'react'
 import Link from 'next/link'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 import { GenerationStream } from '@/components/GenerationStream'
 import { StatusSelect } from '@/components/StatusSelect'
 import { parseSSEEvents } from '@/lib/sse'
@@ -45,18 +46,22 @@ type Revision = {
   created_at: string
 }
 
-function CopyField({
+function SeoFieldRow({
   label,
   value,
+  onChange,
   mono,
-  href,
+  multiline,
+  placeholder,
   copied,
   onCopy,
 }: {
   label: string
   value: string
+  onChange: (value: string) => void
   mono?: boolean
-  href?: string
+  multiline?: boolean
+  placeholder?: string
   copied: boolean
   onCopy: () => void
 }) {
@@ -71,17 +76,21 @@ function CopyField({
           {copied ? '✓ Copied' : 'Copy'}
         </button>
       </div>
-      {href ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`text-xs text-[#2465DE] hover:underline break-all ${mono ? 'font-mono' : ''}`}
-        >
-          {value}
-        </a>
+      {multiline ? (
+        <Textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          rows={3}
+          className={`text-xs resize-none ${mono ? 'font-mono' : ''}`}
+        />
       ) : (
-        <p className={`text-xs text-[#03102F] break-words ${mono ? 'font-mono' : ''}`}>{value}</p>
+        <Input
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={`text-xs h-8 ${mono ? 'font-mono' : ''}`}
+        />
       )}
     </div>
   )
@@ -127,6 +136,31 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   }
 
   const editDirty = page ? editedHtml !== page.html : false
+
+  const [seoDraft, setSeoDraft] = useState({ urlSlug: '', metaTitle: '', metaDescription: '', finalUrl: '' })
+  const [syncedSeo, setSyncedSeo] = useState<string | null>(null)
+  const [savingSeo, setSavingSeo] = useState(false)
+  const [saveSeoError, setSaveSeoError] = useState<string | null>(null)
+
+  // Same "reset draft when the underlying value changes" pattern as editedHtml above —
+  // keeps the SEO form in sync when a refine/import updates meta_title or meta_description.
+  const seoSnapshot = page ? `${page.url_slug}|${page.meta_title}|${page.meta_description}|${page.final_url}` : null
+  if (page && seoSnapshot !== syncedSeo) {
+    setSyncedSeo(seoSnapshot)
+    setSeoDraft({
+      urlSlug: page.url_slug ?? '',
+      metaTitle: page.meta_title ?? '',
+      metaDescription: page.meta_description ?? '',
+      finalUrl: page.final_url ?? '',
+    })
+  }
+
+  const seoDirty = page ? (
+    seoDraft.urlSlug !== (page.url_slug ?? '') ||
+    seoDraft.metaTitle !== (page.meta_title ?? '') ||
+    seoDraft.metaDescription !== (page.meta_description ?? '') ||
+    seoDraft.finalUrl !== (page.final_url ?? '')
+  ) : false
 
   // The preview renders via srcDoc, whose document URL is the opaque "about:srcdoc" —
   // a path-only <base href="/"> resolves against that instead of the real origin, so
@@ -273,6 +307,44 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const handleDiscardEdit = () => {
     if (page) setEditedHtml(page.html)
     setSaveEditError(null)
+  }
+
+  const handleSaveSeo = async () => {
+    setSavingSeo(true)
+    setSaveSeoError(null)
+    const payload = {
+      url_slug: seoDraft.urlSlug || null,
+      meta_title: seoDraft.metaTitle || null,
+      meta_description: seoDraft.metaDescription || null,
+      final_url: seoDraft.finalUrl || null,
+    }
+    try {
+      const res = await fetch(`/api/pages/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (res.ok) {
+        setPage((p) => p ? { ...p, ...payload } : p)
+      } else {
+        const err = await res.json().catch(() => ({ error: 'Save failed' }))
+        setSaveSeoError(err.error || 'Save failed')
+      }
+    } finally {
+      setSavingSeo(false)
+    }
+  }
+
+  const handleDiscardSeo = () => {
+    if (page) {
+      setSeoDraft({
+        urlSlug: page.url_slug ?? '',
+        metaTitle: page.meta_title ?? '',
+        metaDescription: page.meta_description ?? '',
+        finalUrl: page.final_url ?? '',
+      })
+    }
+    setSaveSeoError(null)
   }
 
   // Drops an HTML comment at the cursor position — a quick way to leave a note
@@ -576,32 +648,60 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
             <div className="bg-white border border-slate-200 rounded-2xl p-5">
               <h3 className="font-semibold text-[#03102F] mb-3 text-sm">SEO &amp; URL</h3>
               <div className="space-y-3">
-                <CopyField
+                <SeoFieldRow
                   label="URL slug"
-                  value={page.url_slug || '—'}
+                  value={seoDraft.urlSlug}
+                  onChange={(v) => setSeoDraft((d) => ({ ...d, urlSlug: v }))}
                   mono
+                  placeholder="/url-slug"
                   copied={copiedField === 'slug'}
-                  onCopy={() => handleCopyField('slug', page.url_slug || '')}
+                  onCopy={() => handleCopyField('slug', seoDraft.urlSlug)}
                 />
-                <CopyField
+                <SeoFieldRow
                   label="Meta title"
-                  value={page.meta_title || '—'}
+                  value={seoDraft.metaTitle}
+                  onChange={(v) => setSeoDraft((d) => ({ ...d, metaTitle: v }))}
+                  placeholder="Meta title"
                   copied={copiedField === 'title'}
-                  onCopy={() => handleCopyField('title', page.meta_title || '')}
+                  onCopy={() => handleCopyField('title', seoDraft.metaTitle)}
                 />
-                <CopyField
+                <SeoFieldRow
                   label="Meta description"
-                  value={page.meta_description || '—'}
+                  value={seoDraft.metaDescription}
+                  onChange={(v) => setSeoDraft((d) => ({ ...d, metaDescription: v }))}
+                  multiline
+                  placeholder="Meta description"
                   copied={copiedField === 'description'}
-                  onCopy={() => handleCopyField('description', page.meta_description || '')}
+                  onCopy={() => handleCopyField('description', seoDraft.metaDescription)}
                 />
-                <CopyField
+                <SeoFieldRow
                   label="Final URL"
-                  value={page.final_url || '—'}
-                  href={page.final_url || undefined}
+                  value={seoDraft.finalUrl}
+                  onChange={(v) => setSeoDraft((d) => ({ ...d, finalUrl: v }))}
+                  mono
+                  placeholder="https://hitpayapp.com/..."
                   copied={copiedField === 'url'}
-                  onCopy={() => handleCopyField('url', page.final_url || '')}
+                  onCopy={() => handleCopyField('url', seoDraft.finalUrl)}
                 />
+                {saveSeoError && <p className="text-xs text-red-500">{saveSeoError}</p>}
+                <div className="flex items-center gap-2 pt-1">
+                  {seoDirty && (
+                    <button
+                      onClick={handleDiscardSeo}
+                      disabled={savingSeo}
+                      className="text-xs font-medium text-[#61667C] hover:text-[#03102F] px-3 py-1.5 transition-colors disabled:opacity-40"
+                    >
+                      Discard
+                    </button>
+                  )}
+                  <button
+                    onClick={handleSaveSeo}
+                    disabled={!seoDirty || savingSeo}
+                    className="ml-auto text-xs font-semibold bg-[#2465DE] text-white rounded-lg px-3 py-1.5 hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
+                  >
+                    {savingSeo ? 'Saving…' : seoDirty ? 'Save changes' : 'Saved'}
+                  </button>
+                </div>
               </div>
             </div>
 
