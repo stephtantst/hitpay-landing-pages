@@ -109,7 +109,7 @@ GEO rules enforced in `generator/GENERATOR-PROMPT.md` (must be followed for all 
 - `app/page.tsx` — dashboard listing all generated + static pages (client component, fetches `/api/pages`); list-only, no embedded create form
 - `app/new/page.tsx` — the "Create New Landing Page" flow: brief form + SSE stream consumer. Auto-navigates to `/pages/[id]` once generation finishes.
 - `app/pages/[id]/page.tsx` — page detail: iframe preview, HTML source tab, refine-by-re-prompting with version history, editable SEO & URL fields
-- `components/CreatePageForm/` — the single shared brief form (industry quick-pick chips, vertical, markets, filename, free-text brief) used by `app/new/page.tsx`; auto-derives filename from vertical name on blur
+- `components/CreatePageForm/` — the brief form (free-text brief with HTML/TXT/MD file upload, optional industry/vertical, markets) used by `app/new/page.tsx`. Output filename is fully auto-derived (from vertical, or the brief's first line if vertical is blank) — never user-entered; `app/new/page.tsx` retries under a bumped filename (`-v2`, `-v3`, …) if the derived name collides with an existing page.
 - `components/GenerationStream/` — renders the SSE log entries during generation
 - `lib/supabase.ts` — `createServerClient()` (service role, for API routes) and `createBrowserClient()` (anon, for client components)
 - `lib/anthropic.ts` — both LLM calls with prompt caching; exports `UsageStats` type; cost tracking per model

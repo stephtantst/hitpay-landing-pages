@@ -20,6 +20,18 @@ type LogEntry = {
   usage?: UsageStats
 }
 
+// Filenames are auto-derived (no manual field for the user to fix a collision with),
+// so a 409 duplicate-filename response gets silently retried under a bumped name
+// instead of surfacing an error the user has no direct way to act on.
+function bumpFilename(filename: string): string {
+  const base = filename.replace(/\.html$/, '')
+  const match = base.match(/^(.*)-v(\d+)$/)
+  if (match) return `${match[1]}-v${parseInt(match[2]) + 1}.html`
+  return `${base}-v2.html`
+}
+
+const MAX_FILENAME_ATTEMPTS = 20
+
 export default function NewPage() {
   const router = useRouter()
 
@@ -35,11 +47,21 @@ export default function NewPage() {
     setGeneratedPageId(null)
 
     try {
-      const res = await fetch('/api/generate', {
+      let currentBrief = brief
+      let res: Response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ brief }),
+        body: JSON.stringify({ brief: currentBrief }),
       })
+
+      for (let attempt = 1; res.status === 409 && attempt < MAX_FILENAME_ATTEMPTS; attempt++) {
+        currentBrief = { ...currentBrief, outputFilename: bumpFilename(currentBrief.outputFilename) }
+        res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ brief: currentBrief }),
+        })
+      }
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({ error: 'Generation failed' }))

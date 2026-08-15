@@ -1,10 +1,52 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+
+// Strips an uploaded HTML document down to its readable text — inline CSS/JS and
+// markup tags are pure noise for the brief (Claude reads the copy, not the styling),
+// so this keeps only what's worth spending brief-context tokens on. Block-level
+// elements get a blank line after them so paragraph/heading/list structure survives
+// as plain text.
+const BLOCK_TAGS = new Set([
+  'P', 'DIV', 'SECTION', 'ARTICLE', 'HEADER', 'FOOTER', 'MAIN', 'ASIDE',
+  'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'LI', 'TR', 'UL', 'OL', 'TABLE', 'BLOCKQUOTE',
+])
+
+function htmlToPlainText(html: string): string {
+  const doc = new DOMParser().parseFromString(html, 'text/html')
+  doc.querySelectorAll('script, style').forEach((el) => el.remove())
+
+  let text = ''
+  const walk = (node: ChildNode) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      text += node.textContent ?? ''
+      return
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return
+    const el = node as HTMLElement
+    if (el.tagName === 'BR') { text += '\n'; return }
+    el.childNodes.forEach(walk)
+    if (BLOCK_TAGS.has(el.tagName)) text += '\n\n'
+  }
+  doc.body.childNodes.forEach(walk)
+
+  return text.replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim()
+}
+
+const HTML_FILE_RE = /\.html?$/i
+
+function readFileAsText(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(String(reader.result ?? ''))
+    reader.onerror = () => reject(reader.error)
+    reader.readAsText(file)
+  })
+}
 
 export type CreatePageFormData = {
   vertical: string
@@ -20,21 +62,6 @@ export type InitialCreatePageData = {
   filename: string
 }
 
-type Chip = { label: string; emoji: string; brief: string }
-
-const CHIPS: Chip[] = [
-  { label: 'Restaurants', emoji: '🍜', brief: `HitPay for F&B, Restaurants, and Food Businesses.\n\nPain points: Fake PayNow screenshots, slow reconciliation, cash handling, tourist payments.\n\nKey products: POS Software, Soundbox (instant PayNow alerts, no WiFi), Static QR at 0.4%, Card Terminal, Cross-Border (WeChat Pay / Alipay / UPI for tourists).\n\nSpecial: 2% + S$0.20 F&B card rate. Best testimonial: Bob the Baker Boy or the Bakery quote.` },
-  { label: 'Hospitality', emoji: '🏨', brief: `HitPay for Hotels, Resorts, and Hospitality Businesses.\n\nPain points: Multi-currency tourist payments, fragmented channels, slow check-in, managing deposits.\n\nKey products: Cross-Border Payments (WeChat/Alipay/UPI/GrabPay for tourists), Card Terminal, POS, Invoicing for deposits, Recurring for loyalty programs.\n\nHighlight: 12 APAC markets, mid-market FX, 700+ local payment options. Best testimonial: Hotels & Resorts Philippines.` },
-  { label: 'Beauty', emoji: '💅', brief: `HitPay for Beauty Salons, Spas, and Wellness Businesses.\n\nPain points: Chasing deposits, managing packages manually, no easy WhatsApp payment links, manual membership billing.\n\nKey products: Recurring Billing for memberships/packages, Payment Links via WhatsApp/Instagram, Invoicing with partial payments, SimplyBook.me integration.\n\nBest testimonials: The Senses Therapy (wellness) and Nodspark (beauty brand) case study.` },
-  { label: 'Education', emoji: '📚', brief: `HitPay for Educational Services — tuition centres, schools, online courses, enrichment classes.\n\nPain points: Manual tuition tracking, chasing late payments, managing multiple billing schedules, no professional invoicing.\n\nKey products: Recurring Billing for automated tuition, Payment Links to parents via WhatsApp/email, Invoicing with auto-reminders, Online Store for merch/events, GIRO support.\n\nBest testimonial: Escape Room Experience (automated invoicing).` },
-  { label: 'Healthcare', emoji: '🏥', brief: `HitPay for Healthcare Clinics, Medical Practices, and Health Services.\n\nPain points: Manual post-consultation billing, chasing payments, managing multi-session packages, no remote payment collection.\n\nKey products: Invoicing with partial payments for health packages, Payment Links post-consultation via SMS/WhatsApp, Recurring Billing for health plans, SimplyBook.me integration.\n\nHighlight: MAS licensed, PCI DSS Level 1. Best testimonial: The Senses Therapy.` },
-  { label: 'Travel', emoji: '✈️', brief: `HitPay for Travel Agencies and Tour Operators.\n\nPain points: Multi-currency international clients, deposit management for group tours, reconciliation overhead, accounting sync.\n\nKey products: Cross-Border Payments (12 markets, 150+ currencies, mid-market FX), Invoicing with partial payments (deposit then balance), Payment Links, Xero/QuickBooks sync.\n\nBest testimonial: Travel Agency — "HitPay POS has saved us lots of time and resources."` },
-  { label: 'SaaS', emoji: '🖥️', brief: `HitPay for SaaS and Software Companies needing recurring billing and payment APIs.\n\nPain points: Multi-market billing complexity, subscription management at scale, engineering overhead, all plan types needed.\n\nKey products: Payment APIs (RESTful, Python/Java/PHP/JS, 25+ countries, PCI DSS), Recurring Billing (all schedules + self-serve portal + shareable subscription links + GIRO), global 25+ countries.\n\nBest testimonial: Custom PC Brand — "The HitPay platform is simple with everything we need."` },
-  { label: 'Freelancers', emoji: '💼', brief: `HitPay for Freelancers, Consultants, and Independent Service Providers.\n\nPain points: Getting paid late, no professional system, collecting deposits, manual follow-ups on overdue invoices.\n\nKey products: Payment Links (create and share instantly, no website needed), Invoicing with auto-reminders, Partial Payments for deposits, Recurring Billing for retainer clients, Mobile app.\n\nKey stat: $0 monthly fees — only pay when you get paid.` },
-  { label: 'Subscriptions', emoji: '🔄', brief: `HitPay for Subscription Businesses needing automated recurring billing.\n\nPain points: Managing subscription lifecycles, customers needing to update payment details, complex billing schedules, no self-serve portal, churn from failed payments.\n\nKey products: Recurring Billing (all schedules), customer self-serve portal (update card, cancel, upgrade), shareable subscription plan links, branded email templates, GIRO support, billing dashboard.` },
-  { label: 'Cross-border', emoji: '🌏', brief: `HitPay for Businesses Accepting International and Cross-Border Payments across APAC.\n\nPain points: Accepting payments from different countries, high conversion costs, supporting regional wallets, reconciling multi-currency transactions.\n\nKey products: Cross-Border Payments (12 APAC markets: AU/CN/HK/ID/IN/JP/KR/MY/SG/TH/PH/VN), 700+ local payment options (ShopeePay/GrabPay/GCash/TnG/WeChat/Alipay), mid-market FX, Borderless QR for tourist in-store payments.\n\nKey stats: 12 markets, 700+ options, 150+ currencies.` },
-]
-
 const MARKETS = ['SG', 'MY', 'PH']
 const BRIEF_MIN = 100
 // Soft threshold only (turns the counter amber past this point) — Sonnet's 200K-token
@@ -42,17 +69,12 @@ const BRIEF_MIN = 100
 // The server (web/app/api/generate/route.ts) enforces a generous sanity ceiling instead.
 const BRIEF_SOFT_WARN = 100_000
 
-type FormFields = { vertical: string; markets: string[]; outputFilename: string; rawBrief: string }
+type FormFields = { vertical: string; markets: string[]; rawBrief: string }
 type FormErrors = Partial<Record<keyof FormFields, string>>
 
 function validate(f: FormFields): FormErrors {
   const e: FormErrors = {}
   if (f.markets.length === 0) e.markets = 'Select at least one market'
-  if (!f.outputFilename.trim()) {
-    e.outputFilename = 'Required'
-  } else if (!/^[a-z0-9][a-z0-9-]*\.html$/.test(f.outputFilename)) {
-    e.outputFilename = 'Lowercase letters, numbers, hyphens only — must end in .html'
-  }
   if (f.rawBrief.trim().length < BRIEF_MIN) {
     e.rawBrief = `Add more context — minimum ${BRIEF_MIN} characters (currently ${f.rawBrief.trim().length})`
   }
@@ -60,7 +82,20 @@ function validate(f: FormFields): FormErrors {
 }
 
 function slugify(label: string): string {
-  return label.toLowerCase().replace(/[\s/+&]+/g, '-').replace(/[^a-z0-9-]/g, '')
+  return label.toLowerCase().replace(/[\s/+&]+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/^-+|-+$/g, '')
+}
+
+// The user never types a filename directly — it's always derived. Falls back to the
+// brief's first line when industry is left blank, so there's still a sane default.
+function deriveVerticalLabel(vertical: string, rawBrief: string): string {
+  if (vertical.trim()) return vertical.trim()
+  const firstLine = rawBrief.trim().split('\n')[0].trim()
+  return firstLine.slice(0, 60) || 'Landing Page'
+}
+
+function deriveFilename(vertical: string): string {
+  const slug = slugify(vertical)
+  return `${slug || 'landing-page'}.html`
 }
 
 export function CreatePageForm({ initialData, onSubmit, loading }: {
@@ -71,51 +106,57 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
   const [form, setForm] = useState<FormFields>({
     vertical: initialData?.vertical ?? '',
     markets: initialData?.markets ?? ['SG', 'MY', 'PH'],
-    outputFilename: initialData?.filename ?? '',
     rawBrief: '',
   })
-  const [selectedChip, setSelectedChip] = useState<Chip | null>(null)
   const [errors, setErrors] = useState<FormErrors>({})
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([])
+  const [uploadError, setUploadError] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const set = <K extends keyof FormFields>(k: K, v: FormFields[K]) =>
     setForm((f) => ({ ...f, [k]: v }))
+
+  const handleFiles = async (fileList: FileList | null) => {
+    if (!fileList || fileList.length === 0) return
+    // Snapshot into a plain array up front — input.files is a live view tied to the
+    // DOM element, and resetting the input's value in `finally` below (so the same
+    // file can be re-selected later) would otherwise empty it out from under any
+    // state updater React defers running until after that reset happens.
+    const files = Array.from(fileList)
+    setUploadError(null)
+    try {
+      const additions: string[] = []
+      for (const file of files) {
+        const raw = await readFileAsText(file)
+        const text = HTML_FILE_RE.test(file.name) ? htmlToPlainText(raw) : raw
+        additions.push(`## Uploaded: ${file.name}\n\n${text}`)
+      }
+      setForm((f) => ({
+        ...f,
+        rawBrief: [f.rawBrief.trim(), ...additions].filter(Boolean).join('\n\n'),
+      }))
+      setUploadedFiles((prev) => [...prev, ...files.map((f) => f.name)])
+    } catch {
+      setUploadError('Could not read that file — try pasting its content instead.')
+    } finally {
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
 
   const toggleMarket = (m: string) =>
     set('markets', form.markets.includes(m)
       ? form.markets.filter((x) => x !== m)
       : [...form.markets, m])
 
-  const handleVerticalBlur = () => {
-    if (form.vertical.trim() && !form.outputFilename) {
-      set('outputFilename', slugify(form.vertical) + '.html')
-    }
-  }
-
-  const selectChip = (chip: Chip) => {
-    if (selectedChip?.label === chip.label) {
-      setSelectedChip(null)
-      set('vertical', '')
-      set('outputFilename', '')
-    } else {
-      setSelectedChip(chip)
-      set('vertical', chip.label)
-      set('outputFilename', slugify(chip.label) + '.html')
-      set('rawBrief', chip.brief)
-    }
-  }
-
   const handleSubmit = () => {
     const e = validate(form)
     setErrors(e)
     if (Object.keys(e).length === 0) {
-      // Industry/use case is optional in the UI, but the API still needs a vertical —
-      // derive one from the filename if the user left it blank.
-      const vertical = form.vertical.trim() ||
-        form.outputFilename.replace(/\.html$/, '').replace(/-/g, ' ')
+      const vertical = deriveVerticalLabel(form.vertical, form.rawBrief)
       onSubmit({
         vertical,
         markets: form.markets,
-        outputFilename: form.outputFilename.trim(),
+        outputFilename: deriveFilename(vertical),
         keyProducts: [],
         rawBrief: form.rawBrief,
       })
@@ -127,8 +168,9 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
 
   const canSubmit =
     form.markets.length > 0 &&
-    /^[a-z0-9][a-z0-9-]*\.html$/.test(form.outputFilename) &&
     form.rawBrief.trim().length >= BRIEF_MIN
+
+  const previewFilename = deriveFilename(deriveVerticalLabel(form.vertical, form.rawBrief))
 
   return (
     <Card className="p-6 space-y-5">
@@ -144,12 +186,41 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
           <span className="text-sm leading-none mt-0.5">💡</span>
           <p className="text-xs text-[#1B4FB8] leading-relaxed">
             <strong>Combining multiple references?</strong> Paste them all into this one box — e.g. a GTM doc, then a
-            product doc below it. There&apos;s no meaningful length limit, so don&apos;t trim for space. Label each one
-            with a heading like <code className="font-mono bg-white/60 px-1 rounded">## GTM Strategy</code> and{' '}
+            product doc below it — or upload the files directly below. There&apos;s no meaningful length limit, so
+            don&apos;t trim for space. Label each one with a heading like{' '}
+            <code className="font-mono bg-white/60 px-1 rounded">## GTM Strategy</code> and{' '}
             <code className="font-mono bg-white/60 px-1 rounded">## Product Doc</code> so Claude can tell the sources
             apart — and say explicitly if one should take priority over the other.
           </p>
         </div>
+        <div className="flex items-center gap-2 mb-2">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".html,.htm,.txt,.md"
+            multiple
+            className="hidden"
+            onChange={(e) => handleFiles(e.target.files)}
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#61667C] hover:text-[#03102F] border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-slate-50 transition-colors"
+          >
+            📎 Upload document(s)
+          </button>
+          <span className="text-xs text-[#61667C]">HTML, TXT, or MD — merged into the brief below</span>
+        </div>
+        {uploadError && <p className="text-xs text-red-500 mb-2">{uploadError}</p>}
+        {uploadedFiles.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {uploadedFiles.map((name, i) => (
+              <span key={`${name}-${i}`} className="inline-flex items-center gap-1 text-[11px] font-medium bg-green-50 text-green-700 px-2 py-1 rounded-full">
+                ✓ {name}
+              </span>
+            ))}
+          </div>
+        )}
         <Textarea
           id="brief"
           placeholder="Paste a PRD, brief, or any product context here…"
@@ -167,21 +238,6 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
         </div>
       </div>
 
-      <div>
-        <Label htmlFor="filename">Output filename *</Label>
-        <Input
-          id="filename"
-          placeholder="e.g. ai-shoppers.html"
-          value={form.outputFilename}
-          onChange={(e) => set('outputFilename', e.target.value)}
-          className={`mt-1 font-mono ${errors.outputFilename ? 'border-red-400' : ''}`}
-        />
-        {errors.outputFilename
-          ? <p className="text-xs text-red-500 mt-1">{errors.outputFilename}</p>
-          : <p className="text-xs text-[#61667C] mt-1">Lowercase, hyphens, must end in .html</p>
-        }
-      </div>
-
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Label htmlFor="vertical">Industry or use case</Label>
@@ -190,10 +246,11 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
             placeholder="e.g. Restaurants, Beauty & Wellness, SaaS… (optional)"
             value={form.vertical}
             onChange={(e) => set('vertical', e.target.value)}
-            onBlur={handleVerticalBlur}
             className="mt-1"
           />
-          <p className="text-xs text-[#61667C] mt-1">Optional — inferred from the filename if left blank</p>
+          <p className="text-xs text-[#61667C] mt-1">
+            Optional — will save as <code className="font-mono">{previewFilename}</code>
+          </p>
         </div>
         <div>
           <Label>Target markets *</Label>
@@ -214,29 +271,6 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
             ))}
           </div>
           {errors.markets && <p className="text-xs text-red-500 mt-1">{errors.markets}</p>}
-        </div>
-      </div>
-
-      <div>
-        <Label>Quick pick</Label>
-        <p className="text-xs text-[#61667C] mt-0.5 mb-2">
-          Optional — prefills the industry, filename, and brief above with a starting template you can edit freely.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {CHIPS.map((chip) => (
-            <button
-              key={chip.label}
-              type="button"
-              onClick={() => selectChip(chip)}
-              className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border transition-all ${
-                selectedChip?.label === chip.label
-                  ? 'bg-[#03102F] text-white border-[#03102F]'
-                  : 'border-slate-200 bg-[#F9F9F6] hover:bg-white hover:border-slate-400 text-[#61667C]'
-              }`}
-            >
-              <span>{chip.emoji}</span><span>{chip.label}</span>
-            </button>
-          ))}
         </div>
       </div>
 
