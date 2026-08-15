@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState, Suspense } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { CreatePageForm, type CreatePageFormData, type InitialCreatePageData } from '@/components/CreatePageForm'
+import { CreatePageForm, type CreatePageFormData } from '@/components/CreatePageForm'
 import { GenerationStream } from '@/components/GenerationStream'
 import { parseSSEEvents } from '@/lib/sse'
 
@@ -20,40 +20,12 @@ type LogEntry = {
   usage?: UsageStats
 }
 
-// Bump "foo.html" -> "foo-v2.html", "foo-v2.html" -> "foo-v3.html" — avoids a
-// duplicate-filename error when regenerating from an existing page.
-function bumpFilename(filename: string): string {
-  const base = filename.replace(/\.html$/, '')
-  const match = base.match(/^(.*)-v(\d+)$/)
-  if (match) return `${match[1]}-v${parseInt(match[2]) + 1}.html`
-  return `${base}-v2.html`
-}
-
-function CreatePageContent() {
+export default function NewPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const editId = searchParams.get('edit')
 
-  const [initialData, setInitialData] = useState<InitialCreatePageData | null>(null)
-  const [loadingInitial, setLoadingInitial] = useState(!!editId)
   const [loading, setLoading] = useState(false)
   const [logs, setLogs] = useState<LogEntry[]>([])
   const [generatedPageId, setGeneratedPageId] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (!editId) return
-    fetch(`/api/pages/${editId}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setInitialData({
-          vertical: data.briefs?.vertical ?? '',
-          markets: data.briefs?.market ?? ['SG', 'MY', 'PH'],
-          filename: bumpFilename(data.filename),
-        })
-        setLoadingInitial(false)
-      })
-      .catch(() => setLoadingInitial(false))
-  }, [editId])
 
   const addLog = (entry: LogEntry) => setLogs((l) => [...l, entry])
 
@@ -132,21 +104,11 @@ function CreatePageContent() {
     <div className="max-w-2xl mx-auto px-6 py-8">
       <div className="mb-6">
         <Link href="/" className="text-sm text-[#61667C] hover:text-[#03102F] transition-colors">← Back</Link>
-        <h1 className="text-2xl font-bold text-[#03102F] mt-2">
-          {editId ? 'Regenerate landing page' : 'Create New Landing Page'}
-        </h1>
-        <p className="text-[#61667C] mt-1">
-          {editId
-            ? 'Update the filename to avoid a duplicate error, then write a fresh brief for the regeneration.'
-            : 'Fill in the brief — Claude will generate AEO-optimized HTML and a Figma frame.'}
-        </p>
+        <h1 className="text-2xl font-bold text-[#03102F] mt-2">Create New Landing Page</h1>
+        <p className="text-[#61667C] mt-1">Fill in the brief — Claude will generate AEO-optimized HTML and a Figma frame.</p>
       </div>
 
-      {loadingInitial ? (
-        <div className="text-sm text-[#61667C]">Loading…</div>
-      ) : (
-        <CreatePageForm initialData={initialData} onSubmit={handleSubmit} loading={loading} />
-      )}
+      <CreatePageForm initialData={null} onSubmit={handleSubmit} loading={loading} />
 
       {logs.length > 0 && (
         <div className="mt-6">
@@ -167,13 +129,5 @@ function CreatePageContent() {
         </div>
       )}
     </div>
-  )
-}
-
-export default function NewPage() {
-  return (
-    <Suspense fallback={<div className="max-w-2xl mx-auto px-6 py-8 text-sm text-[#61667C]">Loading…</div>}>
-      <CreatePageContent />
-    </Suspense>
   )
 }

@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { getSystemPrompt, getResearchContext, refineHtml, proposeEdits, applyEdits, EditApplyError } from '@/lib/anthropic'
 import { createServerClient } from '@/lib/supabase'
+import { extractMetaFromHtml } from '@/lib/seo'
 
 export const maxDuration = 300
 
@@ -115,9 +116,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         return
       }
 
+      const { metaTitle, metaDescription } = extractMetaFromHtml(html)
       const { error: updateErr } = await supabase
         .from('generated_pages')
-        .update({ html, updated_at: new Date().toISOString() })
+        .update({ html, meta_title: metaTitle, meta_description: metaDescription, updated_at: new Date().toISOString() })
         .eq('id', id)
 
       if (updateErr) {

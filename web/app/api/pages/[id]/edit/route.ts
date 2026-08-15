@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase'
+import { extractMetaFromHtml } from '@/lib/seo'
 
 // Direct manual save of the HTML — no AI call, no cost. Used by the editable
 // HTML source tab on the page detail view. Snapshots the prior version into
@@ -39,9 +40,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: 'Failed to save revision snapshot: ' + revisionErr.message }, { status: 500 })
   }
 
+  const { metaTitle, metaDescription } = extractMetaFromHtml(html)
   const { error: updateErr } = await supabase
     .from('generated_pages')
-    .update({ html, updated_at: new Date().toISOString() })
+    .update({ html, meta_title: metaTitle, meta_description: metaDescription, updated_at: new Date().toISOString() })
     .eq('id', id)
 
   if (updateErr) {

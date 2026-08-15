@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@/lib/supabase'
+import { deriveUrlSlug, extractMetaFromHtml, buildFinalUrl } from '@/lib/seo'
 
 // Brings a static repo-root *.html page into the same system used for
 // AI-generated pages (generated_pages table), so it gets refine + version
@@ -36,6 +37,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: `Could not find ${basename}` }, { status: 404 })
   }
   const html = await pageRes.text()
+  const urlSlug = deriveUrlSlug(basename)
+  const { metaTitle, metaDescription } = extractMetaFromHtml(html)
 
   const { data: inserted, error } = await supabase
     .from('generated_pages')
@@ -44,6 +47,10 @@ export async function POST(req: NextRequest) {
       html,
       filename: basename,
       status: 'published',
+      url_slug: urlSlug,
+      meta_title: metaTitle,
+      meta_description: metaDescription,
+      final_url: buildFinalUrl(urlSlug),
     })
     .select('id')
     .single()

@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server'
 import { enrichBriefContext } from '@/lib/mcp'
 import { generateHtml, generateFigmaJs, getSystemPrompt, getResearchContext } from '@/lib/anthropic'
 import { createServerClient } from '@/lib/supabase'
+import { deriveUrlSlug, extractMetaFromHtml, buildFinalUrl } from '@/lib/seo'
 import type { CreatePageFormData } from '@/components/CreatePageForm'
 
 export const maxDuration = 300
@@ -121,6 +122,8 @@ export async function POST(req: NextRequest) {
 
       // Save generated page
       await send('status', { step: 'saving_page', message: 'Saving generated page…' })
+      const urlSlug = deriveUrlSlug(brief.outputFilename)
+      const { metaTitle, metaDescription } = extractMetaFromHtml(html)
       const { data: pageRow, error: pageErr } = await supabase
         .from('generated_pages')
         .insert({
@@ -129,7 +132,11 @@ export async function POST(req: NextRequest) {
           filename: brief.outputFilename,
           figma_plugin_js: figmaJs,
           mcp_context: { raw: mcpContext, usage: { html: htmlUsage, figma: figmaUsage } },
-          status: 'ready',
+          status: 'draft',
+          url_slug: urlSlug,
+          meta_title: metaTitle,
+          meta_description: metaDescription,
+          final_url: buildFinalUrl(urlSlug),
         })
         .select()
         .single()

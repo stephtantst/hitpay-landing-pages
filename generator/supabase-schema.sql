@@ -20,7 +20,11 @@ create table if not exists generated_pages (
   figma_frame_id text,
   figma_plugin_js text,
   mcp_context jsonb,
-  status text default 'ready' check (status in ('ready', 'published'))
+  status text default 'draft' check (status in ('draft', 'design', 'web_dev', 'published')),
+  url_slug text,
+  meta_title text,
+  meta_description text,
+  final_url text
 );
 
 -- Snapshots taken before each refine/restore, so a refine can be undone
@@ -73,3 +77,17 @@ create policy "Service role full access on page_revisions"
 -- create index if not exists page_revisions_page_id_idx on page_revisions(page_id, created_at desc);
 -- alter table page_revisions enable row level security;
 -- create policy "Service role full access on page_revisions" on page_revisions for all using (true) with check (true);
+
+-- Widen generated_pages.status from ('ready','published') to a 4-stage manual
+-- workflow status ('draft','design','web_dev','published'), defaulting to 'draft'.
+-- alter table generated_pages drop constraint if exists generated_pages_status_check;
+-- update generated_pages set status = 'draft' where status = 'ready';
+-- alter table generated_pages alter column status set default 'draft';
+-- alter table generated_pages add constraint generated_pages_status_check check (status in ('draft', 'design', 'web_dev', 'published'));
+
+-- SEO/tracking fields mirroring the growth team's "Website SEO_AEO" spreadsheet
+-- columns (URL Slug, Meta Title, Meta Description, Final URL), auto-derived per page.
+-- alter table generated_pages add column if not exists url_slug text;
+-- alter table generated_pages add column if not exists meta_title text;
+-- alter table generated_pages add column if not exists meta_description text;
+-- alter table generated_pages add column if not exists final_url text;

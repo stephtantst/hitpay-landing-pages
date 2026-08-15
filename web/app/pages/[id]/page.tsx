@@ -5,15 +5,21 @@ import Link from 'next/link'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { GenerationStream } from '@/components/GenerationStream'
+import { StatusSelect } from '@/components/StatusSelect'
 import { parseSSEEvents } from '@/lib/sse'
+import type { PageStatus } from '@/lib/supabase'
 
 type PageDetail = {
   id: string
   filename: string
-  status: 'ready' | 'published'
+  status: PageStatus
   created_at: string
   html: string
   figma_plugin_js: string | null
+  url_slug: string | null
+  meta_title: string | null
+  meta_description: string | null
+  final_url: string | null
   briefs: {
     vertical: string
     market: string[]
@@ -39,6 +45,48 @@ type Revision = {
   created_at: string
 }
 
+function CopyField({
+  label,
+  value,
+  mono,
+  href,
+  copied,
+  onCopy,
+}: {
+  label: string
+  value: string
+  mono?: boolean
+  href?: string
+  copied: boolean
+  onCopy: () => void
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-xs font-medium text-[#61667C]">{label}</span>
+        <button
+          onClick={onCopy}
+          className="text-[11px] text-[#2465DE] hover:text-[#1B4FB8] font-semibold flex-shrink-0"
+        >
+          {copied ? '✓ Copied' : 'Copy'}
+        </button>
+      </div>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`text-xs text-[#2465DE] hover:underline break-all ${mono ? 'font-mono' : ''}`}
+        >
+          {value}
+        </a>
+      ) : (
+        <p className={`text-xs text-[#03102F] break-words ${mono ? 'font-mono' : ''}`}>{value}</p>
+      )}
+    </div>
+  )
+}
+
 export default function PageDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const [page, setPage] = useState<PageDetail | null>(null)
@@ -47,6 +95,13 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const [published, setPublished] = useState(false)
   const [publishError, setPublishError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
+
+  const handleCopyField = (field: string, value: string) => {
+    navigator.clipboard.writeText(value)
+    setCopiedField(field)
+    setTimeout(() => setCopiedField((f) => (f === field ? null : f)), 2000)
+  }
 
   const [refineInstruction, setRefineInstruction] = useState('')
   const [refining, setRefining] = useState(false)
@@ -256,6 +311,17 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
     setPublishing(false)
   }
 
+  const handleStatusChange = async (status: PageStatus) => {
+    const prevStatus = page?.status
+    setPage((p) => p ? { ...p, status } : p)
+    const res = await fetch(`/api/pages/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    })
+    if (!res.ok && prevStatus) setPage((p) => p ? { ...p, status: prevStatus } : p)
+  }
+
   const handleCopyFigmaJs = async () => {
     if (!page?.figma_plugin_js) return
     await navigator.clipboard.writeText(page.figma_plugin_js)
@@ -292,11 +358,7 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
               {page.briefs?.vertical ?? page.filename.replace(/\.html$/, '').replace(/-/g, ' ')}
             </h1>
             <span className="text-xs font-mono text-[#61667C] truncate">{page.filename}</span>
-            <span className={`text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0 ${
-              page.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-[#EBF1FC] text-[#2465DE]'
-            }`}>
-              {page.status}
-            </span>
+            <StatusSelect status={page.status} onChange={handleStatusChange} />
           </div>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
@@ -509,6 +571,38 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
               ) : (
                 <p className="text-xs text-[#61667C]">No Figma code generated.</p>
               )}
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-2xl p-5">
+              <h3 className="font-semibold text-[#03102F] mb-3 text-sm">SEO &amp; URL</h3>
+              <div className="space-y-3">
+                <CopyField
+                  label="URL slug"
+                  value={page.url_slug || '—'}
+                  mono
+                  copied={copiedField === 'slug'}
+                  onCopy={() => handleCopyField('slug', page.url_slug || '')}
+                />
+                <CopyField
+                  label="Meta title"
+                  value={page.meta_title || '—'}
+                  copied={copiedField === 'title'}
+                  onCopy={() => handleCopyField('title', page.meta_title || '')}
+                />
+                <CopyField
+                  label="Meta description"
+                  value={page.meta_description || '—'}
+                  copied={copiedField === 'description'}
+                  onCopy={() => handleCopyField('description', page.meta_description || '')}
+                />
+                <CopyField
+                  label="Final URL"
+                  value={page.final_url || '—'}
+                  href={page.final_url || undefined}
+                  copied={copiedField === 'url'}
+                  onCopy={() => handleCopyField('url', page.final_url || '')}
+                />
+              </div>
             </div>
 
             <div className="bg-white border border-slate-200 rounded-2xl p-5">

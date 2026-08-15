@@ -8,6 +8,17 @@ export type Brief = {
   rawBrief: string
 }
 
+export type PageStatus = 'draft' | 'design' | 'web_dev' | 'published'
+
+export const PAGE_STATUSES: PageStatus[] = ['draft', 'design', 'web_dev', 'published']
+
+export const PAGE_STATUS_LABELS: Record<PageStatus, string> = {
+  draft: 'Draft',
+  design: 'Design',
+  web_dev: 'Web Dev',
+  published: 'Published',
+}
+
 export type GeneratedPage = {
   id: string
   brief_id: string
@@ -17,7 +28,11 @@ export type GeneratedPage = {
   figma_frame_id: string | null
   figma_plugin_js: string | null
   mcp_context: Record<string, unknown> | null
-  status: 'ready' | 'published'
+  status: PageStatus
+  url_slug: string | null
+  meta_title: string | null
+  meta_description: string | null
+  final_url: string | null
 }
 
 export type BriefRow = {

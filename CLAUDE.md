@@ -111,7 +111,7 @@ GEO rules enforced in `generator/GENERATOR-PROMPT.md` (must be followed for all 
 ## Web app architecture
 
 - `app/page.tsx` — dashboard listing all generated + static pages (client component, fetches `/api/pages`); list-only, no embedded create form
-- `app/new/page.tsx` — the "Create New Landing Page" flow: brief form + SSE stream consumer. Also handles regenerate via `?edit=<pageId>` (prefills vertical/markets/filename from the existing page, bumps the filename). Auto-navigates to `/pages/[id]` once generation finishes.
+- `app/new/page.tsx` — the "Create New Landing Page" flow: brief form + SSE stream consumer. Auto-navigates to `/pages/[id]` once generation finishes.
 - `app/pages/[id]/page.tsx` — page detail: iframe preview, HTML source tab, refine-by-re-prompting with version history, Figma JS copy panel, publish button
 - `components/CreatePageForm/` — the single shared brief form (industry quick-pick chips, vertical, markets, filename, free-text brief) used by `app/new/page.tsx`; auto-derives filename from vertical name on blur
 - `components/GenerationStream/` — renders the SSE log entries during generation

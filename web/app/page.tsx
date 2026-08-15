@@ -11,6 +11,8 @@ import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
   DropdownMenuItem, DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
+import { StatusSelect } from '@/components/StatusSelect'
+import type { PageStatus } from '@/lib/supabase'
 
 // ─── Static pages ──────────────────────────────────────────────────────────
 
@@ -57,7 +59,7 @@ const STATIC_PAGES = [
 type GeneratedPage = {
   id: string
   filename: string
-  status: string
+  status: PageStatus
   created_at: string
   briefs: { vertical: string; market: string[] } | null
 }
@@ -190,13 +192,14 @@ function GeneratedRow({
   publishingId,
   onPublish,
   onDelete,
+  onStatusChange,
 }: {
   page: GeneratedPage
   publishingId: string | null
   onPublish: (page: GeneratedPage) => void
   onDelete: (page: GeneratedPage) => void
+  onStatusChange: (page: GeneratedPage, status: PageStatus) => void
 }) {
-  const router = useRouter()
   const isPublishing = publishingId === page.id
   const isPublished = page.status === 'published'
 
@@ -232,11 +235,7 @@ function GeneratedRow({
         </div>
       </td>
       <td className="px-5 py-3">
-        <span className={`inline-flex items-center text-[11px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${
-          isPublished ? 'bg-green-100 text-green-700' : 'bg-amber-50 text-amber-700'
-        }`}>
-          {isPublished ? 'Published' : 'Ready'}
-        </span>
+        <StatusSelect status={page.status} onChange={(status) => onStatusChange(page, status)} />
       </td>
       <td className="px-5 py-3 text-xs text-[#61667C]">
         {new Date(page.created_at).toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })}
@@ -259,21 +258,17 @@ function GeneratedRow({
               </svg>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" side="bottom" sideOffset={4}>
-              <DropdownMenuItem onClick={() => router.push(`/new?edit=${page.id}`)}>
-                <svg className="w-3.5 h-3.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                Regenerate
-              </DropdownMenuItem>
               {!isPublished && (
-                <DropdownMenuItem onClick={() => onPublish(page)} disabled={isPublishing}>
-                  <svg className="w-3.5 h-3.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                  {isPublishing ? 'Publishing…' : 'Publish to repo'}
-                </DropdownMenuItem>
+                <>
+                  <DropdownMenuItem onClick={() => onPublish(page)} disabled={isPublishing}>
+                    <svg className="w-3.5 h-3.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    {isPublishing ? 'Publishing…' : 'Publish to repo'}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                </>
               )}
-              <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive" onClick={() => onDelete(page)}>
                 <svg className="w-3.5 h-3.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -313,6 +308,16 @@ export default function Dashboard() {
   const handleDeleted = (id: string) => {
     setGeneratedPages(prev => prev.filter(p => p.id !== id))
     setDeleteTarget(null)
+  }
+
+  const handleStatusChange = async (page: GeneratedPage, status: PageStatus) => {
+    setGeneratedPages(prev => prev.map(p => p.id === page.id ? { ...p, status } : p))
+    const res = await fetch(`/api/pages/${page.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status }),
+    })
+    if (!res.ok) setGeneratedPages(prev => prev.map(p => p.id === page.id ? { ...p, status: page.status } : p))
   }
 
   const totalCount = STATIC_PAGES.length + generatedPages.length
@@ -384,6 +389,7 @@ export default function Dashboard() {
                   publishingId={publishingId}
                   onPublish={handlePublish}
                   onDelete={setDeleteTarget}
+                  onStatusChange={handleStatusChange}
                 />
               ))}
 
