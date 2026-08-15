@@ -81,9 +81,12 @@ const STALL_TIMEOUT_MS = 60_000
 class StreamStallError extends Error {}
 
 // Consumes an Anthropic message stream chunk-by-chunk, throwing StreamStallError if
-// no event arrives within STALL_TIMEOUT_MS.
+// no event arrives within STALL_TIMEOUT_MS. Calls stream.abort() on timeout so the
+// abandoned request actually stops (and stops being billed for output we'll never
+// see) instead of continuing to run on Anthropic's side while a fresh retry starts —
+// without this, a stall-then-retry could silently double the real cost of a call.
 async function consumeStreamWithStallGuard(
-  stream: AsyncIterable<Anthropic.MessageStreamEvent>,
+  stream: AsyncIterable<Anthropic.MessageStreamEvent> & { abort: () => void },
   onChunk: (chunk: string) => void
 ): Promise<string> {
   let fullHtml = ''
@@ -91,7 +94,10 @@ async function consumeStreamWithStallGuard(
   while (true) {
     let timer!: ReturnType<typeof setTimeout>
     const timeout = new Promise<never>((_, reject) => {
-      timer = setTimeout(() => reject(new StreamStallError('Stream stalled — no data received for 60s')), STALL_TIMEOUT_MS)
+      timer = setTimeout(() => {
+        stream.abort()
+        reject(new StreamStallError('Stream stalled — no data received for 60s'))
+      }, STALL_TIMEOUT_MS)
     })
     let result: IteratorResult<Anthropic.MessageStreamEvent>
     try {
