@@ -7,10 +7,6 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
   DialogDescription, DialogFooter,
 } from '@/components/ui/dialog'
-import {
-  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
-  DropdownMenuItem, DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu'
 import { StatusSelect } from '@/components/StatusSelect'
 import type { PageStatus } from '@/lib/supabase'
 
@@ -95,7 +91,6 @@ function DeleteDialog({
           <DialogTitle>Delete page?</DialogTitle>
           <DialogDescription>
             <strong className="text-[#03102F]">{page?.briefs?.vertical ?? page?.filename}</strong> will be removed from the database.
-            {page?.status === 'published' && ' The published HTML file in the repo will remain.'}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -189,20 +184,13 @@ function StaticRow({ page }: { page: typeof STATIC_PAGES[0] }) {
 
 function GeneratedRow({
   page,
-  publishingId,
-  onPublish,
   onDelete,
   onStatusChange,
 }: {
   page: GeneratedPage
-  publishingId: string | null
-  onPublish: (page: GeneratedPage) => void
   onDelete: (page: GeneratedPage) => void
   onStatusChange: (page: GeneratedPage, status: PageStatus) => void
 }) {
-  const isPublishing = publishingId === page.id
-  const isPublished = page.status === 'published'
-
   return (
     <tr className="border-b border-slate-50 hover:bg-slate-50/70 transition-colors">
       <td className="px-5 py-3">
@@ -242,41 +230,29 @@ function GeneratedRow({
       </td>
       <td className="px-5 py-3">
         <div className="flex items-center justify-end gap-1">
-          <Link
-            href={`/pages/${page.id}`}
+          <a
+            href={`/api/pages/${page.id}/raw`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs font-semibold text-[#2465DE] hover:text-[#1B4FB8] px-2.5 py-1.5 rounded-lg hover:bg-[#EBF1FC] transition-colors"
           >
             View
+          </a>
+          <Link
+            href={`/pages/${page.id}`}
+            className="text-xs font-semibold text-[#61667C] hover:text-[#03102F] px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+          >
+            Edit
           </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              className="p-1.5 rounded-lg hover:bg-slate-100 transition-colors text-slate-400 hover:text-[#03102F] focus:outline-none"
-              aria-label="More actions"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <circle cx="5" cy="12" r="1.5" /><circle cx="12" cy="12" r="1.5" /><circle cx="19" cy="12" r="1.5" />
-              </svg>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" side="bottom" sideOffset={4}>
-              {!isPublished && (
-                <>
-                  <DropdownMenuItem onClick={() => onPublish(page)} disabled={isPublishing}>
-                    <svg className="w-3.5 h-3.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    {isPublishing ? 'Publishing…' : 'Publish to repo'}
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                </>
-              )}
-              <DropdownMenuItem variant="destructive" onClick={() => onDelete(page)}>
-                <svg className="w-3.5 h-3.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <button
+            onClick={() => onDelete(page)}
+            title="Delete"
+            className="p-1.5 rounded-lg hover:bg-red-50 transition-colors text-slate-300 hover:text-red-600 focus:outline-none"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
         </div>
       </td>
     </tr>
@@ -289,7 +265,6 @@ export default function Dashboard() {
   const [generatedPages, setGeneratedPages] = useState<GeneratedPage[]>([])
   const [loadingPages, setLoadingPages] = useState(true)
   const [deleteTarget, setDeleteTarget] = useState<GeneratedPage | null>(null)
-  const [publishingId, setPublishingId] = useState<string | null>(null)
 
   useEffect(() => {
     fetch('/api/pages')
@@ -297,13 +272,6 @@ export default function Dashboard() {
       .then(data => { setGeneratedPages(Array.isArray(data) ? data : []); setLoadingPages(false) })
       .catch(() => setLoadingPages(false))
   }, [])
-
-  const handlePublish = async (page: GeneratedPage) => {
-    setPublishingId(page.id)
-    const res = await fetch(`/api/pages/${page.id}/publish`, { method: 'POST' })
-    if (res.ok) setGeneratedPages(prev => prev.map(p => p.id === page.id ? { ...p, status: 'published' } : p))
-    setPublishingId(null)
-  }
 
   const handleDeleted = (id: string) => {
     setGeneratedPages(prev => prev.filter(p => p.id !== id))
@@ -386,8 +354,6 @@ export default function Dashboard() {
                 <GeneratedRow
                   key={page.id}
                   page={page}
-                  publishingId={publishingId}
-                  onPublish={handlePublish}
                   onDelete={setDeleteTarget}
                   onStatusChange={handleStatusChange}
                 />

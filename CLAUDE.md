@@ -56,7 +56,6 @@ The core flow lives in `web/app/api/generate/route.ts` and runs as a server-sent
 3. **HTML generation** (`lib/anthropic.ts: generateHtml`) → Claude Sonnet streams HTML; system prompt and research context are prompt-cached
 4. **Figma JS generation** (`lib/anthropic.ts: generateFigmaJs`) → Claude Haiku generates Figma Plugin API JavaScript
 5. **Save generated page** → `generated_pages` table with html + figma_plugin_js
-6. **Publish** (`POST /api/pages/[id]/publish`) → writes HTML file to repo root
 
 SSE events emitted: `status`, `chunk`, `usage`, `done`, `error`. The frontend (`app/new/page.tsx`) buffers and parses these.
 
@@ -112,7 +111,7 @@ GEO rules enforced in `generator/GENERATOR-PROMPT.md` (must be followed for all 
 
 - `app/page.tsx` — dashboard listing all generated + static pages (client component, fetches `/api/pages`); list-only, no embedded create form
 - `app/new/page.tsx` — the "Create New Landing Page" flow: brief form + SSE stream consumer. Auto-navigates to `/pages/[id]` once generation finishes.
-- `app/pages/[id]/page.tsx` — page detail: iframe preview, HTML source tab, refine-by-re-prompting with version history, Figma JS copy panel, publish button
+- `app/pages/[id]/page.tsx` — page detail: iframe preview, HTML source tab, refine-by-re-prompting with version history, Figma JS copy panel, editable SEO & URL fields
 - `components/CreatePageForm/` — the single shared brief form (industry quick-pick chips, vertical, markets, filename, free-text brief) used by `app/new/page.tsx`; auto-derives filename from vertical name on blur
 - `components/GenerationStream/` — renders the SSE log entries during generation
 - `lib/supabase.ts` — `createServerClient()` (service role, for API routes) and `createBrowserClient()` (anon, for client components)

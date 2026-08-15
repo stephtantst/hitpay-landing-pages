@@ -100,9 +100,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const { id } = use(params)
   const [page, setPage] = useState<PageDetail | null>(null)
   const [loading, setLoading] = useState(true)
-  const [publishing, setPublishing] = useState(false)
-  const [published, setPublished] = useState(false)
-  const [publishError, setPublishError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [copiedField, setCopiedField] = useState<string | null>(null)
 
@@ -369,20 +366,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
     })
   }
 
-  const handlePublish = async () => {
-    setPublishing(true)
-    setPublishError(null)
-    const res = await fetch(`/api/pages/${id}/publish`, { method: 'POST' })
-    if (res.ok) {
-      setPublished(true)
-      setPage((p) => p ? { ...p, status: 'published' } : p)
-    } else {
-      const err = await res.json().catch(() => ({ error: 'Publish failed' }))
-      setPublishError(err.error || 'Publish failed')
-    }
-    setPublishing(false)
-  }
-
   const handleStatusChange = async (status: PageStatus) => {
     const prevStatus = page?.status
     setPage((p) => p ? { ...p, status } : p)
@@ -434,6 +417,14 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
           </div>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
+          <a
+            href={`/api/pages/${id}/raw`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-sm font-medium text-[#61667C] hover:text-[#03102F] border border-slate-200 rounded-xl px-3 py-1.5 hover:bg-[#F9F9F6] transition-colors"
+          >
+            View
+          </a>
           <button
             onClick={() => setPanelOpen((o) => !o)}
             className="flex items-center gap-1.5 text-sm font-medium text-[#61667C] hover:text-[#03102F] border border-slate-200 rounded-xl px-3 py-1.5 hover:bg-[#F9F9F6] transition-colors"
@@ -442,13 +433,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 4v16m6-16v16M4 8h4m8 0h4M4 16h4m8 0h4" />
             </svg>
             {panelOpen ? 'Hide panel' : 'Edit'}
-          </button>
-          <button
-            onClick={handlePublish}
-            disabled={publishing || page.status === 'published'}
-            className="px-4 py-1.5 text-sm font-semibold bg-[#2465DE] text-white rounded-xl hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors"
-          >
-            {publishing ? 'Publishing…' : published ? '✓ Published' : 'Publish to repo'}
           </button>
         </div>
       </div>
@@ -607,16 +591,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
                 >
                   Copy HTML
                 </button>
-                <button
-                  onClick={handlePublish}
-                  disabled={publishing || page.status === 'published'}
-                  className="w-full text-sm font-semibold bg-[#2465DE] text-white rounded-xl px-4 py-2.5 hover:bg-[#1B4FB8] disabled:opacity-40 transition-colors text-left"
-                >
-                  {page.status === 'published' ? '✓ Published to repo' : 'Publish to repo root'}
-                </button>
-                {publishError && (
-                  <p className="text-xs text-red-500 mt-1">{publishError}</p>
-                )}
               </div>
             </div>
 
