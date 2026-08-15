@@ -9,6 +9,10 @@ export const maxDuration = 300
 
 const VALID_MARKETS = new Set(['SG', 'MY', 'PH'])
 const FILENAME_RE = /^[a-z0-9][a-z0-9-]*\.html$/
+// Sanity backstop only — not a real product limit. Sonnet's 200K-token context window
+// comfortably fits a brief many times this size alongside the system prompt, research
+// context, and MCP enrichment; this just guards against a truly pathological payload.
+const BRIEF_SANITY_MAX = 500_000
 
 function validateBrief(brief: CreatePageFormData): string | null {
   if (!brief.vertical?.trim()) return 'vertical is required'
@@ -17,7 +21,7 @@ function validateBrief(brief: CreatePageFormData): string | null {
   if (!brief.outputFilename?.trim()) return 'outputFilename is required'
   if (!FILENAME_RE.test(brief.outputFilename)) return 'outputFilename must be lowercase letters, numbers, and hyphens ending in .html'
   if (!brief.rawBrief?.trim() || brief.rawBrief.trim().length < 100) return 'rawBrief must be at least 100 characters'
-  if (brief.rawBrief.length > 30_000) return 'rawBrief exceeds 30,000 character limit'
+  if (brief.rawBrief.length > BRIEF_SANITY_MAX) return `rawBrief exceeds ${BRIEF_SANITY_MAX.toLocaleString()} character sanity limit`
   return null
 }
 

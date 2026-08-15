@@ -37,7 +37,10 @@ const CHIPS: Chip[] = [
 
 const MARKETS = ['SG', 'MY', 'PH']
 const BRIEF_MIN = 100
-const BRIEF_MAX = 30_000
+// Soft threshold only (turns the counter amber past this point) — Sonnet's 200K-token
+// context window comfortably fits far more than this, so there's no hard cap here.
+// The server (web/app/api/generate/route.ts) enforces a generous sanity ceiling instead.
+const BRIEF_SOFT_WARN = 100_000
 
 type FormFields = { vertical: string; markets: string[]; outputFilename: string; rawBrief: string }
 type FormErrors = Partial<Record<keyof FormFields, string>>
@@ -52,8 +55,6 @@ function validate(f: FormFields): FormErrors {
   }
   if (f.rawBrief.trim().length < BRIEF_MIN) {
     e.rawBrief = `Add more context — minimum ${BRIEF_MIN} characters (currently ${f.rawBrief.trim().length})`
-  } else if (f.rawBrief.length > BRIEF_MAX) {
-    e.rawBrief = `Too long — trim to under ${BRIEF_MAX.toLocaleString()} characters (currently ${f.rawBrief.length.toLocaleString()})`
   }
   return e
 }
@@ -122,16 +123,12 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
   }
 
   const briefLen = form.rawBrief.length
-  const briefCountColor =
-    briefLen > BRIEF_MAX ? 'text-red-500' :
-    briefLen > BRIEF_MAX * 0.8 ? 'text-amber-500' :
-    'text-[#61667C]'
+  const briefCountColor = briefLen > BRIEF_SOFT_WARN ? 'text-amber-500' : 'text-[#61667C]'
 
   const canSubmit =
     form.markets.length > 0 &&
     /^[a-z0-9][a-z0-9-]*\.html$/.test(form.outputFilename) &&
-    form.rawBrief.trim().length >= BRIEF_MIN &&
-    form.rawBrief.length <= BRIEF_MAX
+    form.rawBrief.trim().length >= BRIEF_MIN
 
   return (
     <Card className="p-6 space-y-5">
@@ -143,6 +140,16 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
           Claude will extract what it needs and apply the HitPay GEO + AEO rules on top. Once the page is generated, you can
           keep refining it with follow-up instructions from its detail page — no need to get everything right here.
         </p>
+        <div className="flex items-start gap-2 rounded-lg bg-[#EBF1FC] px-3 py-2 mb-2">
+          <span className="text-sm leading-none mt-0.5">💡</span>
+          <p className="text-xs text-[#1B4FB8] leading-relaxed">
+            <strong>Combining multiple references?</strong> Paste them all into this one box — e.g. a GTM doc, then a
+            product doc below it. There&apos;s no meaningful length limit, so don&apos;t trim for space. Label each one
+            with a heading like <code className="font-mono bg-white/60 px-1 rounded">## GTM Strategy</code> and{' '}
+            <code className="font-mono bg-white/60 px-1 rounded">## Product Doc</code> so Claude can tell the sources
+            apart — and say explicitly if one should take priority over the other.
+          </p>
+        </div>
         <Textarea
           id="brief"
           placeholder="Paste a PRD, brief, or any product context here…"
@@ -156,7 +163,7 @@ export function CreatePageForm({ initialData, onSubmit, loading }: {
             ? <p className="text-xs text-red-500">{errors.rawBrief}</p>
             : <p className="text-xs text-[#61667C]">Minimum {BRIEF_MIN} characters</p>
           }
-          <p className={`text-xs ${briefCountColor}`}>{briefLen.toLocaleString()} / {BRIEF_MAX.toLocaleString()}</p>
+          <p className={`text-xs ${briefCountColor}`}>{briefLen.toLocaleString()} characters</p>
         </div>
       </div>
 
