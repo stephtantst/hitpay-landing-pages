@@ -11,7 +11,7 @@ type TokenUsage = {
   input: number; output: number; cacheRead: number; cacheWrite: number; costUsd: number
 }
 type UsageStats = {
-  html: TokenUsage; figma: TokenUsage; totalCostUsd: number; cacheHit: boolean
+  html: TokenUsage; totalCostUsd: number; cacheHit: boolean
 }
 type LogEntry = {
   type: 'status' | 'error' | 'done' | 'chunk' | 'usage'
@@ -105,7 +105,7 @@ export default function NewPage() {
       <div className="mb-6">
         <Link href="/" className="text-sm text-[#61667C] hover:text-[#03102F] transition-colors">← Back</Link>
         <h1 className="text-2xl font-bold text-[#03102F] mt-2">Create New Landing Page</h1>
-        <p className="text-[#61667C] mt-1">Fill in the brief — Claude will generate AEO-optimized HTML and a Figma frame.</p>
+        <p className="text-[#61667C] mt-1">Fill in the brief — Claude will generate AEO-optimized HTML.</p>
       </div>
 
       <CreatePageForm initialData={null} onSubmit={handleSubmit} loading={loading} />

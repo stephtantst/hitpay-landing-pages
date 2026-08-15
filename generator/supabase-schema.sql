@@ -17,8 +17,6 @@ create table if not exists generated_pages (
   updated_at timestamptz default now(),
   html text not null,
   filename text not null,
-  figma_frame_id text,
-  figma_plugin_js text,
   mcp_context jsonb,
   status text default 'draft' check (status in ('draft', 'design', 'web_dev', 'published')),
   url_slug text,

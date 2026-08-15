@@ -16,7 +16,6 @@ type PageDetail = {
   status: PageStatus
   created_at: string
   html: string
-  figma_plugin_js: string | null
   url_slug: string | null
   meta_title: string | null
   meta_description: string | null
@@ -32,7 +31,7 @@ type TokenUsage = {
   input: number; output: number; cacheRead: number; cacheWrite: number; costUsd: number
 }
 type UsageStats = {
-  html: TokenUsage; figma: TokenUsage; totalCostUsd: number; cacheHit: boolean
+  html: TokenUsage; totalCostUsd: number; cacheHit: boolean
 }
 type LogEntry = {
   type: 'status' | 'error' | 'done' | 'chunk' | 'usage'
@@ -100,7 +99,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
   const { id } = use(params)
   const [page, setPage] = useState<PageDetail | null>(null)
   const [loading, setLoading] = useState(true)
-  const [copied, setCopied] = useState(false)
   const [copiedField, setCopiedField] = useState<string | null>(null)
 
   const handleCopyField = (field: string, value: string) => {
@@ -377,13 +375,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
     if (!res.ok && prevStatus) setPage((p) => p ? { ...p, status: prevStatus } : p)
   }
 
-  const handleCopyFigmaJs = async () => {
-    if (!page?.figma_plugin_js) return
-    await navigator.clipboard.writeText(page.figma_plugin_js)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
       <span className="text-[#61667C]">Loading…</span>
@@ -592,31 +583,6 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
                   Copy HTML
                 </button>
               </div>
-            </div>
-
-            <div className="bg-white border border-slate-200 rounded-2xl p-5">
-              <h3 className="font-semibold text-[#03102F] mb-1 text-sm">Push to Figma</h3>
-              <p className="text-xs text-[#61667C] mb-3">
-                Copy this code, then run it in the HitPay Figma plugin (Plugins → Development → Run) to create the frame.
-              </p>
-              {page.figma_plugin_js ? (
-                <>
-                  <div className="rounded-xl bg-[#03102F] p-3 mb-3 overflow-auto max-h-40">
-                    <pre className="text-xs text-green-400 font-mono whitespace-pre-wrap break-words">
-                      {page.figma_plugin_js.slice(0, 500)}
-                      {page.figma_plugin_js.length > 500 && '\n…'}
-                    </pre>
-                  </div>
-                  <button
-                    onClick={handleCopyFigmaJs}
-                    className="w-full text-sm font-semibold text-white bg-[#03102F] rounded-xl px-4 py-2.5 hover:bg-slate-800 transition-colors"
-                  >
-                    {copied ? '✓ Copied!' : 'Copy plugin code'}
-                  </button>
-                </>
-              ) : (
-                <p className="text-xs text-[#61667C]">No Figma code generated.</p>
-              )}
             </div>
 
             <div className="bg-white border border-slate-200 rounded-2xl p-5">

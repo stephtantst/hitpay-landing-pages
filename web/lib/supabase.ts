@@ -25,8 +25,6 @@ export type GeneratedPage = {
   created_at: string
   html: string
   filename: string
-  figma_frame_id: string | null
-  figma_plugin_js: string | null
   mcp_context: Record<string, unknown> | null
   status: PageStatus
   url_slug: string | null

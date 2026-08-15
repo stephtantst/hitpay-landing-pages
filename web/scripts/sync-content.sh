@@ -30,6 +30,5 @@ done
 
 cp ../generator/GENERATOR-PROMPT.md content/GENERATOR-PROMPT.md
 cp ../RESEARCH.md content/RESEARCH.md
-cp ../figma-plugin/code.js content/figma-plugin-code.js
 
 echo "sync-content: refreshed web/public/{assets,*.html} and web/content/ from repo root."

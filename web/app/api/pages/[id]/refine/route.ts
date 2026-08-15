@@ -96,7 +96,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
       await send('usage', {
         html: usage,
-        figma: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 },
         totalCostUsd: usage.costUsd,
         cacheHit: usage.cacheRead > 0,
         editCount,

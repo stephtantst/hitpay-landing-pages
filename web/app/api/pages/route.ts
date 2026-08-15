@@ -6,7 +6,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from('generated_pages')
     .select(`
-      id, filename, status, created_at, figma_frame_id,
+      id, filename, status, created_at,
       briefs (vertical, market, status)
     `)
     .order('created_at', { ascending: false })

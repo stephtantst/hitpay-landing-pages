@@ -7,7 +7,7 @@ type TokenUsage = {
   input: number; output: number; cacheRead: number; cacheWrite: number; costUsd: number
 }
 type UsageStats = {
-  html: TokenUsage; figma: TokenUsage; totalCostUsd: number; cacheHit: boolean
+  html: TokenUsage; totalCostUsd: number; cacheHit: boolean
 }
 type LogEntry = {
   type: 'status' | 'error' | 'done' | 'chunk' | 'usage'
@@ -17,7 +17,7 @@ type LogEntry = {
 }
 
 const STEP_ICONS: Record<string, string> = {
-  saving: '💾', mcp: '🔍', generating: '✍️', figma: '🎨', saving_page: '📦',
+  saving: '💾', mcp: '🔍', generating: '✍️', saving_page: '📦',
   editing: '🔎', applying: '✂️',
 }
 
@@ -25,7 +25,7 @@ function fmt(n: number) { return n.toLocaleString() }
 function usd(n: number) { return `$${n.toFixed(4)}` }
 
 function UsagePanel({ usage }: { usage: UsageStats }) {
-  const { html, figma, totalCostUsd, cacheHit } = usage
+  const { html, totalCostUsd, cacheHit } = usage
   return (
     <div className="mt-3 pt-3 border-t border-slate-700 space-y-2">
       <div className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Token usage & cost</div>
@@ -51,12 +51,6 @@ function UsagePanel({ usage }: { usage: UsageStats }) {
             <div className="text-slate-400 text-right">{fmt(html.cacheWrite)} tok</div>
           </>
         )}
-
-        <div className="text-slate-500 mt-1">Figma JS (Haiku 4.5)</div>
-        <div className="text-green-300 text-right mt-1">{usd(figma.costUsd)}</div>
-
-        <div className="text-slate-600 pl-2">› input + output</div>
-        <div className="text-slate-400 text-right">{fmt(figma.input + figma.output)} tok</div>
       </div>
 
       <div className="flex items-center justify-between pt-2 border-t border-slate-700">

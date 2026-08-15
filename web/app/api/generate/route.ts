@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { enrichBriefContext } from '@/lib/mcp'
-import { generateHtml, generateFigmaJs, getSystemPrompt, getResearchContext } from '@/lib/anthropic'
+import { generateHtml, getSystemPrompt, getResearchContext } from '@/lib/anthropic'
 import { createServerClient } from '@/lib/supabase'
 import { deriveUrlSlug, extractMetaFromHtml, buildFinalUrl } from '@/lib/seo'
 import type { CreatePageFormData } from '@/components/CreatePageForm'
@@ -111,16 +111,10 @@ export async function POST(req: NextRequest) {
       )
       html = generatedHtml
 
-      // Figma JS generation
-      await send('status', { step: 'figma', message: 'Generating Figma frame code (Haiku)…' })
-      const { js: figmaJs, usage: figmaUsage } = await generateFigmaJs(brief.rawBrief, html)
-
       // Emit usage stats so the UI can display cost + cache info
-      const totalCostUsd = htmlUsage.costUsd + figmaUsage.costUsd
       await send('usage', {
         html: htmlUsage,
-        figma: figmaUsage,
-        totalCostUsd,
+        totalCostUsd: htmlUsage.costUsd,
         cacheHit: htmlUsage.cacheRead > 0,
       })
 
@@ -134,8 +128,7 @@ export async function POST(req: NextRequest) {
           brief_id: briefRow.id,
           html,
           filename: brief.outputFilename,
-          figma_plugin_js: figmaJs,
-          mcp_context: { raw: mcpContext, usage: { html: htmlUsage, figma: figmaUsage } },
+          mcp_context: { raw: mcpContext, usage: { html: htmlUsage } },
           status: 'draft',
           url_slug: urlSlug,
           meta_title: metaTitle,
