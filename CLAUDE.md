@@ -58,6 +58,11 @@ The core flow lives in `web/app/api/generate/route.ts` and runs as a server-sent
 
 SSE events emitted: `status`, `chunk`, `usage`, `done`, `error`. The frontend (`app/new/page.tsx`) buffers and parses these.
 
+**Reliability**: `/api/generate` has `maxDuration = 300` — Vercel hard-kills the function at that point with no chance for app code to run (no error event, no DB update), which previously left a brief stuck at `status: 'generating'` forever with the page never saved. Hardening in place:
+- `generateHtml` detects a stalled stream (no data for 60s — a dead connection, not genuinely slow output) and auto-retries once within the same request.
+- Any failure that reaches the route's catch block (or a failed page save) now marks `briefs.status = 'error'`.
+- `app/new/page.tsx` has its own client-side backstop — a 90s no-data stall timer plus an absolute ~5.5-minute ceiling — since a Vercel hard-kill can leave the connection silently dead with no error event ever arriving.
+
 ## Mock mode
 
 `MOCK_LLM=true` short-circuits the LLM call — HTML streams `restaurants.html` from disk in 200-char chunks.

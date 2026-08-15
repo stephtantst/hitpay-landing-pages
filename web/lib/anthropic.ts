@@ -71,13 +71,52 @@ export function getResearchContext(vertical: string): string {
     : research.slice(0, 2000)
 }
 
+// A generation stream that goes silent for this long is almost certainly a dead
+// connection, not genuinely slow output — Claude streams continuously once it starts.
+// Left unguarded, a stalled stream silently eats the whole request budget (a Vercel
+// function timeout kills the process outright with nothing saved) instead of failing
+// fast enough to retry within it.
+const STALL_TIMEOUT_MS = 60_000
+
+class StreamStallError extends Error {}
+
+// Consumes an Anthropic message stream chunk-by-chunk, throwing StreamStallError if
+// no event arrives within STALL_TIMEOUT_MS.
+async function consumeStreamWithStallGuard(
+  stream: AsyncIterable<Anthropic.MessageStreamEvent>,
+  onChunk: (chunk: string) => void
+): Promise<string> {
+  let fullHtml = ''
+  const iterator = stream[Symbol.asyncIterator]()
+  while (true) {
+    let timer!: ReturnType<typeof setTimeout>
+    const timeout = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new StreamStallError('Stream stalled — no data received for 60s')), STALL_TIMEOUT_MS)
+    })
+    let result: IteratorResult<Anthropic.MessageStreamEvent>
+    try {
+      result = await Promise.race([iterator.next(), timeout])
+    } finally {
+      clearTimeout(timer)
+    }
+    if (result.done) break
+    const chunk = result.value
+    if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+      fullHtml += chunk.delta.text
+      onChunk(chunk.delta.text)
+    }
+  }
+  return fullHtml
+}
+
 export async function generateHtml(
   systemPrompt: string,
   brief: string,
   mcpContext: string,
   researchContext: string,
   markets: string[],
-  onChunk: (chunk: string) => void
+  onChunk: (chunk: string) => void,
+  onStall?: () => void
 ): Promise<{ html: string; usage: UsageStats['html'] }> {
   // Mock mode: skip API call, stream an existing page file
   if (process.env.MOCK_LLM === 'true') {
@@ -111,8 +150,6 @@ export async function generateHtml(
     '\n\nGenerate the complete HTML landing page now. Output ONLY the HTML — no markdown fences, no explanation.',
   ].join('')
 
-  let fullHtml = ''
-
   // Structure for caching:
   //   system[0]   → system prompt       (static, CACHED — biggest block)
   //   user[0]     → research context    (static per vertical, CACHED)
@@ -128,43 +165,53 @@ export async function generateHtml(
       ]
     : dynamicContent
 
-  const stream = anthropic.messages.stream({
-    model: HTML_MODEL,
-    max_tokens: 32000,
-    system: [
-      {
-        type: 'text',
-        text: systemPrompt,
-        cache_control: { type: 'ephemeral' }, // Cache the large static system prompt
-      },
-    ],
-    messages: [{ role: 'user', content: userContent }],
-  })
+  const attempt = async (): Promise<{ html: string; usage: UsageStats['html'] }> => {
+    const stream = anthropic.messages.stream({
+      model: HTML_MODEL,
+      max_tokens: 32000,
+      system: [
+        {
+          type: 'text',
+          text: systemPrompt,
+          cache_control: { type: 'ephemeral' }, // Cache the large static system prompt
+        },
+      ],
+      messages: [{ role: 'user', content: userContent }],
+    })
 
-  for await (const chunk of stream) {
-    if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
-      fullHtml += chunk.delta.text
-      onChunk(chunk.delta.text)
+    const fullHtml = await consumeStreamWithStallGuard(stream, onChunk)
+
+    const final = await stream.finalMessage()
+    const u = final.usage as unknown as Record<string, number>
+    const cacheRead  = u.cache_read_input_tokens       ?? 0
+    const cacheWrite = u.cache_creation_input_tokens   ?? 0
+    const input      = u.input_tokens                  ?? 0
+    const output     = u.output_tokens                 ?? 0
+
+    const usage = {
+      input, output, cacheRead, cacheWrite,
+      costUsd: calcCost(input, output, cacheRead, cacheWrite, {
+        input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
+        cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
+      }),
     }
+
+    console.log('[HTML]', usage)
+    return { html: fullHtml, usage }
   }
 
-  const final = await stream.finalMessage()
-  const u = final.usage as unknown as Record<string, number>
-  const cacheRead  = u.cache_read_input_tokens       ?? 0
-  const cacheWrite = u.cache_creation_input_tokens   ?? 0
-  const input      = u.input_tokens                  ?? 0
-  const output     = u.output_tokens                 ?? 0
-
-  const usage = {
-    input, output, cacheRead, cacheWrite,
-    costUsd: calcCost(input, output, cacheRead, cacheWrite, {
-      input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
-      cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
-    }),
+  // A stalled stream almost always means a dead connection to the API, not genuinely
+  // slow output — one automatic retry catches that within the request's time budget
+  // instead of silently burning the whole thing on a single hung attempt. Any other
+  // error (or a second stall) propagates immediately; we only retry this one failure mode.
+  try {
+    return await attempt()
+  } catch (err) {
+    if (!(err instanceof StreamStallError)) throw err
+    console.warn('[HTML] stream stalled, retrying once:', err.message)
+    onStall?.()
+    return await attempt()
   }
-
-  console.log('[HTML]', usage)
-  return { html: fullHtml, usage }
 }
 
 export async function refineHtml(

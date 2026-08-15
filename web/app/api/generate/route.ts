@@ -67,6 +67,11 @@ export async function POST(req: NextRequest) {
   }
 
 
+  // Hoisted so the catch block below can mark the brief as errored even if the
+  // exception happens after the brief row was created (e.g. a stalled/failed
+  // generation) — otherwise it's stuck showing "generating" forever with no signal.
+  let briefId: string | null = null
+
   ;(async () => {
     try {
       // Save brief
@@ -87,6 +92,7 @@ export async function POST(req: NextRequest) {
         await writer.close()
         return
       }
+      briefId = briefRow.id
 
       // MCP enrichment
       await send('status', { step: 'mcp', message: 'Querying HitPay knowledge base…' })
@@ -107,7 +113,8 @@ export async function POST(req: NextRequest) {
         async (chunk) => {
           html += chunk
           await send('chunk', { text: chunk })
-        }
+        },
+        () => { send('status', { step: 'generating', message: 'Stream stalled — retrying…' }) }
       )
       html = generatedHtml
 
@@ -139,6 +146,7 @@ export async function POST(req: NextRequest) {
         .single()
 
       if (pageErr || !pageRow) {
+        await supabase.from('briefs').update({ status: 'error' }).eq('id', briefRow.id)
         await send('error', { message: 'Failed to save page: ' + pageErr?.message })
         await writer.close()
         return
@@ -149,6 +157,15 @@ export async function POST(req: NextRequest) {
 
       await send('done', { pageId: pageRow.id, filename: brief.outputFilename })
     } catch (err) {
+      // Mark the brief as errored so it doesn't sit in "generating" forever with no
+      // signal — that silent-stuck state (rather than the failure itself) was the
+      // actual complaint: no error, no saved page, just an indefinite wait.
+      if (briefId) {
+        await supabase.from('briefs').update({ status: 'error' }).eq('id', briefId).then(
+          () => {},
+          () => {} // best-effort — don't let a status-update failure mask the real error
+        )
+      }
       await send('error', { message: String(err) })
     } finally {
       await writer.close()

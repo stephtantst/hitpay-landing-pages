@@ -32,6 +32,13 @@ function bumpFilename(filename: string): string {
 
 const MAX_FILENAME_ATTEMPTS = 20
 
+// Belt-and-braces client-side timeouts — a server-side hard timeout (Vercel kills the
+// function outright at maxDuration, see web/app/api/generate/route.ts) can leave the
+// connection silently dead with no error event ever arriving. Without these, the UI
+// would just spin forever instead of telling the user to retry.
+const STALL_MS = 90_000       // no data at all for this long — likely a dead connection
+const OVERALL_MS = 330_000    // ~5.5 min — a bit past the server's 300s ceiling
+
 export default function NewPage() {
   const router = useRouter()
 
@@ -46,12 +53,21 @@ export default function NewPage() {
     setLogs([])
     setGeneratedPageId(null)
 
+    const controller = new AbortController()
+    const overallTimer = setTimeout(() => controller.abort(), OVERALL_MS)
+    let stallTimer: ReturnType<typeof setTimeout> | null = null
+    const resetStallTimer = () => {
+      if (stallTimer) clearTimeout(stallTimer)
+      stallTimer = setTimeout(() => controller.abort(), STALL_MS)
+    }
+
     try {
       let currentBrief = brief
       let res: Response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ brief: currentBrief }),
+        signal: controller.signal,
       })
 
       for (let attempt = 1; res.status === 409 && attempt < MAX_FILENAME_ATTEMPTS; attempt++) {
@@ -60,6 +76,7 @@ export default function NewPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ brief: currentBrief }),
+          signal: controller.signal,
         })
       }
 
@@ -76,8 +93,10 @@ export default function NewPage() {
       let buffer = ''
       let donePageId: string | null = null
 
+      resetStallTimer()
       while (true) {
         const { done, value } = await reader.read()
+        resetStallTimer()
         if (done) break
 
         buffer += decoder.decode(value, { stream: true })
@@ -116,8 +135,14 @@ export default function NewPage() {
         router.push(`/pages/${donePageId}`)
       }
     } catch (err) {
-      addLog({ type: 'error', message: String(err) })
+      if (controller.signal.aborted) {
+        addLog({ type: 'error', message: 'Generation timed out with no response — the server may be overloaded. Please try again.' })
+      } else {
+        addLog({ type: 'error', message: String(err) })
+      }
     } finally {
+      clearTimeout(overallTimer)
+      if (stallTimer) clearTimeout(stallTimer)
       setLoading(false)
     }
   }
