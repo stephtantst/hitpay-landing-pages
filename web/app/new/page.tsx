@@ -37,7 +37,7 @@ const MAX_FILENAME_ATTEMPTS = 20
 // connection silently dead with no error event ever arriving. Without these, the UI
 // would just spin forever instead of telling the user to retry.
 const STALL_MS = 90_000       // no data at all for this long — likely a dead connection
-const OVERALL_MS = 330_000    // ~5.5 min — a bit past the server's 300s ceiling
+const OVERALL_MS = 850_000    // ~14.2 min — a bit past the server's 800s ceiling
 
 export default function NewPage() {
   const router = useRouter()

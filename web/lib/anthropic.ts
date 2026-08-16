@@ -80,7 +80,16 @@ export function getResearchContext(vertical: string): string {
 // instead of waiting out the real 60s (see MOCK_STALL below) — never set this in prod.
 const STALL_TIMEOUT_MS = Number(process.env.STALL_TIMEOUT_MS) || 60_000
 
-class StreamStallError extends Error {}
+// partialChars carries however much output had already streamed before the stall, so a
+// retry can be sized against what's actually left of the per-generation cost budget
+// instead of getting a full fresh budget on top of what the failed attempt already spent.
+class StreamStallError extends Error {
+  partialChars: number
+  constructor(message: string, partialChars: number = 0) {
+    super(message)
+    this.partialChars = partialChars
+  }
+}
 
 // Consumes an Anthropic message stream chunk-by-chunk, throwing StreamStallError if
 // no event arrives within STALL_TIMEOUT_MS. Calls stream.abort() on timeout so the
@@ -98,7 +107,7 @@ async function consumeStreamWithStallGuard(
     const timeout = new Promise<never>((_, reject) => {
       timer = setTimeout(() => {
         stream.abort()
-        reject(new StreamStallError('Stream stalled — no data received for 60s'))
+        reject(new StreamStallError('Stream stalled — no data received for 60s', fullHtml.length))
       }, STALL_TIMEOUT_MS)
     })
     let result: IteratorResult<Anthropic.MessageStreamEvent>
@@ -115,6 +124,37 @@ async function consumeStreamWithStallGuard(
     }
   }
   return fullHtml
+}
+
+// ─── Per-generation cost cap ────────────────────────────────────────────────
+// max_tokens alone bounds a single attempt's worst-case output cost, but a stall-then-
+// retry runs a second full attempt on top of whatever the first one already spent —
+// so a bounded max_tokens per attempt doesn't bound the *generation's* total cost.
+// This sizes each attempt's max_tokens off a shared dollar budget instead: the first
+// attempt gets (budget - its estimated input cost); a retry after a stall gets the
+// remainder after subtracting what the failed attempt is estimated to have already cost.
+const MAX_GENERATION_COST_USD = 0.50
+const MIN_OUTPUT_TOKENS = 1_000    // floor — a near-exhausted retry budget still needs a valid max_tokens
+const MAX_OUTPUT_TOKENS = 32_000   // existing ceiling — the budget only ever lowers this, never raises it
+const MIN_RETRY_BUDGET_USD = 0.05  // below this, a retry isn't worth the spend — fail fast instead
+
+function estimateTokens(text: string): number {
+  return Math.ceil(text.length / 4)
+}
+
+// Worst-case (cache-write-rate) estimate of an attempt's input cost from its actual
+// prompt content, used only to size that attempt's output budget — not for billing.
+function estimateInputCostUsd(systemPrompt: string, userContent: Anthropic.MessageParam['content']): number {
+  const userText = typeof userContent === 'string'
+    ? userContent
+    : userContent.map((block) => ('text' in block ? block.text : '')).join('')
+  const tokens = estimateTokens(systemPrompt) + estimateTokens(userText)
+  return (tokens * SONNET_CACHE_WRITE) / 1_000_000
+}
+
+function maxTokensForBudget(remainingUsd: number): number {
+  const tokens = Math.floor(Math.max(remainingUsd, 0) / (SONNET_OUTPUT_PRICE / 1_000_000))
+  return Math.max(MIN_OUTPUT_TOKENS, Math.min(tokens, MAX_OUTPUT_TOKENS))
 }
 
 // Simulates a real Anthropic stream (same async-iterable + abort() shape consumeStreamWithStallGuard
@@ -230,10 +270,10 @@ export async function generateHtml(
       ]
     : dynamicContent
 
-  const attempt = async (): Promise<{ html: string; usage: UsageStats['html'] }> => {
+  const attempt = async (maxTokens: number): Promise<{ html: string; usage: UsageStats['html'] }> => {
     const stream = anthropic.messages.stream({
       model: HTML_MODEL,
-      max_tokens: 32000,
+      max_tokens: maxTokens,
       system: [
         {
           type: 'text',
@@ -265,17 +305,31 @@ export async function generateHtml(
     return { html: fullHtml, usage }
   }
 
+  const inputCostEst = estimateInputCostUsd(systemPrompt, userContent)
+
   // A stalled stream almost always means a dead connection to the API, not genuinely
   // slow output — one automatic retry catches that within the request's time budget
   // instead of silently burning the whole thing on a single hung attempt. Any other
   // error (or a second stall) propagates immediately; we only retry this one failure mode.
   try {
-    return await attempt()
+    return await attempt(maxTokensForBudget(MAX_GENERATION_COST_USD - inputCostEst))
   } catch (err) {
     if (!(err instanceof StreamStallError)) throw err
+
+    // The failed attempt already spent (at least) its own input cost plus whatever
+    // output it streamed before stalling — size the retry off what's actually left of
+    // the per-generation budget instead of giving it a full budget on top of that.
+    const spentOnFailedAttempt = inputCostEst + (Math.ceil(err.partialChars / 4) * SONNET_OUTPUT_PRICE) / 1_000_000
+    const remaining = MAX_GENERATION_COST_USD - spentOnFailedAttempt - inputCostEst
+
+    if (remaining < MIN_RETRY_BUDGET_USD) {
+      console.warn('[HTML] stream stalled and remaining budget too low to retry:', err.message)
+      throw err
+    }
+
     console.warn('[HTML] stream stalled, retrying once:', err.message)
     onStall?.()
-    return await attempt()
+    return await attempt(maxTokensForBudget(remaining))
   }
 }
 
@@ -330,10 +384,10 @@ export async function refineHtml(
       ]
     : dynamicContent
 
-  const attempt = async (): Promise<{ html: string; usage: UsageStats['html'] }> => {
+  const attempt = async (maxTokens: number): Promise<{ html: string; usage: UsageStats['html'] }> => {
     const stream = anthropic.messages.stream({
       model: HTML_MODEL,
-      max_tokens: 32000,
+      max_tokens: maxTokens,
       system: [
         {
           type: 'text',
@@ -365,16 +419,27 @@ export async function refineHtml(
     return { html: fullHtml, usage }
   }
 
+  const inputCostEst = estimateInputCostUsd(systemPrompt, userContent)
+
   // Same stall/retry treatment as generateHtml — refine regenerates the whole page
   // over the same kind of long-lived stream and is exposed to the same dead-connection
-  // failure mode.
+  // failure mode, plus the same per-generation cost cap.
   try {
-    return await attempt()
+    return await attempt(maxTokensForBudget(MAX_GENERATION_COST_USD - inputCostEst))
   } catch (err) {
     if (!(err instanceof StreamStallError)) throw err
+
+    const spentOnFailedAttempt = inputCostEst + (Math.ceil(err.partialChars / 4) * SONNET_OUTPUT_PRICE) / 1_000_000
+    const remaining = MAX_GENERATION_COST_USD - spentOnFailedAttempt - inputCostEst
+
+    if (remaining < MIN_RETRY_BUDGET_USD) {
+      console.warn('[Refine] stream stalled and remaining budget too low to retry:', err.message)
+      throw err
+    }
+
     console.warn('[Refine] stream stalled, retrying once:', err.message)
     onStall?.()
-    return await attempt()
+    return await attempt(maxTokensForBudget(remaining))
   }
 }
 

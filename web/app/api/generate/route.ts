@@ -5,7 +5,12 @@ import { createServerClient } from '@/lib/supabase'
 import { deriveUrlSlug, extractMetaFromHtml, buildFinalUrl } from '@/lib/seo'
 import type { CreatePageFormData } from '@/components/CreatePageForm'
 
-export const maxDuration = 300
+// 800s is the GA ceiling for Fluid Compute on Pro/Enterprise (no beta opt-in needed) —
+// raised from 300s because genuinely slow-but-healthy generations (long, steadily-
+// streaming output, not stalled) were hitting the old hard limit and being killed
+// mid-stream with no save and no error. Output cost stays bounded independently via
+// generateHtml's per-generation budget cap, not by this duration limit.
+export const maxDuration = 800
 
 const VALID_MARKETS = new Set(['SG', 'MY', 'PH'])
 const FILENAME_RE = /^[a-z0-9][a-z0-9-]*\.html$/
