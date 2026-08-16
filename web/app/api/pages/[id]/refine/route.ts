@@ -3,10 +3,10 @@ import { getSystemPrompt, getResearchContext, refineHtml, proposeEdits, applyEdi
 import { createServerClient } from '@/lib/supabase'
 import { extractMetaFromHtml } from '@/lib/seo'
 
-// Same reasoning as web/app/api/generate/route.ts — 800s is the GA Fluid Compute
-// ceiling on Pro/Enterprise, raised from 300s so genuinely slow (not stalled) refines
-// aren't killed mid-stream. Cost stays capped independently via refineHtml's budget.
-export const maxDuration = 800
+// Same reasoning as web/app/api/generate/route.ts — 300s is the hard ceiling on this
+// project's current Vercel plan (Hobby); raising it requires upgrading to Pro first.
+// Cost stays capped independently via refineHtml's budget.
+export const maxDuration = 300
 
 function validateInstruction(instruction: unknown): string | null {
   if (typeof instruction !== 'string' || !instruction.trim()) return 'instruction is required'

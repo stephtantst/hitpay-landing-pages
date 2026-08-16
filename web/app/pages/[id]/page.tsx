@@ -49,7 +49,7 @@ type Revision = {
 // has the same maxDuration=300 server-side hard timeout, which can leave the
 // connection silently dead with no error event ever arriving.
 const STALL_MS = 90_000       // no data at all for this long — likely a dead connection
-const OVERALL_MS = 850_000    // ~14.2 min — a bit past the server's 800s ceiling
+const OVERALL_MS = 330_000    // ~5.5 min — a bit past the server's 300s ceiling
 
 function SeoFieldRow({
   label,
