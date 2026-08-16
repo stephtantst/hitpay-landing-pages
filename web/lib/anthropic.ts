@@ -76,7 +76,9 @@ export function getResearchContext(vertical: string): string {
 // Left unguarded, a stalled stream silently eats the whole request budget (a Vercel
 // function timeout kills the process outright with nothing saved) instead of failing
 // fast enough to retry within it.
-const STALL_TIMEOUT_MS = 60_000
+// Overridable via env so stall/retry behavior can be exercised locally in seconds
+// instead of waiting out the real 60s (see MOCK_STALL below) — never set this in prod.
+const STALL_TIMEOUT_MS = Number(process.env.STALL_TIMEOUT_MS) || 60_000
 
 class StreamStallError extends Error {}
 
@@ -115,6 +117,67 @@ async function consumeStreamWithStallGuard(
   return fullHtml
 }
 
+// Simulates a real Anthropic stream (same async-iterable + abort() shape consumeStreamWithStallGuard
+// expects) so MOCK_LLM mode can exercise the actual stall-guard/retry code path for free instead of
+// spending real API cost to test it. Controlled by MOCK_STALL:
+//   unset        → normal fast mock, no stall (existing behavior)
+//   'once'       → this attempt hangs past STALL_TIMEOUT_MS, then the caller's retry goes through clean
+//   'always'     → every attempt hangs — exercises the double-stall → surfaced-error path
+function createMockStream(fullText: string, opts: { stall: boolean; chunkSize?: number; chunkDelayMs?: number }) {
+  const { stall, chunkSize = 200, chunkDelayMs = 5 } = opts
+  let aborted = false
+  async function* generate(): AsyncGenerator<Anthropic.MessageStreamEvent> {
+    if (stall) {
+      // Hang well past STALL_TIMEOUT_MS so consumeStreamWithStallGuard's race always loses,
+      // but stop early if aborted so this doesn't leak a dangling timer/generator.
+      const hangMs = STALL_TIMEOUT_MS + 5_000
+      const start = Date.now()
+      while (Date.now() - start < hangMs) {
+        if (aborted) return
+        await new Promise((r) => setTimeout(r, 200))
+      }
+    }
+    for (let i = 0; i < fullText.length; i += chunkSize) {
+      if (aborted) return
+      yield { type: 'content_block_delta', delta: { type: 'text_delta', text: fullText.slice(i, i + chunkSize) } } as Anthropic.MessageStreamEvent
+      await new Promise((r) => setTimeout(r, chunkDelayMs))
+    }
+  }
+  const iterable = generate()
+  return {
+    [Symbol.asyncIterator]: () => iterable,
+    abort: () => { aborted = true },
+  }
+}
+
+const mockUsage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 }
+
+// Shared by generateHtml/refineHtml's mock branches — mirrors the real stall/retry
+// structure (attempt → on StreamStallError, onStall() then one retry) so mock mode
+// exercises the same code path as production instead of a parallel simulation.
+async function mockStreamWithStallSim(
+  fullText: string,
+  onChunk: (chunk: string) => void,
+  onStall?: () => void
+): Promise<{ html: string; usage: UsageStats['html'] }> {
+  const mode = process.env.MOCK_STALL // 'once' | 'always' | undefined
+  let attemptNum = 0
+  const attempt = async () => {
+    attemptNum++
+    const shouldStall = mode === 'always' || (mode === 'once' && attemptNum === 1)
+    const stream = createMockStream(fullText, { stall: shouldStall })
+    const html = await consumeStreamWithStallGuard(stream, onChunk)
+    return { html, usage: mockUsage }
+  }
+  try {
+    return await attempt()
+  } catch (err) {
+    if (!(err instanceof StreamStallError)) throw err
+    onStall?.()
+    return await attempt()
+  }
+}
+
 export async function generateHtml(
   systemPrompt: string,
   brief: string,
@@ -127,11 +190,7 @@ export async function generateHtml(
   // Mock mode: skip API call, stream an existing page file
   if (process.env.MOCK_LLM === 'true') {
     const mockHtml = loadFile('restaurants.html', 'restaurants.html') || '<html><body><h1>Mock page</h1></body></html>'
-    for (let i = 0; i < mockHtml.length; i += 200) {
-      onChunk(mockHtml.slice(i, i + 200))
-      await new Promise((r) => setTimeout(r, 10))
-    }
-    return { html: mockHtml, usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 } }
+    return mockStreamWithStallSim(mockHtml, onChunk, onStall)
   }
 
   // Build a market directive when fewer than 3 markets are selected
@@ -226,7 +285,8 @@ export async function refineHtml(
   instruction: string,
   researchContext: string,
   markets: string[],
-  onChunk: (chunk: string) => void
+  onChunk: (chunk: string) => void,
+  onStall?: () => void
 ): Promise<{ html: string; usage: UsageStats['html'] }> {
   // Mock mode: skip API call, tag the existing HTML so the UI has something to show
   if (process.env.MOCK_LLM === 'true') {
@@ -234,11 +294,7 @@ export async function refineHtml(
     const mockHtml = currentHtml.includes('</head>')
       ? currentHtml.replace('</head>', `${marker}\n</head>`)
       : `${marker}\n${currentHtml}`
-    for (let i = 0; i < mockHtml.length; i += 200) {
-      onChunk(mockHtml.slice(i, i + 200))
-      await new Promise((r) => setTimeout(r, 5))
-    }
-    return { html: mockHtml, usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 } }
+    return mockStreamWithStallSim(mockHtml, onChunk, onStall)
   }
 
   // Same market-override directive as generateHtml, reworded as a reminder for a revision pass
@@ -274,44 +330,52 @@ export async function refineHtml(
       ]
     : dynamicContent
 
-  const stream = anthropic.messages.stream({
-    model: HTML_MODEL,
-    max_tokens: 32000,
-    system: [
-      {
-        type: 'text',
-        text: systemPrompt,
-        cache_control: { type: 'ephemeral' },
-      },
-    ],
-    messages: [{ role: 'user', content: userContent }],
-  })
+  const attempt = async (): Promise<{ html: string; usage: UsageStats['html'] }> => {
+    const stream = anthropic.messages.stream({
+      model: HTML_MODEL,
+      max_tokens: 32000,
+      system: [
+        {
+          type: 'text',
+          text: systemPrompt,
+          cache_control: { type: 'ephemeral' },
+        },
+      ],
+      messages: [{ role: 'user', content: userContent }],
+    })
 
-  let fullHtml = ''
-  for await (const chunk of stream) {
-    if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
-      fullHtml += chunk.delta.text
-      onChunk(chunk.delta.text)
+    const fullHtml = await consumeStreamWithStallGuard(stream, onChunk)
+
+    const final = await stream.finalMessage()
+    const u = final.usage as unknown as Record<string, number>
+    const cacheRead  = u.cache_read_input_tokens       ?? 0
+    const cacheWrite = u.cache_creation_input_tokens   ?? 0
+    const input      = u.input_tokens                  ?? 0
+    const output     = u.output_tokens                 ?? 0
+
+    const usage = {
+      input, output, cacheRead, cacheWrite,
+      costUsd: calcCost(input, output, cacheRead, cacheWrite, {
+        input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
+        cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
+      }),
     }
+
+    console.log('[Refine]', usage)
+    return { html: fullHtml, usage }
   }
 
-  const final = await stream.finalMessage()
-  const u = final.usage as unknown as Record<string, number>
-  const cacheRead  = u.cache_read_input_tokens       ?? 0
-  const cacheWrite = u.cache_creation_input_tokens   ?? 0
-  const input      = u.input_tokens                  ?? 0
-  const output     = u.output_tokens                 ?? 0
-
-  const usage = {
-    input, output, cacheRead, cacheWrite,
-    costUsd: calcCost(input, output, cacheRead, cacheWrite, {
-      input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
-      cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
-    }),
+  // Same stall/retry treatment as generateHtml — refine regenerates the whole page
+  // over the same kind of long-lived stream and is exposed to the same dead-connection
+  // failure mode.
+  try {
+    return await attempt()
+  } catch (err) {
+    if (!(err instanceof StreamStallError)) throw err
+    console.warn('[Refine] stream stalled, retrying once:', err.message)
+    onStall?.()
+    return await attempt()
   }
-
-  console.log('[Refine]', usage)
-  return { html: fullHtml, usage }
 }
 
 // ─── Edit-based refine ──────────────────────────────────────────────────────
@@ -379,11 +443,14 @@ export async function proposeEdits(
   researchContext: string,
   markets: string[]
 ): Promise<{ edits: ProposedEdit[]; usage: UsageStats['html'] }> {
-  // Mock mode: propose a trivial, always-matchable edit so the apply path is exercised locally
+  // Mock mode: propose a trivial, always-matchable edit so the apply path is exercised locally.
+  // When MOCK_STALL is set, propose nothing instead — the refine route already treats "no edits
+  // proposed" as a signal to fall back to refineHtml, which is where the actual stall simulation
+  // lives (see mockStreamWithStallSim) — so this exercises the real edit→fallback→stall path.
   if (process.env.MOCK_LLM === 'true') {
     const marker = `<!-- Refined: ${instruction.slice(0, 80).replace(/-->/g, '')} -->`
     return {
-      edits: currentHtml.includes('</head>')
+      edits: currentHtml.includes('</head>') && !process.env.MOCK_STALL
         ? [{ old_string: '</head>', new_string: `${marker}\n</head>` }]
         : [],
       usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 },
@@ -418,6 +485,10 @@ export async function proposeEdits(
       ]
     : dynamicContent
 
+  // Non-streaming call — a dead connection here would otherwise hang for the SDK's
+  // full default timeout with nothing surfaced. A capped request timeout throws
+  // promptly instead, and the caller (the refine route) already treats any
+  // proposeEdits failure as a signal to fall back to the full-regeneration path.
   const msg = await anthropic.messages.create({
     model: HTML_MODEL,
     max_tokens: 4096,
@@ -431,7 +502,7 @@ export async function proposeEdits(
     tools: [PROPOSE_EDITS_TOOL],
     tool_choice: { type: 'tool', name: 'propose_edits' },
     messages: [{ role: 'user', content: userContent }],
-  })
+  }, { timeout: STALL_TIMEOUT_MS })
 
   const toolUse = msg.content.find(
     (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use'

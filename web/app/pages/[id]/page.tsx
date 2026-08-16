@@ -45,6 +45,12 @@ type Revision = {
   created_at: string
 }
 
+// Same belt-and-braces client-side backstop as app/new/page.tsx — the refine route
+// has the same maxDuration=300 server-side hard timeout, which can leave the
+// connection silently dead with no error event ever arriving.
+const STALL_MS = 90_000       // no data at all for this long — likely a dead connection
+const OVERALL_MS = 330_000    // ~5.5 min — a bit past the server's 300s ceiling
+
 function SeoFieldRow({
   label,
   value,
@@ -197,11 +203,20 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
     setRefining(true)
     setRefineLogs([])
 
+    const controller = new AbortController()
+    const overallTimer = setTimeout(() => controller.abort(), OVERALL_MS)
+    let stallTimer: ReturnType<typeof setTimeout> | null = null
+    const resetStallTimer = () => {
+      if (stallTimer) clearTimeout(stallTimer)
+      stallTimer = setTimeout(() => controller.abort(), STALL_MS)
+    }
+
     try {
       const res = await fetch(`/api/pages/${id}/refine`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ instruction: refineInstruction.trim() }),
+        signal: controller.signal,
       })
 
       if (!res.ok) {
@@ -216,8 +231,10 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
       let buffer = ''
       let refinedDone = false
 
+      resetStallTimer()
       while (true) {
         const { done, value } = await reader.read()
+        resetStallTimer()
         if (done) break
 
         buffer += decoder.decode(value, { stream: true })
@@ -254,8 +271,14 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
         fetchRevisions()
       }
     } catch (err) {
-      addRefineLog({ type: 'error', message: String(err) })
+      if (controller.signal.aborted) {
+        addRefineLog({ type: 'error', message: 'Refine timed out with no response — the server may be overloaded. Please try again.' })
+      } else {
+        addRefineLog({ type: 'error', message: String(err) })
+      }
     } finally {
+      clearTimeout(overallTimer)
+      if (stallTimer) clearTimeout(stallTimer)
       setRefining(false)
     }
   }

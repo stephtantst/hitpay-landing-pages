@@ -88,7 +88,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
           markets,
           async (chunk) => {
             await send('chunk', { text: chunk })
-          }
+          },
+          () => { send('status', { step: 'refining', message: 'Stream stalled — retrying…' }) }
         )
         html = refinedHtml
         usage = regenUsage

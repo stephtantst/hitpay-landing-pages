@@ -63,6 +63,8 @@ SSE events emitted: `status`, `chunk`, `usage`, `done`, `error`. The frontend (`
 - Any failure that reaches the route's catch block (or a failed page save) now marks `briefs.status = 'error'`.
 - `app/new/page.tsx` has its own client-side backstop — a 90s no-data stall timer plus an absolute ~5.5-minute ceiling — since a Vercel hard-kill can leave the connection silently dead with no error event ever arriving.
 
+The refine flow (`app/api/pages/[id]/refine/route.ts`, also `maxDuration = 300`) gets the same treatment: `refineHtml`'s full-regen fallback has the same stall-detect-and-retry as `generateHtml`; `proposeEdits`' non-streaming call gets a capped request timeout (a timeout there is just treated as a normal failure, since the route already falls back to `refineHtml` on any edit-proposal error); and `app/pages/[id]/page.tsx`'s refine handler has the same 90s-stall/~5.5min-ceiling client-side backstop as `app/new/page.tsx`.
+
 ## Mock mode
 
 `MOCK_LLM=true` short-circuits the LLM call — HTML streams `restaurants.html` from disk in 200-char chunks.
