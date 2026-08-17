@@ -33,7 +33,7 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 
 1. Every section that names a payment method must name the equivalent for all three markets.
 2. Entity definition paragraph (below trust bar) must name a specific city or landmark per market — not generic "businesses in Singapore."
-3. Feature section intros must be 80–120-word prose paragraphs — not bullet lead-ins.
+3. Feature section intros must be 60–90-word prose paragraphs — not bullet lead-ins. See rule 37 for the required phrasing pattern.
 4. FAQ questions must be written in third person ("How do businesses in Malaysia...") not first person.
 5. Stats bar must always open with "SGD/MYR/PHP 0 — Monthly fees in any market."
 6. Payouts stat must say "Next business day in SG, MY & PH" — not just "T+1."
@@ -85,7 +85,13 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 ## Readability Rules — SME Audience (follow without exception)
 
 36. All body copy sentences must be 25 words or fewer. Use active voice. Avoid nominalisations and jargon — write "customers scan a QR code to pay" not "QR-initiated payment initiation." Headings and subheadings may be noun phrases; body copy must use active-verb sentences.
-37. Each feature section's 80–120-word prose intro must open with 1–2 sentences naming the specific pain point that vertical faces before pivoting to HitPay's solution. The pain sentence must be specific to the vertical — not a generic "businesses often struggle with…" opener.
+37. Each feature section's 60–90-word prose intro must follow this exact shape:
+    1. **One concrete pain sentence** — a real, specific scenario the vertical actually hits, not a generic "businesses often struggle with…" opener.
+    2. **A tight pivot** naming the feature and fixing the pain — e.g. "[Feature] fixes that:" or "[Feature] solves this:" — not a soft transition like "That's where HitPay comes in."
+    3. **One concrete illustrative example** of the mechanism — a named comparison, a worked scenario, or two contrasting cases — never abstract benefit language ("streamlines operations", "enhances efficiency").
+    4. Where relevant, close on a concrete reassurance that addresses the obvious follow-up doubt (e.g. what happens to settlement, reconciliation, or existing workflow) rather than a generic benefit restatement.
+    Keep sentences short and declarative throughout — this is tighter and more concrete than typical marketing prose, closer to explaining the mechanism to a colleague than pitching it. Model example:
+    > A storefront near a tourist district loses sales when a visitor has no local cash or a card that gets declined. Borderless QR fixes that: the business charges in its own currency, and the tourist scans the same QR to pay in theirs — via any HitPay cross-border payment method (PayNow, DuitNow, WeChat Pay, QRPh, QRIS, UPI and more). The business still gets paid out in its home currency, so reconciliation does not change.
 
 ---
 
@@ -218,7 +224,7 @@ Use `travel.html` as the canonical reference. Match its structure exactly — se
   Each feature section:
   <div class="text-[#2465DE] font-semibold text-sm uppercase tracking-widest mb-4">LABEL</div>
   <h2 class="text-4xl font-bold text-[#03102F] mb-5">[Action-outcome H2]</h2>
-  <p class="text-lg text-[#61667C] mb-8">[80–120-word prose — names payment methods for 2+ markets]</p>
+  <p class="text-lg text-[#61667C] mb-8">[60–90-word prose, pain→pivot→concrete-example shape per rule 37 — names payment methods for 2+ markets]</p>
   <ul class="space-y-3 mb-8">
     <li class="flex items-start gap-3">
       <div class="w-5 h-5 bg-[#D6E3F9] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -462,7 +468,7 @@ After outputting the HTML, produce this checklist with ✅ or ❌:
 - [ ] H1 contains geographic signal (Southeast Asia, or 2+ market names)
 - [ ] Subheadline names one payment method per market
 - [ ] Entity definition paragraph names specific local references per market
-- [ ] Every feature intro is 80–120-word prose
+- [ ] Every feature intro is 60–90-word prose following the pain→pivot→concrete-example shape (rule 37)
 - [ ] Each feature section names payment methods for 2+ markets
 - [ ] Stats bar opens with SGD/MYR/PHP 0
 - [ ] No fabricated testimonial
@@ -517,7 +523,7 @@ After outputting the HTML, produce this checklist with ✅ or ❌:
 
 **Readability:**
 - [ ] No body copy sentence exceeds 25 words
-- [ ] Each feature intro opens with a vertical-specific pain sentence before the solution
+- [ ] Each feature intro opens with a concrete, vertical-specific pain sentence, pivots with "[Feature] fixes that:" (or equivalent), and includes one concrete illustrative example — not abstract benefit language
 
 ---
 
