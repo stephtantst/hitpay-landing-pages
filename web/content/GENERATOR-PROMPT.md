@@ -90,11 +90,13 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 36. All body copy sentences must be 25 words or fewer. Use active voice. Avoid nominalisations and jargon — write "customers scan a QR code to pay" not "QR-initiated payment initiation." Headings and subheadings may be noun phrases; body copy must use active-verb sentences.
 37. Each feature section's 60–90-word prose intro must follow this exact shape:
     1. **One concrete pain sentence** — a real, specific scenario the vertical actually hits, not a generic "businesses often struggle with…" opener. This is also the paragraph's rule-27 topic sentence: third person, vertical/entity-named, self-contained (never "you" here).
-    2. **A tight pivot** naming the feature and fixing the pain — e.g. "[Feature] fixes that:" or "[Feature] solves this:" — not a soft transition like "That's where HitPay comes in." Second person from here on per rule 18.
+    2. **A pivot** naming the feature and resolving the pain — never a soft, vague transition like "That's where HitPay comes in." **Vary the construction across the page's feature sections; never default to the same pivot phrase for every section, and never reuse the identical phrase twice on one page.** Rotate through different patterns, for example: "[Feature] fixes that: …", "[Feature] lets [vertical] businesses …", "With [Feature], you can …", "[Feature] removes that friction — …", "[Feature] closes that gap: …", or skip an explicit meta-transition entirely and jump straight into the mechanism ("[Feature] detects the customer's location and automatically …"). These are examples of the *pattern*, not a fixed list to cycle through verbatim — construct a fresh one that fits the specific feature and pain sentence. Second person from here on per rule 18.
     3. **One concrete illustrative example** of the mechanism — a named comparison, a worked scenario, or two contrasting cases — never abstract benefit language ("streamlines operations", "enhances efficiency"). Second person.
     4. Where relevant, close on a concrete reassurance that addresses the obvious follow-up doubt (e.g. what happens to settlement, reconciliation, or existing workflow) rather than a generic benefit restatement. Second person.
-    Keep sentences short and declarative throughout — this is tighter and more concrete than typical marketing prose, closer to explaining the mechanism to a colleague than pitching it. Model example (note the voice shift after the opening sentence):
+    Keep sentences short and declarative throughout — this is tighter and more concrete than typical marketing prose, closer to explaining the mechanism to a colleague than pitching it. Two model examples, using different pivot patterns on purpose — do not copy either pivot phrase verbatim into a real page, construct a new one each time (note the voice shift after the opening sentence in both):
     > [Vertical] businesses near tourist districts lose sales when a visitor carries no local cash or a card gets declined. Borderless QR fixes that: charge in your own currency while the tourist scans the same QR to pay in theirs, using any HitPay cross-border payment method (PayNow, DuitNow, WeChat Pay, QRPh, QRIS, UPI and more). You still get paid out in your own currency, so your reconciliation doesn't change.
+
+    > Businesses selling at a foreign market, trade fair, or pop-up booth lose sales when they price in a home currency local shoppers can't convert on the spot. Multi-Currency Products lets you price your catalogue directly in the local currency of wherever you're selling. A Singapore merchant at a Bangkok craft fair prices in Thai baht. A Philippine merchant at a Kuala Lumpur market prices in Malaysian ringgit.
 
 ---
 
@@ -526,7 +528,8 @@ After outputting the HTML, produce this checklist with ✅ or ❌:
 
 **Readability:**
 - [ ] No body copy sentence exceeds 25 words
-- [ ] Each feature intro opens with a concrete, vertical-specific pain sentence (third person), pivots with "[Feature] fixes that:" (or equivalent, second person from here on), and includes one concrete illustrative example — not abstract benefit language
+- [ ] Each feature intro opens with a concrete, vertical-specific pain sentence (third person), pivots into the solution (second person from here on), and includes one concrete illustrative example — not abstract benefit language
+- [ ] No pivot phrase is reused across the page's feature sections — each construction is varied, not a repeated template like "[Feature] fixes that:" every time
 - [ ] Voice split is correct: H2/H3s, FAQ answers, and each paragraph's opening topic sentence are third person/entity-named; everything else (persuasive body copy, CTAs) is second person
 
 ---
