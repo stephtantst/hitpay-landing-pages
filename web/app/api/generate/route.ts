@@ -118,7 +118,6 @@ export async function POST(req: NextRequest) {
 
         if (briefErr || !briefRow) {
           await send('error', { message: 'Failed to save brief: ' + briefErr?.message })
-          await writer.close()
           return
         }
         briefId = briefRow.id
@@ -173,7 +172,6 @@ export async function POST(req: NextRequest) {
           usage: result.usage,
           round: nextRound,
         })
-        await writer.close()
         return
       }
 
@@ -211,7 +209,6 @@ export async function POST(req: NextRequest) {
       if (pageErr || !pageRow) {
         await supabase.from('briefs').update({ status: 'error' }).eq('id', briefId)
         await send('error', { message: 'Failed to save page: ' + pageErr?.message })
-        await writer.close()
         return
       }
 

@@ -122,7 +122,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         // Not a failure — out of time budget with more revision left to generate. Hand
         // the partial state back so the frontend can resume in a fresh request.
         await send('continue', outcome.payload)
-        await writer.close()
         return
       }
 
@@ -151,7 +150,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       })
       if (revisionErr) {
         await send('error', { message: 'Failed to save revision snapshot: ' + revisionErr.message })
-        await writer.close()
         return
       }
 
@@ -163,7 +161,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
       if (updateErr) {
         await send('error', { message: 'Failed to save refined page: ' + updateErr.message })
-        await writer.close()
         return
       }
 

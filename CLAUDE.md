@@ -73,6 +73,10 @@ The refine flow (`app/api/pages/[id]/refine/route.ts`, also `maxDuration = 300`)
 - `appendContinuation` trims a naive leading overlap when stitching a round's output onto the accumulated HTML, in case the model echoes back a bit of what it was just shown despite being told not to.
 - `MOCK_CONTINUE_ROUNDS` (integer > 1) forces mock mode to split its canned HTML into that many rounds, exercising the real route + frontend continuation round-trip for free — see `mockRunGeneration` in `lib/anthropic.ts`.
 
+Both routes' early-return paths (brief/page save failure, the `continue` event) must NOT call `writer.close()` themselves — the `finally` block already closes it unconditionally on every exit path (including `return`), so an extra explicit close throws `TypeError: Invalid state: WritableStream is closed`, which escapes as an unhandled rejection and crashes the whole function (`Node.js process exited with exit status: 128`). This existed latently before continuation (the rare error-only early-returns), but the `continue` path hits it on every multi-round generation, which is what surfaced it.
+
+**`proposeEdits` truncation retry**: an instruction touching many scattered occurrences across a page (e.g. "remove every mention of X and Y") can need more edits than fit in a modest `max_tokens` budget. When the tool call gets cut off mid-JSON, it parses out to effectively zero usable edits — indistinguishable from Claude genuinely deciding no edit was needed unless `stop_reason` is checked. `proposeEdits` now retries once with a much larger budget (4096 → 16,000) specifically when `stop_reason === 'max_tokens'`, before falling through to the edit→fallback→full-regen path — since a bigger propose-edits call is still far cheaper than a full page regen. Usage across both attempts is summed for accurate cost reporting.
+
 ## Mock mode
 
 `MOCK_LLM=true` short-circuits the LLM call — HTML streams `restaurants.html` from disk in 200-char chunks.

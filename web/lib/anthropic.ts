@@ -741,42 +741,59 @@ export async function proposeEdits(
   // full default timeout with nothing surfaced. A capped request timeout throws
   // promptly instead, and the caller (the refine route) already treats any
   // proposeEdits failure as a signal to fall back to the full-regeneration path.
-  const msg = await anthropic.messages.create({
-    model: HTML_MODEL,
-    max_tokens: 4096,
-    system: [
-      {
-        type: 'text',
-        text: systemPrompt,
-        cache_control: { type: 'ephemeral' },
-      },
-    ],
-    tools: [PROPOSE_EDITS_TOOL],
-    tool_choice: { type: 'tool', name: 'propose_edits' },
-    messages: [{ role: 'user', content: userContent }],
-  }, { timeout: STALL_TIMEOUT_MS })
+  const attempt = async (maxTokens: number) => {
+    const msg = await anthropic.messages.create({
+      model: HTML_MODEL,
+      max_tokens: maxTokens,
+      system: [
+        {
+          type: 'text',
+          text: systemPrompt,
+          cache_control: { type: 'ephemeral' },
+        },
+      ],
+      tools: [PROPOSE_EDITS_TOOL],
+      tool_choice: { type: 'tool', name: 'propose_edits' },
+      messages: [{ role: 'user', content: userContent }],
+    }, { timeout: STALL_TIMEOUT_MS })
 
-  const toolUse = msg.content.find(
-    (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use'
-  )
-  if (!toolUse) throw new Error('Claude did not return a propose_edits tool call')
-  const input = toolUse.input as { edits?: ProposedEdit[] }
-  const edits = input.edits ?? []
+    const toolUse = msg.content.find(
+      (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use'
+    )
+    if (!toolUse) throw new Error('Claude did not return a propose_edits tool call')
+    const input = toolUse.input as { edits?: ProposedEdit[] }
+    const edits = input.edits ?? []
 
-  const u = msg.usage as unknown as Record<string, number>
-  const cacheRead  = u.cache_read_input_tokens       ?? 0
-  const cacheWrite = u.cache_creation_input_tokens   ?? 0
-  const inputTok   = u.input_tokens                  ?? 0
-  const outputTok  = u.output_tokens                 ?? 0
+    const u = msg.usage as unknown as Record<string, number>
+    const cacheRead  = u.cache_read_input_tokens       ?? 0
+    const cacheWrite = u.cache_creation_input_tokens   ?? 0
+    const inputTok   = u.input_tokens                  ?? 0
+    const outputTok  = u.output_tokens                 ?? 0
 
-  const usage = {
-    input: inputTok, output: outputTok, cacheRead, cacheWrite,
-    costUsd: calcCost(inputTok, outputTok, cacheRead, cacheWrite, {
-      input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
-      cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
-    }),
+    const usage = {
+      input: inputTok, output: outputTok, cacheRead, cacheWrite,
+      costUsd: calcCost(inputTok, outputTok, cacheRead, cacheWrite, {
+        input: SONNET_INPUT_PRICE, output: SONNET_OUTPUT_PRICE,
+        cacheRead: SONNET_CACHE_READ, cacheWrite: SONNET_CACHE_WRITE,
+      }),
+    }
+
+    return { edits, usage, stopReason: msg.stop_reason }
   }
 
-  console.log('[ProposeEdits]', usage, `${edits.length} edit(s)`)
+  // An instruction touching many scattered occurrences (e.g. "remove every mention of
+  // X and Y") can need more edits than fit in a modest max_tokens budget — the tool call
+  // gets cut off mid-JSON and parses out to effectively zero usable edits, which used to
+  // silently trigger the expensive full-regen fallback despite this being the cheap path
+  // failing for a fixable reason. Retry once with a much bigger budget before giving up.
+  let result = await attempt(4096)
+  if (result.stopReason === 'max_tokens') {
+    console.warn('[ProposeEdits] truncated at max_tokens with', result.edits.length, 'edit(s) parsed — retrying with a larger budget')
+    const retryResult = await attempt(16_000)
+    result = { ...retryResult, usage: addUsage(result.usage, retryResult.usage) }
+  }
+
+  const { edits, usage, stopReason } = result
+  console.log('[ProposeEdits]', usage, `${edits.length} edit(s)`, 'stop_reason:', stopReason)
   return { edits, usage }
 }
