@@ -48,10 +48,13 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 12. The HTML `<title>` must be 50–60 characters. Format: `[Primary keyword] | HitPay [Market(s)]`. The primary keyword goes first.
 13. The HTML `<meta name="description">` must be 150–160 characters and name all three markets and top 2 use cases — written to be directly extracted by AI search engines.
 14. Every FAQ question must be phrased as a natural-language search query a business owner would type ("How do Malaysian café owners accept PayNow?"). Every page must include at minimum one definitional question: "What is HitPay and how does it work for [vertical] businesses?"
-15. FAQ answers must be self-contained 40–80 word paragraphs — an AI engine must be able to extract each answer standalone without surrounding context. Minimum 15 FAQ questions per page (not 10).
-16. Feature section H2s must be phrased as action-outcome statements ("Accept every payment method your customers carry") not abstract nouns ("Payment Acceptance").
+15. FAQ answers must be self-contained 40–80 word paragraphs, third person and entity-named per rule 18 — an AI engine must be able to extract each answer standalone without surrounding context, and a "you" pronoun has no antecedent once lifted out of the page. Minimum 15 FAQ questions per page (not 10).
+16. Feature section H2s must be phrased as action-outcome statements in third person, entity/vertical-named per rule 18 ("[Vertical] Businesses Accept Every Payment Method Their Customers Carry") not abstract nouns ("Payment Acceptance") and not second person ("Accept Every Payment Method Your Customers Carry" — reads fine as a heading but is ambiguous once lifted standalone into an AI answer).
 17. Every factual claim must include a specific data point: a number, rate, timeframe, or licence reference. No vague qualifiers ("fast", "easy", "seamless"). Wrap key facts in `<strong>` tags — e.g. `<strong>zero monthly fees</strong>`, `<strong>next business day payouts</strong>`, `<strong>50+ payment methods</strong>` — so AI engines can extract structured claims.
-18. Use third-person prose in body copy ("businesses can…", "merchants accept…") not second person ("you can…"). This rule applies to body copy paragraphs — CTAs, button labels, and hero headlines may use second-person imperative ("Start for free", "Accept every payment").
+18. Voice is split by what a sentence is *for*, not by section:
+    - **Third person, entity-named** — H2/H3 answer blocks and definitional sentences: the parts most likely to get lifted verbatim into an AI Overview or a ChatGPT-style answer. This covers FAQ answers (rule 15), the intro section's definitional opening sentence (rule 23), and each feature paragraph's keyword-anchored topic sentence (rule 27). Example: "HitPay supports PayNow, GrabPay, and cards across Singapore, Malaysia, and the Philippines." Second-person pronouns are ambiguous once lifted out of page context, which is exactly why these specific sentences must stay third person and name the actual subject (HitPay, or the vertical/market) rather than "you" or "we."
+    - **Second person, as normal** — everything else: the persuasive body copy, illustrative examples, and narrative framing surrounding those blocks, plus CTAs, button labels, and hero headlines. Example: "You can start accepting PayNow in minutes." This is the majority of feature-section prose (rule 37) once its opening topic sentence is excluded.
+    A single paragraph will often mix both — its opening topic sentence in third person, the rest of that same paragraph in second person. That's expected, not an inconsistency.
 19. Produce all five JSON-LD schema blocks: FAQPage (all questions), SoftwareApplication, BreadcrumbList, Review (placeholder with [REAL QUOTE REQUIRED] note), Organization.
 20. The `SoftwareApplication` schema must include `dateModified` as `[YYYY-MM-DD]` placeholder, `datePublished` as `[YYYY-MM-DD]` placeholder, `areaServed` listing Singapore, Malaysia, Philippines, and `featureList` with 10–12 vertical-specific items.
 21. The `Organization` schema must include: `"@type": "Organization"`, `"name": "HitPay"`, `"url": "https://www.hitpayapp.com"`, `"logo": "https://www.hitpayapp.com/assets/logo.png"`, `"sameAs"` array with LinkedIn and Twitter URLs as `["https://www.linkedin.com/company/hitpay", "https://twitter.com/hitpaysg"]`, and `"areaServed"` listing Singapore, Malaysia, Philippines.
@@ -60,7 +63,7 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 24. Include a **payment methods comparison table** (`<table>`) somewhere between the feature sections and stats bar. Use three columns (Payment Method | Available in | Type) with one row per method group. This is the format AI engines surface as a featured snippet for "what payment methods does HitPay support" queries.
 25. Add a `SpeakableSpecification` JSON-LD block in `<head>` pointing to the H1 and meta description via CSS selectors — this helps voice search extract the landing page's core answer: `{"@context":"https://schema.org","@type":"SpeakableSpecification","cssSelector":["h1",".speakable-summary"]}`. Add `class="speakable-summary"` to the intro section's first paragraph.
 26. All `<a>` anchor text in the Related Solutions section and Footer must be descriptive keyword phrases — never generic ("click here", "learn more"). Use the target page's primary keyword as the anchor text.
-27. Every body paragraph in feature sections must open with a keyword-anchored topic sentence that is independently extractable without surrounding context. Format: "[Subject] [active verb] [specific benefit] for [vertical] businesses in [market signal]." The first sentence of each paragraph must contain enough context to be understood alone.
+27. Every body paragraph in feature sections must open with a keyword-anchored topic sentence that is independently extractable without surrounding context, in third person per rule 18 (never "you" — an ambiguous pronoun the moment it's lifted standalone). Format: "[Subject] [active verb] [specific benefit] for [vertical] businesses in [market signal]." The first sentence of each paragraph must contain enough context to be understood alone. Everything after that opening sentence switches to second person per rule 18.
 28. Pages must include the relevant regulatory authority and licence details as visible body text for each market targeted — not only in schemas. Include the applicable text based on the markets covered:
     - **Singapore:** HitPay Payment Solutions Pte Ltd is licensed as a Major Payment Institution (PS20200643) under Singapore's Payment Services Act — regulated by the Monetary Authority of Singapore (MAS).
     - **Philippines:** HitPay Payment Solutions, Inc. is a Registered Operator of Payment Systems (OPSCOR-2023-0006) regulated by Bangko Sentral ng Pilipinas (BSP), and a member of the Fintech Philippines Association.
@@ -86,12 +89,12 @@ HitPay is a Singapore-headquartered payment gateway licensed by MAS (PS20200643)
 
 36. All body copy sentences must be 25 words or fewer. Use active voice. Avoid nominalisations and jargon — write "customers scan a QR code to pay" not "QR-initiated payment initiation." Headings and subheadings may be noun phrases; body copy must use active-verb sentences.
 37. Each feature section's 60–90-word prose intro must follow this exact shape:
-    1. **One concrete pain sentence** — a real, specific scenario the vertical actually hits, not a generic "businesses often struggle with…" opener.
-    2. **A tight pivot** naming the feature and fixing the pain — e.g. "[Feature] fixes that:" or "[Feature] solves this:" — not a soft transition like "That's where HitPay comes in."
-    3. **One concrete illustrative example** of the mechanism — a named comparison, a worked scenario, or two contrasting cases — never abstract benefit language ("streamlines operations", "enhances efficiency").
-    4. Where relevant, close on a concrete reassurance that addresses the obvious follow-up doubt (e.g. what happens to settlement, reconciliation, or existing workflow) rather than a generic benefit restatement.
-    Keep sentences short and declarative throughout — this is tighter and more concrete than typical marketing prose, closer to explaining the mechanism to a colleague than pitching it. Model example:
-    > A storefront near a tourist district loses sales when a visitor has no local cash or a card that gets declined. Borderless QR fixes that: the business charges in its own currency, and the tourist scans the same QR to pay in theirs — via any HitPay cross-border payment method (PayNow, DuitNow, WeChat Pay, QRPh, QRIS, UPI and more). The business still gets paid out in its home currency, so reconciliation does not change.
+    1. **One concrete pain sentence** — a real, specific scenario the vertical actually hits, not a generic "businesses often struggle with…" opener. This is also the paragraph's rule-27 topic sentence: third person, vertical/entity-named, self-contained (never "you" here).
+    2. **A tight pivot** naming the feature and fixing the pain — e.g. "[Feature] fixes that:" or "[Feature] solves this:" — not a soft transition like "That's where HitPay comes in." Second person from here on per rule 18.
+    3. **One concrete illustrative example** of the mechanism — a named comparison, a worked scenario, or two contrasting cases — never abstract benefit language ("streamlines operations", "enhances efficiency"). Second person.
+    4. Where relevant, close on a concrete reassurance that addresses the obvious follow-up doubt (e.g. what happens to settlement, reconciliation, or existing workflow) rather than a generic benefit restatement. Second person.
+    Keep sentences short and declarative throughout — this is tighter and more concrete than typical marketing prose, closer to explaining the mechanism to a colleague than pitching it. Model example (note the voice shift after the opening sentence):
+    > [Vertical] businesses near tourist districts lose sales when a visitor carries no local cash or a card gets declined. Borderless QR fixes that: charge in your own currency while the tourist scans the same QR to pay in theirs, using any HitPay cross-border payment method (PayNow, DuitNow, WeChat Pay, QRPh, QRIS, UPI and more). You still get paid out in your own currency, so your reconciliation doesn't change.
 
 ---
 
@@ -500,14 +503,14 @@ After outputting the HTML, produce this checklist with ✅ or ❌:
 - [ ] hreflang tags present for all target markets (+ x-default)
 - [ ] Key facts wrapped in &lt;strong&gt; (zero monthly fees, next business day payouts, 50+ payment methods)
 - [ ] Intro section first sentence is a standalone AI-extractable definition with class="speakable-summary"
-- [ ] Every feature body paragraph opens with a standalone keyword-anchored topic sentence
+- [ ] Every feature body paragraph opens with a standalone keyword-anchored topic sentence, third person (never "you")
 - [ ] Payment methods comparison table present (HTML &lt;table&gt; with Payment Method / Available in / Type columns)
 - [ ] SpeakableSpecification JSON-LD block present
 - [ ] HowTo JSON-LD block present with 4 setup steps
 - [ ] Organization JSON-LD block present
 - [ ] Related/Footer anchor text is descriptive (not "learn more" or "click here")
-- [ ] All FAQ answers are self-contained (40–80 words, AI-extractable)
-- [ ] Feature H2s are action-outcome statements
+- [ ] All FAQ answers are self-contained (40–80 words, AI-extractable, third person)
+- [ ] Feature H2s are action-outcome statements, third person/entity-named
 - [ ] All factual claims include specific data points
 - [ ] Market-specific regulatory text visible on page (MAS PS20200643 for SG; BSP OPSCOR-2023-0006 for PH; BNM/SSM details for MY)
 - [ ] PCI DSS Level 1 compliance mentioned as visible text in at least one body section
@@ -523,7 +526,8 @@ After outputting the HTML, produce this checklist with ✅ or ❌:
 
 **Readability:**
 - [ ] No body copy sentence exceeds 25 words
-- [ ] Each feature intro opens with a concrete, vertical-specific pain sentence, pivots with "[Feature] fixes that:" (or equivalent), and includes one concrete illustrative example — not abstract benefit language
+- [ ] Each feature intro opens with a concrete, vertical-specific pain sentence (third person), pivots with "[Feature] fixes that:" (or equivalent, second person from here on), and includes one concrete illustrative example — not abstract benefit language
+- [ ] Voice split is correct: H2/H3s, FAQ answers, and each paragraph's opening topic sentence are third person/entity-named; everything else (persuasive body copy, CTAs) is second person
 
 ---
 
