@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { enrichBriefContext } from '@/lib/mcp'
-import { generateHtml, getSystemPrompt, getResearchContext } from '@/lib/anthropic'
+import { generateHtml, getSystemPrompt, getResearchContext, MAX_CONTINUATION_ROUNDS, type ContinuationState } from '@/lib/anthropic'
 import { createServerClient } from '@/lib/supabase'
 import { deriveUrlSlug, extractMetaFromHtml, buildFinalUrl } from '@/lib/seo'
 import type { CreatePageFormData } from '@/components/CreatePageForm'
@@ -11,6 +11,17 @@ import type { CreatePageFormData } from '@/components/CreatePageForm'
 // plan hobby"). Output cost is bounded independently via generateHtml's per-generation
 // budget cap, not by this duration limit.
 export const maxDuration = 300
+
+// A generation that's genuinely still healthy (steadily streaming, not stalled) can take
+// longer than maxDuration to finish. Rather than race Vercel's hard kill — which leaves
+// zero chance to save anything — generateHtml stops itself a bit before this soft
+// deadline and hands back partial progress; this route turns that into a `continue`
+// SSE event, and the frontend automatically issues a fresh request (its own full 300s
+// budget) to resume. The margin below 300s covers the brief save, MCP enrichment, page
+// save, and response finalization that also happen inside this same request.
+const SOFT_DEADLINE_MS = 250_000
+
+type ContinuationPayload = ContinuationState & { briefId: string }
 
 const VALID_MARKETS = new Set(['SG', 'MY', 'PH'])
 const FILENAME_RE = /^[a-z0-9][a-z0-9-]*\.html$/
@@ -31,8 +42,11 @@ function validateBrief(brief: CreatePageFormData): string | null {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json() as { brief: CreatePageFormData }
-  const { brief } = body
+  const requestStart = Date.now()
+  const deadlineAt = requestStart + SOFT_DEADLINE_MS
+
+  const body = await req.json() as { brief: CreatePageFormData; continuation?: ContinuationPayload }
+  const { brief, continuation } = body
 
   // Server-side validation — reject before touching Supabase or Claude
   const validationError = validateBrief(brief)
@@ -43,22 +57,28 @@ export async function POST(req: NextRequest) {
     })
   }
 
-  // Duplicate filename check — prevent accidental overwrites
   const supabase = createServerClient()
-  const { data: existing } = await supabase
-    .from('generated_pages')
-    .select('id')
-    .eq('filename', brief.outputFilename)
-    .limit(1)
 
-  if (existing && existing.length > 0) {
-    return new Response(JSON.stringify({
-      error: `A page named "${brief.outputFilename}" already exists. Rename it or delete the existing page first.`,
-      existingId: existing[0].id,
-    }), {
-      status: 409,
-      headers: { 'Content-Type': 'application/json' },
-    })
+  // Duplicate filename check — prevent accidental overwrites. Only relevant on the first
+  // round: a continuation resumes an in-progress generation whose page hasn't been
+  // created yet (that only happens once generation is actually done), so there's nothing
+  // new to collide with.
+  if (!continuation) {
+    const { data: existing } = await supabase
+      .from('generated_pages')
+      .select('id')
+      .eq('filename', brief.outputFilename)
+      .limit(1)
+
+    if (existing && existing.length > 0) {
+      return new Response(JSON.stringify({
+        error: `A page named "${brief.outputFilename}" already exists. Rename it or delete the existing page first.`,
+        existingId: existing[0].id,
+      }), {
+        status: 409,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
   }
 
   const encoder = new TextEncoder()
@@ -79,37 +99,47 @@ export async function POST(req: NextRequest) {
 
   ;(async () => {
     try {
-      // Save brief
-      await send('status', { step: 'saving', message: 'Saving brief…' })
-      const { data: briefRow, error: briefErr } = await supabase
-        .from('briefs')
-        .insert({
-          vertical: brief.vertical,
-          market: brief.markets,
-          brief: brief,
-          status: 'generating',
-        })
-        .select()
-        .single()
+      // On a continuation round, reuse the brief row the first round already created —
+      // otherwise every round would create a duplicate briefs row for the same generation.
+      if (continuation) {
+        briefId = continuation.briefId
+      } else {
+        await send('status', { step: 'saving', message: 'Saving brief…' })
+        const { data: briefRow, error: briefErr } = await supabase
+          .from('briefs')
+          .insert({
+            vertical: brief.vertical,
+            market: brief.markets,
+            brief: brief,
+            status: 'generating',
+          })
+          .select()
+          .single()
 
-      if (briefErr || !briefRow) {
-        await send('error', { message: 'Failed to save brief: ' + briefErr?.message })
-        await writer.close()
-        return
+        if (briefErr || !briefRow) {
+          await send('error', { message: 'Failed to save brief: ' + briefErr?.message })
+          await writer.close()
+          return
+        }
+        briefId = briefRow.id
       }
-      briefId = briefRow.id
 
-      // MCP enrichment
+      // MCP enrichment — re-run each round; it's cheap, non-blocking on failure, and the
+      // brief doesn't change between rounds, so recomputing is simpler than threading it
+      // through the continuation payload.
       await send('status', { step: 'mcp', message: 'Querying HitPay knowledge base…' })
       const mcpContext = await enrichBriefContext(brief.vertical, brief.rawBrief)
 
       // HTML generation (streaming)
-      await send('status', { step: 'generating', message: 'Generating landing page HTML…' })
+      await send('status', {
+        step: 'generating',
+        message: continuation ? `Continuing landing page HTML (round ${continuation.round + 1})…` : 'Generating landing page HTML…',
+      })
       const systemPrompt = getSystemPrompt()
       const researchContext = getResearchContext(brief.vertical)
 
       let html = ''
-      const { html: generatedHtml, usage: htmlUsage } = await generateHtml(
+      const result = await generateHtml(
         systemPrompt,
         brief.rawBrief,
         mcpContext,
@@ -119,16 +149,44 @@ export async function POST(req: NextRequest) {
           html += chunk
           await send('chunk', { text: chunk })
         },
-        () => { send('status', { step: 'generating', message: 'Stream stalled — retrying…' }) }
+        () => { send('status', { step: 'generating', message: 'Stream stalled — retrying…' }) },
+        continuation,
+        deadlineAt
       )
-      html = generatedHtml
 
-      // Emit usage stats so the UI can display cost + cache info
+      // Emit usage stats so the UI can display cost + cache info (cumulative across
+      // every round so far).
       await send('usage', {
-        html: htmlUsage,
-        totalCostUsd: htmlUsage.costUsd,
-        cacheHit: htmlUsage.cacheRead > 0,
+        html: result.usage,
+        totalCostUsd: result.usage.costUsd,
+        cacheHit: result.usage.cacheRead > 0,
       })
+
+      const nextRound = (continuation?.round ?? 0) + 1
+      if (!result.done && nextRound < MAX_CONTINUATION_ROUNDS) {
+        // Not a failure — this request is out of its own time budget with more page left
+        // to generate. Hand the partial state back so the frontend can resume in a fresh
+        // request. briefs.status stays 'generating', which is still accurate.
+        await send('continue', {
+          briefId,
+          partialHtml: result.html,
+          usage: result.usage,
+          round: nextRound,
+        })
+        await writer.close()
+        return
+      }
+
+      if (!result.done) {
+        // Hit the round cap without Claude ever signaling it was actually finished —
+        // still save what was generated rather than discard real, already-paid-for
+        // output, but flag it so it's not mistaken for a normal complete generation.
+        await send('status', {
+          step: 'saving_page',
+          message: `Reached the ${MAX_CONTINUATION_ROUNDS}-round generation limit — saving the page as generated so far (may be incomplete).`,
+        })
+      }
+      html = result.html
 
       // Save generated page
       await send('status', { step: 'saving_page', message: 'Saving generated page…' })
@@ -137,10 +195,10 @@ export async function POST(req: NextRequest) {
       const { data: pageRow, error: pageErr } = await supabase
         .from('generated_pages')
         .insert({
-          brief_id: briefRow.id,
+          brief_id: briefId,
           html,
           filename: brief.outputFilename,
-          mcp_context: { raw: mcpContext, usage: { html: htmlUsage } },
+          mcp_context: { raw: mcpContext, usage: { html: result.usage } },
           status: 'draft',
           url_slug: urlSlug,
           meta_title: metaTitle,
@@ -151,14 +209,14 @@ export async function POST(req: NextRequest) {
         .single()
 
       if (pageErr || !pageRow) {
-        await supabase.from('briefs').update({ status: 'error' }).eq('id', briefRow.id)
+        await supabase.from('briefs').update({ status: 'error' }).eq('id', briefId)
         await send('error', { message: 'Failed to save page: ' + pageErr?.message })
         await writer.close()
         return
       }
 
       // Update brief status
-      await supabase.from('briefs').update({ status: 'done' }).eq('id', briefRow.id)
+      await supabase.from('briefs').update({ status: 'done' }).eq('id', briefId)
 
       await send('done', { pageId: pageRow.id, filename: brief.outputFilename })
     } catch (err) {

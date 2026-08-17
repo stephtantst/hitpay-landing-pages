@@ -51,6 +51,20 @@ type Revision = {
 const STALL_MS = 90_000       // no data at all for this long — likely a dead connection
 const OVERALL_MS = 330_000    // ~5.5 min — a bit past the server's 300s ceiling
 
+// Mirrors ContinuationState in web/lib/anthropic.ts — carries the refine's progress
+// across requests when a single request runs out of its own time budget before Claude
+// actually finished (see the `continue` SSE event below).
+type ContinuationState = {
+  partialHtml: string
+  usage: TokenUsage
+  round: number
+}
+
+// Mirrors MAX_CONTINUATION_ROUNDS in web/lib/anthropic.ts — the server enforces this
+// definitively; this is just a client-side backstop against looping forever if something
+// were ever badly broken server-side.
+const MAX_CONTINUATION_ROUNDS = 6
+
 function SeoFieldRow({
   label,
   value,
@@ -203,64 +217,91 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
     setRefining(true)
     setRefineLogs([])
 
-    const controller = new AbortController()
-    const overallTimer = setTimeout(() => controller.abort(), OVERALL_MS)
-    let stallTimer: ReturnType<typeof setTimeout> | null = null
-    const resetStallTimer = () => {
-      if (stallTimer) clearTimeout(stallTimer)
-      stallTimer = setTimeout(() => controller.abort(), STALL_MS)
-    }
-
     try {
-      const res = await fetch(`/api/pages/${id}/refine`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ instruction: refineInstruction.trim() }),
-        signal: controller.signal,
-      })
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: 'Refine failed' }))
-        addRefineLog({ type: 'error', message: err.error || 'Refine failed' })
-        return
-      }
-      if (!res.body) throw new Error('No response body')
-
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let buffer = ''
+      let continuation: ContinuationState | undefined
       let refinedDone = false
 
-      resetStallTimer()
-      while (true) {
-        const { done, value } = await reader.read()
-        resetStallTimer()
-        if (done) break
+      // Each round is its own request with its own fresh time budget — a refine that
+      // needs more than one round (see the `continue` event below) can't be driven by a
+      // single AbortController/timer pair, since those can't be "un-aborted" once tripped.
+      for (let round = 0; round <= MAX_CONTINUATION_ROUNDS; round++) {
+        const controller = new AbortController()
+        const overallTimer = setTimeout(() => controller.abort(), OVERALL_MS)
+        let stallTimer: ReturnType<typeof setTimeout> | null = null
+        const resetStallTimer = () => {
+          if (stallTimer) clearTimeout(stallTimer)
+          stallTimer = setTimeout(() => controller.abort(), STALL_MS)
+        }
 
-        buffer += decoder.decode(value, { stream: true })
-        const lastDoubleLF = buffer.lastIndexOf('\n\n')
-        if (lastDoubleLF === -1) continue
-        const toProcess = buffer.slice(0, lastDoubleLF + 2)
-        buffer = buffer.slice(lastDoubleLF + 2)
+        try {
+          const res = await fetch(`/api/pages/${id}/refine`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ instruction: refineInstruction.trim(), continuation }),
+            signal: controller.signal,
+          })
 
-        for (const { event, data } of parseSSEEvents(toProcess)) {
-          try {
-            const payload = JSON.parse(data)
-            if (event === 'done') {
-              refinedDone = true
-              addRefineLog({ type: 'done' })
-            } else if (event === 'error') {
-              addRefineLog({ type: 'error', message: payload.message })
-            } else if (event === 'usage') {
-              addRefineLog({ type: 'usage', usage: payload as UsageStats })
-            } else if (event === 'status') {
-              addRefineLog({ type: 'status', step: payload.step, message: payload.message })
-            } else if (event === 'chunk') {
-              addRefineLog({ type: 'chunk', message: payload.text })
-            }
-          } catch {
-            // ignore parse errors on individual events
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ error: 'Refine failed' }))
+            addRefineLog({ type: 'error', message: err.error || 'Refine failed' })
+            return
           }
+          if (!res.body) throw new Error('No response body')
+
+          const reader = res.body.getReader()
+          const decoder = new TextDecoder()
+          let buffer = ''
+          let nextContinuation: ContinuationState | undefined
+
+          resetStallTimer()
+          while (true) {
+            const { done, value } = await reader.read()
+            resetStallTimer()
+            if (done) break
+
+            buffer += decoder.decode(value, { stream: true })
+            const lastDoubleLF = buffer.lastIndexOf('\n\n')
+            if (lastDoubleLF === -1) continue
+            const toProcess = buffer.slice(0, lastDoubleLF + 2)
+            buffer = buffer.slice(lastDoubleLF + 2)
+
+            for (const { event, data } of parseSSEEvents(toProcess)) {
+              try {
+                const payload = JSON.parse(data)
+                if (event === 'done') {
+                  refinedDone = true
+                  addRefineLog({ type: 'done' })
+                } else if (event === 'continue') {
+                  nextContinuation = payload as ContinuationState
+                  addRefineLog({ type: 'status', step: 'continuing', message: `Time budget reached — continuing automatically (round ${payload.round + 1})…` })
+                } else if (event === 'error') {
+                  addRefineLog({ type: 'error', message: payload.message })
+                } else if (event === 'usage') {
+                  addRefineLog({ type: 'usage', usage: payload as UsageStats })
+                } else if (event === 'status') {
+                  addRefineLog({ type: 'status', step: payload.step, message: payload.message })
+                } else if (event === 'chunk') {
+                  addRefineLog({ type: 'chunk', message: payload.text })
+                }
+              } catch {
+                // ignore parse errors on individual events
+              }
+            }
+          }
+
+          if (refinedDone) break
+          if (nextContinuation) { continuation = nextContinuation; continue }
+          break // stream ended with neither `done` nor `continue` — an error was likely already logged
+        } catch (err) {
+          if (controller.signal.aborted) {
+            addRefineLog({ type: 'error', message: 'Refine timed out with no response — the server may be overloaded. Please try again.' })
+          } else {
+            addRefineLog({ type: 'error', message: String(err) })
+          }
+          return
+        } finally {
+          clearTimeout(overallTimer)
+          if (stallTimer) clearTimeout(stallTimer)
         }
       }
 
@@ -270,15 +311,7 @@ export default function PageDetailPage({ params }: { params: Promise<{ id: strin
         setPage(fresh)
         fetchRevisions()
       }
-    } catch (err) {
-      if (controller.signal.aborted) {
-        addRefineLog({ type: 'error', message: 'Refine timed out with no response — the server may be overloaded. Please try again.' })
-      } else {
-        addRefineLog({ type: 'error', message: String(err) })
-      }
     } finally {
-      clearTimeout(overallTimer)
-      if (stallTimer) clearTimeout(stallTimer)
       setRefining(false)
     }
   }

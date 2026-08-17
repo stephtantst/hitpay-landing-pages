@@ -20,6 +20,21 @@ type LogEntry = {
   usage?: UsageStats
 }
 
+// Mirrors ContinuationState in web/lib/anthropic.ts — carries the generation's progress
+// across requests when a single request runs out of its own time budget before Claude
+// actually finished (see the `continue` SSE event below).
+type ContinuationState = {
+  briefId: string
+  partialHtml: string
+  usage: TokenUsage
+  round: number
+}
+
+// Mirrors MAX_CONTINUATION_ROUNDS in web/lib/anthropic.ts — the server enforces this
+// definitively; this is just a client-side backstop against looping forever if something
+// were ever badly broken server-side.
+const MAX_CONTINUATION_ROUNDS = 6
+
 // Filenames are auto-derived (no manual field for the user to fix a collision with),
 // so a 409 duplicate-filename response gets silently retried under a bumped name
 // instead of surfacing an error the user has no direct way to act on.
@@ -53,79 +68,110 @@ export default function NewPage() {
     setLogs([])
     setGeneratedPageId(null)
 
-    const controller = new AbortController()
-    const overallTimer = setTimeout(() => controller.abort(), OVERALL_MS)
-    let stallTimer: ReturnType<typeof setTimeout> | null = null
-    const resetStallTimer = () => {
-      if (stallTimer) clearTimeout(stallTimer)
-      stallTimer = setTimeout(() => controller.abort(), STALL_MS)
-    }
-
     try {
       let currentBrief = brief
-      let res: Response = await fetch('/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ brief: currentBrief }),
-        signal: controller.signal,
-      })
-
-      for (let attempt = 1; res.status === 409 && attempt < MAX_FILENAME_ATTEMPTS; attempt++) {
-        currentBrief = { ...currentBrief, outputFilename: bumpFilename(currentBrief.outputFilename) }
-        res = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ brief: currentBrief }),
-          signal: controller.signal,
-        })
-      }
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: 'Generation failed' }))
-        addLog({ type: 'error', message: err.error || 'Generation failed' })
-        return
-      }
-
-      if (!res.body) throw new Error('No response body')
-
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let buffer = ''
+      let continuation: ContinuationState | undefined
       let donePageId: string | null = null
 
-      resetStallTimer()
-      while (true) {
-        const { done, value } = await reader.read()
-        resetStallTimer()
-        if (done) break
+      // Each round is its own request with its own fresh time budget — a generation that
+      // needs more than one round (see the `continue` event below) can't be driven by a
+      // single AbortController/timer pair, since those can't be "un-aborted" once tripped.
+      for (let round = 0; round <= MAX_CONTINUATION_ROUNDS; round++) {
+        const controller = new AbortController()
+        const overallTimer = setTimeout(() => controller.abort(), OVERALL_MS)
+        let stallTimer: ReturnType<typeof setTimeout> | null = null
+        const resetStallTimer = () => {
+          if (stallTimer) clearTimeout(stallTimer)
+          stallTimer = setTimeout(() => controller.abort(), STALL_MS)
+        }
 
-        buffer += decoder.decode(value, { stream: true })
+        try {
+          let res = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ brief: currentBrief, continuation }),
+            signal: controller.signal,
+          })
 
-        // Process complete SSE blocks (separated by double newline)
-        const lastDoubleLF = buffer.lastIndexOf('\n\n')
-        if (lastDoubleLF === -1) continue
-        const toProcess = buffer.slice(0, lastDoubleLF + 2)
-        buffer = buffer.slice(lastDoubleLF + 2)
-
-        for (const { event, data } of parseSSEEvents(toProcess)) {
-          try {
-            const payload = JSON.parse(data)
-            if (event === 'done' && payload.pageId) {
-              donePageId = payload.pageId
-              setGeneratedPageId(payload.pageId)
-              addLog({ type: 'done', message: payload.filename })
-            } else if (event === 'error') {
-              addLog({ type: 'error', message: payload.message })
-            } else if (event === 'usage') {
-              addLog({ type: 'usage', usage: payload as UsageStats })
-            } else if (event === 'status') {
-              addLog({ type: 'status', step: payload.step, message: payload.message })
-            } else if (event === 'chunk') {
-              addLog({ type: 'chunk', message: payload.text })
+          // Duplicate-filename retry only applies to the very first round — a
+          // continuation resumes an in-progress generation, not a fresh submission.
+          if (!continuation) {
+            for (let attempt = 1; res.status === 409 && attempt < MAX_FILENAME_ATTEMPTS; attempt++) {
+              currentBrief = { ...currentBrief, outputFilename: bumpFilename(currentBrief.outputFilename) }
+              res = await fetch('/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ brief: currentBrief }),
+                signal: controller.signal,
+              })
             }
-          } catch {
-            // ignore parse errors on individual events
           }
+
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ error: 'Generation failed' }))
+            addLog({ type: 'error', message: err.error || 'Generation failed' })
+            return
+          }
+
+          if (!res.body) throw new Error('No response body')
+
+          const reader = res.body.getReader()
+          const decoder = new TextDecoder()
+          let buffer = ''
+          let nextContinuation: ContinuationState | undefined
+
+          resetStallTimer()
+          while (true) {
+            const { done, value } = await reader.read()
+            resetStallTimer()
+            if (done) break
+
+            buffer += decoder.decode(value, { stream: true })
+
+            // Process complete SSE blocks (separated by double newline)
+            const lastDoubleLF = buffer.lastIndexOf('\n\n')
+            if (lastDoubleLF === -1) continue
+            const toProcess = buffer.slice(0, lastDoubleLF + 2)
+            buffer = buffer.slice(lastDoubleLF + 2)
+
+            for (const { event, data } of parseSSEEvents(toProcess)) {
+              try {
+                const payload = JSON.parse(data)
+                if (event === 'done' && payload.pageId) {
+                  donePageId = payload.pageId
+                  setGeneratedPageId(payload.pageId)
+                  addLog({ type: 'done', message: payload.filename })
+                } else if (event === 'continue') {
+                  nextContinuation = payload as ContinuationState
+                  addLog({ type: 'status', step: 'continuing', message: `Time budget reached — continuing automatically (round ${payload.round + 1})…` })
+                } else if (event === 'error') {
+                  addLog({ type: 'error', message: payload.message })
+                } else if (event === 'usage') {
+                  addLog({ type: 'usage', usage: payload as UsageStats })
+                } else if (event === 'status') {
+                  addLog({ type: 'status', step: payload.step, message: payload.message })
+                } else if (event === 'chunk') {
+                  addLog({ type: 'chunk', message: payload.text })
+                }
+              } catch {
+                // ignore parse errors on individual events
+              }
+            }
+          }
+
+          if (donePageId) break
+          if (nextContinuation) { continuation = nextContinuation; continue }
+          break // stream ended with neither `done` nor `continue` — an error was likely already logged
+        } catch (err) {
+          if (controller.signal.aborted) {
+            addLog({ type: 'error', message: 'Generation timed out with no response — the server may be overloaded. Please try again.' })
+          } else {
+            addLog({ type: 'error', message: String(err) })
+          }
+          return
+        } finally {
+          clearTimeout(overallTimer)
+          if (stallTimer) clearTimeout(stallTimer)
         }
       }
 
@@ -134,15 +180,7 @@ export default function NewPage() {
         await new Promise((r) => setTimeout(r, 600))
         router.push(`/pages/${donePageId}`)
       }
-    } catch (err) {
-      if (controller.signal.aborted) {
-        addLog({ type: 'error', message: 'Generation timed out with no response — the server may be overloaded. Please try again.' })
-      } else {
-        addLog({ type: 'error', message: String(err) })
-      }
     } finally {
-      clearTimeout(overallTimer)
-      if (stallTimer) clearTimeout(stallTimer)
       setLoading(false)
     }
   }

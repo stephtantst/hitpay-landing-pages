@@ -91,24 +91,49 @@ class StreamStallError extends Error {
   }
 }
 
-// Consumes an Anthropic message stream chunk-by-chunk, throwing StreamStallError if
-// no event arrives within STALL_TIMEOUT_MS. Calls stream.abort() on timeout so the
-// abandoned request actually stops (and stops being billed for output we'll never
-// see) instead of continuing to run on Anthropic's side while a fresh retry starts —
-// without this, a stall-then-retry could silently double the real cost of a call.
-async function consumeStreamWithStallGuard(
+// Thrown when a request's own soft time budget (see SOFT_DEADLINE_MS in the API routes)
+// runs out before Claude finished — NOT a failure. Vercel's maxDuration hard-kills the
+// whole function with zero chance to save partial output, so instead of racing that wall,
+// generation deliberately stops a bit early and hands back whatever streamed so far; the
+// caller turns this into a "continue in a fresh request" round instead of an error.
+class StreamDeadlineError extends Error {
+  html: string
+  constructor(html: string) {
+    super('Soft deadline reached before generation finished')
+    this.html = html
+  }
+}
+
+// Consumes an Anthropic message stream chunk-by-chunk. Throws StreamStallError if no
+// event arrives within STALL_TIMEOUT_MS (a dead connection), or StreamDeadlineError once
+// deadlineAt passes (this request is running out of its own time budget, independent of
+// whether the stream is healthy) — whichever comes first. Either way stream.abort() is
+// called so the abandoned request actually stops (and stops being billed for output
+// we'll never see) instead of continuing to run on Anthropic's side after we've moved on.
+async function consumeStreamWithGuards(
   stream: AsyncIterable<Anthropic.MessageStreamEvent> & { abort: () => void },
-  onChunk: (chunk: string) => void
+  onChunk: (chunk: string) => void,
+  deadlineAt: number
 ): Promise<string> {
   let fullHtml = ''
   const iterator = stream[Symbol.asyncIterator]()
   while (true) {
+    const msUntilDeadline = deadlineAt - Date.now()
+    if (msUntilDeadline <= 0) {
+      stream.abort()
+      throw new StreamDeadlineError(fullHtml)
+    }
     let timer!: ReturnType<typeof setTimeout>
+    const raceMs = Math.min(STALL_TIMEOUT_MS, msUntilDeadline)
     const timeout = new Promise<never>((_, reject) => {
       timer = setTimeout(() => {
         stream.abort()
-        reject(new StreamStallError('Stream stalled — no data received for 60s', fullHtml.length))
-      }, STALL_TIMEOUT_MS)
+        if (Date.now() >= deadlineAt) {
+          reject(new StreamDeadlineError(fullHtml))
+        } else {
+          reject(new StreamStallError('Stream stalled — no data received for 60s', fullHtml.length))
+        }
+      }, raceMs)
     })
     let result: IteratorResult<Anthropic.MessageStreamEvent>
     try {
@@ -157,7 +182,53 @@ function maxTokensForBudget(remainingUsd: number): number {
   return Math.max(MIN_OUTPUT_TOKENS, Math.min(tokens, MAX_OUTPUT_TOKENS))
 }
 
-// Simulates a real Anthropic stream (same async-iterable + abort() shape consumeStreamWithStallGuard
+// ─── Multi-round continuation ───────────────────────────────────────────────
+// A generation that's genuinely still healthy (steadily streaming, not stalled) can take
+// longer than a single request's maxDuration to finish — Vercel hard-kills the function
+// at that point with zero chance to save anything. Rather than lose the whole attempt,
+// generateHtml/refineHtml stop themselves a bit early (see StreamDeadlineError) and hand
+// back partial HTML for the caller (the API route + frontend) to resume in a fresh
+// request, which gets its own full time budget. MAX_CONTINUATION_ROUNDS bounds how many
+// times that can happen so a pathological case can't loop forever.
+export const MAX_CONTINUATION_ROUNDS = 6
+
+export type ContinuationState = {
+  partialHtml: string
+  usage: UsageStats['html'] // cumulative usage across every round so far
+  round: number
+}
+
+const ZERO_USAGE: UsageStats['html'] = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 }
+
+export type GenerationRoundResult = {
+  done: boolean              // true once Claude actually finished (stop_reason: end_turn) — false means call again with `html`/`usage` as the next continuation
+  html: string                // HTML accumulated so far across all rounds
+  usage: UsageStats['html']   // cumulative usage across all rounds, for budget tracking and billing display
+}
+
+function addUsage(a: UsageStats['html'], b: UsageStats['html']): UsageStats['html'] {
+  return {
+    input: a.input + b.input,
+    output: a.output + b.output,
+    cacheRead: a.cacheRead + b.cacheRead,
+    cacheWrite: a.cacheWrite + b.cacheWrite,
+    costUsd: a.costUsd + b.costUsd,
+  }
+}
+
+// Appends a continuation round's output onto the HTML accumulated so far, trimming a
+// naive leading overlap in case the model echoes back a few words of what it was just
+// shown before continuing — a "pick up exactly where this left off" prompt occasionally
+// does this despite being told not to.
+function appendContinuation(partial: string, next: string): string {
+  const maxOverlap = Math.min(200, partial.length, next.length)
+  for (let k = maxOverlap; k >= 20; k--) {
+    if (partial.slice(-k) === next.slice(0, k)) return partial + next.slice(k)
+  }
+  return partial + next
+}
+
+// Simulates a real Anthropic stream (same async-iterable + abort() shape consumeStreamWithGuards
 // expects) so MOCK_LLM mode can exercise the actual stall-guard/retry code path for free instead of
 // spending real API cost to test it. Controlled by MOCK_STALL:
 //   unset        → normal fast mock, no stall (existing behavior)
@@ -190,31 +261,50 @@ function createMockStream(fullText: string, opts: { stall: boolean; chunkSize?: 
   }
 }
 
-const mockUsage = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, costUsd: 0 }
-
-// Shared by generateHtml/refineHtml's mock branches — mirrors the real stall/retry
-// structure (attempt → on StreamStallError, onStall() then one retry) so mock mode
-// exercises the same code path as production instead of a parallel simulation.
-async function mockStreamWithStallSim(
+// Shared by generateHtml/refineHtml's mock branches — mirrors the real round structure
+// (stall retry within a round via StreamStallError/onStall, continuation across rounds
+// via `done`/round/partialHtml) so mock mode exercises the same code paths as production
+// instead of a parallel simulation. Controlled by:
+//   MOCK_STALL ('once' | 'always')     — this/every round's first attempt hangs past STALL_TIMEOUT_MS
+//   MOCK_CONTINUE_ROUNDS (integer > 1) — splits fullText into this many rounds, forcing a
+//                                        real continuation round-trip through the API route + frontend
+async function mockRunGeneration(
   fullText: string,
+  continuation: ContinuationState | undefined,
   onChunk: (chunk: string) => void,
   onStall?: () => void
-): Promise<{ html: string; usage: UsageStats['html'] }> {
-  const mode = process.env.MOCK_STALL // 'once' | 'always' | undefined
+): Promise<GenerationRoundResult> {
+  const partialHtml = continuation?.partialHtml ?? ''
+  const priorUsage = continuation?.usage ?? ZERO_USAGE
+  const round = continuation?.round ?? 0
+
+  const totalRounds = Math.max(1, Number(process.env.MOCK_CONTINUE_ROUNDS) || 1)
+  const chunkSize = Math.ceil(fullText.length / totalRounds)
+  const roundText = fullText.slice(round * chunkSize, (round + 1) * chunkSize)
+  const isLastRound = (round + 1) * chunkSize >= fullText.length
+
+  const stallMode = process.env.MOCK_STALL
   let attemptNum = 0
   const attempt = async () => {
     attemptNum++
-    const shouldStall = mode === 'always' || (mode === 'once' && attemptNum === 1)
-    const stream = createMockStream(fullText, { stall: shouldStall })
-    const html = await consumeStreamWithStallGuard(stream, onChunk)
-    return { html, usage: mockUsage }
+    const shouldStall = stallMode === 'always' || (stallMode === 'once' && attemptNum === 1)
+    const stream = createMockStream(roundText, { stall: shouldStall })
+    return consumeStreamWithGuards(stream, onChunk, Date.now() + 999_999_999) // no real deadline to simulate in mock mode
   }
+
+  let roundHtml: string
   try {
-    return await attempt()
+    roundHtml = await attempt()
   } catch (err) {
     if (!(err instanceof StreamStallError)) throw err
     onStall?.()
-    return await attempt()
+    roundHtml = await attempt()
+  }
+
+  return {
+    done: isLastRound,
+    html: appendContinuation(partialHtml, roundHtml),
+    usage: addUsage(priorUsage, ZERO_USAGE),
   }
 }
 
@@ -225,12 +315,18 @@ export async function generateHtml(
   researchContext: string,
   markets: string[],
   onChunk: (chunk: string) => void,
-  onStall?: () => void
-): Promise<{ html: string; usage: UsageStats['html'] }> {
+  onStall?: () => void,
+  continuation?: ContinuationState,
+  deadlineAt?: number
+): Promise<GenerationRoundResult> {
+  const partialHtml = continuation?.partialHtml ?? ''
+  const priorUsage = continuation?.usage ?? ZERO_USAGE
+  const effectiveDeadline = deadlineAt ?? Date.now() + 260_000
+
   // Mock mode: skip API call, stream an existing page file
   if (process.env.MOCK_LLM === 'true') {
     const mockHtml = loadFile('restaurants.html', 'restaurants.html') || '<html><body><h1>Mock page</h1></body></html>'
-    return mockStreamWithStallSim(mockHtml, onChunk, onStall)
+    return mockRunGeneration(mockHtml, continuation, onChunk, onStall)
   }
 
   // Build a market directive when fewer than 3 markets are selected
@@ -245,6 +341,19 @@ export async function generateHtml(
       `- Entity paragraph: only name cities/landmarks in ${markets.join(' and ')}`
     : ''
 
+  // A continuation round replaces the "generate now" instruction with a "finish what's
+  // already there" one — the partial HTML from prior rounds is shown so Claude picks up
+  // exactly where it left off instead of restarting the document.
+  const continuationBlock = partialHtml
+    ? '\n\n## Continuation Notice\nA time limit cut generation off before the page was complete — NOT because it was finished. ' +
+      'Everything inside PARTIAL_HTML below has ALREADY been generated and streamed to the user; do not repeat, restate, or ' +
+      'rewrite any of it.\n\n<PARTIAL_HTML>\n' + partialHtml + '\n</PARTIAL_HTML>\n\n' +
+      'Your entire response will be appended DIRECTLY after PARTIAL_HTML with no separator — output nothing but the ' +
+      'continuation (no markdown fences, no commentary, no repeated headers). If PARTIAL_HTML ends mid-tag, mid-attribute, ' +
+      'or mid-word, complete it naturally as your very first characters, then continue writing the remaining sections ' +
+      'through to a complete, valid closing </html>.'
+    : ''
+
   // Dynamic part only — brief + MCP context. Research + system prompt are cached.
   const dynamicContent = [
     '## HitPay Knowledge Base\n',
@@ -252,7 +361,8 @@ export async function generateHtml(
     '\n\n## Brief and Context\n',
     brief,
     marketDirective,
-    '\n\nGenerate the complete HTML landing page now. Output ONLY the HTML — no markdown fences, no explanation.',
+    continuationBlock,
+    partialHtml ? '' : '\n\nGenerate the complete HTML landing page now. Output ONLY the HTML — no markdown fences, no explanation.',
   ].join('')
 
   // Structure for caching:
@@ -270,7 +380,7 @@ export async function generateHtml(
       ]
     : dynamicContent
 
-  const attempt = async (maxTokens: number): Promise<{ html: string; usage: UsageStats['html'] }> => {
+  const attempt = async (maxTokens: number, deadline: number) => {
     const stream = anthropic.messages.stream({
       model: HTML_MODEL,
       max_tokens: maxTokens,
@@ -284,7 +394,7 @@ export async function generateHtml(
       messages: [{ role: 'user', content: userContent }],
     })
 
-    const fullHtml = await consumeStreamWithStallGuard(stream, onChunk)
+    const roundHtml = await consumeStreamWithGuards(stream, onChunk, deadline)
 
     const final = await stream.finalMessage()
     const u = final.usage as unknown as Record<string, number>
@@ -301,35 +411,66 @@ export async function generateHtml(
       }),
     }
 
-    console.log('[HTML]', usage)
-    return { html: fullHtml, usage }
+    console.log('[HTML]', usage, 'stop_reason:', final.stop_reason)
+    return { roundHtml, usage, stopReason: final.stop_reason }
   }
 
   const inputCostEst = estimateInputCostUsd(systemPrompt, userContent)
+  const remainingBudget = MAX_GENERATION_COST_USD - priorUsage.costUsd
+
+  const finalizeSuccess = (result: { roundHtml: string; usage: UsageStats['html']; stopReason: string | null }): GenerationRoundResult => ({
+    done: result.stopReason === 'end_turn',
+    html: appendContinuation(partialHtml, result.roundHtml),
+    usage: addUsage(priorUsage, result.usage),
+  })
+
+  // Not a failure — this request simply ran out of its own time budget. Estimate what
+  // this cut-off round cost (we never get real usage back for an aborted stream) so the
+  // next round's budget stays honest, and hand back the partial HTML for the caller to
+  // resume in a fresh request.
+  const finalizeDeadline = (err: StreamDeadlineError): GenerationRoundResult => {
+    const estimatedUsage: UsageStats['html'] = {
+      input: 0, output: estimateTokens(err.html), cacheRead: 0, cacheWrite: 0,
+      costUsd: inputCostEst + (estimateTokens(err.html) * SONNET_OUTPUT_PRICE) / 1_000_000,
+    }
+    return {
+      done: false,
+      html: appendContinuation(partialHtml, err.html),
+      usage: addUsage(priorUsage, estimatedUsage),
+    }
+  }
 
   // A stalled stream almost always means a dead connection to the API, not genuinely
-  // slow output — one automatic retry catches that within the request's time budget
+  // slow output — one automatic retry catches that within this round's time budget
   // instead of silently burning the whole thing on a single hung attempt. Any other
   // error (or a second stall) propagates immediately; we only retry this one failure mode.
+  // A deadline hit on either the first attempt OR the retry is handled the same way —
+  // it's not an error, just "out of time for this request" — so both are caught here.
   try {
-    return await attempt(maxTokensForBudget(MAX_GENERATION_COST_USD - inputCostEst))
+    return finalizeSuccess(await attempt(maxTokensForBudget(remainingBudget - inputCostEst), effectiveDeadline))
   } catch (err) {
+    if (err instanceof StreamDeadlineError) return finalizeDeadline(err)
     if (!(err instanceof StreamStallError)) throw err
 
     // The failed attempt already spent (at least) its own input cost plus whatever
     // output it streamed before stalling — size the retry off what's actually left of
     // the per-generation budget instead of giving it a full budget on top of that.
     const spentOnFailedAttempt = inputCostEst + (Math.ceil(err.partialChars / 4) * SONNET_OUTPUT_PRICE) / 1_000_000
-    const remaining = MAX_GENERATION_COST_USD - spentOnFailedAttempt - inputCostEst
+    const remaining = remainingBudget - spentOnFailedAttempt - inputCostEst
 
-    if (remaining < MIN_RETRY_BUDGET_USD) {
-      console.warn('[HTML] stream stalled and remaining budget too low to retry:', err.message)
+    if (remaining < MIN_RETRY_BUDGET_USD || Date.now() >= effectiveDeadline) {
+      console.warn('[HTML] stream stalled and no room to retry (budget or time):', err.message)
       throw err
     }
 
     console.warn('[HTML] stream stalled, retrying once:', err.message)
     onStall?.()
-    return await attempt(maxTokensForBudget(remaining))
+    try {
+      return finalizeSuccess(await attempt(maxTokensForBudget(remaining), effectiveDeadline))
+    } catch (retryErr) {
+      if (retryErr instanceof StreamDeadlineError) return finalizeDeadline(retryErr)
+      throw retryErr
+    }
   }
 }
 
@@ -340,15 +481,21 @@ export async function refineHtml(
   researchContext: string,
   markets: string[],
   onChunk: (chunk: string) => void,
-  onStall?: () => void
-): Promise<{ html: string; usage: UsageStats['html'] }> {
+  onStall?: () => void,
+  continuation?: ContinuationState,
+  deadlineAt?: number
+): Promise<GenerationRoundResult> {
+  const partialHtml = continuation?.partialHtml ?? ''
+  const priorUsage = continuation?.usage ?? ZERO_USAGE
+  const effectiveDeadline = deadlineAt ?? Date.now() + 260_000
+
   // Mock mode: skip API call, tag the existing HTML so the UI has something to show
   if (process.env.MOCK_LLM === 'true') {
     const marker = `<!-- Refined: ${instruction.slice(0, 80).replace(/-->/g, '')} -->`
     const mockHtml = currentHtml.includes('</head>')
       ? currentHtml.replace('</head>', `${marker}\n</head>`)
       : `${marker}\n${currentHtml}`
-    return mockStreamWithStallSim(mockHtml, onChunk, onStall)
+    return mockRunGeneration(mockHtml, continuation, onChunk, onStall)
   }
 
   // Same market-override directive as generateHtml, reworded as a reminder for a revision pass
@@ -358,13 +505,28 @@ export async function refineHtml(
     ? `\n\nMarket constraint still applies: this page covers ONLY ${markets.join(', ')} — never introduce or leave in mentions of ${missingMarkets.join(', ')}.`
     : ''
 
+  // A continuation round replaces the "output the complete page" instruction with a
+  // "finish the revised page you were writing" one. partialHtml here is the NEW revised
+  // output generated so far in THIS refine — distinct from currentHtml, the original
+  // page being revised, which stays in context throughout for reference.
+  const continuationBlock = partialHtml
+    ? '\n\n## Continuation Notice\nA time limit cut off the REVISED page below before it was complete — NOT because it was ' +
+      'finished. Everything inside PARTIAL_REVISED_HTML has ALREADY been generated and streamed to the user; do not repeat, ' +
+      'restate, or rewrite any of it.\n\n<PARTIAL_REVISED_HTML>\n' + partialHtml + '\n</PARTIAL_REVISED_HTML>\n\n' +
+      'Your entire response will be appended DIRECTLY after PARTIAL_REVISED_HTML with no separator — output nothing but the ' +
+      'continuation (no markdown fences, no commentary, no repeated headers). If PARTIAL_REVISED_HTML ends mid-tag, ' +
+      'mid-attribute, or mid-word, complete it naturally as your very first characters, then continue writing the ' +
+      'remaining sections through to a complete, valid closing </html>.'
+    : ''
+
   const dynamicContent = [
     '## Current Page HTML (revise this in place — do not start over)\n',
     currentHtml,
     '\n\n## Refinement Instructions\n',
     instruction,
     marketDirective,
-    '\n\nApply the refinement instructions to the HTML above and output the COMPLETE revised HTML page. ' +
+    continuationBlock,
+    partialHtml ? '' : '\n\nApply the refinement instructions to the HTML above and output the COMPLETE revised HTML page. ' +
     'Preserve everything the instructions did not ask you to change — same structure, copy, and styling elsewhere. ' +
     'Output ONLY the HTML — no markdown fences, no explanation.',
   ].join('')
@@ -384,7 +546,7 @@ export async function refineHtml(
       ]
     : dynamicContent
 
-  const attempt = async (maxTokens: number): Promise<{ html: string; usage: UsageStats['html'] }> => {
+  const attempt = async (maxTokens: number, deadline: number) => {
     const stream = anthropic.messages.stream({
       model: HTML_MODEL,
       max_tokens: maxTokens,
@@ -398,7 +560,7 @@ export async function refineHtml(
       messages: [{ role: 'user', content: userContent }],
     })
 
-    const fullHtml = await consumeStreamWithStallGuard(stream, onChunk)
+    const roundHtml = await consumeStreamWithGuards(stream, onChunk, deadline)
 
     const final = await stream.finalMessage()
     const u = final.usage as unknown as Record<string, number>
@@ -415,31 +577,56 @@ export async function refineHtml(
       }),
     }
 
-    console.log('[Refine]', usage)
-    return { html: fullHtml, usage }
+    console.log('[Refine]', usage, 'stop_reason:', final.stop_reason)
+    return { roundHtml, usage, stopReason: final.stop_reason }
   }
 
   const inputCostEst = estimateInputCostUsd(systemPrompt, userContent)
+  const remainingBudget = MAX_GENERATION_COST_USD - priorUsage.costUsd
 
-  // Same stall/retry treatment as generateHtml — refine regenerates the whole page
-  // over the same kind of long-lived stream and is exposed to the same dead-connection
-  // failure mode, plus the same per-generation cost cap.
+  const finalizeSuccess = (result: { roundHtml: string; usage: UsageStats['html']; stopReason: string | null }): GenerationRoundResult => ({
+    done: result.stopReason === 'end_turn',
+    html: appendContinuation(partialHtml, result.roundHtml),
+    usage: addUsage(priorUsage, result.usage),
+  })
+
+  const finalizeDeadline = (err: StreamDeadlineError): GenerationRoundResult => {
+    const estimatedUsage: UsageStats['html'] = {
+      input: 0, output: estimateTokens(err.html), cacheRead: 0, cacheWrite: 0,
+      costUsd: inputCostEst + (estimateTokens(err.html) * SONNET_OUTPUT_PRICE) / 1_000_000,
+    }
+    return {
+      done: false,
+      html: appendContinuation(partialHtml, err.html),
+      usage: addUsage(priorUsage, estimatedUsage),
+    }
+  }
+
+  // Same stall/retry/deadline/cost-cap treatment as generateHtml — refine regenerates
+  // the whole page over the same kind of long-lived stream and is exposed to the same
+  // dead-connection and out-of-time failure modes.
   try {
-    return await attempt(maxTokensForBudget(MAX_GENERATION_COST_USD - inputCostEst))
+    return finalizeSuccess(await attempt(maxTokensForBudget(remainingBudget - inputCostEst), effectiveDeadline))
   } catch (err) {
+    if (err instanceof StreamDeadlineError) return finalizeDeadline(err)
     if (!(err instanceof StreamStallError)) throw err
 
     const spentOnFailedAttempt = inputCostEst + (Math.ceil(err.partialChars / 4) * SONNET_OUTPUT_PRICE) / 1_000_000
-    const remaining = MAX_GENERATION_COST_USD - spentOnFailedAttempt - inputCostEst
+    const remaining = remainingBudget - spentOnFailedAttempt - inputCostEst
 
-    if (remaining < MIN_RETRY_BUDGET_USD) {
-      console.warn('[Refine] stream stalled and remaining budget too low to retry:', err.message)
+    if (remaining < MIN_RETRY_BUDGET_USD || Date.now() >= effectiveDeadline) {
+      console.warn('[Refine] stream stalled and no room to retry (budget or time):', err.message)
       throw err
     }
 
     console.warn('[Refine] stream stalled, retrying once:', err.message)
     onStall?.()
-    return await attempt(maxTokensForBudget(remaining))
+    try {
+      return finalizeSuccess(await attempt(maxTokensForBudget(remaining), effectiveDeadline))
+    } catch (retryErr) {
+      if (retryErr instanceof StreamDeadlineError) return finalizeDeadline(retryErr)
+      throw retryErr
+    }
   }
 }
 
